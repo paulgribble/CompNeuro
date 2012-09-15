@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Computational Modeling in Neuroscience</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="Computational Modeling in Neuroscience"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="Fall 2012"/>
+<meta name="author" content="Paul Gribble"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style><link rel="stylesheet" type="text/css" href="mystyle.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="http://www.gribblelab.org/teaching/index.html"> UP </a>
+ |
+ <a accesskey="H" href="http://www.gribblelab.org/index.html"> HOME </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Computational Modeling in Neuroscience</h1>
+
+
+
+<hr/>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">Administrivia</h2>
+<div class="outline-text-2" id="text-1">
+
+<ul>
+<li>This is the homepage for Neuroscience 9520: Computational Modeling in Neuroscience
+</li>
+<li>Class will be Mondays, 2:00pm - 3:30pm, and Thursdays, 11:30am -
+  1:00pm, in NSC 245A
+</li>
+<li>The instructor is Paul Gribble (email: paul [at] gribblelab [dot] org)
+</li>
+<li>course <a href="syllabus.pdf">syllabus.pdf</a>
+</li>
+</ul>
+
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1">Note there is an enrolment limit of 14 registered students in the course</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<ul>
+<li>Please contact Carol Anderson (<a href="mailto:canders3@uwo.ca">canders3@uwo.ca</a>) to register
+</li>
+</ul>
+
+
+
+<hr/>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Course Notes</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<ol>
+<li value="0"><a href="0_Setup_Your_Computer.html">Setup Your Computer</a>
+</li>
+<li><a href="1_Dynamical_Systems.html">Dynamical Systems</a>
+</li>
+<li><a href="2_Modelling_Dynamical_Systems.html">Modelling Dynamical Systems</a>
+</li>
+</ol>
+
+
+
+<hr/>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Schedule &amp; Topics</h2>
+<div class="outline-text-2" id="text-3">
+
+
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">Sep 10: Introductions &amp; course schedule</h3>
+<div class="outline-text-3" id="text-3-1">
+
+<ul>
+<li><a href="lecture1.pdf">lecture1.pdf</a>
+</li>
+<li><a href="readings/Trappenberg1.pdf">Trappenberg1.pdf</a>
+</li>
+<li><a href="readings/OM1.pdf">OM1.pdf</a> (1st Ed.) or <a href="http://grey.colorado.edu/CompCogNeuro/index.php?title=CCNBook/Intro">CCNBook/Intro</a>
+</li>
+<li><a href="assignment1.pdf">assignment1.pdf</a> (due Due Sep 16)
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">Sep 13: Getting your computer set up with Python &amp; scientific libraries</h3>
+<div class="outline-text-3" id="text-3-2">
+
+<ul>
+<li>course notes <a href="0_Setup_Your_Computer.html">0: Setup Your Computer</a>
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">Sep 17 : Modeling Dynamical Systems I</h3>
+<div class="outline-text-3" id="text-3-3">
+
+<ul>
+<li>course notes <a href="1_Dynamical_Systems.html">1: Dynamical Systems</a>
+</li>
+<li>course notes &hellip; (in progress)
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4">Sep 20: Modeling Dynamical Systems II</h3>
+<div class="outline-text-3" id="text-3-4">
+
+<ul>
+<li>
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5">Sep 24, 27 : no class (Paul away)</h3>
+<div class="outline-text-3" id="text-3-5">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6">Oct 1, 4 : Modeling Action Potentials - Hodgkin-Huxley models</h3>
+<div class="outline-text-3" id="text-3-6">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-7" class="outline-3">
+<h3 id="sec-3-7">Oct 8, 11 : no class (thanksgiving, SFN)</h3>
+<div class="outline-text-3" id="text-3-7">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-8" class="outline-3">
+<h3 id="sec-3-8">Oct 15, 18 : no class (SFN)</h3>
+<div class="outline-text-3" id="text-3-8">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-9" class="outline-3">
+<h3 id="sec-3-9">Oct 22, 25 : Musculoskeletal Models I</h3>
+<div class="outline-text-3" id="text-3-9">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-10" class="outline-3">
+<h3 id="sec-3-10">Oct 29, Nov 1 : Musculoskeletal Models II</h3>
+<div class="outline-text-3" id="text-3-10">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-11" class="outline-3">
+<h3 id="sec-3-11">Nov 5, 8 : Perceptrons &amp; Multi-Layer Networks I</h3>
+<div class="outline-text-3" id="text-3-11">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-12" class="outline-3">
+<h3 id="sec-3-12">Nov 12, 15 : Perceptrons &amp; Multi-Layer Networks I</h3>
+<div class="outline-text-3" id="text-3-12">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-13" class="outline-3">
+<h3 id="sec-3-13">Nov 19, 22 : Other Neural Networks I</h3>
+<div class="outline-text-3" id="text-3-13">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-14" class="outline-3">
+<h3 id="sec-3-14">Nov 26, 29 : Other Neural Networks II</h3>
+<div class="outline-text-3" id="text-3-14">
+
+</div>
+
+</div>
+
+<div id="outline-container-3-15" class="outline-3">
+<h3 id="sec-3-15">Dec 3 : student presentations</h3>
+<div class="outline-text-3" id="text-3-15">
+
+
+
+<hr/>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Links</h2>
+<div class="outline-text-2" id="text-4">
+
+
+<ul>
+<li><a href="readings/SciCompPython.pdf">Introduction to Scientific Computing with Python</a>
+</li>
+<li><a href="http://ipython.org/videos.html">iPython videos</a>
+</li>
+<li><a href="http://youtu.be/2G5YTlheCbw">iPython in-depth: high productivity interactive and parallel python</a>
+  (youtube video) iPython Notebook stuff starts at about 1:15:40, and
+  parallel programming stuff starts at around 2:13:00
+</li>
+<li><a href="http://youtu.be/vWkb7VahaXQ">Using Numpy Arrays to Perform Mathematical Operations in Python</a>
+  (youtube video)
+</li>
+<li><a href="http://openbookproject.net/thinkcs/python/english2e/">How to Think Like a Computer Scientist: Learning with Python</a>
+</li>
+<li><a href="http://scipy-lectures.github.com/">Python Scientific Lecture Notes</a>
+</li>
+<li><a href="http://www.scipy.org/Plotting_Tutorial">SciPy Plotting Tutorial</a>
+</li>
+<li><a href="http://docs.scipy.org/doc/">Numpy and Scipy Documentation</a>
+</li>
+<li><a href="http://www.scipy.org/Tentative_Numpy_Tutorial">Numpy Tutorial</a>
+</li>
+<li><a href="http://scipy.org/Cookbook">SciPy Cookbook</a>
+</li>
+<li><a href="http://scipy.org/Getting_Started">SciPy Getting Started</a>
+</li>
+<li><a href="http://matplotlib.org/gallery.html">matplotlib gallery</a>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+
+<div id="postamble">
+<hr />Paul Gribble | Fall 2012<br>This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />
+</div>
+</body>
+</html>

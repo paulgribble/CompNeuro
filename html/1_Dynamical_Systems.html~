@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>1. Dynamical Systems</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="title" content="1. Dynamical Systems"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="fall 2012"/>
+<meta name="author" content="Paul Gribble &amp; Dinant Kistemaker"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
+  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
+  .center {margin-left:auto; margin-right:auto; text-align:center;}
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top;  }
+  th.right  { text-align:center;  }
+  th.left   { text-align:center;   }
+  th.center { text-align:center; }
+  td.right  { text-align:right;  }
+  td.left   { text-align:left;   }
+  td.center { text-align:center; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  div.inlinetask {
+    padding:10px;
+    border:2px solid gray;
+    margin:10px;
+    background: #ffffcc;
+  }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style><link rel="stylesheet" type="text/css" href="mystyle.css" />
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+ <a accesskey="h" href="http://www.gribblelab.org/compneuro/0_Setup_Your_Computer.html"> UP </a>
+ |
+ <a accesskey="H" href="http://www.gribblelab.org/compneuro/index.html"> HOME </a>
+</div>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">1. Dynamical Systems</h1>
+
+
+
+
+
+
+
+
+<hr/>
+<p>
+[TABLE-OF-CONTENTS]
+
+</p>
+<hr/>
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">What is a dynamical system?</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+Systems can be characterized by the specific relation between their
+input(s) and output(s). A static system has an output that only
+depends on its input. A mechanical example of such a system is an
+idealized, massless (mass=0) spring. The length of the spring depends
+only on the force (the input) that acts upon it. Change the input
+force, and the length of the spring will change, and this will happen
+instantaneously (obviously a massless spring is a theoretical
+construct). A system becomes dynamical (it is said to have <i>dynamics</i>
+when a mass is attached to the spring. Now the position of the mass
+(and equivalently, the length of the spring) is no longer directly
+dependent on the input force, but is also tied to the acceleration of
+the mass, which in turn depends on the sum of all forces acting upon
+it (the sum of the input force and the force due to the spring). The
+net force depends on the position of the mass, which depends on the
+length of the spring, which depends on the spring force. The property
+that acceleration of the mass depends on its position makes this a
+dynamical system.
+</p>
+
+<div class="figure">
+<p><img src="figs/spring-mass.png" height="200px" align="center" alt="figs/spring-mass.png" /></p>
+<p>A spring with a mass attached</p>
+</div>
+
+<p>
+Dynamical systems can be characterized by differential equations that
+relate the state derivatives (e.g. velocity or acceleration) to the
+state variables (e.g. position). The differential equation for the
+spring-mass system depicted above is:
+</p>
+
+
+\begin{equation}
+m\ddot{x} = -kx + mg
+\end{equation}
+
+<p>
+Where \(x\) is the position of the mass \(m\) (the length of the spring),
+\(\ddot{x}\) is the second derivative of position (i.e. acceleration),
+\(k\) is a constant (related to the stiffness of the spring), and \(g\) is
+the graviational constant.
+</p>
+<p>
+The system is said to be a <i>second order</i> system, as the highest
+derivative that appears in the differential equation describing the
+system, is two. The position \(x\) and its time derivative \(\dot{x}\) are
+called <i>states</i> of the system, and \(\dot{x}\) and \(\ddot{x}\) are called
+<i>state derivatives</i>.
+</p>
+<p>
+Most systems out there in nature are dynamical systems. For example
+most chemical reactions under natural circumstances are dynamical: the
+rate of change of a chemical reaction depends on the amount of
+chemical present, in other words the state derivative is proportional
+to the state. Dynamical systems exist in biology as well. For example
+the rate of change of a certain species depends on its population
+size.
+</p>
+<p>
+Dynamical equations are often described by a set of <i>coupled   differential equations</i>. For example, the reproduction rate of
+  rabbits (state derivative 1) depends on the population of rabbits
+  (state 1) and on the population size of foxes (state 2). The
+  reproduction rate of foxes (state derivative 2) depends on the
+  population of foxes (state 2) and also on the population of rabbits
+  (state 1). In this case we have two coupled first-order differential
+  equations, and hence a system of order two. The so-called
+  predator-prey model is also known as the <a href="http://en.wikipedia.org/wiki/Lotka_Volterra_equation">Lotka-Volterra equations</a>.
+</p>
+
+
+\begin{eqnarray}
+\dot{x} &= x(\alpha - \beta y)\\
+\dot{y} &= -y(\gamma - \delta x)
+\end{eqnarray}
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Why make models?</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+There are two main reasons: one being practical and one mostly
+theoretical. The practical use is prediction. A typical example of a
+dynamical system that is modelled for prediction is the weather. The
+weather is a very complex, (high-order, nonlinear, coupled and
+chaotic) system. More theoretically, one reason to make models is to
+test the validity of a functional hypothesis of an observed
+phenomenon. A beautiful example is the model made by <a href="http://en.wikipedia.org/wiki/Hodgkin-Huxley_model">Hodgkin and Huxley</a> to understand how action potentials arise and propagate in
+neurons [<sub></sub><a href="#HH1952">1</a>][<sub></sub><a href="#HH1990">2</a>]. They modelled the different
+(voltage-gated) ion channels in an axon membrane and showed using
+mathematical models that indeed the changes in ion concentrations were
+responsible for the electical spikes observed experimentally 7 years
+earlierr.
+</p>
+
+<div class="figure">
+<p><img src="figs/HH1.png" height="200px" alt="figs/HH1.png" /></p>
+<p>Hodgkin-Huxley model of voltage-gated ion channels</p>
+</div>
+
+
+<div class="figure">
+<p><img src="figs/HH2.png" height="200px" alt="figs/HH2.png" /></p>
+<p>Action potentials across the membrane</p>
+</div>
+
+<p>
+A second theoretical reason to make models is that it is sometimes
+very difficult, if not impossible, to answer a certain question
+empirically. As an example we take the following biomechanical
+question: Would you be able to jump higher if your biceps femoris
+(part of your hamstrings) were two separate muscles each crossing only
+one joint rather than being one muscle crossing both the hip and knee
+joint? Not a strange question as one could then independently control
+the torques around each joint.
+</p>
+<p>
+In order to answer this question empirically, one would like to do the
+following experiment:
+</p>
+<ul>
+<li>measure the maximal jump height of a subject
+</li>
+<li>change only the musculoskeletal properties in question
+</li>
+<li>measure the jump height again
+</li>
+</ul>
+
+
+<p>
+Of course, such an experiment would yield several major ethical,
+practical and theoretical drawbacks. It is unlikely that an ethics
+committee would approve the transplantation of the origin and
+insertion of the hamstrings in order to examine its effect on jump
+height. And even so, one would have some difficulties finding
+subjects. Even with a volunteer for such a surgery it would not bring
+us any closer to an answer. After such a surgery, the subject would
+not be able to jump right away, but has to undergo severe revalidation
+and surely during such a period many factors will undesirably change
+like maximal contractile forces. And even if the subject would fully
+recover (apart from the hamstrings transplantation), his or her
+nervous system would have to find the new optimal muscle stimulation
+pattern.
+</p>
+<p>
+If one person jumps lower than another person, is that because she
+cannot jump as high with her particular muscles, or was it just that
+her CNS was not able to find the optimal muscle activation pattern?
+Ultimately, one wants to know through what mechanism the subject's
+jump performance changes. To investigate this, one would need to know,
+for example, the forces produced by the hamstrings as a function of
+time, something that is impossible to obtain experimentally. Of
+course, this example is somewhat ridiculous, but its message is
+hopefully clear that for several questions a strict empirical approach
+is not suitable. An alternative is provided by mathematical modelling.
+</p>
+</div>
+</div>
+
+<div id="bibliography">
+<h2>References</h2>
+
+<table>
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="HH1952">1</a>]
+</td>
+<td class="bibtexitem">
+A.&nbsp;L. Hodgkin and A.&nbsp;F. Huxley.
+ A quantitative description of membrane current and its application
+  to conduction and excitation in nerve.
+ <em>J. Physiol. (Lond.)</em>, 117(4):500-544, Aug 1952.
+ [PubMed
+  Central:<a href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC1392413">PMC1392413</a>] [PubMed:<a href="http://www.ncbi.nlm.nih.gov/pubmed/12991237">12991237</a>].
+[&nbsp;<a href="refs_bib.html#HH1952">bib</a>&nbsp;]
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="HH1990">2</a>]
+</td>
+<td class="bibtexitem">
+A.&nbsp;L. Hodgkin, A.&nbsp;F. Huxley, A.&nbsp;L. Hodgkin, and A.&nbsp;F. Huxley.
+ A quantitative description of membrane current and its application
+  to conduction and excitation in nerve. 1952.
+ <em>Bull. Math. Biol.</em>, 52(1-2):25-71, 1990.
+ [PubMed:<a href="http://www.ncbi.nlm.nih.gov/pubmed/2185861">2185861</a>].
+[&nbsp;<a href="refs_bib.html#HH1990">bib</a>&nbsp;]
+
+</td>
+</tr>
+</table><hr/><p><em>This file was generated by
+<a href="http://www.lri.fr/~filliatr/bibtex2html/">bibtex2html</a> 1.96.</em></p>
+
+</div>
+</div>
+
+<div id="postamble">
+<hr />Paul Gribble &amp; Dinant Kistemaker | fall 2012<br>This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />
+</div>
+</body>
+</html>

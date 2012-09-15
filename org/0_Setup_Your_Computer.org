@@ -1,0 +1,116 @@
+#+STARTUP: showall
+
+#+TITLE:     0. Setup Your Computer
+#+AUTHOR:    Paul Gribble
+#+EMAIL:     paul@gribblelab.org
+#+DATE:      fall 2012
+#+LINK_UP: http://www.gribblelab.org/compneuro/index.html
+#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+
+-----
+[TABLE-OF-CONTENTS]
+-----
+
+* Install Options
+
+** Option 1: Download and build source code from websites above
+- good luck with that, there are many dependencies, it’s a bit of a mess
+
+** Option 2: Install the Enthought Python Distribution (all platforms)
+- your best bet may be the [[http://www.enthought.com/products/epd.php][Enthought Python Distribution]]
+- they have an [[http://www.enthought.com/products/edudownload.php][Academic Version]] which is free
+- also a totally free version here: [[http://www.enthought.com/products/epd_free.php][EPD Free]]
+- doesn't necessarily include latest versions of packages (e.g. iPython)
+
+** Option 3: Install a software virtual machine running Ubuntu GNU/Linux (all platforms)
+- perhaps the easiest and most "self-contained" option - it won’t
+  install stuff on your own machine but will install stuff within a
+  virtual machine, leaving your machine untouched
+- download and install [[https://www.virtualbox.org/][VirtualBox]], it’s free and runs on Windows & Mac
+  (and GNU/Linux)
+- download the pre-configured [[http://www.gribblelab.org/compneuro/installers/UbuntuVM.ova][UbuntuVM.ova]] provided by me (beware,
+  it’s a 3.8 GB file)
+- in VirtualBox, "Import Appliance..." and point to UbuntuVM.ova
+- Then start the virtual machine (username is compneuro and password is
+  compneuro)
+- you’re ready to rumble, I have installed all the software already
+
+** Option 4 (Mac) : install Python + scientific libraries on your machine
+- install [[http://itunes.apple.com/ca/app/xcode/id497799835?mt=12][Xcode]] from the mac app store (the download is LARGE, several
+  GB)
+- in Xcode: Preferences/Downloads/Components and Install the "Command
+  Line Tools"
+- download and run the [[http://fonnesbeck.github.com/ScipySuperpack/][SciPy Superpack install script]]
+- note: you may have to download install [[http://pypi.python.org/pypi/setuptools][python-setuptools]] first... if
+  the superpack install script doesn’t work, try this
+- you’re ready to rumble
+
+** Option 5 (windows)
+- <laughing>
+- seriously though I have little to no idea about the windows universe
+- your best bet may be the [[http://www.enthought.com/products/epd.php][Enthought Python Distribution]]
+- they have an [[http://www.enthought.com/products/edudownload.php][Academic Version]] which is free, you just have to fill
+  out a form and they send you an email with a download link
+- here is a [[http://goo.gl/HSVPp][blog post]] detailing how to get the ipython notebook
+  running on Windows 7
+
+* Testing your installation
+
+** Launching iPython
+
+To launch iPython, open up a Terminal and type a command to launch:
+
+To make it so Figures appear in their own window on your desktop (like MATLAB):
+#+BEGIN_SRC sh
+ipython --pylab
+#+END_SRC
+
+To make it so Figures appear in the console itself, right after the
+commmand(s) that produced them:
+#+BEGIN_SRC sh
+ipython qtconsole --pylab inline
+#+END_SRC
+
+To launch a browser-based "notebook" (this is really neat)
+#+BEGIN_SRC sh
+ipython notebook --pylab inline
+#+END_SRC
+
+** Making a plot
+
+Type the following:
+
+#+BEGIN_SRC python
+t = arange(0, 1, 0.01)
+y = sin(2*pi*t*3)
+plot(t,y)
+#+END_SRC
+
+and you should see this plot:
+
+#+ATTR_HTML: height="200px"
+[[file:figs/sin.png]]
+
+-----
+
+* Links
+- python : http://www.python.org/
+- numpy : http://numpy.scipy.org/
+- scipy : http://www.scipy.org/
+- matplotlib : http://matplotlib.sourceforge.net/
+- ipython : http://ipython.org/
+- Free Virtual Machine software virtualbox (mac, windows, linux) :
+  [[https://www.virtualbox.org/]]
+- Commercial Virtual Machine software
+  - vmware (mac) :
+    https://www.vmware.com/products/fusion/overview.html
+  - vmware (windows) :
+    https://www.vmware.com/products/workstation/overview.html
+  - parallels desktop (mac) :
+    http://www.parallels.com/products/desktop/
+  - parallels workstation (windows, linux) : http://www.parallels.com/products/workstation/
+- Free Ubuntu GNU/Linux distributions
+  - ubuntu : http://www.ubuntu.com/download/desktop
+- Ubuntu Shell scripts to install python + scientific stuff and LaTeX
+  - python gist : https://gist.github.com/3692447
+  - LaTeX gist : https://gist.github.com/3692459

@@ -1,0 +1,77 @@
+#+STARTUP: showall
+
+#+TITLE:     Computational Modeling in Neuroscience
+#+AUTHOR:    Paul Gribble
+#+EMAIL:     paul@gribblelab.org
+#+DATE:      Fall 2012
+#+OPTIONS: toc:nil
+#+LINK_UP: http://www.gribblelab.org/teaching/index.html
+#+LINK_HOME: http://www.gribblelab.org/index.html
+
+-----
+* Administrivia
+- This is the homepage for Neuroscience 9520: Computational Modeling in Neuroscience
+- Class will be Mondays, 2:00pm - 3:30pm, and Thursdays, 11:30am -
+  1:00pm, in NSC 245A
+- The instructor is Paul Gribble (email: paul [at] gribblelab [dot] org)
+- course [[file:syllabus.pdf][syllabus.pdf]]
+
+** Note there is an enrolment limit of 14 registered students in the course
+- Please contact Carol Anderson ([[mailto:canders3@uwo.ca][canders3@uwo.ca]]) to register
+
+-----
+* Course Notes
+
+0. [@0] [[file:0_Setup_Your_Computer.html][Setup Your Computer]]
+1. [[file:1_Dynamical_Systems.html][Dynamical Systems]]
+2. [[file:2_Modelling_Dynamical_Systems.html][Modelling Dynamical Systems]]
+
+-----
+* Schedule & Topics
+
+** Sep 10: Introductions & course schedule
+- [[file:lecture1.pdf][lecture1.pdf]]
+- [[file:readings/Trappenberg1.pdf][Trappenberg1.pdf]]
+- [[file:readings/OM1.pdf][OM1.pdf]] (1st Ed.) or [[http://grey.colorado.edu/CompCogNeuro/index.php?title=CCNBook/Intro][CCNBook/Intro]]
+- [[file:assignment1.pdf][assignment1.pdf]] (due Due Sep 16)
+
+** Sep 13: Getting your computer set up with Python & scientific libraries
+- course notes [[file:0_Setup_Your_Computer.html][0: Setup Your Computer]]
+
+** Sep 17 : Modeling Dynamical Systems I
+- course notes [[file:1_Dynamical_Systems.html][1: Dynamical Systems]]
+- course notes ... (in progress)
+
+** Sep 20: Modeling Dynamical Systems II
+- 
+
+** Sep 24, 27 : no class (Paul away)
+** Oct 1, 4 : Modeling Action Potentials - Hodgkin-Huxley models
+** Oct 8, 11 : no class (thanksgiving, SFN)
+** Oct 15, 18 : no class (SFN)
+** Oct 22, 25 : Musculoskeletal Models I
+** Oct 29, Nov 1 : Musculoskeletal Models II
+** Nov 5, 8 : Perceptrons & Multi-Layer Networks I
+** Nov 12, 15 : Perceptrons & Multi-Layer Networks I
+** Nov 19, 22 : Other Neural Networks I
+** Nov 26, 29 : Other Neural Networks II
+** Dec 3 : student presentations
+
+-----
+* Links
+
+- [[file:readings/SciCompPython.pdf][Introduction to Scientific Computing with Python]]
+- [[http://ipython.org/videos.html][iPython videos]]
+- [[http://youtu.be/2G5YTlheCbw][iPython in-depth: high productivity interactive and parallel python]]
+  (youtube video) iPython Notebook stuff starts at about 1:15:40, and
+  parallel programming stuff starts at around 2:13:00
+- [[http://youtu.be/vWkb7VahaXQ][Using Numpy Arrays to Perform Mathematical Operations in Python]]
+  (youtube video)
+- [[http://openbookproject.net/thinkcs/python/english2e/][How to Think Like a Computer Scientist: Learning with Python]]
+- [[http://scipy-lectures.github.com/][Python Scientific Lecture Notes]]
+- [[http://www.scipy.org/Plotting_Tutorial][SciPy Plotting Tutorial]]
+- [[http://docs.scipy.org/doc/][Numpy and Scipy Documentation]]
+- [[http://www.scipy.org/Tentative_Numpy_Tutorial][Numpy Tutorial]]
+- [[http://scipy.org/Cookbook][SciPy Cookbook]]
+- [[http://scipy.org/Getting_Started][SciPy Getting Started]]
+- [[http://matplotlib.org/gallery.html][matplotlib gallery]]

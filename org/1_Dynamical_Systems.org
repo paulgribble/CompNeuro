@@ -1,0 +1,146 @@
+#+STARTUP: showall
+
+#+TITLE:     1. Dynamical Systems
+#+AUTHOR:    Paul Gribble & Dinant Kistemaker
+#+EMAIL:     paul@gribblelab.org
+#+DATE:      fall 2012
+#+LINK_UP: http://www.gribblelab.org/compneuro/0_Setup_Your_Computer.html
+#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+#+BIBLIOGRAPHY: refs plain option:-d limit:t
+
+-----
+[TABLE-OF-CONTENTS]
+-----
+
+* What is a dynamical system?
+
+Systems can be characterized by the specific relation between their
+input(s) and output(s). A static system has an output that only
+depends on its input. A mechanical example of such a system is an
+idealized, massless (mass=0) spring. The length of the spring depends
+only on the force (the input) that acts upon it. Change the input
+force, and the length of the spring will change, and this will happen
+instantaneously (obviously a massless spring is a theoretical
+construct). A system becomes dynamical (it is said to have /dynamics/
+when a mass is attached to the spring. Now the position of the mass
+(and equivalently, the length of the spring) is no longer directly
+dependent on the input force, but is also tied to the acceleration of
+the mass, which in turn depends on the sum of all forces acting upon
+it (the sum of the input force and the force due to the spring). The
+net force depends on the position of the mass, which depends on the
+length of the spring, which depends on the spring force. The property
+that acceleration of the mass depends on its position makes this a
+dynamical system.
+
+#+ATTR_HTML: height="200px" align="center"
+#+CAPTION: A spring with a mass attached
+[[file:figs/spring-mass.png]]
+
+Dynamical systems can be characterized by differential equations that
+relate the state derivatives (e.g. velocity or acceleration) to the
+state variables (e.g. position). The differential equation for the
+spring-mass system depicted above is:
+
+\begin{equation}
+m\ddot{x} = -kx + mg
+\end{equation}
+
+Where $x$ is the position of the mass $m$ (the length of the spring),
+$\ddot{x}$ is the second derivative of position (i.e. acceleration),
+$k$ is a constant (related to the stiffness of the spring), and $g$ is
+the graviational constant.
+
+The system is said to be a /second order/ system, as the highest
+derivative that appears in the differential equation describing the
+system, is two. The position $x$ and its time derivative $\dot{x}$ are
+called /states/ of the system, and $\dot{x}$ and $\ddot{x}$ are called
+/state derivatives/.
+
+Most systems out there in nature are dynamical systems. For example
+most chemical reactions under natural circumstances are dynamical: the
+rate of change of a chemical reaction depends on the amount of
+chemical present, in other words the state derivative is proportional
+to the state. Dynamical systems exist in biology as well. For example
+the rate of change of a certain species depends on its population
+size.
+
+Dynamical equations are often described by a set of /coupled
+  differential equations/. For example, the reproduction rate of
+  rabbits (state derivative 1) depends on the population of rabbits
+  (state 1) and on the population size of foxes (state 2). The
+  reproduction rate of foxes (state derivative 2) depends on the
+  population of foxes (state 2) and also on the population of rabbits
+  (state 1). In this case we have two coupled first-order differential
+  equations, and hence a system of order two. The so-called
+  predator-prey model is also known as the [[http://en.wikipedia.org/wiki/Lotka_Volterra_equation][Lotka-Volterra equations]].
+
+\begin{eqnarray}
+\dot{x} &= x(\alpha - \beta y)\\
+\dot{y} &= -y(\gamma - \delta x)
+\end{eqnarray}
+
+* Why make models?
+
+There are two main reasons: one being practical and one mostly
+theoretical. The practical use is prediction. A typical example of a
+dynamical system that is modelled for prediction is the weather. The
+weather is a very complex, (high-order, nonlinear, coupled and
+chaotic) system. More theoretically, one reason to make models is to
+test the validity of a functional hypothesis of an observed
+phenomenon. A beautiful example is the model made by [[http://en.wikipedia.org/wiki/Hodgkin-Huxley_model][Hodgkin and
+Huxley]] to understand how action potentials arise and propagate in
+neurons \cite{HH1952,HH1990}. They modelled the different
+(voltage-gated) ion channels in an axon membrane and showed using
+mathematical models that indeed the changes in ion concentrations were
+responsible for the electical spikes observed experimentally 7 years
+earlierr.
+
+#+CAPTION: Hodgkin-Huxley model of voltage-gated ion channels
+#+ATTR_HTML: height="200px"
+[[file:figs/HH1.png]]
+
+#+CAPTION: Action potentials across the membrane
+#+ATTR_HTML: height="200px"
+[[file:figs/HH2.png]]
+
+A second theoretical reason to make models is that it is sometimes
+very difficult, if not impossible, to answer a certain question
+empirically. As an example we take the following biomechanical
+question: Would you be able to jump higher if your biceps femoris
+(part of your hamstrings) were two separate muscles each crossing only
+one joint rather than being one muscle crossing both the hip and knee
+joint? Not a strange question as one could then independently control
+the torques around each joint.
+
+In order to answer this question empirically, one would like to do the
+following experiment:
+
+- measure the maximal jump height of a subject
+- change only the musculoskeletal properties in question
+- measure the jump height again
+
+Of course, such an experiment would yield several major ethical,
+practical and theoretical drawbacks. It is unlikely that an ethics
+committee would approve the transplantation of the origin and
+insertion of the hamstrings in order to examine its effect on jump
+height. And even so, one would have some difficulties finding
+subjects. Even with a volunteer for such a surgery it would not bring
+us any closer to an answer. After such a surgery, the subject would
+not be able to jump right away, but has to undergo severe revalidation
+and surely during such a period many factors will undesirably change
+like maximal contractile forces. And even if the subject would fully
+recover (apart from the hamstrings transplantation), his or her
+nervous system would have to find the new optimal muscle stimulation
+pattern.
+
+If one person jumps lower than another person, is that because she
+cannot jump as high with her particular muscles, or was it just that
+her CNS was not able to find the optimal muscle activation pattern?
+Ultimately, one wants to know through what mechanism the subject's
+jump performance changes. To investigate this, one would need to know,
+for example, the forces produced by the hamstrings as a function of
+time, something that is impossible to obtain experimentally. Of
+course, this example is somewhat ridiculous, but its message is
+hopefully clear that for several questions a strict empirical approach
+is not suitable. An alternative is provided by mathematical modelling.
+
