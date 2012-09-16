@@ -297,19 +297,19 @@ have is that we are going to keep track not just of one state variable
 
 
 <pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">MassSpring</span>(state,t):
-  <span style="color: #af0000;"># unpack the state vector</span>
-  x = state[0]
-  xd = state[1]
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">unpack the state vector</span>
+  <span style="color: #af5f00;">x</span> = state[0]
+  <span style="color: #af5f00;">xd</span> = state[1]
 
-  <span style="color: #af0000;"># these are our constants</span>
-  k = 2.5 <span style="color: #af0000;"># Newtons per metre</span>
-  m = 1.5 <span style="color: #af0000;"># Kilograms</span>
-  g = 9.8 <span style="color: #af0000;"># metres per second</span>
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">these are our constants</span>
+  <span style="color: #af5f00;">k</span> = 2.5 <span style="color: #af0000;"># </span><span style="color: #af0000;">Newtons per metre</span>
+  <span style="color: #af5f00;">m</span> = 1.5 <span style="color: #af0000;"># </span><span style="color: #af0000;">Kilograms</span>
+  <span style="color: #af5f00;">g</span> = 9.8 <span style="color: #af0000;"># </span><span style="color: #af0000;">metres per second</span>
 
-  <span style="color: #af0000;"># compute acceleration xdd</span>
-  xdd = ((-k*x)/m) + g
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">compute acceleration xdd</span>
+  <span style="color: #af5f00;">xdd</span> = ((-k*x)/m) + g
 
-  <span style="color: #af0000;"># return the two state derivatives</span>
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">return the two state derivatives</span>
   <span style="color: #af00ff;">return</span> [xd, xdd]
 </pre>
 
@@ -379,19 +379,19 @@ bunch of libraries that we will use, including plotting libraries).
 <pre class="src src-python"><span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
 
 <span style="color: #af00ff;">def</span> <span style="color: #0000ff;">MassSpring</span>(state,t):
-  <span style="color: #af0000;"># unpack the state vector</span>
-  x = state[0]
-  xd = state[1]
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">unpack the state vector</span>
+  <span style="color: #af5f00;">x</span> = state[0]
+  <span style="color: #af5f00;">xd</span> = state[1]
 
-  <span style="color: #af0000;"># these are our constants</span>
-  k = -2.5 <span style="color: #af0000;"># Newtons per metre</span>
-  m = 1.5 <span style="color: #af0000;"># Kilograms</span>
-  g = 9.8 <span style="color: #af0000;"># metres per second</span>
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">these are our constants</span>
+  <span style="color: #af5f00;">k</span> = -2.5 <span style="color: #af0000;"># </span><span style="color: #af0000;">Newtons per metre</span>
+  <span style="color: #af5f00;">m</span> = 1.5 <span style="color: #af0000;"># </span><span style="color: #af0000;">Kilograms</span>
+  <span style="color: #af5f00;">g</span> = 9.8 <span style="color: #af0000;"># </span><span style="color: #af0000;">metres per second</span>
 
-  <span style="color: #af0000;"># compute acceleration xdd</span>
-  xdd = ((k*x)/m) + g
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">compute acceleration xdd</span>
+  <span style="color: #af5f00;">xdd</span> = ((k*x)/m) + g
 
-  <span style="color: #af0000;"># return the two state derivatives</span>
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">return the two state derivatives</span>
   <span style="color: #af00ff;">return</span> [xd, xdd]
 
 <span style="color: #af5f00;">state0</span> = [0.0, 0.0]
@@ -549,22 +549,22 @@ to simulate over, and run the simulation using <code>odeint()</code>.
 <pre class="src src-python"><span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
 
 <span style="color: #af00ff;">def</span> <span style="color: #0000ff;">Lorenz</span>(state,t):
-  <span style="color: #af0000;"># unpack the state vector</span>
-  x = state[0]
-  y = state[1]
-  z = state[2]
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">unpack the state vector</span>
+  <span style="color: #af5f00;">x</span> = state[0]
+  <span style="color: #af5f00;">y</span> = state[1]
+  <span style="color: #af5f00;">z</span> = state[2]
 
-  <span style="color: #af0000;"># these are our constants</span>
-  sigma = 10.0
-  rho = 28.0
-  beta = 8.0/3.0
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">these are our constants</span>
+  <span style="color: #af5f00;">sigma</span> = 10.0
+  <span style="color: #af5f00;">rho</span> = 28.0
+  <span style="color: #af5f00;">beta</span> = 8.0/3.0
 
-  <span style="color: #af0000;"># compute state derivatives</span>
-  xd = sigma * (y-x)
-  yd = (rho-z)*x - y
-  zd = x*y - beta*z
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">compute state derivatives</span>
+  <span style="color: #af5f00;">xd</span> = sigma * (y-x)
+  <span style="color: #af5f00;">yd</span> = (rho-z)*x - y
+  <span style="color: #af5f00;">zd</span> = x*y - beta*z
 
-  <span style="color: #af0000;"># return the state derivatives</span>
+  <span style="color: #af0000;"># </span><span style="color: #af0000;">return the state derivatives</span>
   <span style="color: #af00ff;">return</span> [xd, yd, zd]
 
 <span style="color: #af5f00;">state0</span> = [2.0, 3.0, 4.0]
@@ -572,7 +572,7 @@ to simulate over, and run the simulation using <code>odeint()</code>.
 
 <span style="color: #af5f00;">state</span> = odeint(Lorenz, state0, t)
 
-<span style="color: #af0000;"># do some fancy 3D plotting</span>
+<span style="color: #af0000;"># </span><span style="color: #af0000;">do some fancy 3D plotting</span>
 <span style="color: #af00ff;">from</span> mpl_toolkits.mplot3d <span style="color: #af00ff;">import</span> Axes3D
 <span style="color: #af5f00;">fig</span> = figure()
 <span style="color: #af5f00;">ax</span> = fig.gca(projection=<span style="color: #87005f;">'3d'</span>)
@@ -620,17 +620,17 @@ small amount. We will simulate for 30 seconds.
 
 <pre class="src src-python"><span style="color: #af5f00;">t</span> = arange(0.0, 30, 0.01)
 
-<span style="color: #af0000;"># original initial conditions</span>
+<span style="color: #af0000;"># </span><span style="color: #af0000;">original initial conditions</span>
 <span style="color: #af5f00;">state1_0</span> = [2.0, 3.0, 4.0]
 <span style="color: #af5f00;">state1</span> = odeint(Lorenz, state1_0, t)
 
-<span style="color: #af0000;"># rerun with very small change in initial conditions</span>
+<span style="color: #af0000;"># </span><span style="color: #af0000;">rerun with very small change in initial conditions</span>
 <span style="color: #af5f00;">delta</span> = 0.0001
 <span style="color: #af5f00;">state2_0</span> = [2.0+delta, 3.0, 4.0]
 <span style="color: #af5f00;">state2</span> = odeint(Lorenz, state2_0, t)
 
-<span style="color: #af0000;"># animation</span>
-fig,ax = subplots()
+<span style="color: #af0000;"># </span><span style="color: #af0000;">animation</span>
+<span style="color: #af5f00;">fig</span>,<span style="color: #af5f00;">ax</span> = subplots()
 pb, = ax.plot(state1[:,0],state1[:,1],<span style="color: #87005f;">'b-'</span>,alpha=0.2)
 xlabel(<span style="color: #87005f;">'x'</span>)
 ylabel(<span style="color: #87005f;">'y'</span>)
@@ -639,7 +639,7 @@ pp, = ax.plot(state1[10,0],state1[10,1],<span style="color: #87005f;">'b.'</span
 p2, = ax.plot(state2[0:10,0],state2[0:10,1],<span style="color: #87005f;">'r-'</span>)
 pp2, = ax.plot(state2[10,0],state2[10,1],<span style="color: #87005f;">'r.'</span>,markersize=10)
 <span style="color: #af5f00;">tt</span> = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
-<span style="color: #af0000;"># animate</span>
+<span style="color: #af0000;"># </span><span style="color: #af0000;">animate</span>
 <span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> arange(shape(state1)[0]-10):
   p.set_xdata(state1[10+i:20+i,0])
   p.set_ydata(state1[10+i:20+i,1])
@@ -652,10 +652,10 @@ pp2, = ax.plot(state2[10,0],state2[10,1],<span style="color: #87005f;">'r.'</spa
   tt.set_text(<span style="color: #87005f;">"%4.2f sec"</span> % (i*0.01))
   draw()
 
-<span style="color: #af5f00;">i</span> = 1939          <span style="color: #af0000;"># the two simulations really diverge here!</span>
+<span style="color: #af5f00;">i</span> = 1939          <span style="color: #af0000;"># </span><span style="color: #af0000;">the two simulations really diverge here!</span>
 <span style="color: #af5f00;">s1</span> = state1[i,:]
 <span style="color: #af5f00;">s2</span> = state2[i,:]
-<span style="color: #af5f00;">d12</span> = norm(s1-s2) <span style="color: #af0000;"># distance</span>
+<span style="color: #af5f00;">d12</span> = norm(s1-s2) <span style="color: #af0000;"># </span><span style="color: #af0000;">distance</span>
 <span style="color: #af00ff;">print</span> (<span style="color: #87005f;">"distance = %f for a %f different in initial condition"</span>) % (d12, delta)
 </pre>
 

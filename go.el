@@ -3,9 +3,9 @@
 (setq org-publish-project-alist
       '(
 	("CompNeuro"
-	 :base-directory "~/Dropbox/Teaching/CompNeuro/fall_2012/notes/org/"
+	 :base-directory "org/"
 	 :base-extension "org"
-	 :publishing-directory "~/Dropbox/Teaching/CompNeuro/fall_2012/notes/html"
+	 :publishing-directory "html/"
 	 :Publishing-function org-publish-org-to-html
 	 :recursive t
 	 :section-numbers nil
@@ -16,28 +16,28 @@
 	 :style "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\" />"
 	 )
 	("CompNeuro_html"
-	 :base-directory "~/Dropbox/Teaching/CompNeuro/fall_2012/notes/html/"
+	 :base-directory "html/"
 	 :base-extension "css\\|html"
 	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/"
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
 	("CompNeuro_bibhtml"
-	 :base-directory "~/Dropbox/Teaching/CompNeuro/fall_2012/notes/org/"
+	 :base-directory "org/"
 	 :base-extension "html\\|css"
 	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/"
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
 	("CompNeuro_figs"
-	 :base-directory "~/Dropbox/Teaching/CompNeuro/fall_2012/notes/figs/"
+	 :base-directory "figs/"
 	 :base-extension "png\\|jpg"
 	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/figs/"
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
 	("CompNeuro_code"
-	 :base-directory "~/Dropbox/Teaching/CompNeuro/fall_2012/notes/code/"
+	 :base-directory "code/"
 	 :base-extension "c\\|h\\|txt\\|csv"
 	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/code/"
 	 :publishing-function org-publish-attachment
