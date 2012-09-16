@@ -384,7 +384,8 @@ p2, = ax.plot(state2[0:10,0],state2[0:10,1],'r-')
 pp2, = ax.plot(state2[10,0],state2[10,1],'r.',markersize=10)
 tt = title("%4.2f sec" % 0.00)
 # animate
-for i in arange(shape(state1)[0]-10):
+step=3
+for i in xrange(1,shape(state1)[0]-10,step):
   p.set_xdata(state1[10+i:20+i,0])
   p.set_ydata(state1[10+i:20+i,1])
   pp.set_xdata(state1[19+i,0])
