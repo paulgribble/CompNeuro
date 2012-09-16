@@ -1,0 +1,22 @@
+#+STARTUP: showall
+
+#+TITLE:     3. Modelling Action Potentials
+#+AUTHOR:    Paul Gribble & Dinant Kistemaker
+#+EMAIL:     paul@gribblelab.org
+#+DATE:      fall 2012
+#+LINK_UP: http://www.gribblelab.org/compneuro/1_Dynamical_Systems.html
+#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+
+-----
+[TABLE-OF-CONTENTS]
+-----
+
+* x
+
+x
+
+* Next steps
+
+x
+
+[ next ]
