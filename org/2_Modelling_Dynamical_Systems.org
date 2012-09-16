@@ -590,4 +590,4 @@ next topic, we will be applying this to models of single neurons, and
 simulating the dynamics of voltage-gated ion channels, and examining
 how these models predict spiking behaviour.
 
-[ next ]
+[ [[file:3_Modelling_Action_Potentials.html][next]] ]

@@ -25,6 +25,7 @@
 0. [@0] [[file:0_Setup_Your_Computer.html][Setup Your Computer]]
 1. [[file:1_Dynamical_Systems.html][Dynamical Systems]]
 2. [[file:2_Modelling_Dynamical_Systems.html][Modelling Dynamical Systems]]
+3. [[file:3_Modelling_Action_Potentials.html][Modelling Action Potentials]]
 
 -----
 * Schedule & Topics
@@ -40,21 +41,33 @@
 
 ** Sep 17 : Modeling Dynamical Systems I
 - course notes [[file:1_Dynamical_Systems.html][1: Dynamical Systems]]
-- course notes ... (in progress)
+- course notes [[file:2_Modelling_Dynamical_Systems.html][2: Modelling Dynamical Systems]]
 
 ** Sep 20: Modeling Dynamical Systems II
 - 
 
+
 ** Sep 24, 27 : no class (Paul away)
+
 ** Oct 1, 4 : Modeling Action Potentials - Hodgkin-Huxley models
+- course notes [[file:3_Modelling_Action_Potentials.html][3: Modelling Action Potentials]]
+
 ** Oct 8, 11 : no class (thanksgiving, SFN)
+
 ** Oct 15, 18 : no class (SFN)
+
 ** Oct 22, 25 : Musculoskeletal Models I
+
 ** Oct 29, Nov 1 : Musculoskeletal Models II
+
 ** Nov 5, 8 : Perceptrons & Multi-Layer Networks I
+
 ** Nov 12, 15 : Perceptrons & Multi-Layer Networks I
+
 ** Nov 19, 22 : Other Neural Networks I
+
 ** Nov 26, 29 : Other Neural Networks II
+
 ** Dec 3 : student presentations
 
 -----
@@ -75,3 +88,11 @@
 - [[http://scipy.org/Cookbook][SciPy Cookbook]]
 - [[http://scipy.org/Getting_Started][SciPy Getting Started]]
 - [[http://matplotlib.org/gallery.html][matplotlib gallery]]
+
+-----
+
+* These notes
+
+These notes can be viewed (and downloaded) in their entirety from a
+github repository here: [[https://github.com/paulgribble/CompNeuro][CompNeuro]]
+
