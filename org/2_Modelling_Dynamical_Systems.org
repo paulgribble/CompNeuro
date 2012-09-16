@@ -486,6 +486,8 @@ Assumptions of this simple form of the model are:
 3. rate of change of population is proportional to its size
 4. the environment does not change
 
+The parameters can be interepreted as:
+
 - $\alpha$ is the natural growth rate of prey in the absence of predation
 - $\beta$ is the death rate per encounter of prey due to predation
 - $\sigma$ is related to the growth rate of predators
