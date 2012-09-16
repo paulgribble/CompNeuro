@@ -38,7 +38,7 @@
 	 )
 	("CompNeuro_code"
 	 :base-directory "code/"
-	 :base-extension "c\\|h\\|txt\\|csv"
+	 :base-extension "c\\|h\\|txt\\|csv\\|py"
 	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/code/"
 	 :publishing-function org-publish-attachment
 	 :recursive t

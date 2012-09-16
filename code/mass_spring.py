@@ -1,3 +1,5 @@
+#  ipython --pylab
+
 from scipy.integrate import odeint
 
 def MassSpring(state,t):

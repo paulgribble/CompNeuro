@@ -200,6 +200,8 @@ title('Mass-Spring System')
 legend(('$x$ (m)', '$\dot{x}$ (m/sec)'))
 #+END_SRC
 
+[[file:code/mass_spring.py][mass\_spring.py]]
+
 A couple of notes about the code. I have simply chosen, out of the
 blue, values for the constants $k$ and $m$. The [[http://en.wikipedia.org/wiki/Gravitational_constant][gravitational constant]]
 $g$ is of course known. I have also chosen to simulate the system for
