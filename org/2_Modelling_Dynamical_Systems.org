@@ -581,8 +581,3 @@ You should see a plot like this:
    (0.20, 0.20, 0.02, 0.0). What happens and why?
 
 
-
-* Double Pendulum
-
-simple 2-joint arm
-
