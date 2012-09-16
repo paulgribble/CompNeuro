@@ -581,4 +581,13 @@ You should see a plot like this:
 3. Try the following: $(\alpha,\beta,\gamma,\sigma)$ =
    (0.20, 0.20, 0.02, 0.0). What happens and why?
 
+* Next steps
 
+We have seen how to take a set of differential equations that
+characterize the dynamics of a system, and implement them in Python,
+and run a simulation of the behaviour of that system over time. In the
+next topic, we will be applying this to models of single neurons, and
+simulating the dynamics of voltage-gated ion channels, and examining
+how these models predict spiking behaviour.
+
+[ next ]

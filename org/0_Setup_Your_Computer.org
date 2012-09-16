@@ -91,6 +91,17 @@ and you should see this plot:
 #+ATTR_HTML: height="200px"
 [[file:figs/sin.png]]
 
+
+* Next steps
+
+In the next topic we will talk about dynamical systems --- what they
+are, and how they can be used to address scientific questions through
+computer simulation.
+
+[ [[file:1_Dynamical_Systems.html][next]] ]
+
+
+
 -----
 
 * Links

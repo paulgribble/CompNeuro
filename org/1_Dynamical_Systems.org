@@ -144,3 +144,18 @@ course, this example is somewhat ridiculous, but its message is
 hopefully clear that for several questions a strict empirical approach
 is not suitable. An alternative is provided by mathematical modelling.
 
+* Next steps
+
+In the next topic, we will be examining three systems --- a
+mass-spring system, a system representing weather patterns, and a
+system characterizing predator-prey interactions. In each case we will
+see how to go from differential equations characterizing the dynamics
+of the system, to Python code, and run that code to simulate the
+behaviour of the system over time. We will see the great power of
+simulation, namely the ability to change aspects of the system at
+will, and simulate to explore the resulting change in system
+behaviour.
+
+[ [[file:2_Modelling_Dynamical_Systems.html][next]] ]
+
+-----
