@@ -224,6 +224,20 @@ The way to interpret this simulation is, if we start the system at
 $x=0$ and $\dot{x}=0$, and simulate for 10 seconds, this is how the
 system would behave.
 
+** The power of modelling and simulation
+
+Now you can appreciate the power of mathematical models and
+simulation: given a model that characterizes (to some degree of
+accuracy) the behaviour of a system we are interested in, we can use
+simulation to perform experiments /in simulation/ instead of in
+reality. This can be very powerful. We can ask questions of the model,
+in simulation, that may be too difficult, or expensive, or time
+consuming, or just plain impossible, to do in real-life empirical
+studies. The degree to which we regard the results of simulations as
+interpretable, is a direct reflection of the degree to which we
+believe that our mathematical model is a reasonable characterization
+of the behaviour of the real system.
+
 ** Exercises
 
 1. We have started the system at $x=0$ which means that the spring is
@@ -249,19 +263,6 @@ system would behave.
 
 6. How would you add an input force to the system?
 
-** The power of modelling and simulation
-
-Now you can appreciate the power of mathematical models and
-simulation: given a model that characterizes (to some degree of
-accuracy) the behaviour of a system we are interested in, we can use
-simulation to perform experiments /in simulation/ instead of in
-reality. This can be very powerful. We can ask questions of the model,
-in simulation, that may be too difficult, or expensive, or time
-consuming, or just plain impossible, to do in real-life empirical
-studies. The degree to which we regard the results of simulations as
-interpretable, is a direct reflection of the degree to which we
-believe that our mathematical model is a reasonable characterization
-of the behaviour of the real system.
 
 * Lorenz Attractor
 
