@@ -224,7 +224,7 @@ The way to interpret this simulation is, if we start the system at
 $x=0$ and $\dot{x}=0$, and simulate for 10 seconds, this is how the
 system would behave.
 
-*Questions*:
+** Exercises
 
 1. We have started the system at $x=0$ which means that the spring is
    not stretched beyond its resting length (so spring force due to
@@ -342,7 +342,7 @@ show()
 
 You should see something like this:
 
-#+ATTR_HTML: height="600px" align="center"
+#+ATTR_HTML: height="400px" align="center"
 #+CAPTION: Lorenz Attractor
 [[file:figs/lorenz1.png]]
 
@@ -462,7 +462,122 @@ past a couple of days can turn out to be dead wrong.
 
 * Predator-Prey model
 
-Lotka-Volterra
+The [[http://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equation][Lotka-Volterra equations]] are two coupled first-order nonlinear
+differential equations that are used to characterize the dynamics of
+biological systems in which a predator population and a prey popuation
+interact. The two populations develop over time according to these equations:
+
+\begin{eqnarray}
+\dot{x} &= &x(\alpha-\beta y)\\
+\dot{y} &= &-y(\gamma - \sigma x)
+\end{eqnarray}
+
+where $x$ is the number of prey (for example, rabbits), $y$ is the
+number of predators (e.g. foxes), and $\dot{x}$ and $\dot{y}$
+represent the growth rates (the rates of change over time) of the two
+populations. The values $(\alpha,\beta,\gamma,\sigma)$ are parameters
+(constants) that characterize different aspects of the two
+populations.
+
+Assumptions of this simple form of the model are:
+
+1. prey find ample food at all times
+2. food supply of predators depends entirely on prey population
+3. rate of change of population is proportional to its size
+4. the environment does not change
+
+- $\alpha$ is the natural growth rate of prey in the absence of predation
+- $\beta$ is the death rate per encounter of prey due to predation
+- $\sigma$ is related to the growth rate of predators
+- $\gamma$ is the natural death rate of predators in the absence of food (prey)
+
+Here is some example code showing how to simulate this system. Just as
+before, we need to complete a few steps:
+
+1. write a Python function that characterizes how the system's state
+   derivatives are related to the system's states (this is given by
+   the equations above)
+2. decide on values of the system parameters
+3. decide on values of the initial conditions of the system (the
+   initial values of the states)
+4. decide on a time span and time resolution for simulating the system
+5. simulate! (i.e. use an ODE solver to integrate the differential
+   equations over time)
+6. examine the states, typically by plotting them
+
+Here is some code:
+
+#+BEGIN_SRC python
+from scipy.integrate import odeint
+
+def LotkaVolterra(state,t):
+  x = state[0]
+  y = state[1]
+  alpha = 0.1
+  beta =  0.1
+  sigma = 0.1
+  gamma = 0.1
+  xd = x*(alpha - beta*y)
+  yd = -y*(gamma - sigma*x)
+  return [xd,yd]
+
+t = arange(0,500,1)
+state0 = [0.5,0.5]
+state = odeint(LotkaVolterra,state0,t)
+figure()
+plot(t,state)
+ylim([0,8])
+xlabel('Time')
+ylabel('Population Size')
+legend(('x (prey)','y (predator)'))
+title('Lotka-Volterra equations')
+#+END_SRC
+
+You should see a plot like this:
+
+#+ATTR_HTML: height="400px" align="center"
+#+CAPTION: Lotka-Volterra Simulation
+[[file:figs/lotkavolterra1.png]]
+
+We can also plot the trajectory of the system in /state-space/ (much
+like we did for the Lorenz system above):
+
+#+BEGIN_SRC python
+# animation in state-space
+fig,ax = subplots()
+pb, = ax.plot(state[:,0],state[:,1],'b-',alpha=0.2)
+xlabel('x (prey population size)')
+ylabel('y (predator population size)')
+p, = ax.plot(state[0:10,0],state[0:10,1],'b-')
+pp, = ax.plot(state[10,0],state[10,1],'b.',markersize=10)
+tt = title("%4.2f sec" % 0.00)
+# animate
+step=3
+for i in xrange(1,shape(state)[0]-10,step):
+  p.set_xdata(state[10+i:20+i,0])
+  p.set_ydata(state[10+i:20+i,1])
+  pp.set_xdata(state[19+i,0])
+  pp.set_ydata(state[19+i,1])
+  tt.set_text("%d steps" % (i))
+  draw()
+#+END_SRC
+
+[[file:code/lotkavolterra.py][lotkavolterra.py]]
+
+You should see a plot like this:
+
+#+ATTR_HTML: height="400px" align="center"
+#+CAPTION: Lotka-Volterra State-space plot
+[[file:figs/lotkavolterra2.png]]
+
+** Exercises
+
+1. Increase the $\alpha$ parameter and re-run the simulation. What
+   happens and why?
+2. Set all parameters to 0.2. What happens and why?
+3. Try the following: $(\alpha,\beta,\gamma,\sigma)$ =
+   (0.20, 0.20, 0.02, 0.0). What happens and why?
+
 
 
 * Double Pendulum

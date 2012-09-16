@@ -61,30 +61,6 @@
   /*]]>*/-->
 </style><link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012  Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
 <!--/*--><![CDATA[/*><!--*/
  function CodeHighlightOn(elem, id)
  {
@@ -107,56 +83,6 @@ for the JavaScript code in this tag.
 /*]]>*///-->
 </script>
 <script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
-/**
- *
- * @source: http://orgmode.org/mathjax/MathJax.js
- *
- * @licstart  The following is the entire license notice for the
- *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- * Copyright (C) 2012  MathJax
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @licend  The above is the entire license notice
- * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- */
-
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code below.
-
-Copyright (C) 2012  Free Software Foundation, Inc.
-
-The JavaScript code below is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code below.
-*/
 <!--/*--><![CDATA[/*><!--*/
     MathJax.Hub.Config({
         // Only one of the two following lines, depending on user settings
@@ -222,11 +148,16 @@ for the JavaScript code below.
 <li><a href="#sec-1">Characterizing a System Using Differential Equations</a></li>
 <li><a href="#sec-2">Integrating Differential Equations in Python/SciPy</a>
 <ul>
-<li><a href="#sec-2-1">The power of modelling and simulation</a></li>
+<li><a href="#sec-2-1">Exercises</a></li>
+<li><a href="#sec-2-2">The power of modelling and simulation</a></li>
 </ul>
 </li>
 <li><a href="#sec-3">Lorenz Attractor</a></li>
-<li><a href="#sec-4">Predator-Prey model</a></li>
+<li><a href="#sec-4">Predator-Prey model</a>
+<ul>
+<li><a href="#sec-4-1">Exercises</a></li>
+</ul>
+</li>
 <li><a href="#sec-5">Double Pendulum</a></li>
 </ul>
 </div>
@@ -370,21 +301,21 @@ have is that we are going to keep track not just of one state variable
 
 
 
-<pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">MassSpring</span>(state,t):
-  <span style="color: #b22222;"># unpack the state vector</span>
+<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">MassSpring</span>(state,t):
+  <span style="color: #af0000;"># unpack the state vector</span>
   x = state[0]
   xd = state[1]
 
-  <span style="color: #b22222;"># these are our constants</span>
-  k = 2.5 <span style="color: #b22222;"># Newtons per metre</span>
-  m = 1.5 <span style="color: #b22222;"># Kilograms</span>
-  g = 9.8 <span style="color: #b22222;"># metres per second</span>
+  <span style="color: #af0000;"># these are our constants</span>
+  k = 2.5 <span style="color: #af0000;"># Newtons per metre</span>
+  m = 1.5 <span style="color: #af0000;"># Kilograms</span>
+  g = 9.8 <span style="color: #af0000;"># metres per second</span>
 
-  <span style="color: #b22222;"># compute acceleration xdd</span>
+  <span style="color: #af0000;"># compute acceleration xdd</span>
   xdd = ((-k*x)/m) + g
 
-  <span style="color: #b22222;"># return the two state derivatives</span>
-  <span style="color: #a020f0;">return</span> [xd, xdd]
+  <span style="color: #af0000;"># return the two state derivatives</span>
+  <span style="color: #af00ff;">return</span> [xd, xdd]
 </pre>
 
 
@@ -450,34 +381,34 @@ bunch of libraries that we will use, including plotting libraries).
 
 
 
-<pre class="src src-python"><span style="color: #a020f0;">from</span> scipy.integrate <span style="color: #a020f0;">import</span> odeint
+<pre class="src src-python"><span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">MassSpring</span>(state,t):
-  <span style="color: #b22222;"># unpack the state vector</span>
+<span style="color: #af00ff;">def</span> <span style="color: #0000ff;">MassSpring</span>(state,t):
+  <span style="color: #af0000;"># unpack the state vector</span>
   x = state[0]
   xd = state[1]
 
-  <span style="color: #b22222;"># these are our constants</span>
-  k = -2.5 <span style="color: #b22222;"># Newtons per metre</span>
-  m = 1.5 <span style="color: #b22222;"># Kilograms</span>
-  g = 9.8 <span style="color: #b22222;"># metres per second</span>
+  <span style="color: #af0000;"># these are our constants</span>
+  k = -2.5 <span style="color: #af0000;"># Newtons per metre</span>
+  m = 1.5 <span style="color: #af0000;"># Kilograms</span>
+  g = 9.8 <span style="color: #af0000;"># metres per second</span>
 
-  <span style="color: #b22222;"># compute acceleration xdd</span>
+  <span style="color: #af0000;"># compute acceleration xdd</span>
   xdd = ((k*x)/m) + g
 
-  <span style="color: #b22222;"># return the two state derivatives</span>
-  <span style="color: #a020f0;">return</span> [xd, xdd]
+  <span style="color: #af0000;"># return the two state derivatives</span>
+  <span style="color: #af00ff;">return</span> [xd, xdd]
 
-<span style="color: #a0522d;">state0</span> = [0.0, 0.0]
-<span style="color: #a0522d;">t</span> = arange(0.0, 10.0, 0.1)
+<span style="color: #af5f00;">state0</span> = [0.0, 0.0]
+<span style="color: #af5f00;">t</span> = arange(0.0, 10.0, 0.1)
 
-<span style="color: #a0522d;">state</span> = odeint(MassSpring, state0, t)
+<span style="color: #af5f00;">state</span> = odeint(MassSpring, state0, t)
 
 plot(t, state)
-xlabel(<span style="color: #8b2252;">'TIME (sec)'</span>)
-ylabel(<span style="color: #8b2252;">'STATES'</span>)
-title(<span style="color: #8b2252;">'Mass-Spring System'</span>)
-legend((<span style="color: #8b2252;">'$x$ (m)'</span>, <span style="color: #8b2252;">'$\dot{x}$ (m/sec)'</span>))
+xlabel(<span style="color: #87005f;">'TIME (sec)'</span>)
+ylabel(<span style="color: #87005f;">'STATES'</span>)
+title(<span style="color: #87005f;">'Mass-Spring System'</span>)
+legend((<span style="color: #87005f;">'$x$ (m)'</span>, <span style="color: #87005f;">'$\dot{x}$ (m/sec)'</span>))
 </pre>
 
 
@@ -512,9 +443,14 @@ The way to interpret this simulation is, if we start the system at
 \(x=0\) and \(\dot{x}=0\), and simulate for 10 seconds, this is how the
 system would behave.
 </p>
-<p>
-<b>Questions</b>:
-</p>
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">Exercises</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
 <ol>
 <li>We have started the system at \(x=0\) which means that the spring is
    not stretched beyond its resting length (so spring force due to
@@ -547,12 +483,13 @@ system would behave.
 </ol>
 
 
+</div>
 
 </div>
 
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1">The power of modelling and simulation</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">The power of modelling and simulation</h3>
+<div class="outline-text-3" id="text-2-2">
 
 
 <p>
@@ -623,40 +560,40 @@ to simulate over, and run the simulation using <code>odeint()</code>.
 
 
 
-<pre class="src src-python"><span style="color: #a020f0;">from</span> scipy.integrate <span style="color: #a020f0;">import</span> odeint
+<pre class="src src-python"><span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
 
-<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">Lorenz</span>(state,t):
-  <span style="color: #b22222;"># unpack the state vector</span>
+<span style="color: #af00ff;">def</span> <span style="color: #0000ff;">Lorenz</span>(state,t):
+  <span style="color: #af0000;"># unpack the state vector</span>
   x = state[0]
   y = state[1]
   z = state[2]
 
-  <span style="color: #b22222;"># these are our constants</span>
+  <span style="color: #af0000;"># these are our constants</span>
   sigma = 10.0
   rho = 28.0
   beta = 8.0/3.0
 
-  <span style="color: #b22222;"># compute state derivatives</span>
+  <span style="color: #af0000;"># compute state derivatives</span>
   xd = sigma * (y-x)
   yd = (rho-z)*x - y
   zd = x*y - beta*z
 
-  <span style="color: #b22222;"># return the state derivatives</span>
-  <span style="color: #a020f0;">return</span> [xd, yd, zd]
+  <span style="color: #af0000;"># return the state derivatives</span>
+  <span style="color: #af00ff;">return</span> [xd, yd, zd]
 
-<span style="color: #a0522d;">state0</span> = [2.0, 3.0, 4.0]
-<span style="color: #a0522d;">t</span> = arange(0.0, 30.0, 0.01)
+<span style="color: #af5f00;">state0</span> = [2.0, 3.0, 4.0]
+<span style="color: #af5f00;">t</span> = arange(0.0, 30.0, 0.01)
 
-<span style="color: #a0522d;">state</span> = odeint(Lorenz, state0, t)
+<span style="color: #af5f00;">state</span> = odeint(Lorenz, state0, t)
 
-<span style="color: #b22222;"># do some fancy 3D plotting</span>
-<span style="color: #a020f0;">from</span> mpl_toolkits.mplot3d <span style="color: #a020f0;">import</span> Axes3D
-<span style="color: #a0522d;">fig</span> = figure()
-<span style="color: #a0522d;">ax</span> = fig.gca(projection=<span style="color: #8b2252;">'3d'</span>)
+<span style="color: #af0000;"># do some fancy 3D plotting</span>
+<span style="color: #af00ff;">from</span> mpl_toolkits.mplot3d <span style="color: #af00ff;">import</span> Axes3D
+<span style="color: #af5f00;">fig</span> = figure()
+<span style="color: #af5f00;">ax</span> = fig.gca(projection=<span style="color: #87005f;">'3d'</span>)
 ax.plot(state[:,0],state[:,1],state[:,2])
-ax.set_xlabel(<span style="color: #8b2252;">'x'</span>)
-ax.set_ylabel(<span style="color: #8b2252;">'y'</span>)
-ax.set_zlabel(<span style="color: #8b2252;">'z'</span>)
+ax.set_xlabel(<span style="color: #87005f;">'x'</span>)
+ax.set_ylabel(<span style="color: #87005f;">'y'</span>)
+ax.set_zlabel(<span style="color: #87005f;">'z'</span>)
 show()
 </pre>
 
@@ -669,7 +606,7 @@ You should see something like this:
 </p>
 
 <div class="figure">
-<p><img src="figs/lorenz1.png" height="600px" align="center" alt="figs/lorenz1.png" /></p>
+<p><img src="figs/lorenz1.png" height="400px" align="center" alt="figs/lorenz1.png" /></p>
 <p>Lorenz Attractor</p>
 </div>
 
@@ -698,30 +635,30 @@ small amount. We will simulate for 30 seconds.
 
 
 
-<pre class="src src-python"><span style="color: #a0522d;">t</span> = arange(0.0, 30, 0.01)
+<pre class="src src-python"><span style="color: #af5f00;">t</span> = arange(0.0, 30, 0.01)
 
-<span style="color: #b22222;"># original initial conditions</span>
-<span style="color: #a0522d;">state1_0</span> = [2.0, 3.0, 4.0]
-<span style="color: #a0522d;">state1</span> = odeint(Lorenz, state1_0, t)
+<span style="color: #af0000;"># original initial conditions</span>
+<span style="color: #af5f00;">state1_0</span> = [2.0, 3.0, 4.0]
+<span style="color: #af5f00;">state1</span> = odeint(Lorenz, state1_0, t)
 
-<span style="color: #b22222;"># rerun with very small change in initial conditions</span>
-<span style="color: #a0522d;">delta</span> = 0.0001
-<span style="color: #a0522d;">state2_0</span> = [2.0+delta, 3.0, 4.0]
-<span style="color: #a0522d;">state2</span> = odeint(Lorenz, state2_0, t)
+<span style="color: #af0000;"># rerun with very small change in initial conditions</span>
+<span style="color: #af5f00;">delta</span> = 0.0001
+<span style="color: #af5f00;">state2_0</span> = [2.0+delta, 3.0, 4.0]
+<span style="color: #af5f00;">state2</span> = odeint(Lorenz, state2_0, t)
 
-<span style="color: #b22222;"># animation</span>
+<span style="color: #af0000;"># animation</span>
 fig,ax = subplots()
-pb, = ax.plot(state1[:,0],state1[:,1],<span style="color: #8b2252;">'b-'</span>,alpha=0.2)
-xlabel(<span style="color: #8b2252;">'x'</span>)
-ylabel(<span style="color: #8b2252;">'y'</span>)
-p, = ax.plot(state1[0:10,0],state1[0:10,1],<span style="color: #8b2252;">'b-'</span>)
-pp, = ax.plot(state1[10,0],state1[10,1],<span style="color: #8b2252;">'b.'</span>,markersize=10)
-p2, = ax.plot(state2[0:10,0],state2[0:10,1],<span style="color: #8b2252;">'r-'</span>)
-pp2, = ax.plot(state2[10,0],state2[10,1],<span style="color: #8b2252;">'r.'</span>,markersize=10)
-<span style="color: #a0522d;">tt</span> = title(<span style="color: #8b2252;">"%4.2f sec"</span> % 0.00)
-<span style="color: #b22222;"># animate</span>
-<span style="color: #a0522d;">step</span>=3
-<span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #7a378b;">xrange</span>(1,shape(state1)[0]-10,step):
+pb, = ax.plot(state1[:,0],state1[:,1],<span style="color: #87005f;">'b-'</span>,alpha=0.2)
+xlabel(<span style="color: #87005f;">'x'</span>)
+ylabel(<span style="color: #87005f;">'y'</span>)
+p, = ax.plot(state1[0:10,0],state1[0:10,1],<span style="color: #87005f;">'b-'</span>)
+pp, = ax.plot(state1[10,0],state1[10,1],<span style="color: #87005f;">'b.'</span>,markersize=10)
+p2, = ax.plot(state2[0:10,0],state2[0:10,1],<span style="color: #87005f;">'r-'</span>)
+pp2, = ax.plot(state2[10,0],state2[10,1],<span style="color: #87005f;">'r.'</span>,markersize=10)
+<span style="color: #af5f00;">tt</span> = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
+<span style="color: #af0000;"># animate</span>
+<span style="color: #af5f00;">step</span>=3
+<span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #875f87;">xrange</span>(1,shape(state1)[0]-10,step):
   p.set_xdata(state1[10+i:20+i,0])
   p.set_ydata(state1[10+i:20+i,1])
   pp.set_xdata(state1[19+i,0])
@@ -730,14 +667,14 @@ pp2, = ax.plot(state2[10,0],state2[10,1],<span style="color: #8b2252;">'r.'</spa
   p2.set_ydata(state2[10+i:20+i,1])
   pp2.set_xdata(state2[19+i,0])
   pp2.set_ydata(state2[19+i,1])
-  tt.set_text(<span style="color: #8b2252;">"%4.2f sec"</span> % (i*0.01))
+  tt.set_text(<span style="color: #87005f;">"%4.2f sec"</span> % (i*0.01))
   draw()
 
-<span style="color: #a0522d;">i</span> = 1939          <span style="color: #b22222;"># the two simulations really diverge here!</span>
-<span style="color: #a0522d;">s1</span> = state1[i,:]
-<span style="color: #a0522d;">s2</span> = state2[i,:]
-<span style="color: #a0522d;">d12</span> = norm(s1-s2) <span style="color: #b22222;"># distance</span>
-<span style="color: #a020f0;">print</span> (<span style="color: #8b2252;">"distance = %f for a %f different in initial condition"</span>) % (d12, delta)
+<span style="color: #af5f00;">i</span> = 1939          <span style="color: #af0000;"># the two simulations really diverge here!</span>
+<span style="color: #af5f00;">s1</span> = state1[i,:]
+<span style="color: #af5f00;">s2</span> = state2[i,:]
+<span style="color: #af5f00;">d12</span> = norm(s1-s2) <span style="color: #af0000;"># distance</span>
+<span style="color: #af00ff;">print</span> (<span style="color: #87005f;">"distance = %f for a %f different in initial condition"</span>) % (d12, delta)
 </pre>
 
 
@@ -817,9 +754,177 @@ past a couple of days can turn out to be dead wrong.
 
 
 <p>
-Lotka-Volterra
+The <a href="http://en.wikipedia.org/wiki/Lotka–Volterra_equation">Lotka-Volterra equations</a> are two coupled first-order nonlinear
+differential equations that are used to characterize the dynamics of
+biological systems in which a predator population and a prey popuation
+interact. The two populations develop over time according to these equations:
 </p>
 
+
+\begin{eqnarray}
+\dot{x} &= &x(\alpha-\beta y)\\
+\dot{y} &= &-y(\gamma - \sigma x)
+\end{eqnarray}
+
+<p>
+where \(x\) is the number of prey (for example, rabbits), \(y\) is the
+number of predators (e.g. foxes), and \(\dot{x}\) and \(\dot{y}\)
+represent the growth rates (the rates of change over time) of the two
+populations. The values \((\alpha,\beta,\gamma,\sigma)\) are parameters
+(constants) that characterize different aspects of the two
+populations.
+</p>
+<p>
+Assumptions of this simple form of the model are:
+</p>
+<ol>
+<li>prey find ample food at all times
+</li>
+<li>food supply of predators depends entirely on prey population
+</li>
+<li>rate of change of population is proportional to its size
+</li>
+<li>the environment does not change
+
+</li>
+<li>\(\alpha\) is the natural growth rate of prey in the absence of predation
+</li>
+<li>\(\beta\) is the death rate per encounter of prey due to predation
+</li>
+<li>\(\sigma\) is related to the growth rate of predators
+</li>
+<li>\(\gamma\) is the natural death rate of predators in the absence of food (prey)
+</li>
+</ol>
+
+
+<p>
+Here is some example code showing how to simulate this system. Just as
+before, we need to complete a few steps:
+</p>
+<ol>
+<li>write a Python function that characterizes how the system's state
+   derivatives are related to the system's states (this is given by
+   the equations above)
+</li>
+<li>decide on values of the system parameters
+</li>
+<li>decide on values of the initial conditions of the system (the
+   initial values of the states)
+</li>
+<li>decide on a time span and time resolution for simulating the system
+</li>
+<li>simulate! (i.e. use an ODE solver to integrate the differential
+   equations over time)
+</li>
+<li>examine the states, typically by plotting them
+</li>
+</ol>
+
+
+<p>
+Here is some code:
+</p>
+
+
+
+<pre class="src src-python"><span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
+
+<span style="color: #af00ff;">def</span> <span style="color: #0000ff;">LotkaVolterra</span>(state,t):
+  x = state[0]
+  y = state[1]
+  alpha = 0.1
+  beta =  0.1
+  sigma = 0.1
+  gamma = 0.1
+  xd = x*(alpha - beta*y)
+  yd = -y*(gamma - sigma*x)
+  <span style="color: #af00ff;">return</span> [xd,yd]
+
+<span style="color: #af5f00;">t</span> = arange(0,500,1)
+<span style="color: #af5f00;">state0</span> = [0.5,0.5]
+<span style="color: #af5f00;">state</span> = odeint(LotkaVolterra,state0,t)
+figure()
+plot(t,state)
+ylim([0,8])
+xlabel(<span style="color: #87005f;">'Time'</span>)
+ylabel(<span style="color: #87005f;">'Population Size'</span>)
+legend((<span style="color: #87005f;">'x (prey)'</span>,<span style="color: #87005f;">'y (predator)'</span>))
+title(<span style="color: #87005f;">'Lotka-Volterra equations'</span>)
+</pre>
+
+
+<p>
+You should see a plot like this:
+</p>
+
+<div class="figure">
+<p><img src="figs/lotkavolterra1.png" height="400px" align="center" alt="figs/lotkavolterra1.png" /></p>
+<p>Lotka-Volterra Simulation</p>
+</div>
+
+<p>
+We can also plot the trajectory of the system in <i>state-space</i> (much
+like we did for the Lorenz system above):
+</p>
+
+
+
+<pre class="src src-python"><span style="color: #af0000;"># animation in state-space</span>
+fig,ax = subplots()
+pb, = ax.plot(state[:,0],state[:,1],<span style="color: #87005f;">'b-'</span>,alpha=0.2)
+xlabel(<span style="color: #87005f;">'x (prey population size)'</span>)
+ylabel(<span style="color: #87005f;">'y (predator population size)'</span>)
+p, = ax.plot(state[0:10,0],state[0:10,1],<span style="color: #87005f;">'b-'</span>)
+pp, = ax.plot(state[10,0],state[10,1],<span style="color: #87005f;">'b.'</span>,markersize=10)
+<span style="color: #af5f00;">tt</span> = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
+<span style="color: #af0000;"># animate</span>
+<span style="color: #af5f00;">step</span>=3
+<span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #875f87;">xrange</span>(1,shape(state)[0]-10,step):
+  p.set_xdata(state[10+i:20+i,0])
+  p.set_ydata(state[10+i:20+i,1])
+  pp.set_xdata(state[19+i,0])
+  pp.set_ydata(state[19+i,1])
+  tt.set_text(<span style="color: #87005f;">"%d steps"</span> % (i))
+  draw()
+</pre>
+
+
+<p>
+<a href="code/lotkavolterra.py">lotkavolterra.py</a>
+</p>
+<p>
+You should see a plot like this:
+</p>
+
+<div class="figure">
+<p><img src="figs/lotkavolterra2.png" height="400px" align="center" alt="figs/lotkavolterra2.png" /></p>
+<p>Lotka-Volterra State-space plot</p>
+</div>
+
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">Exercises</h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+<ol>
+<li>Increase the \(\alpha\) parameter and re-run the simulation. What
+   happens and why?
+</li>
+<li>Set all parameters to 0.2. What happens and why?
+</li>
+<li>Try the following: \((\alpha,\beta,\gamma,\sigma)\) =
+   (0.20, 0.20, 0.02, 0.0). What happens and why?
+</li>
+</ol>
+
+
+
+
+</div>
 </div>
 
 </div>
