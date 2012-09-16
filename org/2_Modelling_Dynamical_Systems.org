@@ -338,6 +338,8 @@ ax.set_zlabel('z')
 show()
 #+END_SRC
 
+[[file:code/lorenz1.py][lorenz1.py]]
+
 You should see something like this:
 
 #+ATTR_HTML: height="600px" align="center"
@@ -405,6 +407,8 @@ s2 = state2[i,:]
 d12 = norm(s1-s2) # distance
 print ("distance = %f for a %f different in initial condition") % (d12, delta)
 #+END_SRC
+
+[[file:code/lorenz2.py][lorenz2.py]]
 
 #+BEGIN_EXAMPLE
 distance = 32.757253 for a 0.000100 different in initial condition
