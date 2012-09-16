@@ -94,5 +94,5 @@
 * These notes
 
 These notes can be viewed (and downloaded) in their entirety from a
-github repository here: [[https://github.com/paulgribble/CompNeuro][CompNeuro]]
+[[https://github.com][github]] repository here: [[https://github.com/paulgribble/CompNeuro][CompNeuro]]
 
