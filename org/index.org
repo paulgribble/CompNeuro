@@ -34,7 +34,7 @@
 - [[file:lecture1.pdf][lecture1.pdf]]
 - [[file:readings/Trappenberg1.pdf][Trappenberg1.pdf]]
 - [[file:readings/OM1.pdf][OM1.pdf]] (1st Ed.) or [[http://grey.colorado.edu/CompCogNeuro/index.php?title=CCNBook/Intro][CCNBook/Intro]]
-- [[file:assignment1.pdf][assignment1.pdf]] (due Due Sep 16)
+- [[file:assignment1.pdf][assignment1.pdf]] (due Due Sep 23)
 
 ** Sep 13: Getting your computer set up with Python & scientific libraries
 - course notes [[file:0_Setup_Your_Computer.html][0: Setup Your Computer]]
