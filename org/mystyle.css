@@ -1,6 +1,8 @@
+@import url(http://fonts.googleapis.com/css?family=Ubuntu);
+
 html {
-	font-family: verdana, sans-serif;
-	font-size: 10pt;
+	font-family: 'Ubuntu', verdana, sans-serif;
+	font-size: 11pt;
 	height: 100%;
 	width: 100%;
 	margin: 0;
