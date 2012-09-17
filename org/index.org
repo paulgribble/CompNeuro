@@ -73,14 +73,24 @@
 -----
 * Links
 
+** Python Introductory Tutorials
+
+- [[http://openbookproject.net/thinkcs/python/english2e/][How to Think Like a Computer Scientist: Learning with Python]]
+- [[http://learnpythonthehardway.org/book/][Learn Python The Hard Way]]
+- [[http://www.diveintopython.net/][Dive Into Python]]
 - [[file:readings/SciCompPython.pdf][Introduction to Scientific Computing with Python]]
+
+** iPython
+
 - [[http://ipython.org/videos.html][iPython videos]]
 - [[http://youtu.be/2G5YTlheCbw][iPython in-depth: high productivity interactive and parallel python]]
   (youtube video) iPython Notebook stuff starts at about 1:15:40, and
   parallel programming stuff starts at around 2:13:00
+
+** Numpy / SciPy / Matplotlib
+
 - [[http://youtu.be/vWkb7VahaXQ][Using Numpy Arrays to Perform Mathematical Operations in Python]]
   (youtube video)
-- [[http://openbookproject.net/thinkcs/python/english2e/][How to Think Like a Computer Scientist: Learning with Python]]
 - [[http://scipy-lectures.github.com/][Python Scientific Lecture Notes]]
 - [[http://www.scipy.org/Plotting_Tutorial][SciPy Plotting Tutorial]]
 - [[http://docs.scipy.org/doc/][Numpy and Scipy Documentation]]
