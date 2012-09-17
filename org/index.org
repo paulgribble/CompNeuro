@@ -80,13 +80,6 @@
 - [[http://www.diveintopython.net/][Dive Into Python]]
 - [[file:readings/SciCompPython.pdf][Introduction to Scientific Computing with Python]]
 
-** iPython
-
-- [[http://ipython.org/videos.html][iPython videos]]
-- [[http://youtu.be/2G5YTlheCbw][iPython in-depth: high productivity interactive and parallel python]]
-  (youtube video) iPython Notebook stuff starts at about 1:15:40, and
-  parallel programming stuff starts at around 2:13:00
-
 ** Numpy / SciPy / Matplotlib
 
 - [[http://youtu.be/vWkb7VahaXQ][Using Numpy Arrays to Perform Mathematical Operations in Python]]
@@ -98,6 +91,13 @@
 - [[http://scipy.org/Cookbook][SciPy Cookbook]]
 - [[http://scipy.org/Getting_Started][SciPy Getting Started]]
 - [[http://matplotlib.org/gallery.html][matplotlib gallery]]
+
+** iPython
+
+- [[http://ipython.org/videos.html][iPython videos]]
+- [[http://youtu.be/2G5YTlheCbw][iPython in-depth: high productivity interactive and parallel python]]
+  (youtube video) iPython Notebook stuff starts at about 1:15:40, and
+  parallel programming stuff starts at around 2:13:00
 
 -----
 
