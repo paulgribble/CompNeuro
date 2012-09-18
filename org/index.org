@@ -79,6 +79,7 @@
 - [[http://learnpythonthehardway.org/book/][Learn Python The Hard Way]]
 - [[http://www.diveintopython.net/][Dive Into Python]]
 - [[file:readings/SciCompPython.pdf][Introduction to Scientific Computing with Python]]
+- [[http://www.pythontutor.com/][Online Python Tutor]]
 
 ** Numpy / SciPy / Matplotlib
 
