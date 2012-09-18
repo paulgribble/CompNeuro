@@ -5,7 +5,6 @@ from scipy.integrate import odeint
 # here is our state function that implements the
 # differential equations defining the dynamics of
 # a double-pendulum
-
 def DoublePendulum(x, t):
     damping = 0.0
     g = 9.8
@@ -21,16 +20,13 @@ def DoublePendulum(x, t):
 
 # decide on a time range for simulation
 # and initial states
-
 t = arange(0, 10, 0.01)
 x0 = [pi, pi/2, 0.0, 0.0] # a0, a1, a0d, a1d
 
 # simulate!
-
 x = odeint(DoublePendulum, x0, t)
 
 # plot the states over time
-
 figure()
 plot(t,x)
 legend(('a0','a1','a0d','a1d'))
@@ -40,7 +36,6 @@ draw()
 
 # a utility function to convert from joint angles to hinge positions
 # we will use this for our animation
-
 def a2h(a0,a1):
 	h0 = [0,0]
 	h1 = [np.sin(a0), np.cos(a0)]
@@ -48,7 +43,6 @@ def a2h(a0,a1):
 	return [h0, h1, h2]
 
 # let's make an animation of the pendulum's motion
-
 def AnimatePendulum(states,t):
 	# slice out the two angles and two angular velocities
 	a0 = states[:,0]
@@ -91,5 +85,7 @@ def AnimatePendulum(states,t):
 		title1.set_text('time = %3.2fs' %t[i])
 		draw()
 
+# Go animation!
 AnimatePendulum(x,t)
+
 
