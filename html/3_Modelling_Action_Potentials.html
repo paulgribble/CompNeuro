@@ -153,7 +153,10 @@
 <li><a href="#sec-1">Introduction</a></li>
 <li><a href="#sec-2">Simulating the Hodgkin &amp; Huxley model</a>
 <ul>
-<li><a href="#sec-2-1">Step 1: membrane potential</a></li>
+<li><a href="#sec-2-1">The neuron model</a>
+<ul>
+<li><a href="#sec-2-1-1">Passive Properties</a></li>
+</ul></li>
 </ul>
 </li>
 <li><a href="#sec-3">Next steps</a></li>
@@ -175,7 +178,7 @@ single neuron to simulate action potentials. The model is based on the
 work by Hodgkin &amp; Huxley in the 1940s and 1950s
 [<sub></sub><a href="#HH1952">1</a>][<sub></sub><a href="#HH1990">2</a>]. A good reference to refresh your memory about
 how ion channels in a neuron work is the Kandel, Schwartz &amp; Jessel
-book "Principles of Neural Science".
+book "Principles of Neural Science" [<sub></sub><a href="#kandel2000principles">4</a>].
 </p>
 <p>
 To model the action potential we will use an article by Ekeberg et              
@@ -235,8 +238,46 @@ process underlying the origin of an action potential.
 </div>
 
 <div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1">Step 1: membrane potential</h3>
+<h3 id="sec-2-1">The neuron model</h3>
 <div class="outline-text-3" id="text-2-1">
+
+
+
+<div class="figure">
+<p><img src="figs/ekeberg_fig1.png" width="400px" align="center" alt="figs/ekeberg_fig1.png" /></p>
+<p>Schematic of Ekeberg et al. 1991 neuron model</p>
+</div>
+
+<p>
+The figure above, adapted from Ekeberg et al., 1991
+[<sub></sub><a href="#ekeberg1991">3</a>], schematically illustrates the model of a
+neuron. In panel A we see a soma, and multiple dendrites. Each of
+these can be modelled by an electrical "compartment" (Panel B) and the
+passive interactions between them can be modelled as a pretty standard
+electrical circuit (see <a href="http://en.wikipedia.org/wiki/Biological_neuron_model">Biological Neuron Model</a> for more details about
+compartmental models of neurons). In panel C, we see an expanded model
+of the Soma from panel A. Here, a number of active ion channels are
+included in the model of the soma.
+</p>
+<p>
+For our purposes here, we will focus on the soma, and we will not
+include any additional dendrites in our implementation of the
+model. Thus essentially we will be modeling what appears in panel C,
+and at that, only a subset.
+</p>
+<p>
+In panel C we see that the soma can be modelled as an electrical
+circuit with a sodium ion channel (Na), a potassium ion channel (K), a
+calcium ion channel (Ca), and a calcium-dependent potassium channel
+(K(Ca)). What we will be concerned with simulating, ultimately, is the
+intracellular potential E.
+</p>
+
+</div>
+
+<div id="outline-container-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1">Passive Properties</h4>
+<div class="outline-text-4" id="text-2-1-1">
 
 
 <p>
@@ -262,14 +303,31 @@ physics that <a href="http://en.wikipedia.org/wiki/Capacitance">capacitance</a> 
 store an electrical charge.
 </p>
 <p>
-The "bunch of other things" includes (in order of appearance) a
-passive leakage current, a term characterizing the electrical coupling
-of different compartments, and the currents entering through all of
-the active ion channels into the compartment.
+The "bunch of other things" is a sum of three things, actually, (from
+left to right): a passive leakage current, plus a term characterizing
+the electrical coupling of different compartments, plus the currents
+of the various ion channels. Since we are not going to be modelling
+dendrites here, we can ignore the middle term on the right hand side
+of the equation (&sum;{\left(E<sub>comp</sub>-E\right)}G<sub>core</sub>) which
+represents the sum of currents from adjacent compartments (we have
+none).
 </p>
 <p>
-x
+We are also going to include in our model an external current
+\(I_{ext}\). This can essentially represent the sum of currents coming
+in from the dendrites (which we are not explicitly modelling). It can
+also represent external current injected in a <a href="http://en.wikipedia.org/wiki/Patch_clamp">patch-clamp</a>
+experiment. This is what we as experimenters can manipulate, for
+example, to see how neuron spiking behaviour changes. So what we will
+actually be working with is this:
 </p>
+
+
+\begin{equation}
+\frac{dE}{dt} = \frac{(E_{leak}-E)G_{m} + I_{channels} + I_{ext}}{C_{m}}
+\end{equation}
+
+
 <p>
 <a href="code/ekeberg.py">ekeberg.py</a>
 </p>
@@ -281,6 +339,7 @@ x
 
 
 
+</div>
 </div>
 </div>
 
@@ -344,6 +403,20 @@ O.&nbsp;Ekeberg, P.&nbsp;Wallen, A.&nbsp;Lansner, H.&nbsp;Traven, L.&nbsp;Brodin
   networks. I. The single neuron and synaptic interaction.
  <em>Biol Cybern</em>, 65(2):81-90, 1991.
 [&nbsp;<a href="refs_bib.html#ekeberg1991">bib</a>&nbsp;]
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="kandel2000principles">4</a>]
+</td>
+<td class="bibtexitem">
+E.R. Kandel, J.H. Schwartz, T.M. Jessell, et&nbsp;al.
+ <em>Principles of neural science</em>, volume&nbsp;4.
+ McGraw-Hill New York, 2000.
+[&nbsp;<a href="refs_bib.html#kandel2000principles">bib</a>&nbsp;]
 
 </td>
 </tr>

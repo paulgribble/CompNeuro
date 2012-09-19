@@ -96,7 +96,7 @@ def neuron(state, t, params):
 	I_leak = (Epar['E_leak']-E) * Epar['G_leak']
 
 	# calculate derivative of E
-	dEdt = (I_leak + I_ext + I_K + I_Na) / Epar['C_m']
+	dEdt = (I_leak + I_K + I_Na + I_ext) / Epar['C_m']
 	statep = [dEdt, dmdt, dhdt, dndt]
 
 	return statep

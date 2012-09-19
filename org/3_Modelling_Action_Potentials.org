@@ -19,7 +19,7 @@ single neuron to simulate action potentials. The model is based on the
 work by Hodgkin & Huxley in the 1940s and 1950s
 \cite{HH1952,HH1990}. A good reference to refresh your memory about
 how ion channels in a neuron work is the Kandel, Schwartz & Jessel
-book "Principles of Neural Science".
+book "Principles of Neural Science" \cite{kandel2000principles}.
 
 To model the action potential we will use an article by Ekeberg et              
 al. (1991) published in Biological Cybernetics
@@ -54,7 +54,34 @@ electric circuit including two types of ion channels: sodium and
 potassium channels. We will use this model to better understand the
 process underlying the origin of an action potential.
 
-** Step 1: membrane potential
+** The neuron model
+
+#+ATTR_HTML: width="400px" align="center"
+#+CAPTION: Schematic of Ekeberg et al. 1991 neuron model
+[[file:figs/ekeberg_fig1.png]]
+
+The figure above, adapted from Ekeberg et al., 1991
+\cite{ekeberg1991}, schematically illustrates the model of a
+neuron. In panel A we see a soma, and multiple dendrites. Each of
+these can be modelled by an electrical "compartment" (Panel B) and the
+passive interactions between them can be modelled as a pretty standard
+electrical circuit (see [[http://en.wikipedia.org/wiki/Biological_neuron_model][Biological Neuron Model]] for more details about
+compartmental models of neurons). In panel C, we see an expanded model
+of the Soma from panel A. Here, a number of active ion channels are
+included in the model of the soma.
+
+For our purposes here, we will focus on the soma, and we will not
+include any additional dendrites in our implementation of the
+model. Thus essentially we will be modeling what appears in panel C,
+and at that, only a subset.
+
+In panel C we see that the soma can be modelled as an electrical
+circuit with a sodium ion channel (Na), a potassium ion channel (K), a
+calcium ion channel (Ca), and a calcium-dependent potassium channel
+(K(Ca)). What we will be concerned with simulating, ultimately, is the
+intracellular potential E.
+
+*** Passive Properties
 
 Equation (1) of Ekeberg is a differential equation describing the
 relation between the time derivative of the membrane potential $E$ as
@@ -74,12 +101,27 @@ $C_{m}$ (the right hand side of the equation). Recall from basic
 physics that [[http://en.wikipedia.org/wiki/Capacitance][capacitance]] is a measure of the ability of something to
 store an electrical charge.
 
-The "bunch of other things" includes (in order of appearance) a
-passive leakage current, a term characterizing the electrical coupling
-of different compartments, and the currents entering through all of
-the active ion channels into the compartment.
+The "bunch of other things" is a sum of three things, actually, (from
+left to right): a passive leakage current, plus a term characterizing
+the electrical coupling of different compartments, plus the currents
+of the various ion channels. Since we are not going to be modelling
+dendrites here, we can ignore the middle term on the right hand side
+of the equation (\sum{\left(E_{comp}-E\right)}G_{core}) which
+represents the sum of currents from adjacent compartments (we have
+none).
 
-x
+We are also going to include in our model an external current
+$I_{ext}$. This can essentially represent the sum of currents coming
+in from the dendrites (which we are not explicitly modelling). It can
+also represent external current injected in a [[http://en.wikipedia.org/wiki/Patch_clamp][patch-clamp]]
+experiment. This is what we as experimenters can manipulate, for
+example, to see how neuron spiking behaviour changes. So what we will
+actually be working with is this:
+
+\begin{equation}
+\frac{dE}{dt} = \frac{(E_{leak}-E)G_{m} + I_{channels} + I_{ext}}{C_{m}}
+\end{equation}
+
 
 [[file:code/ekeberg.py][ekeberg.py]]
 

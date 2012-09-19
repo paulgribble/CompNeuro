@@ -25,7 +25,7 @@
 0. [@0] [[file:0_Setup_Your_Computer.html][Setup Your Computer]]
 1. [[file:1_Dynamical_Systems.html][Dynamical Systems]]
 2. [[file:2_Modelling_Dynamical_Systems.html][Modelling Dynamical Systems]]
-3. [[file:3_Modelling_Action_Potentials.html][Modelling Action Potentials]]
+3. Modelling Action Potentials
 
 -----
 * Schedule & Topics
@@ -50,7 +50,7 @@
 ** Sep 24, 27 : no class (Paul away)
 
 ** Oct 1, 4 : Modeling Action Potentials - Hodgkin-Huxley models
-- course notes [[file:3_Modelling_Action_Potentials.html][3: Modelling Action Potentials]]
+- course notes 3: Modelling Action Potentials
 
 ** Oct 8, 11 : no class (thanksgiving, SFN)
 
