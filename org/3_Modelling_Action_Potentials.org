@@ -122,6 +122,22 @@ actually be working with is this:
 \frac{dE}{dt} = \frac{(E_{leak}-E)G_{m} + I_{channels} + I_{ext}}{C_{m}}
 \end{equation}
 
+What we need to do now is unpack the $I_{channels}$ term representing
+the currents from all of the ion channels in the model. Initially we
+will only be including two, the potassium channel (K) and the sodium
+channel (Na).
+
+*** Sodium channels (Na)
+
+x
+
+*** Potassium channels (K)
+
+x
+
+*** Python code
+
+x
 
 [[file:code/ekeberg.py][ekeberg.py]]
 
