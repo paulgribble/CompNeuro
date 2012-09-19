@@ -135,7 +135,7 @@ x
 
 x
 
-*** Python code
+** Python code
 
 x
 
