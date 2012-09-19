@@ -1,7 +1,6 @@
-@import url(http://fonts.googleapis.com/css?family=Ubuntu);
-
 html {
-	font-family: 'Ubuntu', verdana, sans-serif;
+	font-family: sans-serif;
+	font-weight:100;
 	font-size: 11pt;
 	height: 100%;
 	width: 100%;
@@ -17,8 +16,19 @@ body {
 	padding-top: 2%;
 }
 
-body a{
+body a {
 	color: #2580a2;
 	text-decoration: none;
 }
 
+h1 {
+   font-weight: normal;
+}
+
+h2 {
+   font-weight: normal;
+}
+
+h3 {
+   font-weight: normal;
+}
