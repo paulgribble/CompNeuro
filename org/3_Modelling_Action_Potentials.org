@@ -77,16 +77,15 @@ store an electrical charge.
 The "bunch of other things" includes (in order of appearance) a
 passive leakage current, a term characterizing the electrical coupling
 of different compartments, and the currents entering through all of
-the active ion channels into the compartment. For now let's ignore the
-second term $\sum{\left(E_{comp}-E\right)}G_{core}$ and let's focus on
-the others.
+the active ion channels into the compartment.
 
-Equations (2), (3)
+x
 
-As a first step, let's focus just on the first part: the leak current
-through the membrane.
+[[file:code/ekeberg.py][ekeberg.py]]
 
-
+#+ATTR_HTML: width="600px" align="center"
+#+CAPTION: Spiking neuron simulation based on Ekeberg et al., 1991
+[[file:figs/ekeberg1.png]]
 
 
 
