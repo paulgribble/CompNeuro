@@ -31,6 +31,54 @@ following questions:
 - What is the order of the system described in equations 1-9?
 - What are the states and state derivatives of the system?
 
+* Simulating the Hodgkin & Huxley model
+
+Before we begin coding up the model, it may be useful to remind you of
+a fundamental law of electricity, one that relates electrical
+potential $V$ to electric current $I$ and resistance $R$ (or
+conductance $G$, the reciprocal of resistance). This of course is
+known as [[http://en.wikipedia.org/wiki/Ohm's_law][Ohm's law]]:
+
+\begin{equation}
+V = IR
+\end{equation}
+
+or 
+
+\begin{equation}
+V = \frac{I}{G}
+\end{equation}
+
+Our goal here is to code up a dynamical model of the membrane's
+electric circuit including two types of ion channels: sodium and
+potassium channels. We will use this model to better understand the
+process underlying the origin of an action potential.
+
+** Step 1: membrane potential
+
+Equation (1) of Ekeberg is a differential equation describing the
+relation between the time derivative of the membrane potential $E$ as
+a function of the passive leak current through the membrane, and the
+current through the ion channels. Note that Ekeberg uses $E$ instead
+of the typical $V$ symbol to represent electrical potential.
+
+\begin{equation}
+\frac{dE}{dt} = \frac{(E_{leak}-E)G_{m} + \sum{\left(E_{comp}-E\right)}G_{core} + I_{channels}}{C_{m}}
+\end{equation}
+
+Don't panic, it's not actually that complicated. What this equation is
+saying is that the rate of change of electrical potential across the
+current (the left hand side of the equation, $\frac{dE}{dt}$) is equal
+to the sum of a bunch of other terms, divided by membrane capacitance
+$C_{m}$ (the right hand side of the equation). Recall from basic
+physics that [[http://en.wikipedia.org/wiki/Capacitance][capacitance]] is a measure of the ability of something to
+store an electrical charge.
+
+As a first step, let's focus just on the first part: the leak current
+through the membrane.
+
+
+
 
 
 * Next steps

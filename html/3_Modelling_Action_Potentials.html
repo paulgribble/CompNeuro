@@ -82,7 +82,47 @@
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
 
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
@@ -111,7 +151,12 @@
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">Introduction</a></li>
-<li><a href="#sec-2">Next steps</a></li>
+<li><a href="#sec-2">Simulating the Hodgkin &amp; Huxley model</a>
+<ul>
+<li><a href="#sec-2-1">Step 1: membrane potential</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">Next steps</a></li>
 </ul>
 </div>
 </div>
@@ -149,15 +194,89 @@ following questions:
 </ul>
 
 
-
-
 </div>
 
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Next steps</h2>
+<h2 id="sec-2">Simulating the Hodgkin &amp; Huxley model</h2>
 <div class="outline-text-2" id="text-2">
+
+
+<p>
+Before we begin coding up the model, it may be useful to remind you of
+a fundamental law of electricity, one that relates electrical
+potential \(V\) to electric current \(I\) and resistance \(R\) (or
+conductance \(G\), the reciprocal of resistance). This of course is
+known as <a href="http://en.wikipedia.org/wiki/Ohm's_law">Ohm's law</a>:
+</p>
+
+
+\begin{equation}
+V = IR
+\end{equation}
+
+<p>
+or 
+</p>
+
+
+\begin{equation}
+V = \frac{I}{G}
+\end{equation}
+
+<p>
+Our goal here is to code up a dynamical model of the membrane's
+electric circuit including two types of ion channels: sodium and
+potassium channels. We will use this model to better understand the
+process underlying the origin of an action potential.
+</p>
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">Step 1: membrane potential</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+<p>
+Equation (1) of Ekeberg is a differential equation describing the
+relation between the time derivative of the membrane potential \(E\) as
+a function of the passive leak current through the membrane, and the
+current through the ion channels. Note that Ekeberg uses \(E\) instead
+of the typical \(V\) symbol to represent electrical potential.
+</p>
+
+
+\begin{equation}
+\frac{dE}{dt} = \frac{(E_{leak}-E)G_{m} + \sum{\left(E_{comp}-E\right)}G_{core} + I_{channels}}{C_{m}}
+\end{equation}
+
+<p>
+Don't panic, it's not actually that complicated. What this equation is
+saying is that the rate of change of electrical potential across the
+current (the left hand side of the equation, \(\frac{dE}{dt}\)) is equal
+to the sum of a bunch of other terms, divided by membrane capacitance
+\(C_{m}\) (the right hand side of the equation). Recall from basic
+physics that <a href="http://en.wikipedia.org/wiki/Capacitance">capacitance</a> is a measure of the ability of something to
+store an electrical charge.
+</p>
+<p>
+As a first step, let's focus just on the first part: the leak current
+through the membrane.
+</p>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Next steps</h2>
+<div class="outline-text-2" id="text-3">
 
 
 <p>
