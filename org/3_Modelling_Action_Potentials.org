@@ -6,14 +6,31 @@
 #+DATE:      fall 2012
 #+LINK_UP: http://www.gribblelab.org/compneuro/2_Modelling_Dynamical_Systems.html
 #+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+#+BIBLIOGRAPHY: refs plain option:-d limit:t
 
 -----
 [TABLE-OF-CONTENTS]
 -----
 
-* x
+* Introduction
 
-x
+In this section we will use a model of voltage-gated ion channels in a
+single neuron to simulate action potentials. The model is based on the
+work by Hodgkin & Huxley in the 1940s and 1950s
+\cite{HH1952,HH1990}. A good reference to refresh your memory about
+how ion channels in a neuron work is the Kandel, Schwartz & Jessel
+book "Principles of Neural Science".
+
+To model the action potential we will use an article by Ekeberg et              
+al. (1991) published in Biological Cybernetics
+\cite{ekeberg1991}. When reading the article you can focus on the
+first three pages (up to paragraph 2.3) and try to find answers to the
+following questions:
+
+- How many differential equations are there?
+- What is the order of the system described in equations 1-9?
+- What are the states and state derivatives of the system?
+
 
 
 * Next steps
