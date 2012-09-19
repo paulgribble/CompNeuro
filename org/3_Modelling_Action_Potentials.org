@@ -74,6 +74,15 @@ $C_{m}$ (the right hand side of the equation). Recall from basic
 physics that [[http://en.wikipedia.org/wiki/Capacitance][capacitance]] is a measure of the ability of something to
 store an electrical charge.
 
+The "bunch of other things" includes (in order of appearance) a
+passive leakage current, a term characterizing the electrical coupling
+of different compartments, and the currents entering through all of
+the active ion channels into the compartment. For now let's ignore the
+second term $\sum{\left(E_{comp}-E\right)}G_{core}$ and let's focus on
+the others.
+
+Equations (2), (3)
+
 As a first step, let's focus just on the first part: the leak current
 through the membrane.
 
