@@ -32,7 +32,7 @@ pp, = ax.plot(state[10,0],state[10,1],'b.',markersize=10)
 tt = title("%4.2f sec" % 0.00)
 
 # animate
-step=3
+step=2
 for i in xrange(1,shape(state)[0]-10,step):
   p.set_xdata(state[10+i:20+i,0])
   p.set_ydata(state[10+i:20+i,1])

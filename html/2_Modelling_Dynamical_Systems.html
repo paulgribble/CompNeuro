@@ -960,7 +960,7 @@ p, = ax.plot(state[0:10,0],state[0:10,1],<span style="color: #87005f;">'b-'</spa
 pp, = ax.plot(state[10,0],state[10,1],<span style="color: #87005f;">'b.'</span>,markersize=10)
 <span style="color: #af5f00;">tt</span> = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
 <span style="color: #af0000;"># animate</span>
-<span style="color: #af5f00;">step</span>=3
+<span style="color: #af5f00;">step</span>=2
 <span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">xrange</span>(1,shape(state)[0]-10,step):
   p.set_xdata(state[10+i:20+i,0])
   p.set_ydata(state[10+i:20+i,1])
