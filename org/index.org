@@ -48,6 +48,7 @@
 ** Sep 20: Modeling Dynamical Systems II
 - more on dynamical systems
 - [[file:assignment2.pdf][assignment2.pdf]] (due Sep 30)
+- code example for optimizer: [[file:code/optimizer_example.py][optimizer\_example.py]]
 
 -----
 ** Sep 24, 27 : no class (Paul away)
