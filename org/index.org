@@ -30,44 +30,57 @@
 -----
 * Schedule & Topics
 
+-----
 ** Sep 10: Introductions & course schedule
 - [[file:lecture1.pdf][lecture1.pdf]]
 - [[file:readings/Trappenberg1.pdf][Trappenberg1.pdf]]
 - [[file:readings/OM1.pdf][OM1.pdf]] (1st Ed.) or [[http://grey.colorado.edu/CompCogNeuro/index.php?title=CCNBook/Intro][CCNBook/Intro]]
-- [[file:assignment1.pdf][assignment1.pdf]] (due Due Sep 23)
+- [[file:assignment1.pdf][assignment1.pdf]] (due Sep 23)
 
 ** Sep 13: Getting your computer set up with Python & scientific libraries
 - course notes [[file:0_Setup_Your_Computer.html][0: Setup Your Computer]]
 
+-----
 ** Sep 17 : Modeling Dynamical Systems I
 - course notes [[file:1_Dynamical_Systems.html][1: Dynamical Systems]]
 - course notes [[file:2_Modelling_Dynamical_Systems.html][2: Modelling Dynamical Systems]]
 
 ** Sep 20: Modeling Dynamical Systems II
-- 
+- more on dynamical systems
+- [[file:assignment2.pdf][assignment2.pdf]] (due Sep 30)
 
-
+-----
 ** Sep 24, 27 : no class (Paul away)
 
+-----
 ** Oct 1, 4 : Modeling Action Potentials - Hodgkin-Huxley models
 - course notes 3: Modelling Action Potentials
 
+-----
 ** Oct 8, 11 : no class (thanksgiving, SFN)
 
+-----
 ** Oct 15, 18 : no class (SFN)
 
+-----
 ** Oct 22, 25 : Musculoskeletal Models I
 
+-----
 ** Oct 29, Nov 1 : Musculoskeletal Models II
 
+-----
 ** Nov 5, 8 : Perceptrons & Multi-Layer Networks I
 
+-----
 ** Nov 12, 15 : Perceptrons & Multi-Layer Networks I
 
+-----
 ** Nov 19, 22 : Other Neural Networks I
 
+-----
 ** Nov 26, 29 : Other Neural Networks II
 
+-----
 ** Dec 3 : student presentations
 
 -----

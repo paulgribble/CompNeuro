@@ -49,3 +49,13 @@ div#postamble {
 div#bibliography {
     line-height: 120%;
 }
+
+ol li {
+    line-height: 120%;
+    padding-bottom: 5pt;
+}
+
+ul li {
+    line-height: 120%;
+    padding-bottom: 5pt;
+}
