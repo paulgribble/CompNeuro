@@ -55,10 +55,11 @@ def neuron(state, t, params):
 	"""
 	 Purpose: simulate Hodgkin and Huxley model for the action potential using
 	 the equations from Ekeberg et al, Biol Cyb, 1991.
-	 Input: t (time), state ([E m h n] (ie [membrane potential; activation of
-	        Na++ channel; inactivation of Na++ channel; activation of K+
-	        channel]), opt (non used matrix for odeoptions) and the params
-	        (parameters of neuron; see mkparams.m or Ekeberg et al).
+	 Input: state ([E m h n] (ie [membrane potential; activation of
+	          Na++ channel; inactivation of Na++ channel; activation of K+
+	          channel]),
+		t (time),
+		and the params (parameters of neuron; see Ekeberg et al).
 	 Output: statep (state derivatives).
 	"""
 
@@ -113,6 +114,8 @@ params['E_params']['I_ext'] = 1.0e-10
 
 # run simulation
 state = odeint(neuron, state0, t, args=(params,))
+
+# plot the results
 
 figure(figsize=(8,12))
 subplot(4,1,1)

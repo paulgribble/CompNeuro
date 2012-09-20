@@ -14,6 +14,7 @@ body {
 	padding-right: 8%;
 	padding-bottom: 5%;
 	padding-top: 2%;
+	line-height: 200%;
 }
 
 body a {
@@ -31,4 +32,20 @@ h2 {
 
 h3 {
    font-weight: normal;
+}
+
+pre {
+    line-height: 110%;
+}
+
+div#table-of-contents {
+    line-height: 120%;
+}
+
+div#postamble {
+    line-height: 120%;
+}
+
+div#bibliography {
+    line-height: 120%;
 }
