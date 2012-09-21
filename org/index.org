@@ -32,10 +32,10 @@
 
 -----
 ** Sep 10: Introductions & course schedule
-- [[file:lecture1.pdf][lecture1.pdf]]
-- [[file:readings/Trappenberg1.pdf][Trappenberg1.pdf]]
-- [[file:readings/OM1.pdf][OM1.pdf]] (1st Ed.) or [[http://grey.colorado.edu/CompCogNeuro/index.php?title=CCNBook/Intro][CCNBook/Intro]]
-- [[file:assignment1.pdf][assignment1.pdf]] (due Sep 23)
+- lecture slides: [[file:lecture1.pdf][lecture1.pdf]]
+- please read this: [[file:readings/Trappenberg1.pdf][Trappenberg1.pdf]]
+- please read this: [[file:readings/OM1.pdf][OM1.pdf]] (1st Ed.) or [[http://grey.colorado.edu/CompCogNeuro/index.php?title=CCNBook/Intro][CCNBook/Intro]]
+- your first assignment: [[file:assignment1.pdf][assignment1.pdf]] (due Sep 23)
 
 ** Sep 13: Getting your computer set up with Python & scientific libraries
 - course notes [[file:0_Setup_Your_Computer.html][0: Setup Your Computer]]
@@ -48,13 +48,18 @@
 ** Sep 20: Modeling Dynamical Systems II
 - more on dynamical systems
 - [[file:assignment2.pdf][assignment2.pdf]] (due Sep 30)
-- code example for optimizer: [[file:code/optimizer_example.py][optimizer\_example.py]]
+- code example for using optimization: [[file:code/optimizer_example.py][optimizer\_example.py]]
 
 -----
 ** Sep 24, 27 : no class (Paul away)
 
 -----
 ** Oct 1, 4 : Modeling Action Potentials - Hodgkin-Huxley models
+- [[file:readings/ekeberg1991.pdf][Ekeberg et al. (1991)]] (please read this)
+- optional: see the original Hodgkin & Huxley 1952 paper reprinted in
+  1990: [[file:readings/HH1990.pdf][Hodgkin & Huxley 1952 (1990)]]
+- optional: a chapter on [[file:readings/spiking_neuron_models.pdf][Spiking Neuron Models]] for a general overview
+  of the field
 - course notes 3: Modelling Action Potentials
 
 -----
