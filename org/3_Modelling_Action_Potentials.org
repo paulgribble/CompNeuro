@@ -106,7 +106,7 @@ left to right): a passive leakage current, plus a term characterizing
 the electrical coupling of different compartments, plus the currents
 of the various ion channels. Since we are not going to be modelling
 dendrites here, we can ignore the middle term on the right hand side
-of the equation ($\sum{\left(E_{comp}-E\right)}G_{core}$) which
+of the equation $\sum{\left(E_{comp}-E\right)}G_{core}$ which
 represents the sum of currents from adjacent compartments (we have
 none).
 
@@ -184,31 +184,82 @@ $\alpha_{h}$ and $\beta_{h}$ even though they are represented by the
 same symbols in the equations.
 
 So in summary, for the sodium channels, we have two state variables:
-$m$ and $h$ representing the activation ($m$) and deactivation ($h$)
-of the sodium channels. We have a differential equation for each,
+$(m,h)$ representing the activation ($m$) and deactivation ($h$) of
+the sodium channels. We have a differential equation for each,
 describing how the rate of change (the first derivative) of these
 states can be calculated: Ekeberg equations (3) and (5). Those
-differential equations involve parameters ($\alpha$,$\beta$), one set
-for $m$ and a second set for $h$. Those ($\alpha$,$\beta$) parameters
+differential equations involve parameters $(\alpha,\beta)$, one set
+for $m$ and a second set for $h$. Those $(\alpha,\beta)$ parameters
 are computed from Ekeberg equations (4) (for $m$) and (6) (for
-$h$). Those equations involve parameters ($A$,$B$,$C$) that have
-parameter values specific to $\alpha$ and $\beta$ (see Table 1 of
-Ekeberg et al., 1991).
+$h$). Those equations involve parameters $(A,B,C)$ that have parameter
+values specific to $\alpha$ and $\beta$ and $m$ and $h$ (see Table 1
+of Ekeberg et al., 1991).
 
 *** Potassium channels (K)
 
-x
+The potassium channels are represted in a similar way, although in
+this case there is only channel activation, and no inactivation. In
+Ekeberg et al. (1991) the three equations (7), (8) and (9) represent
+the potassium channels:
+
+\begin{equation}
+I_{k} = (E_{k}-E_{soma})G_{k}n^{4}
+\end{equation}
+
+\begin{equation}
+\frac{dn}{dt} = \alpha_{n}(1-n) - \beta_{n}n
+\end{equation}
+
+where $n$ is the state variable representing the activation of
+potassium channels. As before we have expressions for $(\alpha,\beta)$
+which represent the fact that the potassium channel is also
+voltage-gated:
+
+\begin{eqnarray}
+\alpha_{n} &= &\frac{A(E_{soma}-B)}{1-e^{(B-E_{soma})/C}}\\
+\beta_{n} &= &\frac{A(B-E_{soma})}{1-e^{(E_{soma}-B)/C}}
+\end{eqnarray}
+
+Again, the parameter values for $(A,B,C)$ can be found in Ekeberg et
+al., (1991) Table 1.
+
+To summarize, the potassium channel has a single state variable $n$
+representing the activation of the potassium channel.
+
+*** Summary
+
+We have a model now that includes four state variables:
+
+1. $E$ representing the potential in the soma, given by differential equation (1) in Ekeberg et al., (1991)
+2. $m$ representing the activation of sodium channels, Ekeberg equation (3)
+3. $h$ representing the inactivation of sodium channels, Ekeberg equation (5)
+4. $n$ representing the activation of potassium channels, Ekeberg equation (8)
+
+Each of the differential equations that define how to compute state
+derivatives, involve $(\alpha,\beta)$ terms that are given by Ekeberg
+equations (4) (for $m$), (6) (for $h$) and (9) (for $n$).
+
+So what we have to do in order to simulate the dynamic behaviour of
+this neuron over time, is simply to implement these equations in
+Python code, give the system some reasonable initial conditions, and
+simulate it over time using the =odeint()= function.
 
 ** Python code
 
-The full code can be found here: [[file:code/ekeberg.py][ekeberg.py]].
+A full code listing of a model including sodium and potassium channels
+can be found here: [[file:code/ekeberg1.py][ekeberg1.py]]. Admittedly, this system involves more
+equations, and more parameters, than the other simple "toy" systems
+that we saw in the previous section. The fundamental ideas are the
+same however, so let's step through things bit by bit.
 
-We begin by setting up all of the model parameters (there are
-many). We do this in a Python data type called a [[http://docs.python.org/tutorial/datastructures.html#dictionaries][dictionary]]. This is a
-useful data type to parcel all of our parameters together. Unlike an
-array or list, which we would have to index using integer values (and
-then keep track of which one corresponded to which parameter), with a
-dictionary, we can index into it using string labels.
+We begin by setting up all of the necessary model parameters (there
+are many). They are found in Ekeberg et al. (1991) Tables 1 and 2. I
+have chosen to do this using a Python data type called a
+[[http://docs.python.org/tutorial/datastructures.html#dictionaries][dictionary]]. This is a useful data type to parcel all of our parameters
+together. Unlike an array or list, which we would have to index using
+integer values (and then keep track of which one corresponded to which
+parameter), with a dictionary, we can index into it using string
+labels.
 
 #+BEGIN_SRC python
 # ipython --pylab
@@ -263,7 +314,40 @@ params = {
 }
 #+END_SRC
 
-The next bit of code is the ODE function itself.
+We could have stored the four values in =E_params= in an array like this:
+
+#+BEGIN_SRC python
+E_params = array([-7.0e-2, 3.0e-09, 6.0e-11, 0*1.0e-10])
+#+END_SRC
+
+but then we would have to access particular values by indexing into that array with integers like this:
+
+#+BEGIN_SRC python
+E_leak = E_params[0]
+G_leak = E_params[1]
+#+END_SRC
+
+Instead, if we use a dictionary, we can index into the structure using alphanumeric strings as index values, like this:
+
+#+BEGIN_SRC python
+E_params['E_leak']
+E_params['G_leak']
+#+END_SRC
+
+You don't have to use a dictionary to store the parameter values, but
+I find it a really useful way to maintain readability.
+
+Our next bit of code is the implementation of the ODE function
+itself. Remember, our ultimate goal is to model $E$, the potential
+across the soma membrane. We know from Ekeberg equation (1) that the
+rate of change of $E$ depends on leakage current and on the sum of
+currents from other channels. These other currents are given by
+Ekeberg equations (2) (sodium) and (7) (potassium). These equations
+involve the three other states in our system: sodium activation $m$,
+sodium inactivation $h$ and potassium activation $n$, which are each
+defined by their own differential equations, Ekeberg equations (3),
+(5) and (8), respectively. It's just a matter of coding things up step
+by step.
 
 #+BEGIN_SRC python
 # define our ODE function
@@ -366,10 +450,31 @@ Here is what you should see:
 #+CAPTION: Spiking neuron simulation based on Ekeberg et al., 1991
 [[file:figs/ekeberg1.png]]
 
+* Things to try
 
+1. alter the [[file:code/ekeberg1.py][ekeberg1.py]] code so that the modelled neuron only has the
+   leakage current and external current. In other words, comment out
+   the terms related to sodium and potassium channels. Run a
+   simulation with an initial membrane potential of -70mv and an
+   external current of 0.0mv. What happens and why?
+2. Change the external current to 1.0e-10 and re-run the
+   simulation. What happens and why?
+3. Add in the terms related to the sodium channel (activation and
+   deactivation). Run a simulation with external current of 1.0e-10
+   and initial states =[-70e-03, 0, 1]=. What happens and why?
+4. Add in the terms related to the potassium channel. Run a simulation
+   with external current of 1.0e-10 and initial states =[-70e-03, 0,
+   1, 0]=. What happens and why?
 
 * Next steps
 
-x
+Next we will be looking at models of motor control. We will be using
+human arm movement as the model system. We will first implement a
+kinematic model of a two-joint arm, so we can talk about
+transformations between hand-space and joint-space, and the non-linear
+geometrical transformations that must take place. After that we will
+move on to talking about models of muscle, force production, and limb
+dynamics, with an eye towards a modelling the neural control of arm
+movements such as reaching and pointing.
 
 [ next ]
