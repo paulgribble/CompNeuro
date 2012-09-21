@@ -2,6 +2,7 @@
 (require 'org-exp-bibtex)
 (setq org-publish-project-alist
       '(
+
 	("CompNeuro"
 	 :base-directory "org/"
 	 :base-extension "org"
@@ -15,6 +16,7 @@
 	 :link-up "index.html"
 	 :style "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\" />"
 	 )
+
 	("CompNeuro_html"
 	 :base-directory "html/"
 	 :base-extension "css\\|html"
@@ -22,6 +24,7 @@
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
+
 	("CompNeuro_bibhtml"
 	 :base-directory "org/"
 	 :base-extension "html\\|css"
@@ -29,6 +32,7 @@
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
+
 	("CompNeuro_figs"
 	 :base-directory "figs/"
 	 :base-extension "png\\|jpg"
@@ -36,6 +40,7 @@
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
+
 	("CompNeuro_code"
 	 :base-directory "code/"
 	 :base-extension "c\\|h\\|txt\\|csv\\|py"
@@ -43,6 +48,7 @@
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
+
 	("org" :components ("CompNeuro" "CompNeuro_html" "CompNeuro_bibhtml" "CompNeuro_figs" "CompNeuro_code"))))
 
 (org-publish-project "CompNeuro")

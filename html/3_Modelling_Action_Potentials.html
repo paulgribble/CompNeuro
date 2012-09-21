@@ -421,7 +421,89 @@ channel (Na).
 
 
 <p>
-x
+The current through sodium channels that enter the soma are
+represented by equation (2) in Ekeberg et al. (1991):
+</p>
+
+
+\begin{equation}
+I_{Na} = (E_{Na} - E_{soma})G_{Na}m^{3}h
+\end{equation}
+
+<p>
+where \(m\) is the activation of the sodium channel and \(h\) is the
+inactivation of the sodium channel, and the other terms are constant
+parameters: \(E_{Na}\) is the reversal potential, \(G_{Na}\) is the
+maximum sodium conductance throught the membrane, and \(E_{soma}\) is
+the membrane potential of the soma.
+</p>
+<p>
+The activation \(m\) of the sodium channels is described by the
+differential equation (3) in Ekeberg et al. (1991):
+</p>
+
+
+\begin{equation}
+\frac{dm}{dt} = \alpha_{m}(1-m) - \beta_{m}m
+\end{equation}
+
+<p>
+where \(\alpha_{m}\) represents the rate at which the channel switches
+from a closed to an open state, and \(\beta_{m}\) is rate for the
+reverse. These two parameters \(\alpha\) and \(\beta\) depend on the
+membrane potential in the soma. In other words the sodium channel is
+voltage-gated. Equation (4) in Ekeberg et al. (1991) gives these
+relationships:
+</p>
+
+
+\begin{eqnarray}
+\alpha_{m} &= &\frac{A(E_{soma}-B)}{1-e^{(B-E_{soma})/C}}\\
+\beta_{m} &= &\frac{A(B-E_{soma})}{1-e^{(E_{soma}-B)/C}}
+\end{eqnarray}
+
+<p>
+A tricky bit in the Ekeberg et al. (1991) paper is that the \(A\), \(B\)
+and \(C\) parameters above are different for \(\alpha\) and \(\beta\) even
+though there is no difference in the symbols used in the equations.
+</p>
+<p>
+The inactivation of the sodium channels is described by a similar set of equations: a differential equation giving the rate of change of the sodium channel deactivation, from Ekeberg et al. (1991) equation (5):
+</p>
+
+
+\begin{equation}
+\frac{dh}{dt} = \alpha_{h}(1-h) - \beta_{h}h
+\end{equation}
+
+<p>
+and equations specifying how \(\alpha_{h}\) and \(\beta_{h}\) are
+voltage-dependent, given in Ekeberg et al. (1991) equation (6):
+</p>
+
+
+\begin{eqnarray}
+\alpha_{h} &= &\frac{A(B-E_{soma})}{1-e^{(E_{soma}-B)/C}}\\
+\beta_{h} &= &\frac{A}{1-e^{(B-E_{soma})/C}}
+\end{eqnarray}
+
+<p>
+Note again that although the terms \(A\), \(B\) and \(C\) are different for
+\(\alpha_{h}\) and \(\beta_{h}\) even though they are represented by the
+same symbols in the equations.
+</p>
+<p>
+So in summary, for the sodium channels, we have two state variables:
+\(m\) and \(h\) representing the activation (\(m\)) and deactivation (\(h\))
+of the sodium channels. We have a differential equation for each,
+describing how the rate of change (the first derivative) of these
+states can be calculated: Ekeberg equations (3) and (5). Those
+differential equations involve parameters (\(\alpha\),$&beta;$), one set
+for \(m\) and a second set for \(h\). Those (\(\alpha\),$&beta;$) parameters
+are computed from Ekeberg equations (4) (for \(m\)) and (6) (for
+\(h\)). Those equations involve parameters (\(A\),$B$,\(C\)) that have
+parameter values specific to \(\alpha\) and \(\beta\) (see Table 1 of
+Ekeberg et al., 1991).
 </p>
 </div>
 
