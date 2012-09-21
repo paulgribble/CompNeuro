@@ -23,12 +23,12 @@ legend(('x (prey)','y (predator)'))
 title('Lotka-Volterra equations')
 
 # animation in state-space
-fig,ax = subplots()
-pb, = ax.plot(state[:,0],state[:,1],'b-',alpha=0.2)
+figure()
+pb, = plot(state[:,0],state[:,1],'b-',alpha=0.2)
 xlabel('x (prey population size)')
 ylabel('y (predator population size)')
-p, = ax.plot(state[0:10,0],state[0:10,1],'b-')
-pp, = ax.plot(state[10,0],state[10,1],'b.',markersize=10)
+p, = plot(state[0:10,0],state[0:10,1],'b-')
+pp, = plot(state[10,0],state[10,1],'b.',markersize=10)
 tt = title("%4.2f sec" % 0.00)
 
 # animate

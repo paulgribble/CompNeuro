@@ -722,17 +722,17 @@ small amount. We will simulate for 30 seconds.
 <span style="color: #af5f00;">state2</span> = odeint(Lorenz, state2_0, t)
 
 <span style="color: #af0000;"># animation</span>
-fig,ax = subplots()
-pb, = ax.plot(state1[:,0],state1[:,1],<span style="color: #87005f;">'b-'</span>,alpha=0.2)
+figure()
+pb, = plot(state1[:,0],state1[:,1],<span style="color: #87005f;">'b-'</span>,alpha=0.2)
 xlabel(<span style="color: #87005f;">'x'</span>)
 ylabel(<span style="color: #87005f;">'y'</span>)
-p, = ax.plot(state1[0:10,0],state1[0:10,1],<span style="color: #87005f;">'b-'</span>)
-pp, = ax.plot(state1[10,0],state1[10,1],<span style="color: #87005f;">'b.'</span>,markersize=10)
-p2, = ax.plot(state2[0:10,0],state2[0:10,1],<span style="color: #87005f;">'r-'</span>)
-pp2, = ax.plot(state2[10,0],state2[10,1],<span style="color: #87005f;">'r.'</span>,markersize=10)
+p, = plot(state1[0:10,0],state1[0:10,1],<span style="color: #87005f;">'b-'</span>)
+pp, = plot(state1[10,0],state1[10,1],<span style="color: #87005f;">'b.'</span>,markersize=10)
+p2, = plot(state2[0:10,0],state2[0:10,1],<span style="color: #87005f;">'r-'</span>)
+pp2, = plot(state2[10,0],state2[10,1],<span style="color: #87005f;">'r.'</span>,markersize=10)
 <span style="color: #af5f00;">tt</span> = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
 <span style="color: #af0000;"># animate</span>
-<span style="color: #af5f00;">step</span>=3
+<span style="color: #af5f00;">step</span> = 3
 <span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">xrange</span>(1,shape(state1)[0]-10,step):
   p.set_xdata(state1[10+i:20+i,0])
   p.set_ydata(state1[10+i:20+i,1])
@@ -952,13 +952,14 @@ like we did for the Lorenz system above):
 
 
 <pre class="src src-python"><span style="color: #af0000;"># animation in state-space</span>
-fig,ax = subplots()
-pb, = ax.plot(state[:,0],state[:,1],<span style="color: #87005f;">'b-'</span>,alpha=0.2)
+figure()
+pb, = plot(state[:,0],state[:,1],<span style="color: #87005f;">'b-'</span>,alpha=0.2)
 xlabel(<span style="color: #87005f;">'x (prey population size)'</span>)
 ylabel(<span style="color: #87005f;">'y (predator population size)'</span>)
-p, = ax.plot(state[0:10,0],state[0:10,1],<span style="color: #87005f;">'b-'</span>)
-pp, = ax.plot(state[10,0],state[10,1],<span style="color: #87005f;">'b.'</span>,markersize=10)
+p, = plot(state[0:10,0],state[0:10,1],<span style="color: #87005f;">'b-'</span>)
+pp, = plot(state[10,0],state[10,1],<span style="color: #87005f;">'b.'</span>,markersize=10)
 <span style="color: #af5f00;">tt</span> = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
+
 <span style="color: #af0000;"># animate</span>
 <span style="color: #af5f00;">step</span>=2
 <span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">xrange</span>(1,shape(state)[0]-10,step):

@@ -33,14 +33,14 @@ state2_0 = [2.0+delta, 3.0, 4.0]
 state2 = odeint(Lorenz, state2_0, t)
 
 # animation
-fig,ax = subplots()
-pb, = ax.plot(state1[:,0],state1[:,1],'b-',alpha=0.2)
+figure()
+pb, = plot(state1[:,0],state1[:,1],'b-',alpha=0.2)
 xlabel('x')
 ylabel('y')
-p, = ax.plot(state1[0:10,0],state1[0:10,1],'b-')
-pp, = ax.plot(state1[10,0],state1[10,1],'b.',markersize=10)
-p2, = ax.plot(state2[0:10,0],state2[0:10,1],'r-')
-pp2, = ax.plot(state2[10,0],state2[10,1],'r.',markersize=10)
+p, = plot(state1[0:10,0],state1[0:10,1],'b-')
+pp, = plot(state1[10,0],state1[10,1],'b.',markersize=10)
+p2, = plot(state2[0:10,0],state2[0:10,1],'r-')
+pp2, = plot(state2[10,0],state2[10,1],'r.',markersize=10)
 tt = title("%4.2f sec" % 0.00)
 # animate
 step = 3
