@@ -25,7 +25,7 @@
 0. [@0] [[file:0_Setup_Your_Computer.html][Setup Your Computer]]
 1. [[file:1_Dynamical_Systems.html][Dynamical Systems]]
 2. [[file:2_Modelling_Dynamical_Systems.html][Modelling Dynamical Systems]]
-3. Modelling Action Potentials
+3. [[file:3_Modelling_Action_Potentials.html][Modelling Action Potentials]]
 
 -----
 * Schedule & Topics
@@ -60,7 +60,7 @@
   1990: [[file:readings/HH1990.pdf][Hodgkin & Huxley 1952 (1990)]]
 - optional: a chapter on [[file:readings/spiking_neuron_models.pdf][Spiking Neuron Models]] for a general overview
   of the field
-- course notes 3: Modelling Action Potentials
+- course notes [[file:3_Modelling_Action_Potentials.html][3: Modelling Action Potentials]]
 
 -----
 ** Oct 8, 11 : no class (thanksgiving, SFN)
