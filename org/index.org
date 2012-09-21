@@ -94,6 +94,7 @@
 - [[http://www.diveintopython.net/][Dive Into Python]]
 - [[file:readings/SciCompPython.pdf][Introduction to Scientific Computing with Python]]
 - [[http://www.pythontutor.com/][Online Python Tutor]]
+- [[https://github.com/profjsb/python-bootcamp][Python Bootcamp]]
 
 ** Numpy / SciPy / Matplotlib
 
