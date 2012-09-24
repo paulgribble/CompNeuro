@@ -61,6 +61,7 @@
 - optional: a chapter on [[file:readings/spiking_neuron_models.pdf][Spiking Neuron Models]] for a general overview
   of the field
 - course notes [[file:3_Modelling_Action_Potentials.html][3: Modelling Action Potentials]]
+- [[file:assignment3.pdf][assignment3.pdf]] (due Oct 7)
 
 -----
 ** Oct 8, 11 : no class (thanksgiving, SFN)
