@@ -49,6 +49,8 @@
 - more on dynamical systems
 - [[file:assignment2.pdf][assignment2.pdf]] (due Sep 30)
 - code example for using optimization: [[file:code/optimizer_example.py][optimizer\_example.py]]
+- cool demo of [[http://www.youtube.com/watch?v=Klw7L0OZbFQ][synchronization of metronomes]] (and [[http://www.youtube.com/watch?v=kqFc4wriBvE][japanese version]]),
+  plus [[https://github.com/paulgribble/metronomes][python code]] for simulating it
 
 -----
 ** Sep 24, 27 : no class (Paul away)
