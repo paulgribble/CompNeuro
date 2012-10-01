@@ -67,6 +67,7 @@
 - YouTube videos on [[http://www.youtube.com/watch?v=7EyhsOewnH4][The Action Potential]] and [[http://www.youtube.com/watch?v=LXdTg9jZYvs][Voltage Gated Channels
   and the Action Potential]]
 - [[file:assignment3.pdf][assignment3.pdf]] (due Oct 7)
+- [[file:code/assignment2_sol.py][assignment2_sol.py]]
 
 -----
 ** Oct 8, 11 : no class (thanksgiving, SFN)
