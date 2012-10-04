@@ -108,6 +108,7 @@
 - [[http://www.pythontutor.com/][Online Python Tutor]]
 - [[https://github.com/profjsb/python-bootcamp][Python Bootcamp]] (github)
 - [[http://www.youtube.com/playlist?list=PLRdRinj2mDqsnazUsGeFq8Fi-2lL77vFF][Python Bootcamp August 2012]] (YouTube playlist)
+- [[http://register.pythonbootcamp.info/agenda][Python Bootcamp August 2012]] (list of topics & downloads)
 
 ** Numpy / SciPy / Matplotlib
 
