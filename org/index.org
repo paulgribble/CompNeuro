@@ -128,6 +128,7 @@
 - [[http://youtu.be/2G5YTlheCbw][iPython in-depth: high productivity interactive and parallel python]]
   (youtube video) iPython Notebook stuff starts at about 1:15:40, and
   parallel programming stuff starts at around 2:13:00
+- [[http://nbviewer.ipython.org/][IPython Notebook Viewer]]
 
 -----
 
