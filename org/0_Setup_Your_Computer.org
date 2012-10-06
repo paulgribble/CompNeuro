@@ -125,3 +125,5 @@ computer simulation.
 - Ubuntu Shell scripts to install python + scientific stuff and LaTeX
   - python gist : https://gist.github.com/3692447
   - LaTeX gist : https://gist.github.com/3692459
+- [[http://fperez.org/py4science/starter_kit.html][Py4Science]] a Starter Kit
+- [[http://neuro.debian.net/][NeuroDebian]] linux-based turnkey software platform for neuroscience
