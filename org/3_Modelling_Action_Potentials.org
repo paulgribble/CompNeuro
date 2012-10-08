@@ -272,7 +272,7 @@ from scipy.integrate import odeint
 E_params = {
 	'E_leak' : -7.0e-2,
 	'G_leak' : 3.0e-09,
-	'C_m'    : 6.0e-11,
+	'C_m'    : 3.0e-11,
 	'I_ext'  : 0*1.0e-10
 }
 
