@@ -316,6 +316,10 @@ transformations. There are many studies in arm movement control, eye
 movements, locomotion, etc, that use this basic approach, combining
 experimental data with predictions from computational models.
 
+- Flash, Tamar, and Neville Hogan. "The coordination of arm movements:
+  an experimentally confirmed mathematical model." The journal of
+  Neuroscience 5, no. 7 (1985): 1688-1703.
+
 - Scott, S. H., and G. E. Loeb. "The computation of position sense
   from spindles in mono-and multiarticular muscles." The Journal of
   neuroscience 14, no. 12 (1994): 7529-7540.

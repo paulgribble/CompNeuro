@@ -535,6 +535,15 @@ Note that in the lower plot, the shoulder location is at the origin,
 arm position &mdash; in joint space (top) and in cartesian hand space
 (bottom).
 </p>
+<p>
+We can note a few distinct features of this mapping between joint and
+hand space. First, equal spacing across the workspace in joint space
+does <i>not</i> correspond to equal spacing across the hand workspace,
+especially near the outer edges of the hand's reach. Second, a square
+workspace region in joint space corresponds to a really curved region
+in hand space. These complexities reflect the fact that the mapping
+between joint space and hand space is <i>non-linear</i>.
+</p>
 </div>
 
 </div>
@@ -644,6 +653,11 @@ movements, locomotion, etc, that use this basic approach, combining
 experimental data with predictions from computational models.
 </p>
 <ul>
+<li>Flash, Tamar, and Neville Hogan. "The coordination of arm movements:
+  an experimentally confirmed mathematical model." The journal of
+  Neuroscience 5, no. 7 (1985): 1688-1703.
+
+</li>
 <li>Scott, S. H., and G. E. Loeb. "The computation of position sense
   from spindles in mono-and multiarticular muscles." The Journal of
   neuroscience 14, no. 12 (1994): 7529-7540.
