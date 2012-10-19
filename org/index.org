@@ -26,6 +26,7 @@
 1. [[file:1_Dynamical_Systems.html][Dynamical Systems]]
 2. [[file:2_Modelling_Dynamical_Systems.html][Modelling Dynamical Systems]]
 3. [[file:3_Modelling_Action_Potentials.html][Modelling Action Potentials]]
+4. [[file:4_Computational_Motor_Control_Kinematics.html][Computational Motor Control: Kinematics]]
 
 -----
 * Schedule & Topics
@@ -78,6 +79,10 @@
 
 -----
 ** Oct 22, 25 : Musculoskeletal Models I
+- Shadmehr & Wise, Chapter 9 (Computing End-Effector Location: Theory)
+- [[file:4_Computational_Motor_Control_Kinematics.html][4: Computational Motor Control: Kinematics]]
+- read at least one of the papers listed at the end of the course
+  notes
 
 -----
 ** Oct 29, Nov 1 : Musculoskeletal Models II

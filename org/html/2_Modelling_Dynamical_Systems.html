@@ -61,6 +61,30 @@
   /*]]>*/-->
 </style><link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
 <!--/*--><![CDATA[/*><!--*/
  function CodeHighlightOn(elem, id)
  {
@@ -83,6 +107,56 @@
 /*]]>*///-->
 </script>
 <script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+/**
+ *
+ * @source: http://orgmode.org/mathjax/MathJax.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ * Copyright (C) 2012  MathJax
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ */
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code below.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code below is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code below.
+*/
 <!--/*--><![CDATA[/*><!--*/
     MathJax.Hub.Config({
         // Only one of the two following lines, depending on user settings
@@ -659,7 +733,7 @@ pp2, = plot(state2[10,0],state2[10,1],<span style="color: #87005f;">'r.'</span>,
 <span style="color: #af5f00;">tt</span> = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
 <span style="color: #af0000;"># animate</span>
 <span style="color: #af5f00;">step</span> = 3
-<span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #875f87;">xrange</span>(1,shape(state1)[0]-10,step):
+<span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">xrange</span>(1,shape(state1)[0]-10,step):
   p.set_xdata(state1[10+i:20+i,0])
   p.set_ydata(state1[10+i:20+i,1])
   pp.set_xdata(state1[19+i,0])
@@ -888,7 +962,7 @@ pp, = plot(state[10,0],state[10,1],<span style="color: #87005f;">'b.'</span>,mar
 
 <span style="color: #af0000;"># animate</span>
 <span style="color: #af5f00;">step</span>=2
-<span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #875f87;">xrange</span>(1,shape(state)[0]-10,step):
+<span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">xrange</span>(1,shape(state)[0]-10,step):
   p.set_xdata(state[10+i:20+i,0])
   p.set_ydata(state[10+i:20+i,1])
   pp.set_xdata(state[19+i,0])
