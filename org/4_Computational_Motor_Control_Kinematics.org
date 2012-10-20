@@ -63,8 +63,8 @@ before using $\sin()$ and $\cos()$, and asked you where my hand is
 located, you could compute this:
 
 \begin{eqnarray}
-H_{x} &= &l \cos(\theta) &= 0.45 \cos\left(\frac{45*\pi}{180}\right) = 0.37 m\\
-H_{y} &= &l \sin(\theta) &= 0.45 \sin\left(\frac{45*\pi}{180}\right) = 0.26 m\\
+H_{x} &= &l \cos(\theta) &= 0.45 \cos\left(\frac{35*\pi}{180}\right) = 0.37 m\\
+H_{y} &= &l \sin(\theta) &= 0.45 \sin\left(\frac{35*\pi}{180}\right) = 0.26 m\\
 \end{eqnarray}
 
 So the hand position would be $(0.37,0.26)$ (measured in metres).
