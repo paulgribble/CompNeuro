@@ -78,7 +78,7 @@
 ** Oct 15, 18 : no class (SFN)
 
 -----
-** Oct 22, 25 : Musculoskeletal Models I
+** Oct 22, 25 : Computational Motor Control: Kinematics
 - Shadmehr & Wise, Chapter 9 (Computing End-Effector Location: Theory)
 - course notes: [[file:4_Computational_Motor_Control_Kinematics.html][4: Computational Motor Control: Kinematics]]
 - read *at least two* of the papers listed in the course notes
@@ -86,19 +86,19 @@
 - [[file:code/minjerk.py][minjerk.py]]
 
 -----
-** Oct 29, Nov 1 : Musculoskeletal Models II
+** Oct 29, Nov 1 : Computational Motor Control: Dynamics
 
 -----
-** Nov 5, 8 : Perceptrons & Multi-Layer Networks I
+** Nov 5, 8 : Computational Motor Control: Muscle Models
 
 -----
-** Nov 12, 15 : Perceptrons & Multi-Layer Networks I
+** Nov 12, 15 : Computational Models of Learning: Perceptrons & Multi-Layer Neural Networks
 
 -----
-** Nov 19, 22 : Other Neural Networks I
+** Nov 19, 22 : Computational Models of Learning: Other Neural Network Architectures
 
 -----
-** Nov 26, 29 : Other Neural Networks II
+** Nov 26, 29 : Computational Models of Learning: Unsupervised Learning
 
 -----
 ** Dec 3 : student presentations
