@@ -81,9 +81,8 @@
 ** Oct 22, 25 : Musculoskeletal Models I
 - Shadmehr & Wise, Chapter 9 (Computing End-Effector Location: Theory)
 - course notes: [[file:4_Computational_Motor_Control_Kinematics.html][4: Computational Motor Control: Kinematics]]
-- read at least one of the papers listed at the end of the course
-  notes
-- assignment 4 (coming soon)
+- read *at least two* of the papers listed in the course notes
+- [[file:assignment4.pdf][assignment4.pdf]]
 - [[file:code/minjerk.py][minjerk.py]]
 
 -----

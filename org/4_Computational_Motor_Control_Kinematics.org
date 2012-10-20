@@ -140,7 +140,7 @@ Let's introduce a shoulder joint as well:
 *** Forward Kinematics
 
 Now let's think about the forward and inverse kinematic equations to
-go from intrinsic coordinates (joint angles $(\theta_{1},\theta_{2})$
+go from intrinsic coordinates, joint angles $(\theta_{1},\theta_{2})$
 to extrinsic coordinates $(H_{x},H_{y})$. We will compute the elbow
 joint position as an intermediate step.
 
@@ -152,15 +152,15 @@ H_{y} &= &E_{y} + l_{2}\sin(\theta_{1}+\theta_{2})\\
 \end{eqnarray}
 
 Now if I give you a set of shoulder and elbow joint angles
-$(\theta_{1},\theta_{2}), you can compute what my hand position
+$(\theta_{1},\theta_{2})$, you can compute what my hand position
 $(H_{x},H_{y})$ is.
 
 We can visualize this mapping by doing something like the following:
 decide on a range of shoulder angles and elbow angles that are
 physiologically realistic, and sample that range equally in joint
 space ... then run those joint angles through the forward kinematics
-equations to visualize how those equally-space joint angles correspond
-to cartesian hand positions.
+equations to visualize how those equally-spaced joint angles
+correspond to cartesian hand positions.
 
 #+BEGIN_SRC python
 # Function to transform joint angles (a1,a2) to hand position (Hx,Hy)
@@ -280,9 +280,103 @@ position/. Another way of putting this is, there are an infinite
 number of ways of configuring the 7 joints of the arm to reach a
 single 3D hand position.
 
+** Computational Models of Kinematics
+
+*** The Minimum-Jerk Hypothesis
+
+One of the early computational models of arm movement kinematics was
+described by Tamar Flash and Neville Hogan. Tamar was a postdoc at MIT
+at the time, working with Neville Hogan, a Professor there (as well as
+with Emilio Bizzi, another Professor at MIT). Tamar is now a Professor
+at the Weizmann Institute of Science in Rehovot, Israel.
+
+For a long time, researchers had noted striking regularities in the
+hand paths of multi-joint arm movements. Movements were smooth, with
+unimodal, (mostly) symmetric velocity profiles (so-called
+"bell-shaped" velocity profiles).
+
+- Morasso, P. (1981). Spatial control of arm movements. Experimental
+  Brain Research, 42(2), 223-227.
+
+- Abend, W., Bizzi, E., & Morasso, P. (1982). Human arm trajectory
+  formation. Brain: a journal of neurology, 105(Pt 2), 331.
+
+- Atkeson, C. G., & Hollerbach, J. M. (1985). Kinematic features of
+  unrestrained vertical arm movements. The Journal of Neuroscience,
+  5(9), 2318-2330.
+
+Flash and Hogan investigated these patterns in the context of
+optimization theory --- a theory proposing that the brain plans and
+controls movements in an /optimal/ way, where optimal is defined by a
+specific task-related cost function. In other words, the brain chooses
+movement paths and neural control signals that /minimize/ some
+objective cost function.
+
+- Todorov, E. (2004). Optimality principles in sensorimotor
+  control. Nature neuroscience, 7(9), 907-915.
+
+- Diedrichsen, J., Shadmehr, R., & Ivry, R. B. (2010). The
+  coordination of movement: optimal feedback control and
+  beyond. Trends in cognitive sciences, 14(1), 31-39.
+
+Flash and Hogan wondered, at the kinematic level, what cost function
+might predict the empirically observed patterns of arm movements?
+
+They discovered that by minimizing the time integral of the square of
+"jerk", a simple kinematic model predicted many of the regular
+patterns seen empirically for arm movements of many kinds (moving from
+one point to another, or even moving through via-points and moving
+around obstacles). [[http://en.wikipedia.org/wiki/Jerk_(physics)][Jerk]] is the rate of change (the derivative) of
+acceleration, i.e. the second derivative of velocity, or the third
+derivative of position. Essentially jerk is a measure of movement
+smoothness. Whether or not it turns out that the brain is actually
+interested in minimizing jerk in order to plan and control arm
+movements (an explanatory model), the minimum-jerk model turns out to
+be a good descriptive model that is able to predict kinematics of
+multi-joint movement.
+
+- Hogan, N. (1984). An organizing principle for a class of voluntary
+  movements. The Journal of Neuroscience, 4(11), 2745-2754.
+
+- Flash, T. and Hogan, N. (1985) The coordination of arm movements: an
+  experimentally confirmed mathematical model. J. Neurosci. 7:
+  1688-1703.
+
+
+*** Minimum Endpoint Variance
+
+More recently, researchers have investigated how noise (variability)
+in neural control signals affects movement kinematics. One hypothesis
+stemming from this work is that the CNS plans and controls movements
+in such a way as to minimize the variance of the endpoint (e.g. the
+hand, for a point-to-point arm movement). The idea is that the effects
+of so-called "signal-dependent noise" in neural control signals
+accumulates over the course of a movement, and so the hypothesis is
+that the CNS chooses specific time-varying neural control signals that
+minimize the variability of the endpoint (e.g. hand), for example at
+the final target location of a point-to-point movement.
+
+- Harris, C. M., & Wolpert, D. M. (1998). Signal-dependent noise
+  determines motor planning. Nature, 394(6695), 780-784.
+
+- van Beers, R. J., Haggard, P., & Wolpert, D. M. (2004). The role of
+  execution noise in movement variability. Journal of Neurophysiology,
+  91(2), 1050-1063.
+
+- Iguchi, N., Sakaguchi, Y., & Ishida, F. (2005). The minimum endpoint
+  variance trajectory depends on the profile of the signal-dependent
+  noise. Biological cybernetics, 92(4), 219-228.
+
+- Churchland, M. M., Afshar, A., & Shenoy, K. V. (2006). A central
+  source of movement variability. Neuron, 52(6), 1085-1096.
+
+- Simmons, G., & Demiris, Y. (2006). Object grasping using the minimum
+  variance model. Biological cybernetics, 94(5), 393-407.
+
+
 ** Why are kinematic transformations important?
 
-The many-to-one mappin issue is directly relevant to current key
+The many-to-one mapping issue is directly relevant to current key
 questions in sensory-motor neuroscience. How does the nervous system
 choose a single arm configuration when the goal is to place the hand
 at a specific 3D location in space? Of course the /redundancy problem/
@@ -315,10 +409,6 @@ address, when you have an explicit quantitative model of coordinate
 transformations. There are many studies in arm movement control, eye
 movements, locomotion, etc, that use this basic approach, combining
 experimental data with predictions from computational models.
-
-- Flash, Tamar, and Neville Hogan. "The coordination of arm movements:
-  an experimentally confirmed mathematical model." The journal of
-  Neuroscience 5, no. 7 (1985): 1688-1703.
 
 - Scott, S. H., and G. E. Loeb. "The computation of position sense
   from spindles in mono-and multiarticular muscles." The Journal of
