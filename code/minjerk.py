@@ -16,5 +16,5 @@ def minjerk(H1x,H1y,H2x,H2y,t,n):
 		tau = T[i]/t
 		Hx[i] = H1x + ((H1x-H2x)*(15*(tau**4) - (6*tau**5) - (10*tau**3)))
 		Hy[i] = H1y + ((H1y-H2y)*(15*(tau**4) - (6*tau**5) - (10*tau**3)))
-	return Hx,Hy
+	return T,Hx,Hy
 
