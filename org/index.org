@@ -93,6 +93,9 @@
 
 -----
 ** Nov 12, 15 : Computational Models of Learning: Perceptrons & Multi-Layer Neural Networks
+- for a really nice overview of all sort of NNs, see: [[https://www.coursera.org/course/neuralnets][Neural Networks
+  for Machine Learning]] (Geoff Hinton, Univ Toronto, Coursera online
+  course)
 
 -----
 ** Nov 19, 22 : Computational Models of Learning: Other Neural Network Architectures
