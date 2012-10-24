@@ -233,16 +233,16 @@ for the JavaScript code below.
 <li><a href="#sec-1-2-2">Inverse Kinematics</a></li>
 <li><a href="#sec-1-2-3">The Jacobian</a></li>
 <li><a href="#sec-1-2-4">Inverse Jacobian</a></li>
-<li><a href="#sec-1-2-5">One-to-one mapping</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-3">Computational Models of Kinematics</a>
+<li><a href="#sec-1-3">The Redundancy Problem</a></li>
+<li><a href="#sec-1-4">Computational Models of Kinematics</a>
 <ul>
-<li><a href="#sec-1-3-1">The Minimum-Jerk Hypothesis</a></li>
-<li><a href="#sec-1-3-2">Minimum Endpoint Variance</a></li>
+<li><a href="#sec-1-4-1">The Minimum-Jerk Hypothesis</a></li>
+<li><a href="#sec-1-4-2">Minimum Endpoint Variance</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-4">Why are kinematic transformations important?</a></li>
+<li><a href="#sec-1-5">Why are kinematic transformations important?</a></li>
 </ul>
 </li>
 </ul>
@@ -580,14 +580,16 @@ one of the steps in your assignment for this topic.
 
 
 <p>
-So far we have look at kinematic equations for arm positions &mdash; joint
+So far we have looked at kinematic equations for arm positions &mdash; joint
 angular positions and hand cartesian positions. Here we look at
 velocities (rate of change of position) in the two coordinate frames,
 joint-space and hand-space.
 </p>
 <p>
-How can we compute hand velocities \(\frac{dH}{dt}\) given joint
-velocities \(\frac{d\theta}{dt}\)? We can apply the the <a href="http://en.wikipedia.org/wiki/Chain_rule">Chain Rule</a>:
+How can we compute hand velocities \(\frac{dH}{dt}\) given
+joint velocities \(\frac{d\theta}{dt}\)? If we can we
+compute an intermediate term \(\frac{dH}{d\theta}\) then we
+can apply the the <a href="http://en.wikipedia.org/wiki/Chain_rule">Chain Rule</a>:
 </p>
 
 
@@ -596,8 +598,8 @@ velocities \(\frac{d\theta}{dt}\)? We can apply the the <a href="http://en.wikip
 \end{equation}
 
 <p>
-We then define the <b>Jacobian</b> (<a href="http://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">Wikipedia:Jacobian</a>) matrix \(J(\theta)\)
-as:
+This intermediate term is in fact known as the <b>Jacobian</b>
+(<a href="http://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">Wikipedia:Jacobian</a>) matrix \(J(\theta)\) and is defined as:
 </p>
 
 
@@ -615,52 +617,57 @@ and so:
 \end{equation}
 
 <p>
-For the sake of notational brevity we will refer to hand velocities as
-\(\dot{H}\) and joint velocities as \(\dot{\theta}\).
+Note that the Jacobian is written as \(J(\theta)\) which means it is a
+function of joint angles \(\theta\) &mdash; in other words, the four terms
+in the Jacobian matrix (see below) change depending on limb
+configuration (joint angles). This means the relationships between
+joint angles and hand coordinates changes depending on where the limb
+is in its workspace. We already have an idea that this is true, from
+the figure above.
+</p>
+<p>
+For the sake of notational brevity we will refer to hand
+velocities as \(\dot{H}\) and joint velocities as \(\dot{\theta}\) and we
+will omit (from the notation) the functional dependence of \(J\) on
+\(\theta\):
 </p>
 
 
 \begin{equation}
-\dot{H} = J(\theta)\dot{\theta}
+\dot{H} = J \dot{\theta}
 \end{equation}
 
 <p>
 The Jacobian is a matrix-valued function; you can think of it like a
-vector version of the derivative of a scalar. The Jacobian matrix
-\(J(\theta)\) encodes relationships between changes in joint angles and
-changes in hand positions.
+vector version of the derivative of a scalar. The Jacobian matrix \(J\)
+encodes relationships between changes in joint angles and changes in
+hand positions.
 </p>
 
 
 \begin{equation}
-J(\theta) = \frac{dH}{d\theta} = \left[
-  \begin{array}{cc} \frac{dH_{x}}{d\theta_{1}} &\frac{dH_{x}}{d\theta_{2}}\\
-                    \frac{dH_{y}}{d\theta_{1}} &\frac{dH_{y}}{d\theta_{2}}
+J = \frac{dH}{d\theta} = \left[
+  \begin{array}{cc} \frac{\partial H_{x}}{\partial \theta_{1}}, &\frac{\partial H_{x}}{\partial \theta_{2}}\\
+                    \frac{\partial H_{y}}{\partial \theta_{1}}, &\frac{\partial H_{y}}{\partial \theta_{2}}
   \end{array} \right]
 \end{equation}
 
 <p>
 For a system with 2 joint angles \(\theta = (\theta_{1},\theta_{2})\)
-and 2 hand coordinates \(H = (H_{x},H_{y})\), the Jacobian \(J(\theta)\)
-is a 2x2 matrix where each value codes the rate of change of a given
-hand coordinate with respect the given joint coordinate. So for
-example the term \(\frac{dH_{x}}{d\theta_{2}}\) represents the change in
-the \(x\) coordinate of the hand given a change in the elbow joint angle
-\(\theta_{2}\).
+and 2 hand coordinates \(H = (H_{x},H_{y})\), the Jacobian \(J\) is a 2x2
+matrix where each value codes the rate of change of a given hand
+coordinate with respect the given joint coordinate. So for example the
+term \(\frac{\partial H_{x}}{\partial \theta_{2}}\) represents the
+change in the \(x\) coordinate of the hand given a change in the elbow
+joint angle \(\theta_{2}\).
 </p>
 <p>
-Note also that the Jacobian is written as \(J(\theta)\) which means it
-is a function of joint angles \(\theta\) &mdash; in other words, the four
-terms in the Jacobian matrix change depending on limb configuration
-(joint angles). This means the relationships between joint angles and hand coordinates changes depending on where the limb is in its workspace. We already have an idea that this is true, from the figure above.
-</p>
-<p>
-So how do we determine the four terms of \(J(\theta)\)? We have to do
-calculus and differentiate the equations for \(H_{x}\) and \(H_{y}\) with
-respect to the joint angles \(\theta_{1}\) and \(\theta_{2}\). Fortunately
-we can use a Python package for symbolic computation called <a href="http://sympy.org/en/index.html">SymPy</a> to
-help us with the calculus. (you will have to install SymPy&hellip; on
-ubuntu, just type <code>sudo apt-get install python-sympy</code>)
+So how do we determine the four terms of \(J\)? We have to do calculus
+and differentiate the equations for \(H_{x}\) and \(H_{y}\) with respect
+to the joint angles \(\theta_{1}\) and \(\theta_{2}\). Fortunately we can
+use a Python package for symbolic computation called <a href="http://sympy.org/en/index.html">SymPy</a> to help us
+with the calculus. (you will have to install SymPy&hellip; on Ubuntu (or
+any Debian-based GNU/Linux), just type <code>sudo apt-get install python-sympy</code>)
 </p>
 
 
@@ -668,15 +675,15 @@ ubuntu, just type <code>sudo apt-get install python-sympy</code>)
 <pre class="src src-python"><span style="color: #af0000;"># import sympy</span>
 <span style="color: #af00ff;">from</span> sympy <span style="color: #af00ff;">import</span> *
 <span style="color: #af0000;"># define these variables as symbolic (not numeric)</span>
-a1,a2,l1,l2,t = symbols(<span style="color: #87005f;">'a1 a2 l1 l2 t'</span>)
+a1,a2,l1,l2 = symbols(<span style="color: #87005f;">'a1 a2 l1 l2'</span>)
 <span style="color: #af0000;"># forward kinematics for Hx and Hy</span>
-<span style="color: #af5f00;">hx</span> = l1*cos(a1(t)) + l2*cos(a1(t)+a2(t))
-<span style="color: #af5f00;">hy</span> = l1*sin(a1(t)) + l2*sin(a1(t)+a2(t))
+<span style="color: #af5f00;">hx</span> = l1*cos(a1) + l2*cos(a1+a2)
+<span style="color: #af5f00;">hy</span> = l1*sin(a1) + l2*sin(a1+a2)
 <span style="color: #af0000;"># use sympy diff() to get partial derivatives for Jacobian matrix</span>
-<span style="color: #af5f00;">J11</span> = diff(hx,a1(t))
-<span style="color: #af5f00;">J12</span> = diff(hx,a2(t))
-<span style="color: #af5f00;">J21</span> = diff(hy,a1(t))
-<span style="color: #af5f00;">J22</span> = diff(hy,a2(t))
+<span style="color: #af5f00;">J11</span> = diff(hx,a1)
+<span style="color: #af5f00;">J12</span> = diff(hx,a2)
+<span style="color: #af5f00;">J21</span> = diff(hy,a1)
+<span style="color: #af5f00;">J22</span> = diff(hy,a2)
 <span style="color: #af00ff;">print</span> J11
 <span style="color: #af00ff;">print</span> J12
 <span style="color: #af00ff;">print</span> J21
@@ -686,16 +693,16 @@ a1,a2,l1,l2,t = symbols(<span style="color: #87005f;">'a1 a2 l1 l2 t'</span>)
 
 
 <pre class="example">In [12]: print J11
--l1*sin(a1(t)) - l2*sin(a1(t) + a2(t))
+-l1*sin(a1) - l2*sin(a1 + a2)
 
 In [13]: print J12
--l2*sin(a1(t) + a2(t))
+-l2*sin(a1 + a2)
 
 In [14]: print J21
-l1*cos(a1(t)) + l2*cos(a1(t) + a2(t))
+l1*cos(a1) + l2*cos(a1 + a2)
 
 In [15]: print J22
-l2*cos(a1(t) + a2(t))
+l2*cos(a1 + a2)
 </pre>
 
 
@@ -705,10 +712,10 @@ So now we have the four terms of the Jacobian:
 
 
 \begin{equation}
-J(\theta) = \left[ \begin{array}{cc}
-    -l_{1}\sin(\theta_{1}) - l_{2}\sin(\theta_{1} + \theta_{2})
+J = \left[ \begin{array}{cc}
+    -l_{1}\sin(\theta_{1}) - l_{2}\sin(\theta_{1} + \theta_{2}),
     &-l_{2}\sin(\theta_{1} + \theta_{2})\\
-    l_{1}\cos(\theta_{1}) + l_{2}\cos(\theta_{1} + \theta_{2})
+    l_{1}\cos(\theta_{1}) + l_{2}\cos(\theta_{1} + \theta_{2}),
     &l_{2}\cos(\theta_{1} + \theta_{2})
    \end{array} \right]
 \end{equation}
@@ -741,7 +748,7 @@ and now we can use the Jacobian to compute hand velocities, given joint angular 
 
 
 \begin{equation}
-\dot{H} = J(\theta)\dot{\theta}
+\dot{H} = J \dot{\theta}
 \end{equation}
 
 
@@ -782,19 +789,28 @@ with respect to time. Remember the equation for velocity:
 
 
 \begin{equation}
-\dot{H} = J(\theta)\dot{\theta}
+\dot{H} = J \dot{\theta}
 \end{equation}
 
 <p>
-for acceleration we just differentiate with respect to time, and apply
-the <a href="http://en.wikipedia.org/wiki/Product_rule">Product Rule</a> from calculus:
+for acceleration we just differentiate both sides with respect to
+time:
 </p>
 
 
 \begin{equation}
-\frac{d}{dt} \left(\dot{H}\right) = \frac{d}{dt} \left( J(\theta)\dot{\theta} \right) = 
-                      \left[ J(\theta) \frac{d \dot{\theta}}{dt} \right]
-                      \left[ \left( \frac{d}{dt} J(\theta)\right) \dot{\theta} \right]
+\ddot{H} = \frac{d}{dt} \left(\dot{H}\right) = \frac{d}{dt} \left( J \dot{\theta} \right)
+\end{equation}
+
+<p>
+and apply the <a href="http://en.wikipedia.org/wiki/Product_rule">Product Rule</a> from calculus:
+</p>
+
+
+\begin{equation}
+\frac{d}{dt} \left( J \dot{\theta} \right) = 
+                      \left[ J \left( \frac{d}{dt} \dot{\theta} \right) \right] +
+                      \left[ \left( \frac{d}{dt} J\right) \dot{\theta} \right]
 \end{equation}
 
 <p>
@@ -803,18 +819,19 @@ simplifying further,
 
 
 \begin{equation}
-\ddot{H} = \left[ J(\theta)\ddot{\theta} \right]
-           \left [\dot{J}(\theta,\dot{\theta})\dot{\theta} \right]
+\ddot{H} = (J) (\ddot{\theta}) + (\dot{J}) (\dot{\theta})
 \end{equation}
 
 <p>
 So if we have joint accelerations \(\ddot{\theta}\) and joint velocities
-\(\dot{\theta}\), all we need is the Jacobian \(J(\theta)\) and the time
-derivative of the Jacobian \(\dot{J}(\theta,\dot{\theta})\), and we can
-compute hand accelerations \(\ddot{H}\).
+\(\dot{\theta}\), all we need is the Jacobian \(J\) and the time
+derivative of the Jacobian \(\dot{J}\), and we can compute hand
+accelerations \(\ddot{H}\).
 </p>
 <p>
-How do we get \(\dot{J}(\theta,\dot{\theta})\)? Again we can use SymPy, as above, and we get the following: (I will just show the Python code):
+How do we get \(\dot{J}\)? Again we can use SymPy, as above, and we get
+the following: (I will just show the final Python function, not the
+SymPy part):
 </p>
 
 
@@ -835,6 +852,11 @@ How do we get \(\dot{J}(\theta,\dot{\theta})\)? Again we can use SymPy, as above
 </pre>
 
 
+<p>
+Note that the time derivative of the Jacobian, \(\dot{J}\), is a
+function of both joint angles \(\theta\) and joint velocities
+\(\dot{\theta}\).
+</p>
 </li>
 </ul>
 </div>
@@ -855,21 +877,21 @@ Recall for velocities that:
 
 
 \begin{equation}
-\dot{H} = J(\theta)\dot{\theta}
+J \dot{\theta} = \dot{H}
 \end{equation}
 
 <p>
-To solve for \(\dot{\theta}\) we can simply use the matrix inverse of
-the Jacobian:
+To solve for \(\dot{\theta}\) we can simply multiply both sides of the
+equation by the matrix inverse of the Jacobian:
 </p>
 
 
 \begin{equation}
-\dot{\theta} = J(\theta)^{-1}\dot{H}
+\dot{\theta} = J^{-1}\dot{H}
 \end{equation}
 
 <p>
-In Numpy the matrix inverse is given by the <code>inv()</code> function.
+In Numpy you can compute the inverse of a matrix using the <code>inv()</code> function.
 </p>
 <p>
 Similarly for accelerations, we can do the following:
@@ -877,17 +899,18 @@ Similarly for accelerations, we can do the following:
 
 
 \begin{equation}
-\ddot{\theta} = J(\theta)^{-1} \left[ \ddot{H} - \left( \dot{J}(\theta,\dot{\theta}) \dot{\theta}  \right)  \right]
+\ddot{\theta} = J^{-1} \left[ \ddot{H} - \left( (\dot{J}) (\dot{\theta})  \right)  \right]
 \end{equation}
 
 
 </div>
+</div>
 
 </div>
 
-<div id="outline-container-1-2-5" class="outline-4">
-<h4 id="sec-1-2-5">One-to-one mapping</h4>
-<div class="outline-text-4" id="text-1-2-5">
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3">The Redundancy Problem</h3>
+<div class="outline-text-3" id="text-1-3">
 
 
 <p>
@@ -923,22 +946,26 @@ rotations within that 4D null space <i>have no effect on 3D hand position</i>. A
 number of ways of configuring the 7 joints of the arm to reach a
 single 3D hand position.
 </p>
+<p>
+How does the CNS choose to plan and control movements with all of this
+redundancy? This is known in the sensory-motor neuroscience literature
+as the <i>Redundancy Problem</i>.
+</p>
 </div>
-</div>
-
-</div>
-
-<div id="outline-container-1-3" class="outline-3">
-<h3 id="sec-1-3">Computational Models of Kinematics</h3>
-<div class="outline-text-3" id="text-1-3">
-
-
 
 </div>
 
-<div id="outline-container-1-3-1" class="outline-4">
-<h4 id="sec-1-3-1">The Minimum-Jerk Hypothesis</h4>
-<div class="outline-text-4" id="text-1-3-1">
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4">Computational Models of Kinematics</h3>
+<div class="outline-text-3" id="text-1-4">
+
+
+
+</div>
+
+<div id="outline-container-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1">The Minimum-Jerk Hypothesis</h4>
+<div class="outline-text-4" id="text-1-4-1">
 
 
 <p>
@@ -1025,9 +1052,9 @@ multi-joint movement.
 
 </div>
 
-<div id="outline-container-1-3-2" class="outline-4">
-<h4 id="sec-1-3-2">Minimum Endpoint Variance</h4>
-<div class="outline-text-4" id="text-1-3-2">
+<div id="outline-container-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2">Minimum Endpoint Variance</h4>
+<div class="outline-text-4" id="text-1-4-2">
 
 
 <p>
@@ -1073,9 +1100,9 @@ the final target location of a point-to-point movement.
 
 </div>
 
-<div id="outline-container-1-4" class="outline-3">
-<h3 id="sec-1-4">Why are kinematic transformations important?</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-1-5" class="outline-3">
+<h3 id="sec-1-5">Why are kinematic transformations important?</h3>
+<div class="outline-text-3" id="text-1-5">
 
 
 <p>
