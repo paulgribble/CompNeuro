@@ -222,7 +222,6 @@ plot((hx,hx),(yl[0],yl[1]),'b-')
 #+CAPTION: Joint vs Hand Kinematics for Two Joint Arm
 [[file:figs/twojointarm_kinematics_workspace.png]]
 
-
 Note that in the lower plot, the shoulder location is at the origin,
 $(0,0)$. The blue crosshairs in each subplot correspond to the same
 arm position --- in joint space (top) and in cartesian hand space
@@ -245,6 +244,237 @@ must use inverse kinematics to determine this.
 
 I will leave the inverse kinematics equations up to you to derive as
 one of the steps in your assignment for this topic.
+
+*** The Jacobian
+
+So far we have look at kinematic equations for arm positions --- joint
+angular positions and hand cartesian positions. Here we look at
+velocities (rate of change of position) in the two coordinate frames,
+joint-space and hand-space.
+
+How can we compute hand velocities $\frac{dH}{dt}$ given joint
+velocities $\frac{d\theta}{dt}$? We can apply the the [[http://en.wikipedia.org/wiki/Chain_rule][Chain Rule]]:
+
+\begin{equation}
+\frac{dH}{dt} = \frac{dH}{d\theta} \frac{d\theta}{dt}
+\end{equation}
+
+We then define the *Jacobian* ([[http://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant][Wikipedia:Jacobian]]) matrix $J(\theta)$
+as:
+
+\begin{equation}
+J(\theta) = \frac{dH}{d\theta}
+\end{equation}
+
+and so:
+
+\begin{equation}
+\frac{dH}{dt} = J(\theta) \frac{d\theta}{dt}
+\end{equation}
+
+For the sake of notational brevity we will refer to hand velocities as
+$\dot{H}$ and joint velocities as $\dot{\theta}$.
+
+\begin{equation}
+\dot{H} = J(\theta)\dot{\theta}
+\end{equation}
+
+The Jacobian is a matrix-valued function; you can think of it like a
+vector version of the derivative of a scalar. The Jacobian matrix
+$J(\theta)$ encodes relationships between changes in joint angles and
+changes in hand positions.
+
+\begin{equation}
+J(\theta) = \frac{dH}{d\theta} = \left[
+  \begin{array}{cc} \frac{dH_{x}}{d\theta_{1}} &\frac{dH_{x}}{d\theta_{2}}\\
+                    \frac{dH_{y}}{d\theta_{1}} &\frac{dH_{y}}{d\theta_{2}}
+  \end{array} \right]
+\end{equation}
+
+For a system with 2 joint angles $\theta = (\theta_{1},\theta_{2})$
+and 2 hand coordinates $H = (H_{x},H_{y})$, the Jacobian $J(\theta)$
+is a 2x2 matrix where each value codes the rate of change of a given
+hand coordinate with respect the given joint coordinate. So for
+example the term $\frac{dH_{x}}{d\theta_{2}}$ represents the change in
+the $x$ coordinate of the hand given a change in the elbow joint angle
+$\theta_{2}$.
+
+Note also that the Jacobian is written as $J(\theta)$ which means it
+is a function of joint angles $\theta$ --- in other words, the four
+terms in the Jacobian matrix change depending on limb configuration
+(joint angles). This means the relationships between joint angles and hand coordinates changes depending on where the limb is in its workspace. We already have an idea that this is true, from the figure above.
+
+So how do we determine the four terms of $J(\theta)$? We have to do
+calculus and differentiate the equations for $H_{x}$ and $H_{y}$ with
+respect to the joint angles $\theta_{1}$ and $\theta_{2}$. Fortunately
+we can use a Python package for symbolic computation called [[http://sympy.org/en/index.html][SymPy]] to
+help us with the calculus. (you will have to install SymPy... on
+ubuntu, just type =sudo apt-get install python-sympy=)
+
+#+BEGIN_SRC python
+# import sympy
+from sympy import *
+# define these variables as symbolic (not numeric)
+a1,a2,l1,l2,t = symbols('a1 a2 l1 l2 t')
+# forward kinematics for Hx and Hy
+hx = l1*cos(a1(t)) + l2*cos(a1(t)+a2(t))
+hy = l1*sin(a1(t)) + l2*sin(a1(t)+a2(t))
+# use sympy diff() to get partial derivatives for Jacobian matrix
+J11 = diff(hx,a1(t))
+J12 = diff(hx,a2(t))
+J21 = diff(hy,a1(t))
+J22 = diff(hy,a2(t))
+print J11
+print J12
+print J21
+print J22
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+In [12]: print J11
+-l1*sin(a1(t)) - l2*sin(a1(t) + a2(t))
+
+In [13]: print J12
+-l2*sin(a1(t) + a2(t))
+
+In [14]: print J21
+l1*cos(a1(t)) + l2*cos(a1(t) + a2(t))
+
+In [15]: print J22
+l2*cos(a1(t) + a2(t))
+#+END_EXAMPLE
+
+So now we have the four terms of the Jacobian:
+
+\begin{equation}
+J(\theta) = \left[ \begin{array}{cc}
+    -l_{1}\sin(\theta_{1}) - l_{2}\sin(\theta_{1} + \theta_{2})
+    &-l_{2}\sin(\theta_{1} + \theta_{2})\\
+    l_{1}\cos(\theta_{1}) + l_{2}\cos(\theta_{1} + \theta_{2})
+    &l_{2}\cos(\theta_{1} + \theta_{2})
+   \end{array} \right]
+\end{equation}
+
+and now we can write a Python function that returns the Jacobian, given a set of joint angles:
+
+#+BEGIN_SRC python
+def jacobian(A,aparams):
+   """
+   Given joint angles A=(a1,a2)
+   returns the Jacobian matrix J(q) = dH/dA
+   """
+   l1 = aparams['l1']
+   l2 = aparams['l2']
+   dHxdA1 = -l1*sin(A[0]) - l2*sin(A[0]+A[1])
+   dHxdA2 = -l2*sin(A[0]+A[1])
+   dHydA1 = l1*cos(A[0]) + l2*cos(A[0]+A[1])
+   dHydA2 = l2*cos(A[0]+A[1])
+   J = matrix([[dHxdA1,dHxdA2],[dHydA1,dHydA2]])
+   return J
+#+END_SRC
+
+and now we can use the Jacobian to compute hand velocities, given joint angular velocities according to the equation from above:
+
+\begin{equation}
+\dot{H} = J(\theta)\dot{\theta}
+\end{equation}
+
+#+BEGIN_SRC python
+aparams = {'l1' : 0.3384, 'l2' : 0.4554}
+A = array([45.0,90.0])*pi/180       # joint angles
+Ad = matrix([[-5.0],[3.0]])*pi/180  # joint velocities
+J = jacobian(A,aparams)
+Hd = J*Ad
+print Hd
+#+END_SRC
+
+#+BEGIN_EXAMPLE
+[[ 0.03212204]
+ [-0.00964106]]
+#+END_EXAMPLE
+
+We can visualize the Jacobian by plotting velocity vectors in joint
+space and the corresponding velocity vectors in hand space. See source
+file [[file:code/jacobian_plots.py][jacobian\_plots.py]] for python code.
+
+#+ATTR_HTML: width="700px" align="center"
+#+CAPTION: Visualizing the Jacobian
+[[file:figs/jacobian_plots.png]]
+
+**** Accelerations
+
+We can also use the Jacobian to compute accelerations at the hand due
+to accelerations at the joint, simply by differentiating our equations
+with respect to time. Remember the equation for velocity:
+
+\begin{equation}
+\dot{H} = J(\theta)\dot{\theta}
+\end{equation}
+
+for acceleration we just differentiate with respect to time, and apply
+the [[http://en.wikipedia.org/wiki/Product_rule][Product Rule]] from calculus:
+
+\begin{equation}
+\frac{d}{dt} \left(\dot{H}\right) = \frac{d}{dt} \left( J(\theta)\dot{\theta} \right) = 
+                      \left[ J(\theta) \frac{d \dot{\theta}}{dt} \right]
+                      \left[ \left( \frac{d}{dt} J(\theta)\right) \dot{\theta} \right]
+\end{equation}
+
+simplifying further,
+
+\begin{equation}
+\ddot{H} = \left[ J(\theta)\ddot{\theta} \right]
+           \left [\dot{J}(\theta,\dot{\theta})\dot{\theta} \right]
+\end{equation}
+
+So if we have joint accelerations $\ddot{\theta}$ and joint velocities
+$\dot{\theta}$, all we need is the Jacobian $J(\theta)$ and the time
+derivative of the Jacobian $\dot{J}(\theta,\dot{\theta})$, and we can
+compute hand accelerations $\ddot{H}$.
+
+How do we get $\dot{J}(\theta,\dot{\theta})$? Again we can use SymPy, as above, and we get the following: (I will just show the Python code):
+
+#+BEGIN_SRC python
+def jacobiand(A,Ad,aparams):
+"""
+Given joint angles A=(a1,a2) and velocities Ad=(a1d,a2d)
+returns the time derivative of the Jacobian matrix d/dt (J)
+"""
+l1 = aparams['l1']
+l2 = aparams['l2']
+Jd11 = -l1*cos(A[0])*Ad[0] - l2*(Ad[0] + Ad[1])*cos(A[0] + A[1])
+Jd12 = -l2*(Ad[0] + Ad[1])*cos(A[0] + A[1])
+Jd21 = -l1*sin(A[0])*Ad[0] - l2*(Ad[0] + Ad[1])*sin(A[0] + A[1])
+Jd22 = -l2*(Ad[0] + Ad[1])*sin(A[0] + A[1])
+Jd = matrix([[Jd11, Jd12],[Jd21, Jd22]])
+return Jd
+#+END_SRC
+
+*** Inverse Jacobian
+
+We have seen how to compute hand velocities and accelerations given joint angles, velocities and accelerations... but what about inverse kinematics? How do we compute joint velocities given hand velocities? What about joint accelerations given hand accelerations?
+
+Recall for velocities that:
+
+\begin{equation}
+\dot{H} = J(\theta)\dot{\theta}
+\end{equation}
+
+To solve for $\dot{\theta}$ we can simply use the matrix inverse of
+the Jacobian:
+
+\begin{equation}
+\dot{\theta} = J(\theta)^{-1}\dot{H}
+\end{equation}
+
+In Numpy the matrix inverse is given by the =inv()= function.
+
+Similarly for accelerations, we can do the following:
+
+\begin{equation}
+\ddot{\theta} = J(\theta)^{-1} \left[ \ddot{H} - \left( \dot{J}(\theta,\dot{\theta}) \dot{\theta}  \right)  \right]
+\end{equation}
+
 
 *** One-to-one mapping
 
