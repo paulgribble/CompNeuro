@@ -33,10 +33,11 @@ and let's put it in a vertical plane, with gravity acting down:
 [[file:figs/elbow_dynamics.png]]
 
 We have a single link of length $l$ that is represented as a uniform
-rod with centre of mass $m$ kg located $l$ metres from the origin
-(about which the link rotates). The angle $\theta$ is the angle
-between the horizontal and the link, and we have the force of gravity
-$g$ acting in the downward direction.
+rod of length $l$ metres, with centre of mass $m$ kg located $r$
+metres from the origin (about which the link rotates), and with
+rotational [[http://en.wikipedia.org/wiki/Moment_of_inertia][moment of inertia]] $i$ (kgm$^{2}$). The angle $\theta$ is
+the angle between the horizontal and the link, and we have the force
+of gravity $g$ acting in the downward direction.
 
 There are many ways of deriving the equations of motion of a dynamical
 system, including the [[http://en.wikipedia.org/wiki/Lagrangian_mechanics][Lagrangian]], [[http://en.wikipedia.org/wiki/Hamiltonian_mechanics][Hamiltonian]], and [[http://en.wikipedia.org/wiki/Newton%E2%80%93Euler_equations][Newton-Euler]]
@@ -82,16 +83,54 @@ Euler-Lagrange equation to get generalized forces $Q_{j}$.
 
 ** Kinetic Energy $T$
 
-So first let's write down the [[http://en.wikipedia.org/wiki/Kinetic_energy][kinetic energy]] $T$. We know that for a
-point mass (and we are representing our link as a point mass $m$ kg
-located $l$ metres away from a rotary joint), the kinetic energy is
-$\frac{1}{2}mv^{2}$ where $v$ is velocity:
+So first let's write down the [[http://en.wikipedia.org/wiki/Kinetic_energy][kinetic energy]] $T$. There are two parts:
+the linear kinetic energy of the centre of mass $m$, and the
+rotational kinetic energy of the rod.
+
+*** Linear kinetic energy
+
+We know that for a point mass (and we are representing our link's
+centre of mass as a point mass $m$ kg located $\frac{l}{2}$ metres
+away from a rotary joint), the kinetic energy is $\frac{1}{2}mv^{2}$
+where $v$ is velocity:
 
 \begin{eqnarray}
-T &= &\frac{1}{2} m v^{2}\\
-T &= &\frac{1}{2} m (\dot{x}^{2} + \dot{y}^{2})\\
-T &= &\frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2}
+T_{lin} &= &\frac{1}{2} m v^{2}\\
+T_{lin} &= &\frac{1}{2} m (\dot{x}^{2} + \dot{y}^{2})\\
+T_{lin} &= &\frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2}
 \end{eqnarray}
+
+*** Rotational kinetic energy
+
+For rotation, kinetic energy is:
+
+\begin{equation}
+T_{rot} = \frac{1}{2} i \dot{\theta}^{2}
+\end{equation}
+
+where $i$ is the moment of inertia and $\dot{\theta} is the angular
+velocity.
+
+Putting them together, the total kinetic energy of the system is:
+
+\begin{equation}
+T = \frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2} + \frac{1}{2} i \dot{\theta}^{2}
+\end{equation}
+
+We can transform the coordinates from extrinsic $(x,y)$ (location of
+centre of mass) to intrinsic $\theta$ using the following relations,
+which we know from geometry:
+
+\begin{eqnarray}
+x &= &r \sin\theta\\
+y &= &-r \cos\theta
+\end{eqnarray}
+
+so if we substitute and simplify terms (not shown) we get:
+
+\begin{equation}
+T = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2}
+\end{equation}
 
 ** Potential Energy $U$
 
@@ -109,7 +148,7 @@ let's define the "zero potential energy point" (like the "ground")
 when the pendulum is pointing straight down, i.e. when $\theta = 0$:
 
 \begin{equation}
-U = m g l \left( 1-\cos\theta \right)
+U = m g r \left( 1-\cos\theta \right)
 \end{equation}
 
 ** Lagrangian $L$
@@ -117,27 +156,7 @@ U = m g l \left( 1-\cos\theta \right)
 So now we have the Lagrangian $L = T-U$ is:
 
 \begin{equation}
-L = \frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2} - m g l \left( 1-\cos\theta \right)
-\end{equation}
-
-We can transform the coordinates from extrinsic $(x,y)$ to intrinsic
-$\theta$ using the following relations, which we know from geometry:
-
-\begin{eqnarray}
-x &= &l \sin\theta\\
-y &= &-l \cos\theta
-\end{eqnarray}
-
-The reason we want to transform from $(x,y)$ into $\theta$ is simply
-that we want to characterize our system in terms of a single
-generalized variable which we decide should be $\theta$. The choice of
-generalized coordinate is not always as straightforward as it is here.
-
-So substituting the above relations for $x$ and $y$, once we do some
-algebra to simplify (not shown), we get:
-
-\begin{equation}
-L = \frac{1}{2} m l^{2} \dot{\theta}^{2} - m g l(1-\cos\theta)
+L = T-U = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2} - m g r \left( 1-\cos\theta \right)
 \end{equation}
 
 So to summarize, we have chosen our *generalized coordinates* to be in
@@ -157,20 +176,20 @@ you're a calculus ninja, or use a symbolic computing package like
 SymPy to do it for you.
 
 \begin{equation}
-\frac{\partial L}{\partial \theta} = -m g l \sin \theta
+\frac{\partial L}{\partial \theta} = -m g r \sin \theta
 \end{equation}
 
 and
 
 \begin{equation}
-\frac{\partial L}{\partial \dot{\theta}} = m l^{2} \dot{\theta}
+\frac{\partial L}{\partial \dot{\theta}} = \dot{\theta} \left( i + m r^{2} \right)
 \end{equation}
 
 and
 
 \begin{equation}
 \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta}}  \right) = 
-m l^{2} \ddot{\theta}
+\ddot{\theta} \left( i + m r^{2} \right)
 \end{equation}
 
 and remember the Euler-Lagrange equation:
@@ -182,7 +201,7 @@ Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \l
 so plugging in the values from the calculus/algebra above,
 
 \begin{equation}
-Q = m l^{2} \ddot{\theta} + m g l \sin \theta
+Q = \ddot{\theta} \left( i + m r^{2}  \right) + m g r \sin\theta
 \end{equation}
 
 So this is our *equation of motion*, it gives us a relationship
@@ -195,7 +214,7 @@ $\dot{\theta}$ doesn't appear in our equations of motion in this case).
 Our equation of motion:
 
 \begin{equation}
-Q = m l^{2} \ddot{\theta} + m g l \sin \theta
+Q = \ddot{\theta} \left( i + m r^{2}  \right) + m g r \sin\theta
 \end{equation}
 
 where $Q$ is joint torque (Nm), $m$ is link mass (kg), $l$ is link
@@ -217,18 +236,21 @@ torque).
 We can easily solve our equation of motion for $\ddot{\theta}$:
 
 \begin{equation}
-\ddot{\theta} = \frac{Q - mgl\sin\theta}{ml^{2}}
+\ddot{\theta} = \frac{Q - mgr\sin\theta}{i + mr^{2}}
 \end{equation}
 
 Note that if the torque $Q$ is zero, in other words if there is no *input* torque to the system, then:
 
 \begin{equation}
-\ddot{\theta} = - \frac{g\sin\theta}{l}
+\ddot{\theta} = \frac{- mgr\sin\theta}{i + mr^{2}}
 \end{equation}
 
 This characterizes the passive dynamics of the system (the dynamical
 behaviour of the system in the absence of any external driving
 torque).
+
+If you want to see the SymPy code for doing all this calculus, it is
+here: [[file:code/onejoint_lagrange.py][onejoint\_lagrange.py]]
 
 ** Simulating the dynamics of the one-joint arm
 
@@ -236,14 +258,15 @@ Let's write a function, as we did earlier in the course for other systems, for t
 
 #+BEGIN_SRC python
 from scipy.integrate import odeint
-
 def onejointarm(state,t):
-theta = state[0]      # joint angle (rad)
-theta_dot = state[1]  # joint velocity (rad/s)
-l = 0.50              # link length (m)
-g = 9.81              # gravitational constant (m/s/s)
-theta_ddot = -g*sin(theta) / l
-return [theta_dot, theta_ddot]
+   theta = state[0]      # joint angle (rad)
+   theta_dot = state[1]  # joint velocity (rad/s)
+   m = 1.65              # kg
+   r = 0.50              # link length (m)
+   g = 9.81              # gravitational constant (m/s/s)
+   i = 0.025             # moment of inertia (kg m m)
+   theta_ddot = -(m*g*r*sin(theta)) / (i + (m*r*r))
+   return [theta_dot, theta_ddot]
 
 t = linspace(0.0,10.0,1001)   # 10 seconds sampled at 1000 Hz
 state0 = [90.0*pi/180.0, 0.0] # 90 deg initial angle, 0 deg/sec initial velocity

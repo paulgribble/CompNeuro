@@ -223,7 +223,12 @@ for the JavaScript code below.
 <li><a href="#sec-2">Equations of motion for a one-joint arm</a>
 <ul>
 <li><a href="#sec-2-1">Euler-Lagrange Equation</a></li>
-<li><a href="#sec-2-2">Kinetic Energy \(T\)</a></li>
+<li><a href="#sec-2-2">Kinetic Energy \(T\)</a>
+<ul>
+<li><a href="#sec-2-2-1">Linear kinetic energy</a></li>
+<li><a href="#sec-2-2-2">Rotational kinetic energy</a></li>
+</ul>
+</li>
 <li><a href="#sec-2-3">Potential Energy \(U\)</a></li>
 <li><a href="#sec-2-4">Lagrangian \(L\)</a></li>
 <li><a href="#sec-2-5">Equation of motion</a></li>
@@ -276,10 +281,11 @@ and let's put it in a vertical plane, with gravity acting down:
 
 <p>
 We have a single link of length \(l\) that is represented as a uniform
-rod with centre of mass \(m\) kg located \(l\) metres from the origin
-(about which the link rotates). The angle \(\theta\) is the angle
-between the horizontal and the link, and we have the force of gravity
-\(g\) acting in the downward direction.
+rod of length \(l\) metres, with centre of mass \(m\) kg located \(r\)
+metres from the origin (about which the link rotates), and with
+rotational <a href="http://en.wikipedia.org/wiki/Moment_of_inertia">moment of inertia</a> \(i\) (kgm\(^{2}\)). The angle \(\theta\) is
+the angle between the horizontal and the link, and we have the force
+of gravity \(g\) acting in the downward direction.
 </p>
 <p>
 There are many ways of deriving the equations of motion of a dynamical
@@ -356,19 +362,85 @@ Euler-Lagrange equation to get generalized forces \(Q_{j}\).
 
 
 <p>
-So first let's write down the <a href="http://en.wikipedia.org/wiki/Kinetic_energy">kinetic energy</a> \(T\). We know that for a
-point mass (and we are representing our link as a point mass \(m\) kg
-located \(l\) metres away from a rotary joint), the kinetic energy is
-\(\frac{1}{2}mv^{2}\) where \(v\) is velocity:
+So first let's write down the <a href="http://en.wikipedia.org/wiki/Kinetic_energy">kinetic energy</a> \(T\). There are two parts:
+the linear kinetic energy of the centre of mass \(m\), and the
+rotational kinetic energy of the rod.
+</p>
+
+</div>
+
+<div id="outline-container-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1">Linear kinetic energy</h4>
+<div class="outline-text-4" id="text-2-2-1">
+
+
+<p>
+We know that for a point mass (and we are representing our link's
+centre of mass as a point mass \(m\) kg located \(\frac{l}{2}\) metres
+away from a rotary joint), the kinetic energy is \(\frac{1}{2}mv^{2}\)
+where \(v\) is velocity:
 </p>
 
 
 \begin{eqnarray}
-T &= &\frac{1}{2} m v^{2}\\
-T &= &\frac{1}{2} m (\dot{x}^{2} + \dot{y}^{2})\\
-T &= &\frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2}
+T_{lin} &= &\frac{1}{2} m v^{2}\\
+T_{lin} &= &\frac{1}{2} m (\dot{x}^{2} + \dot{y}^{2})\\
+T_{lin} &= &\frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2}
 \end{eqnarray}
 
+</div>
+
+</div>
+
+<div id="outline-container-2-2-2" class="outline-4">
+<h4 id="sec-2-2-2">Rotational kinetic energy</h4>
+<div class="outline-text-4" id="text-2-2-2">
+
+
+<p>
+For rotation, kinetic energy is:
+</p>
+
+
+\begin{equation}
+T_{rot} = \frac{1}{2} i \dot{\theta}^{2}
+\end{equation}
+
+<p>
+where \(i\) is the moment of inertia and $\dot{&theta;} is the angular
+velocity.
+</p>
+<p>
+Putting them together, the total kinetic energy of the system is:
+</p>
+
+
+\begin{equation}
+T = \frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2} + \frac{1}{2} i \dot{\theta}^{2}
+\end{equation}
+
+<p>
+We can transform the coordinates from extrinsic \((x,y)\) (location of
+centre of mass) to intrinsic \(\theta\) using the following relations,
+which we know from geometry:
+</p>
+
+
+\begin{eqnarray}
+x &= &r \sin\theta\\
+y &= &-r \cos\theta
+\end{eqnarray}
+
+<p>
+so if we substitute and simplify terms (not shown) we get:
+</p>
+
+
+\begin{equation}
+T = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2}
+\end{equation}
+
+</div>
 </div>
 
 </div>
@@ -398,7 +470,7 @@ when the pendulum is pointing straight down, i.e. when \(\theta = 0\):
 
 
 \begin{equation}
-U = m g l \left( 1-\cos\theta \right)
+U = m g r \left( 1-\cos\theta \right)
 \end{equation}
 
 </div>
@@ -416,34 +488,7 @@ So now we have the Lagrangian \(L = T-U\) is:
 
 
 \begin{equation}
-L = \frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2} - m g l \left( 1-\cos\theta \right)
-\end{equation}
-
-<p>
-We can transform the coordinates from extrinsic \((x,y)\) to intrinsic
-\(\theta\) using the following relations, which we know from geometry:
-</p>
-
-
-\begin{eqnarray}
-x &= &l \sin\theta\\
-y &= &-l \cos\theta
-\end{eqnarray}
-
-<p>
-The reason we want to transform from \((x,y)\) into \(\theta\) is simply
-that we want to characterize our system in terms of a single
-generalized variable which we decide should be \(\theta\). The choice of
-generalized coordinate is not always as straightforward as it is here.
-</p>
-<p>
-So substituting the above relations for \(x\) and \(y\), once we do some
-algebra to simplify (not shown), we get:
-</p>
-
-
-\begin{equation}
-L = \frac{1}{2} m l^{2} \dot{\theta}^{2} - m g l(1-\cos\theta)
+L = T-U = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2} - m g r \left( 1-\cos\theta \right)
 \end{equation}
 
 <p>
@@ -474,7 +519,7 @@ SymPy to do it for you.
 
 
 \begin{equation}
-\frac{\partial L}{\partial \theta} = -m g l \sin \theta
+\frac{\partial L}{\partial \theta} = -m g r \sin \theta
 \end{equation}
 
 <p>
@@ -483,7 +528,7 @@ and
 
 
 \begin{equation}
-\frac{\partial L}{\partial \dot{\theta}} = m l^{2} \dot{\theta}
+\frac{\partial L}{\partial \dot{\theta}} = \dot{\theta} \left( i + m r^{2} \right)
 \end{equation}
 
 <p>
@@ -493,7 +538,7 @@ and
 
 \begin{equation}
 \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta}}  \right) = 
-m l^{2} \ddot{\theta}
+\ddot{\theta} \left( i + m r^{2} \right)
 \end{equation}
 
 <p>
@@ -511,7 +556,7 @@ so plugging in the values from the calculus/algebra above,
 
 
 \begin{equation}
-Q = m l^{2} \ddot{\theta} + m g l \sin \theta
+Q = \ddot{\theta} \left( i + m r^{2}  \right) + m g r \sin\theta
 \end{equation}
 
 <p>
@@ -534,7 +579,7 @@ Our equation of motion:
 
 
 \begin{equation}
-Q = m l^{2} \ddot{\theta} + m g l \sin \theta
+Q = \ddot{\theta} \left( i + m r^{2}  \right) + m g r \sin\theta
 \end{equation}
 
 <p>
@@ -560,7 +605,7 @@ We can easily solve our equation of motion for \(\ddot{\theta}\):
 
 
 \begin{equation}
-\ddot{\theta} = \frac{Q - mgl\sin\theta}{ml^{2}}
+\ddot{\theta} = \frac{Q - mgr\sin\theta}{i + mr^{2}}
 \end{equation}
 
 <p>
@@ -569,13 +614,17 @@ Note that if the torque \(Q\) is zero, in other words if there is no <b>input</b
 
 
 \begin{equation}
-\ddot{\theta} = - \frac{g\sin\theta}{l}
+\ddot{\theta} = \frac{- mgr\sin\theta}{i + mr^{2}}
 \end{equation}
 
 <p>
 This characterizes the passive dynamics of the system (the dynamical
 behaviour of the system in the absence of any external driving
 torque).
+</p>
+<p>
+If you want to see the SymPy code for doing all this calculus, it is
+here: <a href="code/onejoint_lagrange.py">onejoint_lagrange.py</a>
 </p>
 </div>
 
@@ -593,14 +642,15 @@ Let's write a function, as we did earlier in the course for other systems, for t
 
 
 <pre class="src src-python"><span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
-
 <span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointarm</span>(state,t):
-<span style="color: #af5f00;">theta</span> = state[0]      <span style="color: #af0000;"># joint angle (rad)</span>
-<span style="color: #af5f00;">theta_dot</span> = state[1]  <span style="color: #af0000;"># joint velocity (rad/s)</span>
-<span style="color: #af5f00;">l</span> = 0.50              <span style="color: #af0000;"># link length (m)</span>
-<span style="color: #af5f00;">g</span> = 9.81              <span style="color: #af0000;"># gravitational constant (m/s/s)</span>
-<span style="color: #af5f00;">theta_ddot</span> = -g*sin(theta) / l
-<span style="color: #af00ff;">return</span> [theta_dot, theta_ddot]
+   theta = state[0]      <span style="color: #af0000;"># joint angle (rad)</span>
+   theta_dot = state[1]  <span style="color: #af0000;"># joint velocity (rad/s)</span>
+   m = 1.65              <span style="color: #af0000;"># kg</span>
+   r = 0.50              <span style="color: #af0000;"># link length (m)</span>
+   g = 9.81              <span style="color: #af0000;"># gravitational constant (m/s/s)</span>
+   i = 0.025             <span style="color: #af0000;"># moment of inertia (kg m m)</span>
+   theta_ddot = -(m*g*r*sin(theta)) / (i + (m*r*r))
+   <span style="color: #af00ff;">return</span> [theta_dot, theta_ddot]
 
 <span style="color: #af5f00;">t</span> = linspace(0.0,10.0,1001)   <span style="color: #af0000;"># 10 seconds sampled at 1000 Hz</span>
 <span style="color: #af5f00;">state0</span> = [90.0*pi/180.0, 0.0] <span style="color: #af0000;"># 90 deg initial angle, 0 deg/sec initial velocity</span>
