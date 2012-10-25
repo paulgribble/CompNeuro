@@ -45,7 +45,9 @@ approaches. They are all different ways to get to the same place (for
 our purposes), the equations of motion relating the inputs
 (e.g. forces and torques) to the dynamical behaviour (accelerations,
 velocities, positions) of a system. We will look at the Lagrangian
-approach here.
+approach here. A great practical book for looking at all sorts of
+examples of the Lagrangian approach, for all sorts of mechanical
+systems, is [[http://www.amazon.ca/Schaums-Outline-Lagrangian-Dynamics-Wells/dp/0070692580][Schaum's Outline: Lagrangian Dynamics]].
 
 *Note*: if you are squeamish about the calculus, or you're just not
 that interested in the nuts and bolts of /how/ to derive equations of
