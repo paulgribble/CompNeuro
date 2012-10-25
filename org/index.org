@@ -27,6 +27,7 @@
 2. [[file:2_Modelling_Dynamical_Systems.html][Modelling Dynamical Systems]]
 3. [[file:3_Modelling_Action_Potentials.html][Modelling Action Potentials]]
 4. [[file:4_Computational_Motor_Control_Kinematics.html][Computational Motor Control: Kinematics]]
+5. [[file:5_Computational_Motor_Control_Dynamics.html][Computational Motor Control: Dynamics]]
 
 -----
 * Schedule & Topics
@@ -87,7 +88,7 @@
 
 -----
 ** Oct 29, Nov 1 : Computational Motor Control: Dynamics
-
+-  [[file:5_Computational_Motor_Control_Dynamics.html][5: Computational Motor Control: Dynamics]]
 -----
 ** Nov 5, 8 : Computational Motor Control: Muscle Models
 

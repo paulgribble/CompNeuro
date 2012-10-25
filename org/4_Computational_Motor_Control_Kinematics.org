@@ -4,7 +4,7 @@
 #+AUTHOR:    Paul Gribble & Dinant Kistemaker
 #+EMAIL:     paul@gribblelab.org
 #+DATE:      fall 2012
-#+LINK_UP: http://www.gribblelab.org/compneuro/2_Modelling_Dynamical_Systems.html
+#+LINK_UP:http://www.gribblelab.org/compneuro/3_Modelling_Action_Potentials.html
 #+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
 
 -----
@@ -27,7 +27,7 @@ kinematic equations* take us in the other direction, from extrinsic
 variables to intrinsic variables, e.g. from hand coordinates to joint
 angles.
 
-** One-joint Elbow Kinematic Model
+* One-joint Elbow Kinematic Model
 
 Let's first consider a simple model of an arm movement. To begin with
 we will model a single joint, the elbow joint. Our model will have a
@@ -46,7 +46,7 @@ elbow angle $\theta$, and the extrinsic variable is the hand position
 in cartesian coordinates, which is defined by two values,
 $(H_{x},H_{y})$.
 
-*** Forward Kinematics
+** Forward Kinematics
 
 What are the forward kinematic equations for our elbow model? We
 simply need to recall our trigonometry from high school (remember
@@ -69,7 +69,7 @@ H_{y} &= &l \sin(\theta) &= 0.45 \sin\left(\frac{35*\pi}{180}\right) = 0.26 m\\
 
 So the hand position would be $(0.37,0.26)$ (measured in metres).
 
-*** Inverse Kinematics
+** Inverse Kinematics
 
 What about the inverse kinematics equations? If I give you the
 position of my hand, and the length of my lower arm, how can you
@@ -129,7 +129,7 @@ axis('equal')
 #+CAPTION: Example elbow movement
 [[file:figs/elbow_movement_kinematics.png]]
 
-** Two-joint arm
+* Two-joint arm
 
 Let's introduce a shoulder joint as well:
 
@@ -137,7 +137,7 @@ Let's introduce a shoulder joint as well:
 #+CAPTION: Schematic of a simple kinematic model of a two-joint arm
 [[file:figs/twojointarm_kinematics.png]]
 
-*** Forward Kinematics
+** Forward Kinematics
 
 Now let's think about the forward and inverse kinematic equations to
 go from intrinsic coordinates, joint angles $(\theta_{1},\theta_{2})$
@@ -235,7 +235,7 @@ workspace region in joint space corresponds to a really curved region
 in hand space. These complexities reflect the fact that the mapping
 between joint space and hand space is /non-linear/.
 
-*** Inverse Kinematics
+** Inverse Kinematics
 
 You can start to appreciate the sorts of problems the brain must face
 when planning arm movements. If I want move my hand through a
@@ -245,7 +245,7 @@ must use inverse kinematics to determine this.
 I will leave the inverse kinematics equations up to you to derive as
 one of the steps in your assignment for this topic.
 
-*** The Jacobian
+** The Jacobian
 
 So far we have looked at kinematic equations for arm positions --- joint
 angular positions and hand cartesian positions. Here we look at
@@ -469,7 +469,7 @@ Note that the time derivative of the Jacobian, $\dot{J}$, is a
 function of both joint angles $\theta$ and joint velocities
 $\dot{\theta}$.
 
-*** Inverse Jacobian
+** Inverse Jacobian
 
 We have seen how to compute hand velocities and accelerations given joint angles, velocities and accelerations... but what about inverse kinematics? How do we compute joint velocities given hand velocities? What about joint accelerations given hand accelerations?
 
@@ -495,7 +495,7 @@ Similarly for accelerations, we can do the following:
 \end{equation}
 
 
-** The Redundancy Problem
+* The Redundancy Problem
 
 Notice something important (and unrealistic) about our simple
 two-joint arm model. There is a one-to-one mapping between any two
@@ -533,9 +533,9 @@ How does the CNS choose to plan and control movements with all of this
 redundancy? This is known in the sensory-motor neuroscience literature
 as the /Redundancy Problem/.
 
-** Computational Models of Kinematics
+* Computational Models of Kinematics
 
-*** The Minimum-Jerk Hypothesis
+** The Minimum-Jerk Hypothesis
 
 One of the early computational models of arm movement kinematics was
 described by Tamar Flash and Neville Hogan. Tamar was a postdoc at MIT
@@ -596,7 +596,7 @@ multi-joint movement.
   1688-1703.
 
 
-*** Minimum Endpoint Variance
+** Minimum Endpoint Variance
 
 More recently, researchers have investigated how noise (variability)
 in neural control signals affects movement kinematics. One hypothesis
@@ -627,7 +627,7 @@ the final target location of a point-to-point movement.
   variance model. Biological cybernetics, 94(5), 393-407.
 
 
-** Why are kinematic transformations important?
+* Why are kinematic transformations important?
 
 The many-to-one mapping issue is directly relevant to current key
 questions in sensory-motor neuroscience. How does the nervous system
@@ -680,5 +680,9 @@ experimental data with predictions from computational models.
   control reduces instability that arises from motor noise." The
   Journal of Neuroscience 29, no. 40 (2009): 12606-12616.
 
+* Next Steps
 
-[ next ]
+Next we will look at modelling the dynamics of arm movement.
+
+[ [[file:5_Computational_Motor_Control_Dynamics.html][Computational Motor Control: Dynamics]] ]
+

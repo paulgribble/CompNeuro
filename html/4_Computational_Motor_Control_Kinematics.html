@@ -200,7 +200,7 @@ for the JavaScript code below.
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="http://www.gribblelab.org/compneuro/2_Modelling_Dynamical_Systems.html"> UP </a>
+ <a accesskey="h" href="http://www.gribblelab.org/compneuro/3_Modelling_Action_Potentials.html"> UP </a>
  |
  <a accesskey="H" href="http://www.gribblelab.org/compneuro/index.html"> HOME </a>
 </div>
@@ -219,32 +219,30 @@ for the JavaScript code below.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Introduction</a>
+<li><a href="#sec-1">Introduction</a></li>
+<li><a href="#sec-2">One-joint Elbow Kinematic Model</a>
 <ul>
-<li><a href="#sec-1-1">One-joint Elbow Kinematic Model</a>
-<ul>
-<li><a href="#sec-1-1-1">Forward Kinematics</a></li>
-<li><a href="#sec-1-1-2">Inverse Kinematics</a></li>
+<li><a href="#sec-2-1">Forward Kinematics</a></li>
+<li><a href="#sec-2-2">Inverse Kinematics</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-2">Two-joint arm</a>
+<li><a href="#sec-3">Two-joint arm</a>
 <ul>
-<li><a href="#sec-1-2-1">Forward Kinematics</a></li>
-<li><a href="#sec-1-2-2">Inverse Kinematics</a></li>
-<li><a href="#sec-1-2-3">The Jacobian</a></li>
-<li><a href="#sec-1-2-4">Inverse Jacobian</a></li>
+<li><a href="#sec-3-1">Forward Kinematics</a></li>
+<li><a href="#sec-3-2">Inverse Kinematics</a></li>
+<li><a href="#sec-3-3">The Jacobian</a></li>
+<li><a href="#sec-3-4">Inverse Jacobian</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-3">The Redundancy Problem</a></li>
-<li><a href="#sec-1-4">Computational Models of Kinematics</a>
+<li><a href="#sec-4">The Redundancy Problem</a></li>
+<li><a href="#sec-5">Computational Models of Kinematics</a>
 <ul>
-<li><a href="#sec-1-4-1">The Minimum-Jerk Hypothesis</a></li>
-<li><a href="#sec-1-4-2">Minimum Endpoint Variance</a></li>
+<li><a href="#sec-5-1">The Minimum-Jerk Hypothesis</a></li>
+<li><a href="#sec-5-2">Minimum Endpoint Variance</a></li>
 </ul>
 </li>
-<li><a href="#sec-1-5">Why are kinematic transformations important?</a></li>
-</ul>
-</li>
+<li><a href="#sec-6">Why are kinematic transformations important?</a></li>
+<li><a href="#sec-7">Next Steps</a></li>
 </ul>
 </div>
 </div>
@@ -271,12 +269,13 @@ hand is, in a cartesian coordinate system \((H_{x},H_{y})\). <b>Inverse kinemati
 variables to intrinsic variables, e.g. from hand coordinates to joint
 angles.
 </p>
+</div>
 
 </div>
 
-<div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1">One-joint Elbow Kinematic Model</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">One-joint Elbow Kinematic Model</h2>
+<div class="outline-text-2" id="text-2">
 
 
 <p>
@@ -303,9 +302,9 @@ in cartesian coordinates, which is defined by two values,
 
 </div>
 
-<div id="outline-container-1-1-1" class="outline-4">
-<h4 id="sec-1-1-1">Forward Kinematics</h4>
-<div class="outline-text-4" id="text-1-1-1">
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">Forward Kinematics</h3>
+<div class="outline-text-3" id="text-2-1">
 
 
 <p>
@@ -340,9 +339,9 @@ So the hand position would be \((0.37,0.26)\) (measured in metres).
 
 </div>
 
-<div id="outline-container-1-1-2" class="outline-4">
-<h4 id="sec-1-1-2">Inverse Kinematics</h4>
-<div class="outline-text-4" id="text-1-1-2">
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">Inverse Kinematics</h3>
+<div class="outline-text-3" id="text-2-2">
 
 
 <p>
@@ -421,9 +420,9 @@ axis(<span style="color: #87005f;">'equal'</span>)
 
 </div>
 
-<div id="outline-container-1-2" class="outline-3">
-<h3 id="sec-1-2">Two-joint arm</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Two-joint arm</h2>
+<div class="outline-text-2" id="text-3">
 
 
 <p>
@@ -438,9 +437,9 @@ Let's introduce a shoulder joint as well:
 
 </div>
 
-<div id="outline-container-1-2-1" class="outline-4">
-<h4 id="sec-1-2-1">Forward Kinematics</h4>
-<div class="outline-text-4" id="text-1-2-1">
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">Forward Kinematics</h3>
+<div class="outline-text-3" id="text-3-1">
 
 
 <p>
@@ -555,9 +554,9 @@ between joint space and hand space is <i>non-linear</i>.
 
 </div>
 
-<div id="outline-container-1-2-2" class="outline-4">
-<h4 id="sec-1-2-2">Inverse Kinematics</h4>
-<div class="outline-text-4" id="text-1-2-2">
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">Inverse Kinematics</h3>
+<div class="outline-text-3" id="text-3-2">
 
 
 <p>
@@ -574,9 +573,9 @@ one of the steps in your assignment for this topic.
 
 </div>
 
-<div id="outline-container-1-2-3" class="outline-4">
-<h4 id="sec-1-2-3">The Jacobian</h4>
-<div class="outline-text-4" id="text-1-2-3">
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">The Jacobian</h3>
+<div class="outline-text-3" id="text-3-3">
 
 
 <p>
@@ -779,7 +778,7 @@ file <a href="code/jacobian_plots.py">jacobian_plots.py</a> for python code.
 </div>
 
 <ul>
-<li id="sec-1-2-3-1">Accelerations<br/>
+<li id="sec-3-3-1">Accelerations<br/>
 
 <p>
 We can also use the Jacobian to compute accelerations at the hand due
@@ -863,9 +862,9 @@ function of both joint angles \(\theta\) and joint velocities
 
 </div>
 
-<div id="outline-container-1-2-4" class="outline-4">
-<h4 id="sec-1-2-4">Inverse Jacobian</h4>
-<div class="outline-text-4" id="text-1-2-4">
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4">Inverse Jacobian</h3>
+<div class="outline-text-3" id="text-3-4">
 
 
 <p>
@@ -908,9 +907,9 @@ Similarly for accelerations, we can do the following:
 
 </div>
 
-<div id="outline-container-1-3" class="outline-3">
-<h3 id="sec-1-3">The Redundancy Problem</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">The Redundancy Problem</h2>
+<div class="outline-text-2" id="text-4">
 
 
 <p>
@@ -955,17 +954,17 @@ as the <i>Redundancy Problem</i>.
 
 </div>
 
-<div id="outline-container-1-4" class="outline-3">
-<h3 id="sec-1-4">Computational Models of Kinematics</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Computational Models of Kinematics</h2>
+<div class="outline-text-2" id="text-5">
 
 
 
 </div>
 
-<div id="outline-container-1-4-1" class="outline-4">
-<h4 id="sec-1-4-1">The Minimum-Jerk Hypothesis</h4>
-<div class="outline-text-4" id="text-1-4-1">
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1">The Minimum-Jerk Hypothesis</h3>
+<div class="outline-text-3" id="text-5-1">
 
 
 <p>
@@ -1052,9 +1051,9 @@ multi-joint movement.
 
 </div>
 
-<div id="outline-container-1-4-2" class="outline-4">
-<h4 id="sec-1-4-2">Minimum Endpoint Variance</h4>
-<div class="outline-text-4" id="text-1-4-2">
+<div id="outline-container-5-2" class="outline-3">
+<h3 id="sec-5-2">Minimum Endpoint Variance</h3>
+<div class="outline-text-3" id="text-5-2">
 
 
 <p>
@@ -1100,9 +1099,9 @@ the final target location of a point-to-point movement.
 
 </div>
 
-<div id="outline-container-1-5" class="outline-3">
-<h3 id="sec-1-5">Why are kinematic transformations important?</h3>
-<div class="outline-text-3" id="text-1-5">
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">Why are kinematic transformations important?</h2>
+<div class="outline-text-2" id="text-6">
 
 
 <p>
@@ -1166,10 +1165,21 @@ experimental data with predictions from computational models.
 </ul>
 
 
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7">Next Steps</h2>
+<div class="outline-text-2" id="text-7">
+
 
 <p>
-[ next ]
-</p></div>
+Next we will look at modelling the dynamics of arm movement.
+</p>
+<p>
+[ <a href="5_Computational_Motor_Control_Dynamics.html">Computational Motor Control: Dynamics</a> ]
+</p>
 </div>
 </div>
 </div>
