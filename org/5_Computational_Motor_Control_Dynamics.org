@@ -153,7 +153,7 @@ let's define the "zero potential energy point" (like the "ground")
 when the pendulum is pointing straight down, i.e. when $\theta = 0$:
 
 \begin{equation}
-U = m g r \left( r-\cos\theta \right)
+U = m g r \left( 1-\cos\theta \right)
 \end{equation}
 
 ** Lagrangian $L$
@@ -161,7 +161,7 @@ U = m g r \left( r-\cos\theta \right)
 So now we have the Lagrangian $L = T-U$ is:
 
 \begin{equation}
-L = T-U = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2} - m g r \left( r-\cos\theta \right)
+L = T-U = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2} - m g r \left( 1-\cos\theta \right)
 \end{equation}
 
 So to summarize, we have chosen our *generalized coordinates* to be in
