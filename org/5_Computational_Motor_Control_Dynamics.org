@@ -28,7 +28,7 @@ complex dynamical behaviour.
 Let's start with a simple one-joint planar arm (like an elbow joint),
 and let's put it in a vertical plane, with gravity acting down:
 
-#+ATTR_HTML: width="600px" align="center"
+#+ATTR_HTML: width="400px" align="center"
 #+CAPTION: Schematic of a simple one-joint arm in a vertical plane
 [[file:figs/elbow_dynamics.png]]
 
@@ -46,6 +46,11 @@ our purposes), the equations of motion relating the inputs
 (e.g. forces and torques) to the dynamical behaviour (accelerations,
 velocities, positions) of a system. We will look at the Lagrangian
 approach here.
+
+*Note*: if you are squeamish about the calculus, or you're just not
+that interested in the nuts and bolts of /how/ to derive equations of
+motion, that's OK ... just skip ahead to [[http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-2-6][here]] and see what the final
+equation of motion looks like.
 
 ** Euler-Lagrange Equation
 
@@ -108,7 +113,7 @@ For rotation, kinetic energy is:
 T_{rot} = \frac{1}{2} i \dot{\theta}^{2}
 \end{equation}
 
-where $i$ is the moment of inertia and $\dot{\theta} is the angular
+where $i$ is the moment of inertia and $\dot{\theta}$ is the angular
 velocity.
 
 Putting them together, the total kinetic energy of the system is:
@@ -148,7 +153,7 @@ let's define the "zero potential energy point" (like the "ground")
 when the pendulum is pointing straight down, i.e. when $\theta = 0$:
 
 \begin{equation}
-U = m g r \left( 1-\cos\theta \right)
+U = m g r \left( r-\cos\theta \right)
 \end{equation}
 
 ** Lagrangian $L$
@@ -156,7 +161,7 @@ U = m g r \left( 1-\cos\theta \right)
 So now we have the Lagrangian $L = T-U$ is:
 
 \begin{equation}
-L = T-U = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2} - m g r \left( 1-\cos\theta \right)
+L = T-U = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2} - m g r \left( r-\cos\theta \right)
 \end{equation}
 
 So to summarize, we have chosen our *generalized coordinates* to be in

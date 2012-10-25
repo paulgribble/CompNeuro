@@ -275,7 +275,7 @@ and let's put it in a vertical plane, with gravity acting down:
 </p>
 
 <div class="figure">
-<p><img src="figs/elbow_dynamics.png" width="600px" align="center" alt="figs/elbow_dynamics.png" /></p>
+<p><img src="figs/elbow_dynamics.png" width="400px" align="center" alt="figs/elbow_dynamics.png" /></p>
 <p>Schematic of a simple one-joint arm in a vertical plane</p>
 </div>
 
@@ -295,6 +295,12 @@ our purposes), the equations of motion relating the inputs
 (e.g. forces and torques) to the dynamical behaviour (accelerations,
 velocities, positions) of a system. We will look at the Lagrangian
 approach here.
+</p>
+<p>
+<b>Note</b>: if you are squeamish about the calculus, or you're just not
+that interested in the nuts and bolts of <i>how</i> to derive equations of
+motion, that's OK &hellip; just skip ahead to <a href="http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-2-6">here</a> and see what the final
+equation of motion looks like.
 </p>
 
 </div>
@@ -407,7 +413,7 @@ T_{rot} = \frac{1}{2} i \dot{\theta}^{2}
 \end{equation}
 
 <p>
-where \(i\) is the moment of inertia and $\dot{&theta;} is the angular
+where \(i\) is the moment of inertia and \(\dot{\theta}\) is the angular
 velocity.
 </p>
 <p>
@@ -470,7 +476,7 @@ when the pendulum is pointing straight down, i.e. when \(\theta = 0\):
 
 
 \begin{equation}
-U = m g r \left( 1-\cos\theta \right)
+U = m g r \left( r-\cos\theta \right)
 \end{equation}
 
 </div>
@@ -488,7 +494,7 @@ So now we have the Lagrangian \(L = T-U\) is:
 
 
 \begin{equation}
-L = T-U = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2} - m g r \left( 1-\cos\theta \right)
+L = T-U = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2} - m g r \left( r-\cos\theta \right)
 \end{equation}
 
 <p>
