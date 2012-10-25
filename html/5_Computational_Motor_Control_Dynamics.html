@@ -106,7 +106,97 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+/**
+ *
+ * @source: http://orgmode.org/mathjax/MathJax.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ * Copyright (C) 2012  MathJax
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ */
 
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code below.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code below is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code below.
+*/
+<!--/*--><![CDATA[/*><!--*/
+    MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
+        displayAlign: "center",
+        displayIndent: "2em",
+
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
+             }
+        }
+    });
+/*]]>*///-->
+</script>
 </head>
 <body>
 <div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
@@ -130,6 +220,18 @@ for the JavaScript code in this tag.
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">Introduction</a></li>
+<li><a href="#sec-2">Equations of motion for a one-joint arm</a>
+<ul>
+<li><a href="#sec-2-1">Euler-Lagrange Equation</a></li>
+<li><a href="#sec-2-2">Kinetic Energy \(T\)</a></li>
+<li><a href="#sec-2-3">Potential Energy \(U\)</a></li>
+<li><a href="#sec-2-4">Lagrangian \(L\)</a></li>
+<li><a href="#sec-2-5">Equation of motion</a></li>
+<li><a href="#sec-2-6">Forward vs Inverse Dynamics</a></li>
+<li><a href="#sec-2-7">Simulating the dynamics of the one-joint arm</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">Equations of motion for a two-joint arm</a></li>
 </ul>
 </div>
 </div>
@@ -143,9 +245,425 @@ for the JavaScript code in this tag.
 
 
 <p>
-x
+Here we will talk about deriving the <b>equations of motion</b> for a
+one-joint and then two-joint (planar) arm. We saw in earlier topics
+how to translate differential equations into Python code for
+simulation. Here we will be talking about how to derive the equations
+themselves. Then we will implement them in Python, and simulate the
+dynamical behaviour of the arm. For now we will still leave out
+muscles, and only talk about the dynamics of the arm linkage
+itself. Surprisingly, even a "simple" two-joint arm ends up having
+complex dynamical behaviour.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">Equations of motion for a one-joint arm</h2>
+<div class="outline-text-2" id="text-2">
+
+
+<p>
+Let's start with a simple one-joint planar arm (like an elbow joint),
+and let's put it in a vertical plane, with gravity acting down:
 </p>
 
+<div class="figure">
+<p><img src="figs/elbow_dynamics.png" width="600px" align="center" alt="figs/elbow_dynamics.png" /></p>
+<p>Schematic of a simple one-joint arm in a vertical plane</p>
+</div>
+
+<p>
+We have a single link of length \(l\) that is represented as a uniform
+rod with centre of mass \(m\) kg located \(l\) metres from the origin
+(about which the link rotates). The angle \(\theta\) is the angle
+between the horizontal and the link, and we have the force of gravity
+\(g\) acting in the downward direction.
+</p>
+<p>
+There are many ways of deriving the equations of motion of a dynamical
+system, including the <a href="http://en.wikipedia.org/wiki/Lagrangian_mechanics">Lagrangian</a>, <a href="http://en.wikipedia.org/wiki/Hamiltonian_mechanics">Hamiltonian</a>, and <a href="http://en.wikipedia.org/wiki/Newton–Euler_equations">Newton-Euler</a>
+approaches. They are all different ways to get to the same place (for
+our purposes), the equations of motion relating the inputs
+(e.g. forces and torques) to the dynamical behaviour (accelerations,
+velocities, positions) of a system. We will look at the Lagrangian
+approach here.
+</p>
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">Euler-Lagrange Equation</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+<p>
+The really cool thing about the Lagrangian approach is that you can derive equations of motion using only:
+</p>
+<ol>
+<li>a characterization of the energy (kinetic &amp; potential) of the system
+</li>
+<li>a description of the kinematics of the system
+</li>
+<li>running these through calculus
+</li>
+</ol>
+
+
+<p>
+The Euler-Lagrange equation gives the "generalized" equations of motion
+as:
+</p>
+
+
+\begin{equation}
+Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \left( \frac{\partial L}{\partial q_{j}} \right)
+\end{equation}
+
+<p>
+where \(j\) indexes into each "generalized coordinate", and where
+</p>
+
+
+\begin{equation}
+L = T - U
+\end{equation}
+
+<p>
+and where \(T\) is the <b>kinetic energy</b> of the system, and \(U\) is
+the <b>potential energy</b> of the system.
+</p>
+<p>
+The basic idea is once you derive an expression for \(L\), then you just
+run it through the derivatives in the Euler-Lagrange equation, to get
+the equations of motion in terms of the "generalized forces"
+\(Q_{j}\). I know that sounds a bit opaque, so let's run through a
+concrete example with our single-joint pendulum.
+</p>
+<p>
+Let's derive the two parts of \(L\) (\(T\) and \(U\)) and then we will see
+how to get the equations of motion by running \(L\) through the
+Euler-Lagrange equation to get generalized forces \(Q_{j}\).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">Kinetic Energy \(T\)</h3>
+<div class="outline-text-3" id="text-2-2">
+
+
+<p>
+So first let's write down the <a href="http://en.wikipedia.org/wiki/Kinetic_energy">kinetic energy</a> \(T\). We know that for a
+point mass (and we are representing our link as a point mass \(m\) kg
+located \(l\) metres away from a rotary joint), the kinetic energy is
+\(\frac{1}{2}mv^{2}\) where \(v\) is velocity:
+</p>
+
+
+\begin{eqnarray}
+T &= &\frac{1}{2} m v^{2}\\
+T &= &\frac{1}{2} m (\dot{x}^{2} + \dot{y}^{2})\\
+T &= &\frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2}
+\end{eqnarray}
+
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3">Potential Energy \(U\)</h3>
+<div class="outline-text-3" id="text-2-3">
+
+
+<p>
+Now let's write down the <a href="http://en.wikipedia.org/wiki/Potential_energy">potential energy</a> \(U\). We know from basic
+physics that in general, the potential energy for a mass in earth's
+gravitational field is:
+</p>
+
+
+\begin{equation}
+U = m g h
+\end{equation}
+
+<p>
+where \(m\) is mass (kg), \(g\) is the gravitational constant (9.81 m/s)
+and \(h\) is the height "above the ground". So for our rotating arm,
+let's define the "zero potential energy point" (like the "ground")
+when the pendulum is pointing straight down, i.e. when \(\theta = 0\):
+</p>
+
+
+\begin{equation}
+U = m g l \left( 1-\cos\theta \right)
+\end{equation}
+
+</div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4">Lagrangian \(L\)</h3>
+<div class="outline-text-3" id="text-2-4">
+
+
+<p>
+So now we have the Lagrangian \(L = T-U\) is:
+</p>
+
+
+\begin{equation}
+L = \frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2} - m g l \left( 1-\cos\theta \right)
+\end{equation}
+
+<p>
+We can transform the coordinates from extrinsic \((x,y)\) to intrinsic
+\(\theta\) using the following relations, which we know from geometry:
+</p>
+
+
+\begin{eqnarray}
+x &= &l \sin\theta\\
+y &= &-l \cos\theta
+\end{eqnarray}
+
+<p>
+The reason we want to transform from \((x,y)\) into \(\theta\) is simply
+that we want to characterize our system in terms of a single
+generalized variable which we decide should be \(\theta\). The choice of
+generalized coordinate is not always as straightforward as it is here.
+</p>
+<p>
+So substituting the above relations for \(x\) and \(y\), once we do some
+algebra to simplify (not shown), we get:
+</p>
+
+
+\begin{equation}
+L = \frac{1}{2} m l^{2} \dot{\theta}^{2} - m g l(1-\cos\theta)
+\end{equation}
+
+<p>
+So to summarize, we have chosen our <b>generalized coordinates</b> to be in
+terms of the joint angle \(\theta\). Since we only have one degree of
+freedom in our system, in fact we only have one generalized
+coordinate, which is \(\theta\). The generalized forces \(Q_{j}\) are just
+one, so we will write \(Q\), and since we chose our generalized
+coordinate to be angular, \(\theta\), our generalized force \(Q\) is
+actually a <a href="http://en.wikipedia.org/wiki/Torque">torque</a> (the rotational equivalent of a force).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-5" class="outline-3">
+<h3 id="sec-2-5">Equation of motion</h3>
+<div class="outline-text-3" id="text-2-5">
+
+
+<p>
+Now it's a matter of computing the derivative terms in the
+Euler-Lagrange equation to get an expression giving the torque of the
+system in terms of the system states. You can do this by hand if
+you're a calculus ninja, or use a symbolic computing package like
+SymPy to do it for you.
+</p>
+
+
+\begin{equation}
+\frac{\partial L}{\partial \theta} = -m g l \sin \theta
+\end{equation}
+
+<p>
+and
+</p>
+
+
+\begin{equation}
+\frac{\partial L}{\partial \dot{\theta}} = m l^{2} \dot{\theta}
+\end{equation}
+
+<p>
+and
+</p>
+
+
+\begin{equation}
+\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta}}  \right) = 
+m l^{2} \ddot{\theta}
+\end{equation}
+
+<p>
+and remember the Euler-Lagrange equation:
+</p>
+
+
+\begin{equation}
+Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \left( \frac{\partial L}{\partial q_{j}} \right)
+\end{equation}
+
+<p>
+so plugging in the values from the calculus/algebra above,
+</p>
+
+
+\begin{equation}
+Q = m l^{2} \ddot{\theta} + m g l \sin \theta
+\end{equation}
+
+<p>
+So this is our <b>equation of motion</b>, it gives us a relationship
+between generalized force \(Q\) (which is a <b>torque</b>), and the <b>states of the system</b>, \((\theta,\dot{\theta},\ddot{\theta})\) (note actually
+\(\dot{\theta}\) doesn't appear in our equations of motion in this case).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-6" class="outline-3">
+<h3 id="sec-2-6">Forward vs Inverse Dynamics</h3>
+<div class="outline-text-3" id="text-2-6">
+
+
+<p>
+Our equation of motion:
+</p>
+
+
+\begin{equation}
+Q = m l^{2} \ddot{\theta} + m g l \sin \theta
+\end{equation}
+
+<p>
+where \(Q\) is joint torque (Nm), \(m\) is link mass (kg), \(l\) is link
+length (m), \(g\) is gravitational constant (m/s/s) and \(\theta\) is
+joint angle (radians), gives <b>joint torque as a function of state</b>.
+</p>
+<p>
+This is actually the <i>inverse dynamics</i> equation. To say it
+differently, this is the equation we can use to answer the question,
+"what torque do I need at the joint (for example from muscles) in
+order to generate a given dynamic state?"
+</p>
+<p>
+For forward simulation of a dynamical system, we need the <i>forward dynamics</i> equation of motion. In other words, we need an equation that
+gives the derivatives of the system state(s) as a function of the
+system states themselves (and any other quantities, e.g. joint
+torque).
+</p>
+<p>
+We can easily solve our equation of motion for \(\ddot{\theta}\):
+</p>
+
+
+\begin{equation}
+\ddot{\theta} = \frac{Q - mgl\sin\theta}{ml^{2}}
+\end{equation}
+
+<p>
+Note that if the torque \(Q\) is zero, in other words if there is no <b>input</b> torque to the system, then:
+</p>
+
+
+\begin{equation}
+\ddot{\theta} = - \frac{g\sin\theta}{l}
+\end{equation}
+
+<p>
+This characterizes the passive dynamics of the system (the dynamical
+behaviour of the system in the absence of any external driving
+torque).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-7" class="outline-3">
+<h3 id="sec-2-7">Simulating the dynamics of the one-joint arm</h3>
+<div class="outline-text-3" id="text-2-7">
+
+
+<p>
+Let's write a function, as we did earlier in the course for other systems, for the forward dynamics of our one-joint arm:
+</p>
+
+
+
+<pre class="src src-python"><span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
+
+<span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointarm</span>(state,t):
+<span style="color: #af5f00;">theta</span> = state[0]      <span style="color: #af0000;"># joint angle (rad)</span>
+<span style="color: #af5f00;">theta_dot</span> = state[1]  <span style="color: #af0000;"># joint velocity (rad/s)</span>
+<span style="color: #af5f00;">l</span> = 0.50              <span style="color: #af0000;"># link length (m)</span>
+<span style="color: #af5f00;">g</span> = 9.81              <span style="color: #af0000;"># gravitational constant (m/s/s)</span>
+<span style="color: #af5f00;">theta_ddot</span> = -g*sin(theta) / l
+<span style="color: #af00ff;">return</span> [theta_dot, theta_ddot]
+
+<span style="color: #af5f00;">t</span> = linspace(0.0,10.0,1001)   <span style="color: #af0000;"># 10 seconds sampled at 1000 Hz</span>
+<span style="color: #af5f00;">state0</span> = [90.0*pi/180.0, 0.0] <span style="color: #af0000;"># 90 deg initial angle, 0 deg/sec initial velocity</span>
+<span style="color: #af5f00;">state</span> = odeint(onejointarm, state0, t)
+
+figure()
+plot(t,state*180/pi)
+legend((<span style="color: #87005f;">'theta'</span>,<span style="color: #87005f;">'thetadot'</span>))
+xlabel(<span style="color: #87005f;">'TIME (sec)'</span>)
+ylabel(<span style="color: #87005f;">'THETA (deg) &amp; THETA_DOT (deg/sec)'</span>)
+</pre>
+
+
+
+<div class="figure">
+<p><img src="figs/onejointarm_passive.png" width="600px" align="center" alt="figs/onejointarm_passive.png" /></p>
+<p>Dynamics of passive one-joint arm</p>
+</div>
+
+<p>
+Here's a little function that will animate the arm:
+</p>
+
+
+
+<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">animate_arm</span>(state,t):
+   l = 0.5
+   figure(figsize=(12,6))
+   plot(0,0,<span style="color: #87005f;">'r.'</span>)
+   p, = plot((0,l*sin(state[0,0])),(0,-l*cos(state[0,0])),<span style="color: #87005f;">'b-'</span>)
+   tt = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
+   xlim([-l-.05,l+.05])
+   ylim([-l,.10])
+   step = 3
+   <span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">xrange</span>(1,shape(state)[0]-10,step):
+      p.set_xdata((0,l*sin(state[i,0])))
+      p.set_ydata((0,-l*cos(state[i,0])))
+      tt.set_text(<span style="color: #87005f;">"%4.2f sec"</span> % (i*0.01))
+      draw()
+
+animate_arm(state,t)
+</pre>
+
+
+
+<div class="figure">
+<p><img src="figs/onejointanimation.png" width="600px" align="center" alt="figs/onejointanimation.png" /></p>
+<p>Animation of passive one-joint arm</p>
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Equations of motion for a two-joint arm</h2>
+<div class="outline-text-2" id="text-3">
+
+
+<p>
+x
+</p>
 
 <p>
 [ next ]

@@ -13,8 +13,281 @@
 
 * Introduction
 
-x
+Here we will talk about deriving the *equations of motion* for a
+one-joint and then two-joint (planar) arm. We saw in earlier topics
+how to translate differential equations into Python code for
+simulation. Here we will be talking about how to derive the equations
+themselves. Then we will implement them in Python, and simulate the
+dynamical behaviour of the arm. For now we will still leave out
+muscles, and only talk about the dynamics of the arm linkage
+itself. Surprisingly, even a "simple" two-joint arm ends up having
+complex dynamical behaviour.
 
+* Equations of motion for a one-joint arm
+
+Let's start with a simple one-joint planar arm (like an elbow joint),
+and let's put it in a vertical plane, with gravity acting down:
+
+#+ATTR_HTML: width="600px" align="center"
+#+CAPTION: Schematic of a simple one-joint arm in a vertical plane
+[[file:figs/elbow_dynamics.png]]
+
+We have a single link of length $l$ that is represented as a uniform
+rod with centre of mass $m$ kg located $l$ metres from the origin
+(about which the link rotates). The angle $\theta$ is the angle
+between the horizontal and the link, and we have the force of gravity
+$g$ acting in the downward direction.
+
+There are many ways of deriving the equations of motion of a dynamical
+system, including the [[http://en.wikipedia.org/wiki/Lagrangian_mechanics][Lagrangian]], [[http://en.wikipedia.org/wiki/Hamiltonian_mechanics][Hamiltonian]], and [[http://en.wikipedia.org/wiki/Newton%E2%80%93Euler_equations][Newton-Euler]]
+approaches. They are all different ways to get to the same place (for
+our purposes), the equations of motion relating the inputs
+(e.g. forces and torques) to the dynamical behaviour (accelerations,
+velocities, positions) of a system. We will look at the Lagrangian
+approach here.
+
+** Euler-Lagrange Equation
+
+The really cool thing about the Lagrangian approach is that you can derive equations of motion using only:
+
+1. a characterization of the energy (kinetic & potential) of the system
+2. a description of the kinematics of the system
+3. running these through calculus
+
+The Euler-Lagrange equation gives the "generalized" equations of motion
+as:
+
+\begin{equation}
+Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \left( \frac{\partial L}{\partial q_{j}} \right)
+\end{equation}
+
+where $j$ indexes into each "generalized coordinate", and where
+
+\begin{equation}
+L = T - U
+\end{equation}
+
+and where $T$ is the *kinetic energy* of the system, and $U$ is
+the *potential energy* of the system.
+
+The basic idea is once you derive an expression for $L$, then you just
+run it through the derivatives in the Euler-Lagrange equation, to get
+the equations of motion in terms of the "generalized forces"
+$Q_{j}$. I know that sounds a bit opaque, so let's run through a
+concrete example with our single-joint pendulum.
+
+Let's derive the two parts of $L$ ($T$ and $U$) and then we will see
+how to get the equations of motion by running $L$ through the
+Euler-Lagrange equation to get generalized forces $Q_{j}$.
+
+** Kinetic Energy $T$
+
+So first let's write down the [[http://en.wikipedia.org/wiki/Kinetic_energy][kinetic energy]] $T$. We know that for a
+point mass (and we are representing our link as a point mass $m$ kg
+located $l$ metres away from a rotary joint), the kinetic energy is
+$\frac{1}{2}mv^{2}$ where $v$ is velocity:
+
+\begin{eqnarray}
+T &= &\frac{1}{2} m v^{2}\\
+T &= &\frac{1}{2} m (\dot{x}^{2} + \dot{y}^{2})\\
+T &= &\frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2}
+\end{eqnarray}
+
+** Potential Energy $U$
+
+Now let's write down the [[http://en.wikipedia.org/wiki/Potential_energy][potential energy]] $U$. We know from basic
+physics that in general, the potential energy for a mass in earth's
+gravitational field is:
+
+\begin{equation}
+U = m g h
+\end{equation}
+
+where $m$ is mass (kg), $g$ is the gravitational constant (9.81 m/s)
+and $h$ is the height "above the ground". So for our rotating arm,
+let's define the "zero potential energy point" (like the "ground")
+when the pendulum is pointing straight down, i.e. when $\theta = 0$:
+
+\begin{equation}
+U = m g l \left( 1-\cos\theta \right)
+\end{equation}
+
+** Lagrangian $L$
+
+So now we have the Lagrangian $L = T-U$ is:
+
+\begin{equation}
+L = \frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2} - m g l \left( 1-\cos\theta \right)
+\end{equation}
+
+We can transform the coordinates from extrinsic $(x,y)$ to intrinsic
+$\theta$ using the following relations, which we know from geometry:
+
+\begin{eqnarray}
+x &= &l \sin\theta\\
+y &= &-l \cos\theta
+\end{eqnarray}
+
+The reason we want to transform from $(x,y)$ into $\theta$ is simply
+that we want to characterize our system in terms of a single
+generalized variable which we decide should be $\theta$. The choice of
+generalized coordinate is not always as straightforward as it is here.
+
+So substituting the above relations for $x$ and $y$, once we do some
+algebra to simplify (not shown), we get:
+
+\begin{equation}
+L = \frac{1}{2} m l^{2} \dot{\theta}^{2} - m g l(1-\cos\theta)
+\end{equation}
+
+So to summarize, we have chosen our *generalized coordinates* to be in
+terms of the joint angle $\theta$. Since we only have one degree of
+freedom in our system, in fact we only have one generalized
+coordinate, which is $\theta$. The generalized forces $Q_{j}$ are just
+one, so we will write $Q$, and since we chose our generalized
+coordinate to be angular, $\theta$, our generalized force $Q$ is
+actually a [[http://en.wikipedia.org/wiki/Torque][torque]] (the rotational equivalent of a force).
+
+** Equation of motion
+
+Now it's a matter of computing the derivative terms in the
+Euler-Lagrange equation to get an expression giving the torque of the
+system in terms of the system states. You can do this by hand if
+you're a calculus ninja, or use a symbolic computing package like
+SymPy to do it for you.
+
+\begin{equation}
+\frac{\partial L}{\partial \theta} = -m g l \sin \theta
+\end{equation}
+
+and
+
+\begin{equation}
+\frac{\partial L}{\partial \dot{\theta}} = m l^{2} \dot{\theta}
+\end{equation}
+
+and
+
+\begin{equation}
+\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta}}  \right) = 
+m l^{2} \ddot{\theta}
+\end{equation}
+
+and remember the Euler-Lagrange equation:
+
+\begin{equation}
+Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \left( \frac{\partial L}{\partial q_{j}} \right)
+\end{equation}
+
+so plugging in the values from the calculus/algebra above,
+
+\begin{equation}
+Q = m l^{2} \ddot{\theta} + m g l \sin \theta
+\end{equation}
+
+So this is our *equation of motion*, it gives us a relationship
+between generalized force $Q$ (which is a *torque*), and the *states
+of the system*, $(\theta,\dot{\theta},\ddot{\theta})$ (note actually
+$\dot{\theta}$ doesn't appear in our equations of motion in this case).
+
+** Forward vs Inverse Dynamics
+
+Our equation of motion:
+
+\begin{equation}
+Q = m l^{2} \ddot{\theta} + m g l \sin \theta
+\end{equation}
+
+where $Q$ is joint torque (Nm), $m$ is link mass (kg), $l$ is link
+length (m), $g$ is gravitational constant (m/s/s) and $\theta$ is
+joint angle (radians), gives *joint torque as a function of
+state*.
+
+This is actually the /inverse dynamics/ equation. To say it
+differently, this is the equation we can use to answer the question,
+"what torque do I need at the joint (for example from muscles) in
+order to generate a given dynamic state?"
+
+For forward simulation of a dynamical system, we need the /forward
+dynamics/ equation of motion. In other words, we need an equation that
+gives the derivatives of the system state(s) as a function of the
+system states themselves (and any other quantities, e.g. joint
+torque).
+
+We can easily solve our equation of motion for $\ddot{\theta}$:
+
+\begin{equation}
+\ddot{\theta} = \frac{Q - mgl\sin\theta}{ml^{2}}
+\end{equation}
+
+Note that if the torque $Q$ is zero, in other words if there is no *input* torque to the system, then:
+
+\begin{equation}
+\ddot{\theta} = - \frac{g\sin\theta}{l}
+\end{equation}
+
+This characterizes the passive dynamics of the system (the dynamical
+behaviour of the system in the absence of any external driving
+torque).
+
+** Simulating the dynamics of the one-joint arm
+
+Let's write a function, as we did earlier in the course for other systems, for the forward dynamics of our one-joint arm:
+
+#+BEGIN_SRC python
+from scipy.integrate import odeint
+
+def onejointarm(state,t):
+theta = state[0]      # joint angle (rad)
+theta_dot = state[1]  # joint velocity (rad/s)
+l = 0.50              # link length (m)
+g = 9.81              # gravitational constant (m/s/s)
+theta_ddot = -g*sin(theta) / l
+return [theta_dot, theta_ddot]
+
+t = linspace(0.0,10.0,1001)   # 10 seconds sampled at 1000 Hz
+state0 = [90.0*pi/180.0, 0.0] # 90 deg initial angle, 0 deg/sec initial velocity
+state = odeint(onejointarm, state0, t)
+
+figure()
+plot(t,state*180/pi)
+legend(('theta','thetadot'))
+xlabel('TIME (sec)')
+ylabel('THETA (deg) & THETA_DOT (deg/sec)')
+#+END_SRC
+
+#+ATTR_HTML: width="600px" align="center"
+#+CAPTION: Dynamics of passive one-joint arm
+[[file:figs/onejointarm_passive.png]]
+
+Here's a little function that will animate the arm:
+
+#+BEGIN_SRC python
+def animate_arm(state,t):
+   l = 0.5
+   figure(figsize=(12,6))
+   plot(0,0,'r.')
+   p, = plot((0,l*sin(state[0,0])),(0,-l*cos(state[0,0])),'b-')
+   tt = title("%4.2f sec" % 0.00)
+   xlim([-l-.05,l+.05])
+   ylim([-l,.10])
+   step = 3
+   for i in xrange(1,shape(state)[0]-10,step):
+      p.set_xdata((0,l*sin(state[i,0])))
+      p.set_ydata((0,-l*cos(state[i,0])))
+      tt.set_text("%4.2f sec" % (i*0.01))
+      draw()
+
+animate_arm(state,t)
+#+END_SRC
+
+#+ATTR_HTML: width="600px" align="center"
+#+CAPTION: Animation of passive one-joint arm
+[[file:figs/onejointanimation.png]]
+
+* Equations of motion for a two-joint arm
+
+x
 
 
 [ next ]
