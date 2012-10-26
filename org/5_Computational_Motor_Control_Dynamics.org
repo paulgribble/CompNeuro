@@ -317,7 +317,225 @@ animate_arm(state,t)
 
 * Equations of motion for a two-joint arm
 
-x
+To derive the equations of motion for a two-jointarm arm we will
+follow the same basic steps as above for the one-joint arm.
+
+#+ATTR_HTML: width="500px" align="center"
+#+CAPTION: Schematic of a two-joint arm in a vertical plane
+[[file:figs/twojointarm_dynamics.png]]
+
+Now we have two links of length $l_{1}$ and $l_{2}$ metres, each
+represented as a uniform rod of mass $m_{1}$ and $m_{2}$ kg, with the
+centres of mass located $r_{1}$ and $r_{2}$ metres from the points of
+rotation. Moments of inertia (not shown on figure) are $i_{1}$ and
+$i_{2}$. The shoulder joint is located at the origin, $(0,0)$ metres,
+the elbow joint $E$ at $(e_{x},e_{y})$ and the hand $H$ at
+$(h_{x},h_{y})$. Gravity $g$ is pointing "down" $(-y)$ and joint
+angles $(\theta_{1},\theta_{2})$ are as indicated.
+
+As before we will be using the Euler-Lagrange equation to derive the equations of motion:
+
+\begin{equation}
+Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \left( \frac{\partial L}{\partial q_{j}} \right)
+\end{equation}
+
+where $j={1,2}$ (see below) and where
+
+\begin{equation}
+L = T - U
+\end{equation}
+
+Here we will have two generalized coordinates $\theta_{1}$ and
+$\theta_{2}$, and so our generalized forces $Q_{1}$ and $Q_{2}$ will
+correspond to shoulder torque and elbow torque, respectively.
+
+*Note* If you want to skip over the Lagrangian formulation you are
+welcome to, just skip right [[http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-3-4][here]] to the equations of motion.
+
+
+** Kinetic Energy
+
+Again we must write expressions for linear and rotational kinetic energy.
+
+*** Linear kinetic energy
+
+In general,
+
+\begin{equation}
+Tlin_{j} = \frac{1}{2} m_{j} v_{j}^{2}
+\end{equation}
+
+for $j={1,2}$. Expanding $v_{j}$:
+
+\begin{eqnarray}
+Tlin_{1} &= &\frac{1}{2} m_{1} \left( \dot{x_{1}}^{2} + \dot{y_{1}}^{2} \right)\\
+Tlin_{2} &= &\frac{1}{2} m_{2} \left( \dot{x_{2}}^{2} + \dot{y_{2}}^{2} \right)\\
+\end{eqnarray}
+
+*** Rotational kinetic energy
+
+For rotation, kinetic energy is:
+
+\begin{equation}
+Trot_{j} = \frac{1}{2} i_{j} \dot{\theta_{j}}^{2}
+\end{equation}
+
+so
+
+\begin{eqnarray}
+Trot_{1} &= &\frac{1}{2} i_{1} \dot{\theta_{1}}^{2}\\
+Trot_{2} &= &\frac{1}{2} i_{2} \dot{\theta_{2}}^{2}\\
+\end{eqnarray}
+
+We can transform the coordinates from external $(x,y)$ cartesian
+coordinates into our chosen (intrinsic, joint-based) generalized
+coordinate frame $(\theta_{1},\theta_{2})$ based on the following
+relations from geometry (our forward kinematic equations):
+
+\begin{eqnarray}
+x_{1} &= &r_{1} \sin \theta_{1}\\
+y_{1} &= &-r_{1} \cos \theta_{1}\\
+x_{2} &= &l_{1} \sin \theta_{1} + r_{2} \sin \left( \theta_{1}+\theta_{2} \right)\\
+y_{2} &= &-l_{1} \cos \theta_{1} - r_{2} \cos \left( \theta_{1}+\theta_{2} \right)
+\end{eqnarray}
+
+Total kinetic energy is then:
+
+\begin{eqnarray}
+T &= &Tlin_{1} + Tlin_{2} + Trot_{1} + Trot_{2}\\
+\end{eqnarray}
+
+** Potential energy
+
+Just as for the onejoint arm we have potential energy of each link.
+
+\begin{eqnarray}
+U_{1} &= &m_{1} g r_{1}(1-\cos\theta_{1})\\
+U_{2} &= &m_{2} g \left( l_{1}(1-\cos\theta_{1}) + r_{2}(1-\cos(\theta_{1}+\theta_{2}))  \right)
+\end{eqnarray}
+
+** Lagrangian
+
+We then define the lagrangian $L$ as
+
+\begin{eqnarray}
+L &= &T - U\\
+L &= &Tlin_{1} + Tlin_{2} + Trot_{1} + Trot_{2} - U_{1} - U{2}
+\end{eqnarray}
+
+To get the equations of motion we then simply evaluate the
+Euler-Lagrange equation, once for each generalized force (torque):
+
+\begin{eqnarray}
+Q_{1} &= &\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta_{1}}} \right) - \left( \frac{\partial L}{\partial \theta_{1}} \right)\\
+Q_{2} &= &\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta_{2}}} \right) - \left( \frac{\partial L}{\partial \theta_{2}} \right)
+\end{eqnarray}
+
+** Equations of Motion
+
+What we end up with (I won't take you step by through all the
+calculus) is two equations of motion, one for shoulder torque $Q_{1}$
+and one for elbow torque $Q_{2}$.
+
+\begin{eqnarray}
+Q_{1} &= &A_{1} \ddot{\theta_{1}} + B_{1} \ddot{\theta_{2}} + C_{1} + G_{1}\\
+Q_{2} &= &A_{2} \ddot{\theta_{1}} + B_{2} \ddot{\theta_{2}} + C_{2} + G_{2}\\
+\end{eqnarray}
+
+where
+
+\begin{eqnarray}
+A_{1} &= &m_{2}l_{1}^{2} + i_{1} + i_{2} + m_{1}r_{1}^{2} + m_{2}r_{2}^{2} + 2 m_{2} r_{2} l_{1}\cos\theta_{2}\\
+A_{2} &= &m_{2} r_{2}^{2} + m_{2} r_{2} l_{1} \cos\theta_{2} + i_{2}
+\end{eqnarray}
+
+and
+
+\begin{eqnarray}
+B_{1} &= &m_{2} r_{2}^{2} + i_{2} + m_{2} r_{2} l_{1} \cos\theta_{2}\\
+B_{2} &= &i_{2} + m_{2} r_{2}^{2}
+\end{eqnarray}
+
+and
+
+\begin{eqnarray}
+C_{1} &= &- m_{2} r_{2} \dot{\theta_{2}}^{2} l_{1}\sin\theta_{2} - 2 m_{2} r_{2} l_{1} \dot{\theta_{1}}\dot{\theta_{2}} \sin\theta_{2}\\
+C_{2} &= &m_{2} r_{2}  l_{1} \dot{\theta_{1}}^{2} \sin\theta_{2}
+\end{eqnarray}
+
+and
+
+\begin{eqnarray}
+G_{1} &= &g \sin\theta_{1} \left(m_{2}l_{1} + m_{1}r_{1} \right) + g m_{2} r_{2} \sin(\theta_{1}+\theta_{2})\\
+G_{2} &= &g m_{2} r_{2} \sin(\theta_{1}+\theta_{2})
+\end{eqnarray}
+
+The $A$ and $B$ terms you can think of as inertial terms (they depend
+on joint accelerations). The $C$ terms are usually called
+/Coriolis-centrifugal/ terms, and the $G$ terms are the terms due to
+gravity.
+
+*** Joint Interaction Torques
+
+Notice something interesting about these two-joint arm equations of
+motion: The torque at the shoulder $Q_{1}$ depends not just on
+shoulder acceleration $\ddot{\theta_{1}}$ but also on elbow joint
+acceleration $\ddot{\theta_{2}}$. Similarly, elbow joint torque
+$Q_{2}$ depends not just on elbow joint acceleration
+$\ddot{\theta_{2}}$ but also on shoulder joint acceleration
+$\ddot{\theta_{1}}$. These are inertial interaction torques.
+
+If you look at the Coriolis/centrifugal terms $C$ you also see a
+similar pattern but for velocities. Shoulder torque $Q_{1}$ depends
+(via $C_{1}$) on /elbow velocity/ $\dot{\theta_{2}}$ and on the product
+of shoulder and elbow velocities
+$\dot{\theta_{1}}\dot{theta_{2}}$. Elbow torque $Q_{2}$ depends (via
+$C_{2}$) on shoulder velocity squared $\dot{\theta_{1}}^{2}$. These are
+Coriolis-centrifugal interaction torques.
+
+So when torque at one joint depends on velocities and/or accelerations
+at another joint, we call these effects *joint interaction torques*.
+
+*** Inverse vs Forward Dynamics Equations of Motion
+
+The equations above are inverse dynamics equations: they give the
+shoulder and elbow joint torques required (for example by muscles) to
+generate a particular arm kinematic trajectory.
+
+To get the forward dynamics equations of motion, we just need to do a little bit of algebra. Let's first write our inverse dynamics equations from above, in matrix form:
+
+\begin{equation}
+Q = I \ddot{\theta} + C + G
+\end{equation}
+
+where
+
+\begin{eqnarray}
+I &= &\left[ \begin{array}{cc} A_{1} &B_{1}\\ A_{2} & B_{2}  \end{array} \right]\\
+\ddot{\theta} &= &\left[ \begin{array}{cc} \ddot{\theta_{1}}\\\ddot{\theta_{2}} \end{array} \right] \\
+C &= &\left[ \begin{array}{cc} C_{1}\\C_{2} \end{array} \right] \\
+G &= &\left[ \begin{array}{cc} G_{1}\\G_{2} \end{array} \right]
+\end{eqnarray}
+
+Now to change our equation into a forward dynamics equation, we simply
+need to solve for $\ddot{\theta}$:
+
+\begin{equation}
+\ddot{\theta} = \left( I^{-1} \right) \left( Q-C-G \right)
+\end{equation}
+
+and for a passive arm with no external (driving) torques (e.g. from muscles) this simplifies to:
+
+\begin{equation}
+\ddot{\theta} = \left( I^{-1} \right) \left( -C-G \right)
+\end{equation}
+
+Here is a Python function that implements the forward dynamics equations of a passive two-joint arm:
+
+#+BEGIN_SRC python
+
+#+END_SRC
+
 
 
 [ next ]
