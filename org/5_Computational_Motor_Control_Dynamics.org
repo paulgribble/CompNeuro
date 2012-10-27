@@ -438,29 +438,24 @@ calculus) is two equations of motion, one for shoulder torque $Q_{1}$
 and one for elbow torque $Q_{2}$.
 
 \begin{eqnarray}
-Q_{1} &= &A_{1} \ddot{\theta_{1}} + B_{1} \ddot{\theta_{2}} + C_{1} + G_{1}\\
-Q_{2} &= &A_{2} \ddot{\theta_{1}} + B_{2} \ddot{\theta_{2}} + C_{2} + G_{2}\\
+Q_{1} &= &M_{11} \ddot{\theta_{1}} + M_{12} \ddot{\theta_{2}} + C_{1} + G_{1}\\
+Q_{2} &= &M_{21} \ddot{\theta_{1}} + M_{22} \ddot{\theta_{2}} + C_{2} + G_{2}\\
 \end{eqnarray}
 
 where
 
 \begin{eqnarray}
-A_{1} &= &m_{2}l_{1}^{2} + i_{1} + i_{2} + m_{1}r_{1}^{2} + m_{2}r_{2}^{2} + 2 m_{2} r_{2} l_{1}\cos\theta_{2}\\
-A_{2} &= &m_{2} r_{2}^{2} + m_{2} r_{2} l_{1} \cos\theta_{2} + i_{2}
+M_{11} &= &i_{1} + i_{2} + m_{1}r_{1}^{2} + m_{2}\left( l_{1}^{2} + r_{2}^{2} + 2 l_{1} r_{2} \cos\theta_{2} \right)\\
+M_{12} &= &i_{2} + m_{2} \left(r_{2}^{2} + l_{1} r_{2} \cos\theta_{2} \right)\\
+M_{21} &= &i_{2} + m_{2} \left(r_{2}^{2} + l_{1} r_{2} \cos\theta_{2} \right)
+M_{22} &= &i_{2} + m_{2} r_{2}^{2}
 \end{eqnarray}
 
 and
 
 \begin{eqnarray}
-B_{1} &= &m_{2} r_{2}^{2} + i_{2} + m_{2} r_{2} l_{1} \cos\theta_{2}\\
-B_{2} &= &i_{2} + m_{2} r_{2}^{2}
-\end{eqnarray}
-
-and
-
-\begin{eqnarray}
-C_{1} &= &- m_{2} r_{2} \dot{\theta_{2}}^{2} l_{1}\sin\theta_{2} - 2 m_{2} r_{2} l_{1} \dot{\theta_{1}}\dot{\theta_{2}} \sin\theta_{2}\\
-C_{2} &= &m_{2} r_{2}  l_{1} \dot{\theta_{1}}^{2} \sin\theta_{2}
+C_{1} &= &- m_{2} l_{1} \dot{\theta_{2}}^{2} r_{2} \sin\theta_{2} - 2 m_{2}  l_{1} \dot{\theta_{1}}\dot{\theta_{2}} r_{2} \sin\theta_{2}\\
+C_{2} &= &m_{2}  l_{1} \dot{\theta_{1}}^{2} r_{2} \sin\theta_{2}
 \end{eqnarray}
 
 and
