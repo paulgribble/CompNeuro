@@ -384,7 +384,7 @@ so
 
 \begin{eqnarray}
 Trot_{1} &= &\frac{1}{2} i_{1} \dot{\theta_{1}}^{2}\\
-Trot_{2} &= &\frac{1}{2} i_{2} \left(\dot{\theta_{1}}^{2}+ \dot{\theta_{2}}^{2}\right)\\
+Trot_{2} &= &\frac{1}{2} i_{2} \left(\dot{\theta_{1}}+ \dot{\theta_{2}}\right)^{2}\\
 \end{eqnarray}
 
 We can transform the coordinates from external $(x,y)$ cartesian
