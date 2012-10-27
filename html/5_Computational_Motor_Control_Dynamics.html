@@ -61,6 +61,30 @@
   /*]]>*/-->
 </style><link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
 <!--/*--><![CDATA[/*><!--*/
  function CodeHighlightOn(elem, id)
  {
@@ -83,6 +107,56 @@
 /*]]>*///-->
 </script>
 <script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+/**
+ *
+ * @source: http://orgmode.org/mathjax/MathJax.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ * Copyright (C) 2012  MathJax
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ */
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code below.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code below is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code below.
+*/
 <!--/*--><![CDATA[/*><!--*/
     MathJax.Hub.Config({
         // Only one of the two following lines, depending on user settings
@@ -592,26 +666,26 @@ Let's write a function, as we did earlier in the course for other systems, for t
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
-<span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointarm</span>(state,t):
-   theta = state[0]      <span style="color: #af0000;"># joint angle (rad)</span>
-   theta_dot = state[1]  <span style="color: #af0000;"># joint velocity (rad/s)</span>
-   m = 1.65              <span style="color: #af0000;"># kg</span>
-   r = 0.50              <span style="color: #af0000;"># link length (m)</span>
-   g = 9.81              <span style="color: #af0000;"># gravitational constant (m/s/s)</span>
-   i = 0.025             <span style="color: #af0000;"># moment of inertia (kg m m)</span>
+<pre class="src src-python"><span style="color: #00cdcd; font-weight: bold;">from</span> scipy.integrate <span style="color: #00cdcd; font-weight: bold;">import</span> odeint
+<span style="color: #00cdcd; font-weight: bold;">def</span> <span style="color: #0000ee; font-weight: bold;">onejointarm</span>(state,t):
+   theta = state[0]      <span style="color: #cd0000;"># joint angle (rad)</span>
+   theta_dot = state[1]  <span style="color: #cd0000;"># joint velocity (rad/s)</span>
+   m = 1.65              <span style="color: #cd0000;"># kg</span>
+   r = 0.50              <span style="color: #cd0000;"># link length (m)</span>
+   g = 9.81              <span style="color: #cd0000;"># gravitational constant (m/s/s)</span>
+   i = 0.025             <span style="color: #cd0000;"># moment of inertia (kg m m)</span>
    theta_ddot = -(m*g*r*sin(theta)) / (i + (m*r*r))
-   <span style="color: #af00ff;">return</span> [theta_dot, theta_ddot]
+   <span style="color: #00cdcd; font-weight: bold;">return</span> [theta_dot, theta_ddot]
 
-<span style="color: #af5f00;">t</span> = linspace(0.0,10.0,1001)   <span style="color: #af0000;"># 10 seconds sampled at 1000 Hz</span>
-<span style="color: #af5f00;">state0</span> = [90.0*pi/180.0, 0.0] <span style="color: #af0000;"># 90 deg initial angle, 0 deg/sec initial velocity</span>
-<span style="color: #af5f00;">state</span> = odeint(onejointarm, state0, t)
+<span style="color: #cdcd00;">t</span> = linspace(0.0,10.0,1001)   <span style="color: #cd0000;"># 10 seconds sampled at 1000 Hz</span>
+<span style="color: #cdcd00;">state0</span> = [90.0*pi/180.0, 0.0] <span style="color: #cd0000;"># 90 deg initial angle, 0 deg/sec initial velocity</span>
+<span style="color: #cdcd00;">state</span> = odeint(onejointarm, state0, t)
 
 figure()
 plot(t,state*180/pi)
-legend((<span style="color: #87005f;">'theta'</span>,<span style="color: #87005f;">'thetadot'</span>))
-xlabel(<span style="color: #87005f;">'TIME (sec)'</span>)
-ylabel(<span style="color: #87005f;">'THETA (deg) &amp; THETA_DOT (deg/sec)'</span>)
+legend((<span style="color: #00cd00;">'theta'</span>,<span style="color: #00cd00;">'thetadot'</span>))
+xlabel(<span style="color: #00cd00;">'TIME (sec)'</span>)
+ylabel(<span style="color: #00cd00;">'THETA (deg) &amp; THETA_DOT (deg/sec)'</span>)
 </pre>
 
 
@@ -627,19 +701,19 @@ Here's a little function that will animate the arm:
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">animate_arm</span>(state,t):
+<pre class="src src-python"><span style="color: #00cdcd; font-weight: bold;">def</span> <span style="color: #0000ee; font-weight: bold;">animate_arm</span>(state,t):
    l = 0.5
    figure(figsize=(12,6))
-   plot(0,0,<span style="color: #87005f;">'r.'</span>)
-   p, = plot((0,l*sin(state[0,0])),(0,-l*cos(state[0,0])),<span style="color: #87005f;">'b-'</span>)
-   tt = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
+   plot(0,0,<span style="color: #00cd00;">'r.'</span>)
+   p, = plot((0,l*sin(state[0,0])),(0,-l*cos(state[0,0])),<span style="color: #00cd00;">'b-'</span>)
+   tt = title(<span style="color: #00cd00;">"%4.2f sec"</span> % 0.00)
    xlim([-l-.05,l+.05])
    ylim([-l,.10])
    step = 3
-   <span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #875f87;">xrange</span>(1,shape(state)[0]-10,step):
+   <span style="color: #00cdcd; font-weight: bold;">for</span> i <span style="color: #00cdcd; font-weight: bold;">in</span> <span style="color: #0000ee; font-weight: bold;">xrange</span>(1,shape(state)[0]-10,step):
       p.set_xdata((0,l*sin(state[i,0])))
       p.set_ydata((0,-l*cos(state[i,0])))
-      tt.set_text(<span style="color: #87005f;">"%4.2f sec"</span> % (i*0.01))
+      tt.set_text(<span style="color: #00cd00;">"%4.2f sec"</span> % (i*0.01))
       draw()
 
 animate_arm(state,t)
@@ -773,7 +847,7 @@ so
 
 \begin{eqnarray}
 Trot_{1} &= &\frac{1}{2} i_{1} \dot{\theta_{1}}^{2}\\
-Trot_{2} &= &\frac{1}{2} i_{2} \dot{\theta_{2}}^{2}\\
+Trot_{2} &= &\frac{1}{2} i_{2} \left(\dot{\theta_{1}}^{2}+ \dot{\theta_{2}}^{2}\right)\\
 \end{eqnarray}
 
 <p>

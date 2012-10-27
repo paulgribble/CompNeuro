@@ -61,6 +61,30 @@
   /*]]>*/-->
 </style><link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
 <!--/*--><![CDATA[/*><!--*/
  function CodeHighlightOn(elem, id)
  {
@@ -83,6 +107,56 @@
 /*]]>*///-->
 </script>
 <script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
+/**
+ *
+ * @source: http://orgmode.org/mathjax/MathJax.js
+ *
+ * @licstart  The following is the entire license notice for the
+ *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ * Copyright (C) 2012  MathJax
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * @licend  The above is the entire license notice
+ * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
+ *
+ */
+
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code below.
+
+Copyright (C) 2012  Free Software Foundation, Inc.
+
+The JavaScript code below is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code below.
+*/
 <!--/*--><![CDATA[/*><!--*/
     MathJax.Hub.Config({
         // Only one of the two following lines, depending on user settings
@@ -544,55 +618,55 @@ labels.
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># ipython --pylab</span>
+<pre class="src src-python"><span style="color: #cd0000;"># ipython --pylab</span>
 
-<span style="color: #af0000;"># import some needed functions</span>
-<span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
+<span style="color: #cd0000;"># import some needed functions</span>
+<span style="color: #00cdcd; font-weight: bold;">from</span> scipy.integrate <span style="color: #00cdcd; font-weight: bold;">import</span> odeint
 
-<span style="color: #af0000;"># set up a dictionary of parameters</span>
+<span style="color: #cd0000;"># set up a dictionary of parameters</span>
 
-<span style="color: #af5f00;">E_params</span> = {
-        <span style="color: #87005f;">'E_leak'</span> : -7.0e-2,
-        <span style="color: #87005f;">'G_leak'</span> : 3.0e-09,
-        <span style="color: #87005f;">'C_m'</span>    : 3.0e-11,
-        <span style="color: #87005f;">'I_ext'</span>  : 0*1.0e-10
+<span style="color: #cdcd00;">E_params</span> = {
+        <span style="color: #00cd00;">'E_leak'</span> : -7.0e-2,
+        <span style="color: #00cd00;">'G_leak'</span> : 3.0e-09,
+        <span style="color: #00cd00;">'C_m'</span>    : 3.0e-11,
+        <span style="color: #00cd00;">'I_ext'</span>  : 0*1.0e-10
 }
 
-<span style="color: #af5f00;">Na_params</span> = {
-        <span style="color: #87005f;">'Na_E'</span>          : 5.0e-2,
-        <span style="color: #87005f;">'Na_G'</span>          : 1.0e-6,
-        <span style="color: #87005f;">'k_Na_act'</span>      : 3.0e+0,
-        <span style="color: #87005f;">'A_alpha_m_act'</span> : 2.0e+5,
-        <span style="color: #87005f;">'B_alpha_m_act'</span> : -4.0e-2,
-        <span style="color: #87005f;">'C_alpha_m_act'</span> : 1.0e-3,
-        <span style="color: #87005f;">'A_beta_m_act'</span>  : 6.0e+4,
-        <span style="color: #87005f;">'B_beta_m_act'</span>  : -4.9e-2,
-        <span style="color: #87005f;">'C_beta_m_act'</span>  : 2.0e-2,
-        <span style="color: #87005f;">'l_Na_inact'</span>    : 1.0e+0,
-        <span style="color: #87005f;">'A_alpha_m_inact'</span> : 8.0e+4,
-        <span style="color: #87005f;">'B_alpha_m_inact'</span> : -4.0e-2,
-        <span style="color: #87005f;">'C_alpha_m_inact'</span> : 1.0e-3,
-        <span style="color: #87005f;">'A_beta_m_inact'</span>  : 4.0e+2,
-        <span style="color: #87005f;">'B_beta_m_inact'</span>  : -3.6e-2,
-        <span style="color: #87005f;">'C_beta_m_inact'</span>  : 2.0e-3
+<span style="color: #cdcd00;">Na_params</span> = {
+        <span style="color: #00cd00;">'Na_E'</span>          : 5.0e-2,
+        <span style="color: #00cd00;">'Na_G'</span>          : 1.0e-6,
+        <span style="color: #00cd00;">'k_Na_act'</span>      : 3.0e+0,
+        <span style="color: #00cd00;">'A_alpha_m_act'</span> : 2.0e+5,
+        <span style="color: #00cd00;">'B_alpha_m_act'</span> : -4.0e-2,
+        <span style="color: #00cd00;">'C_alpha_m_act'</span> : 1.0e-3,
+        <span style="color: #00cd00;">'A_beta_m_act'</span>  : 6.0e+4,
+        <span style="color: #00cd00;">'B_beta_m_act'</span>  : -4.9e-2,
+        <span style="color: #00cd00;">'C_beta_m_act'</span>  : 2.0e-2,
+        <span style="color: #00cd00;">'l_Na_inact'</span>    : 1.0e+0,
+        <span style="color: #00cd00;">'A_alpha_m_inact'</span> : 8.0e+4,
+        <span style="color: #00cd00;">'B_alpha_m_inact'</span> : -4.0e-2,
+        <span style="color: #00cd00;">'C_alpha_m_inact'</span> : 1.0e-3,
+        <span style="color: #00cd00;">'A_beta_m_inact'</span>  : 4.0e+2,
+        <span style="color: #00cd00;">'B_beta_m_inact'</span>  : -3.6e-2,
+        <span style="color: #00cd00;">'C_beta_m_inact'</span>  : 2.0e-3
 }
 
-<span style="color: #af5f00;">K_params</span> = {
-        <span style="color: #87005f;">'k_E'</span>           : -9.0e-2,
-        <span style="color: #87005f;">'k_G'</span>           : 2.0e-7,
-        <span style="color: #87005f;">'k_K'</span>           : 4.0e+0,
-        <span style="color: #87005f;">'A_alpha_m_act'</span> : 2.0e+4,
-        <span style="color: #87005f;">'B_alpha_m_act'</span> : -3.1e-2,
-        <span style="color: #87005f;">'C_alpha_m_act'</span> : 8.0e-4,
-        <span style="color: #87005f;">'A_beta_m_act'</span>  : 5.0e+3,
-        <span style="color: #87005f;">'B_beta_m_act'</span>  : -2.8e-2,
-        <span style="color: #87005f;">'C_beta_m_act'</span>  : 4.0e-4
+<span style="color: #cdcd00;">K_params</span> = {
+        <span style="color: #00cd00;">'k_E'</span>           : -9.0e-2,
+        <span style="color: #00cd00;">'k_G'</span>           : 2.0e-7,
+        <span style="color: #00cd00;">'k_K'</span>           : 4.0e+0,
+        <span style="color: #00cd00;">'A_alpha_m_act'</span> : 2.0e+4,
+        <span style="color: #00cd00;">'B_alpha_m_act'</span> : -3.1e-2,
+        <span style="color: #00cd00;">'C_alpha_m_act'</span> : 8.0e-4,
+        <span style="color: #00cd00;">'A_beta_m_act'</span>  : 5.0e+3,
+        <span style="color: #00cd00;">'B_beta_m_act'</span>  : -2.8e-2,
+        <span style="color: #00cd00;">'C_beta_m_act'</span>  : 4.0e-4
 }
 
-<span style="color: #af5f00;">params</span> = {
-        <span style="color: #87005f;">'E_params'</span>  : E_params,
-        <span style="color: #87005f;">'Na_params'</span> : Na_params,
-        <span style="color: #87005f;">'K_params'</span>  : K_params
+<span style="color: #cdcd00;">params</span> = {
+        <span style="color: #00cd00;">'E_params'</span>  : E_params,
+        <span style="color: #00cd00;">'Na_params'</span> : Na_params,
+        <span style="color: #00cd00;">'K_params'</span>  : K_params
 }
 </pre>
 
@@ -603,7 +677,7 @@ We could have stored the four values in <code>E_params</code> in an array like t
 
 
 
-<pre class="src src-python"><span style="color: #af5f00;">E_params</span> = array([-7.0e-2, 3.0e-09, 6.0e-11, 0*1.0e-10])
+<pre class="src src-python"><span style="color: #cdcd00;">E_params</span> = array([-7.0e-2, 3.0e-09, 6.0e-11, 0*1.0e-10])
 </pre>
 
 
@@ -613,8 +687,8 @@ but then we would have to access particular values by indexing into that array w
 
 
 
-<pre class="src src-python"><span style="color: #af5f00;">E_leak</span> = E_params[0]
-<span style="color: #af5f00;">G_leak</span> = E_params[1]
+<pre class="src src-python"><span style="color: #cdcd00;">E_leak</span> = E_params[0]
+<span style="color: #cdcd00;">G_leak</span> = E_params[1]
 </pre>
 
 
@@ -624,8 +698,8 @@ Instead, if we use a dictionary, we can index into the structure using alphanume
 
 
 
-<pre class="src src-python">E_params[<span style="color: #87005f;">'E_leak'</span>]
-E_params[<span style="color: #87005f;">'G_leak'</span>]
+<pre class="src src-python">E_params[<span style="color: #00cd00;">'E_leak'</span>]
+E_params[<span style="color: #00cd00;">'G_leak'</span>]
 </pre>
 
 
@@ -649,58 +723,58 @@ by step.
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># define our ODE function</span>
+<pre class="src src-python"><span style="color: #cd0000;"># define our ODE function</span>
 
-<span style="color: #af00ff;">def</span> <span style="color: #0000ff;">neuron</span>(state, t, params):
-        <span style="color: #87005f;">"""</span>
-<span style="color: #87005f;">         Purpose: simulate Hodgkin and Huxley model for the action potential using</span>
-<span style="color: #87005f;">         the equations from Ekeberg et al, Biol Cyb, 1991.</span>
-<span style="color: #87005f;">         Input: state ([E m h n] (ie [membrane potential; activation of</span>
-<span style="color: #87005f;">                  Na++ channel; inactivation of Na++ channel; activation of K+</span>
-<span style="color: #87005f;">                  channel]),</span>
-<span style="color: #87005f;">                t (time),</span>
-<span style="color: #87005f;">                and the params (parameters of neuron; see Ekeberg et al).</span>
-<span style="color: #87005f;">         Output: statep (state derivatives).</span>
-<span style="color: #87005f;">        """</span>
+<span style="color: #00cdcd; font-weight: bold;">def</span> <span style="color: #0000ee; font-weight: bold;">neuron</span>(state, t, params):
+        <span style="color: #00cd00;">"""</span>
+<span style="color: #00cd00;">         Purpose: simulate Hodgkin and Huxley model for the action potential using</span>
+<span style="color: #00cd00;">         the equations from Ekeberg et al, Biol Cyb, 1991.</span>
+<span style="color: #00cd00;">         Input: state ([E m h n] (ie [membrane potential; activation of</span>
+<span style="color: #00cd00;">                  Na++ channel; inactivation of Na++ channel; activation of K+</span>
+<span style="color: #00cd00;">                  channel]),</span>
+<span style="color: #00cd00;">                t (time),</span>
+<span style="color: #00cd00;">                and the params (parameters of neuron; see Ekeberg et al).</span>
+<span style="color: #00cd00;">         Output: statep (state derivatives).</span>
+<span style="color: #00cd00;">        """</span>
 
         E = state[0]
         m = state[1]
         h = state[2]
         n = state[3]
 
-        Epar = params[<span style="color: #87005f;">'E_params'</span>]
-        Na   = params[<span style="color: #87005f;">'Na_params'</span>]
-        K    = params[<span style="color: #87005f;">'K_params'</span>]
+        Epar = params[<span style="color: #00cd00;">'E_params'</span>]
+        Na   = params[<span style="color: #00cd00;">'Na_params'</span>]
+        K    = params[<span style="color: #00cd00;">'K_params'</span>]
 
-        <span style="color: #af0000;"># external current (from "voltage clamp", other compartments, other neurons, etc)</span>
-        I_ext = Epar[<span style="color: #87005f;">'I_ext'</span>]
+        <span style="color: #cd0000;"># external current (from "voltage clamp", other compartments, other neurons, etc)</span>
+        I_ext = Epar[<span style="color: #00cd00;">'I_ext'</span>]
 
-        <span style="color: #af0000;"># calculate Na rate functions and I_Na</span>
-        alpha_act = Na[<span style="color: #87005f;">'A_alpha_m_act'</span>] * (E-Na[<span style="color: #87005f;">'B_alpha_m_act'</span>]) / (1.0 - exp((Na[<span style="color: #87005f;">'B_alpha_m_act'</span>]-E) / Na[<span style="color: #87005f;">'C_alpha_m_act'</span>]))
-        beta_act = Na[<span style="color: #87005f;">'A_beta_m_act'</span>] * (Na[<span style="color: #87005f;">'B_beta_m_act'</span>]-E) / (1.0 - exp((E-Na[<span style="color: #87005f;">'B_beta_m_act'</span>]) / Na[<span style="color: #87005f;">'C_beta_m_act'</span>]) )
+        <span style="color: #cd0000;"># calculate Na rate functions and I_Na</span>
+        alpha_act = Na[<span style="color: #00cd00;">'A_alpha_m_act'</span>] * (E-Na[<span style="color: #00cd00;">'B_alpha_m_act'</span>]) / (1.0 - exp((Na[<span style="color: #00cd00;">'B_alpha_m_act'</span>]-E) / Na[<span style="color: #00cd00;">'C_alpha_m_act'</span>]))
+        beta_act = Na[<span style="color: #00cd00;">'A_beta_m_act'</span>] * (Na[<span style="color: #00cd00;">'B_beta_m_act'</span>]-E) / (1.0 - exp((E-Na[<span style="color: #00cd00;">'B_beta_m_act'</span>]) / Na[<span style="color: #00cd00;">'C_beta_m_act'</span>]) )
         dmdt = ( alpha_act * (1.0 - m) ) - ( beta_act * m )
 
-        alpha_inact = Na[<span style="color: #87005f;">'A_alpha_m_inact'</span>] * (Na[<span style="color: #87005f;">'B_alpha_m_inact'</span>]-E) / (1.0 - exp((E-Na[<span style="color: #87005f;">'B_alpha_m_inact'</span>]) / Na[<span style="color: #87005f;">'C_alpha_m_inact'</span>]))
-        beta_inact  = Na[<span style="color: #87005f;">'A_beta_m_inact'</span>] / (1.0 + (exp((Na[<span style="color: #87005f;">'B_beta_m_inact'</span>]-E) / Na[<span style="color: #87005f;">'C_beta_m_inact'</span>])))
+        alpha_inact = Na[<span style="color: #00cd00;">'A_alpha_m_inact'</span>] * (Na[<span style="color: #00cd00;">'B_alpha_m_inact'</span>]-E) / (1.0 - exp((E-Na[<span style="color: #00cd00;">'B_alpha_m_inact'</span>]) / Na[<span style="color: #00cd00;">'C_alpha_m_inact'</span>]))
+        beta_inact  = Na[<span style="color: #00cd00;">'A_beta_m_inact'</span>] / (1.0 + (exp((Na[<span style="color: #00cd00;">'B_beta_m_inact'</span>]-E) / Na[<span style="color: #00cd00;">'C_beta_m_inact'</span>])))
         dhdt = ( alpha_inact*(1.0 - h) ) - ( beta_inact*h )
 
-        <span style="color: #af0000;"># Na-current:</span>
-        I_Na =(Na[<span style="color: #87005f;">'Na_E'</span>]-E) * Na[<span style="color: #87005f;">'Na_G'</span>] * (m**Na[<span style="color: #87005f;">'k_Na_act'</span>]) * h
+        <span style="color: #cd0000;"># Na-current:</span>
+        I_Na =(Na[<span style="color: #00cd00;">'Na_E'</span>]-E) * Na[<span style="color: #00cd00;">'Na_G'</span>] * (m**Na[<span style="color: #00cd00;">'k_Na_act'</span>]) * h
 
-        <span style="color: #af0000;"># calculate K rate functions and I_K</span>
-        alpha_kal = K[<span style="color: #87005f;">'A_alpha_m_act'</span>] * (E-K[<span style="color: #87005f;">'B_alpha_m_act'</span>]) / (1.0 - exp((K[<span style="color: #87005f;">'B_alpha_m_act'</span>]-E) / K[<span style="color: #87005f;">'C_alpha_m_act'</span>]))
-        beta_kal = K[<span style="color: #87005f;">'A_beta_m_act'</span>] * (K[<span style="color: #87005f;">'B_beta_m_act'</span>]-E) / (1.0 - exp((E-K[<span style="color: #87005f;">'B_beta_m_act'</span>]) / K[<span style="color: #87005f;">'C_beta_m_act'</span>]))
+        <span style="color: #cd0000;"># calculate K rate functions and I_K</span>
+        alpha_kal = K[<span style="color: #00cd00;">'A_alpha_m_act'</span>] * (E-K[<span style="color: #00cd00;">'B_alpha_m_act'</span>]) / (1.0 - exp((K[<span style="color: #00cd00;">'B_alpha_m_act'</span>]-E) / K[<span style="color: #00cd00;">'C_alpha_m_act'</span>]))
+        beta_kal = K[<span style="color: #00cd00;">'A_beta_m_act'</span>] * (K[<span style="color: #00cd00;">'B_beta_m_act'</span>]-E) / (1.0 - exp((E-K[<span style="color: #00cd00;">'B_beta_m_act'</span>]) / K[<span style="color: #00cd00;">'C_beta_m_act'</span>]))
         dndt = ( alpha_kal*(1.0 - n) ) - ( beta_kal*n )
-        I_K = (K[<span style="color: #87005f;">'k_E'</span>]-E) * K[<span style="color: #87005f;">'k_G'</span>] * n**K[<span style="color: #87005f;">'k_K'</span>]
+        I_K = (K[<span style="color: #00cd00;">'k_E'</span>]-E) * K[<span style="color: #00cd00;">'k_G'</span>] * n**K[<span style="color: #00cd00;">'k_K'</span>]
 
-        <span style="color: #af0000;"># leak current</span>
-        I_leak = (Epar[<span style="color: #87005f;">'E_leak'</span>]-E) * Epar[<span style="color: #87005f;">'G_leak'</span>]
+        <span style="color: #cd0000;"># leak current</span>
+        I_leak = (Epar[<span style="color: #00cd00;">'E_leak'</span>]-E) * Epar[<span style="color: #00cd00;">'G_leak'</span>]
 
-        <span style="color: #af0000;"># calculate derivative of E</span>
-        dEdt = (I_leak + I_K + I_Na + I_ext) / Epar[<span style="color: #87005f;">'C_m'</span>]
+        <span style="color: #cd0000;"># calculate derivative of E</span>
+        dEdt = (I_leak + I_K + I_Na + I_ext) / Epar[<span style="color: #00cd00;">'C_m'</span>]
         statep = [dEdt, dmdt, dhdt, dndt]
 
-        <span style="color: #af00ff;">return</span> statep
+        <span style="color: #00cdcd; font-weight: bold;">return</span> statep
 </pre>
 
 
@@ -713,17 +787,17 @@ external current by changing the value of the
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># simulate</span>
+<pre class="src src-python"><span style="color: #cd0000;"># simulate</span>
 
-<span style="color: #af0000;"># set initial states and time vector</span>
-<span style="color: #af5f00;">state0</span> = [-70e-03, 0, 1, 0]
-<span style="color: #af5f00;">t</span> = arange(0, 0.2, 0.001)
+<span style="color: #cd0000;"># set initial states and time vector</span>
+<span style="color: #cdcd00;">state0</span> = [-70e-03, 0, 1, 0]
+<span style="color: #cdcd00;">t</span> = arange(0, 0.2, 0.001)
 
-<span style="color: #af0000;"># let's inject some external current</span>
-params[<span style="color: #87005f;">'E_params'</span>][<span style="color: #87005f;">'I_ext'</span>] = 1.0e-10
+<span style="color: #cd0000;"># let's inject some external current</span>
+params[<span style="color: #00cd00;">'E_params'</span>][<span style="color: #00cd00;">'I_ext'</span>] = 1.0e-10
 
-<span style="color: #af0000;"># run simulation</span>
-<span style="color: #af5f00;">state</span> = odeint(neuron, state0, t, args=(params,))
+<span style="color: #cd0000;"># run simulation</span>
+<span style="color: #cdcd00;">state</span> = odeint(neuron, state0, t, args=(params,))
 </pre>
 
 
@@ -733,22 +807,22 @@ Finally, we plot the results:
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># plot the results</span>
+<pre class="src src-python"><span style="color: #cd0000;"># plot the results</span>
 
 figure(figsize=(8,12))
 subplot(4,1,1)
 plot(t, state[:,0])
-title(<span style="color: #87005f;">'membrane potential'</span>)
+title(<span style="color: #00cd00;">'membrane potential'</span>)
 subplot(4,1,2)
 plot(t, state[:,1])
-title(<span style="color: #87005f;">'Na2+ channel activation'</span>)
+title(<span style="color: #00cd00;">'Na2+ channel activation'</span>)
 subplot(4,1,3)
 plot(t, state[:,2])
-title(<span style="color: #87005f;">'Na2+ channel inactivation'</span>)
+title(<span style="color: #00cd00;">'Na2+ channel inactivation'</span>)
 subplot(4,1,4)
 plot(t, state[:,3])
-title(<span style="color: #87005f;">'K+ channel activation'</span>)
-xlabel(<span style="color: #87005f;">'TIME (sec)'</span>)
+title(<span style="color: #00cd00;">'K+ channel activation'</span>)
+xlabel(<span style="color: #00cd00;">'TIME (sec)'</span>)
 </pre>
 
 
