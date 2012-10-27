@@ -34,10 +34,18 @@ U = U1 + U2
 
 # lagrangian L
 L = T - U
+L = nsimplify(L)
 
 # compute generalized forces (toruqes) Qj
-Q1 = diff(diff(L,diff(a1(t))),t) - diff(L,a1(t))
-Q2 = diff(diff(L,diff(a2(t))),t) - diff(L,a2(t))
+dldq1 = simplify(diff(L,a1(t)))
+dldqd1 = simplify(diff(L,diff(a1(t),t)))
+ddtdldqd1 = simplify(diff(dldqd1,t))
+Q1 = ddtdldqd1 - dldq1
+
+dldq2 = simplify(diff(L,a2(t)))
+dldqd2 = simplify(diff(L,diff(a2(t),t)))
+ddtdldqd2 = simplify(diff(dldqd2,t))
+Q2 = ddtdldqd2 - dldq2
 
 # simplify!
 Q1 = simplify(nsimplify(Q1))
