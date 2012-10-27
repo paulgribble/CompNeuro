@@ -61,30 +61,6 @@
   /*]]>*/-->
 </style><link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012  Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
 <!--/*--><![CDATA[/*><!--*/
  function CodeHighlightOn(elem, id)
  {
@@ -107,56 +83,6 @@ for the JavaScript code in this tag.
 /*]]>*///-->
 </script>
 <script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
-/**
- *
- * @source: http://orgmode.org/mathjax/MathJax.js
- *
- * @licstart  The following is the entire license notice for the
- *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- * Copyright (C) 2012  MathJax
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @licend  The above is the entire license notice
- * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- */
-
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code below.
-
-Copyright (C) 2012  Free Software Foundation, Inc.
-
-The JavaScript code below is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code below.
-*/
 <!--/*--><![CDATA[/*><!--*/
     MathJax.Hub.Config({
         // Only one of the two following lines, depending on user settings
@@ -710,7 +636,7 @@ Here's a little function that will animate the arm:
    xlim([-l-.05,l+.05])
    ylim([-l,.10])
    step = 3
-   <span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">xrange</span>(1,shape(state)[0]-10,step):
+   <span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #875f87;">xrange</span>(1,shape(state)[0]-10,step):
       p.set_xdata((0,l*sin(state[i,0])))
       p.set_ydata((0,-l*cos(state[i,0])))
       tt.set_text(<span style="color: #87005f;">"%4.2f sec"</span> % (i*0.01))
@@ -941,8 +867,8 @@ and one for elbow torque \(Q_{2}\).
 
 
 \begin{eqnarray}
-Q_{1} &= &A_{1} \ddot{\theta_{1}} + B_{1} \ddot{\theta_{2}} + C_{1} + G_{1}\\
-Q_{2} &= &A_{2} \ddot{\theta_{1}} + B_{2} \ddot{\theta_{2}} + C_{2} + G_{2}\\
+Q_{1} &= &M_{11} \ddot{\theta_{1}} + M_{12} \ddot{\theta_{2}} + C_{1} + G_{1}\\
+Q_{2} &= &M_{21} \ddot{\theta_{1}} + M_{22} \ddot{\theta_{2}} + C_{2} + G_{2}\\
 \end{eqnarray}
 
 <p>
@@ -951,8 +877,9 @@ where
 
 
 \begin{eqnarray}
-A_{1} &= &m_{2}l_{1}^{2} + i_{1} + i_{2} + m_{1}r_{1}^{2} + m_{2}r_{2}^{2} + 2 m_{2} r_{2} l_{1}\cos\theta_{2}\\
-A_{2} &= &m_{2} r_{2}^{2} + m_{2} r_{2} l_{1} \cos\theta_{2} + i_{2}
+M_{11} &= &i_{1} + i_{2} + m_{1}r_{1}^{2} + m_{2}\left( l_{1}^{2} + r_{2}^{2} + 2 l_{1} r_{2} \cos\theta_{2} \right)\\
+M_{12} &= M_{21} = &i_{2} + m_{2} \left(r_{2}^{2} + l_{1} r_{2} \cos\theta_{2} \right)\\
+M_{22} &= &i_{2} + m_{2} r_{2}^{2}
 \end{eqnarray}
 
 <p>
@@ -961,18 +888,8 @@ and
 
 
 \begin{eqnarray}
-B_{1} &= &m_{2} r_{2}^{2} + i_{2} + m_{2} r_{2} l_{1} \cos\theta_{2}\\
-B_{2} &= &i_{2} + m_{2} r_{2}^{2}
-\end{eqnarray}
-
-<p>
-and
-</p>
-
-
-\begin{eqnarray}
-C_{1} &= &- m_{2} r_{2} \dot{\theta_{2}}^{2} l_{1}\sin\theta_{2} - 2 m_{2} r_{2} l_{1} \dot{\theta_{1}}\dot{\theta_{2}} \sin\theta_{2}\\
-C_{2} &= &m_{2} r_{2}  l_{1} \dot{\theta_{1}}^{2} \sin\theta_{2}
+C_{1} &= &- m_{2} l_{1} \dot{\theta_{2}}^{2} r_{2} \sin\theta_{2} - 2 m_{2}  l_{1} \dot{\theta_{1}}\dot{\theta_{2}} r_{2} \sin\theta_{2}\\
+C_{2} &= &m_{2}  l_{1} \dot{\theta_{1}}^{2} r_{2} \sin\theta_{2}
 \end{eqnarray}
 
 <p>
@@ -986,8 +903,8 @@ G_{2} &= &g m_{2} r_{2} \sin(\theta_{1}+\theta_{2})
 \end{eqnarray}
 
 <p>
-The \(A\) and \(B\) terms you can think of as inertial terms (they depend
-on joint accelerations). The \(C\) terms are usually called
+The \(M\) terms you can think of as inertial terms (they depend on joint
+accelerations). The \(C\) terms are usually called
 <i>Coriolis-centrifugal</i> terms, and the \(G\) terms are the terms due to
 gravity.
 </p>
@@ -1041,7 +958,7 @@ To get the forward dynamics equations of motion, we just need to do a little bit
 
 
 \begin{equation}
-Q = I \ddot{\theta} + C + G
+Q = M \ddot{\theta} + C + G
 \end{equation}
 
 <p>
@@ -1050,7 +967,7 @@ where
 
 
 \begin{eqnarray}
-I &= &\left[ \begin{array}{cc} A_{1} &B_{1}\\ A_{2} & B_{2}  \end{array} \right]\\
+M &= &\left[ \begin{array}{cc} M_{11} &M_{12}\\ M_{21} & M_{22}  \end{array} \right]\\
 \ddot{\theta} &= &\left[ \begin{array}{cc} \ddot{\theta_{1}}\\\ddot{\theta_{2}} \end{array} \right] \\
 C &= &\left[ \begin{array}{cc} C_{1}\\C_{2} \end{array} \right] \\
 G &= &\left[ \begin{array}{cc} G_{1}\\G_{2} \end{array} \right]
@@ -1063,7 +980,7 @@ need to solve for \(\ddot{\theta}\):
 
 
 \begin{equation}
-\ddot{\theta} = \left( I^{-1} \right) \left( Q-C-G \right)
+\ddot{\theta} = \left( M^{-1} \right) \left( Q-C-G \right)
 \end{equation}
 
 <p>
@@ -1072,7 +989,7 @@ and for a passive arm with no external (driving) torques (e.g. from muscles) thi
 
 
 \begin{equation}
-\ddot{\theta} = \left( I^{-1} \right) \left( -C-G \right)
+\ddot{\theta} = \left( M^{-1} \right) \left( -C-G \right)
 \end{equation}
 
 <p>

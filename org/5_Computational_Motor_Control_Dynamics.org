@@ -446,8 +446,7 @@ where
 
 \begin{eqnarray}
 M_{11} &= &i_{1} + i_{2} + m_{1}r_{1}^{2} + m_{2}\left( l_{1}^{2} + r_{2}^{2} + 2 l_{1} r_{2} \cos\theta_{2} \right)\\
-M_{12} &= &i_{2} + m_{2} \left(r_{2}^{2} + l_{1} r_{2} \cos\theta_{2} \right)\\
-M_{21} &= &i_{2} + m_{2} \left(r_{2}^{2} + l_{1} r_{2} \cos\theta_{2} \right)
+M_{12} &= M_{21} = &i_{2} + m_{2} \left(r_{2}^{2} + l_{1} r_{2} \cos\theta_{2} \right)\\
 M_{22} &= &i_{2} + m_{2} r_{2}^{2}
 \end{eqnarray}
 
@@ -465,8 +464,8 @@ G_{1} &= &g \sin\theta_{1} \left(m_{2}l_{1} + m_{1}r_{1} \right) + g m_{2} r_{2}
 G_{2} &= &g m_{2} r_{2} \sin(\theta_{1}+\theta_{2})
 \end{eqnarray}
 
-The $A$ and $B$ terms you can think of as inertial terms (they depend
-on joint accelerations). The $C$ terms are usually called
+The $M$ terms you can think of as inertial terms (they depend on joint
+accelerations). The $C$ terms are usually called
 /Coriolis-centrifugal/ terms, and the $G$ terms are the terms due to
 gravity.
 
@@ -500,13 +499,13 @@ generate a particular arm kinematic trajectory.
 To get the forward dynamics equations of motion, we just need to do a little bit of algebra. Let's first write our inverse dynamics equations from above, in matrix form:
 
 \begin{equation}
-Q = I \ddot{\theta} + C + G
+Q = M \ddot{\theta} + C + G
 \end{equation}
 
 where
 
 \begin{eqnarray}
-I &= &\left[ \begin{array}{cc} A_{1} &B_{1}\\ A_{2} & B_{2}  \end{array} \right]\\
+M &= &\left[ \begin{array}{cc} M_{11} &M_{12}\\ M_{21} & M_{22}  \end{array} \right]\\
 \ddot{\theta} &= &\left[ \begin{array}{cc} \ddot{\theta_{1}}\\\ddot{\theta_{2}} \end{array} \right] \\
 C &= &\left[ \begin{array}{cc} C_{1}\\C_{2} \end{array} \right] \\
 G &= &\left[ \begin{array}{cc} G_{1}\\G_{2} \end{array} \right]
@@ -516,13 +515,13 @@ Now to change our equation into a forward dynamics equation, we simply
 need to solve for $\ddot{\theta}$:
 
 \begin{equation}
-\ddot{\theta} = \left( I^{-1} \right) \left( Q-C-G \right)
+\ddot{\theta} = \left( M^{-1} \right) \left( Q-C-G \right)
 \end{equation}
 
 and for a passive arm with no external (driving) torques (e.g. from muscles) this simplifies to:
 
 \begin{equation}
-\ddot{\theta} = \left( I^{-1} \right) \left( -C-G \right)
+\ddot{\theta} = \left( M^{-1} \right) \left( -C-G \right)
 \end{equation}
 
 Here is a Python function that implements the forward dynamics equations of a passive two-joint arm:
