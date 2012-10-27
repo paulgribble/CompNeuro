@@ -22,7 +22,7 @@ Tlin2 = 0.5 * m2 * ((x2d*x2d) + (y2d*y2d))
 
 # rotational kinetic energy
 Trot1 = 0.5 * i1 * a1d * a1d
-Trot2 = 0.5 * i2 * a2d * a2d
+Trot2 = 0.5 * i2 * (a1d+a2d) * (a1d+a2d)
 
 # total kinetic energy
 T = Tlin1 + Tlin2 + Trot1 + Trot2
