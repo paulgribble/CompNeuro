@@ -1,3 +1,5 @@
+# ipython --pylab
+
 from scipy.integrate import odeint
 
 # forward dynamics equations of our passive two-joint arm

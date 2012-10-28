@@ -524,6 +524,8 @@ and for a passive arm with no external (driving) torques (e.g. from muscles) thi
 \ddot{\theta} = \left( M^{-1} \right) \left( -C-G \right)
 \end{equation}
 
+** Simulating the dynamics of the two-joint arm
+
 Here is a Python function that implements the forward dynamics equations of a passive two-joint arm:
 
 #+BEGIN_SRC python
@@ -558,11 +560,12 @@ def twojointarm(state,t,aparams):
 	return [a1d, a2d, a1dd, a2dd]
 #+END_SRC
 
-Here is a python program that will do a forward simulation of our
+Here is a full python program that will do a forward simulation of our
 passive two-joint arm, starting from specified initial shoulder and
 elbow joint angles and velocities. It will also show a rudimentary
 animation of the resulting motion of the arm.
 
 [[file:code/twojointarm_passive.py][twojointarm\_passive.py]]
+
 
 [ next ]
