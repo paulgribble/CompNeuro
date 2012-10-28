@@ -88,7 +88,7 @@
 -----
 ** Oct 29, Nov 1 : Computational Motor Control: Dynamics
 - course notes: [[file:5_Computational_Motor_Control_Dynamics.html][5: Computational Motor Control: Dynamics]]
-- read *at least one* of the papers listed in the course notes
+- read *at least two* of the papers listed in the course notes
 - [[file:code/twojointarm.py][twojointarm.py]] utility functions and Python code for doing inverse
   and forward dynamics of a two-joint arm with external driving
   torques
