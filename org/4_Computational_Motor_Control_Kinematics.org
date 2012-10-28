@@ -630,6 +630,62 @@ the final target location of a point-to-point movement.
 - Simmons, G., & Demiris, Y. (2006). Object grasping using the minimum
   variance model. Biological cybernetics, 94(5), 393-407.
 
+* How does the brain plan and control movement?
+
+Geogeopoulos and colleagues in the 1980s recorded electrical activity
+of single motor cortical neurons in awake, behaving monkeys during
+two-joint arm movemnets. The general goal was to find out if patterns
+of neural activity could inform the question of how the brain controls
+arm movements, and in particular, how large populations of neurons
+might be coordinated to produce the patterns of arm movements
+empirically observed.
+
+- Georgopoulos, A. P., Kalaska, J. F., Caminiti, R., & Massey,
+  J. T. (1982). On the relations between the direction of
+  two-dimensional arm movements and cell discharge in primate motor
+  cortex. The Journal of Neuroscience, 2(11), 1527-1537.
+
+- Georgopoulos, A. P., Caminiti, R., Kalaska, J. F., & Massey,
+  J. T. (1983). Spatial coding of movement: a hypothesis concerning
+  the coding of movement direction by motor cortical populations. Exp
+  Brain Res Suppl, 7(32), 336.
+
+- Georgopoulos, A. P., Schwartz, A. B., & Kettner,
+  R. E. (1986). Neuronal population coding of movement
+  direction. Science, 233(4771), 1416-1419.
+
+- Schwartz, A. B., Kettner, R. E., & Georgopoulos,
+  A. P. (1988). Primate motor cortex and free arm movements to visual
+  targets in three-dimensional space. I. Relations between single cell
+  discharge and direction of movement. The Journal of Neuroscience,
+  8(8), 2913-2927.
+
+- Georgopoulos, A. P., Kettner, R. E., & Schwartz,
+  A. B. (1988). Primate motor cortex and free arm movements to visual
+  targets in three-dimensional space. II. Coding of the direction of
+  movement by a neuronal population. The Journal of Neuroscience,
+  8(8), 2928-2937.
+
+- Kettner, R. E., Schwartz, A. B., & Georgopoulos,
+  A. P. (1988). Primate motor cortex and free arm movements to visual
+  targets in three-dimensional space. III. Positional gradients and
+  population coding of movement direction from various movement
+  origins. The journal of Neuroscience, 8(8), 2938-2947.
+
+- Moran, D. W., & Schwartz, A. B. (1999). Motor cortical
+  representation of speed and direction during reaching. Journal of
+  Neurophysiology, 82(5), 2676-2692.
+
+** Neural Prosthetics
+
+These results have been directly translated into the very applied
+problem of using brain activity to control neural prosthetics,
+e.g. robotic prosthetic limbs.
+
+- Taylor, D. M., Tillery, S. I. H., & Schwartz, A. B. (2002). Direct
+  cortical control of 3D neuroprosthetic devices. Science, 296(5574),
+  1829-1832.
+
 
 * Why are kinematic transformations important?
 
@@ -674,6 +730,10 @@ experimental data with predictions from computational models.
 - Tweed, Douglas B., Thomas P. Haslwanter, Vera Happe, and Michael
   Fetter. "Non-commutativity in the brain." Nature 399, no. 6733
   (1999): 261-263.
+
+- Messier, J., & Kalaska, J. F. (1999). Comparison of variability of
+  initial kinematics and endpoints of reaching movements. Experimental
+  Brain Research, 125(2), 139-152.
 
 - Loeb, E. P., S. F. Giszter, P. Saltiel and E. Bizzi, and
   F. A. Mussa-Ivaldi. "Output units of motor behavior: an experimental

@@ -80,7 +80,6 @@
 
 -----
 ** Oct 22, 25 : Computational Motor Control: Kinematics
-- Shadmehr & Wise, Chapter 9 (Computing End-Effector Location: Theory)
 - course notes: [[file:4_Computational_Motor_Control_Kinematics.html][4: Computational Motor Control: Kinematics]]
 - read *at least two* of the papers listed in the course notes
 - [[file:assignment4.pdf][assignment4.pdf]]
@@ -88,11 +87,11 @@
 
 -----
 ** Oct 29, Nov 1 : Computational Motor Control: Dynamics
--  [[file:5_Computational_Motor_Control_Dynamics.html][5: Computational Motor Control: Dynamics]]
+- course notes: [[file:5_Computational_Motor_Control_Dynamics.html][5: Computational Motor Control: Dynamics]]
 - read *at least one* of the papers listed in the course notes
 - [[file:code/twojointarm.py][twojointarm.py]] utility functions and Python code for doing inverse
   and forward dynamics of a two-joint arm with external driving
-  torques (e.g. from muscles)
+  torques
 -----
 
 ** Nov 5, 8 : Computational Motor Control: Muscle Models
