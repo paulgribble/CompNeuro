@@ -551,6 +551,10 @@ unimodal, (mostly) symmetric velocity profiles (so-called
 - Morasso, P. (1981). Spatial control of arm movements. Experimental
   Brain Research, 42(2), 223-227.
 
+- Soechting, J. F., & Lacquaniti, F. (1981). Invariant characteristics
+  of a pointing movement in man. The Journal of Neuroscience, 1(7),
+  710-720.
+
 - Abend, W., Bizzi, E., & Morasso, P. (1982). Human arm trajectory
   formation. Brain: a journal of neurology, 105(Pt 2), 331.
 

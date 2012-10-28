@@ -51,10 +51,10 @@ systems, is [[http://www.amazon.ca/Schaums-Outline-Lagrangian-Dynamics-Wells/dp/
 
 *Note*: if you are squeamish about the calculus, or you're just not
 that interested in the nuts and bolts of /how/ to derive equations of
-motion, that's OK ... just skip ahead to [[http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-2-6][here]] and see what the final
+motion, that's OK ... just skip ahead to [[http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-2-2][here]] and see what the final
 equation of motion looks like.
 
-** Euler-Lagrange Equation
+** Optional: Euler-Lagrange Equation
 
 The really cool thing about the Lagrangian approach is that you can derive equations of motion using only:
 
@@ -88,13 +88,13 @@ Let's derive the two parts of $L$ ($T$ and $U$) and then we will see
 how to get the equations of motion by running $L$ through the
 Euler-Lagrange equation to get generalized forces $Q_{j}$.
 
-** Kinetic Energy $T$
+*** Kinetic Energy $T$
 
 So first let's write down the [[http://en.wikipedia.org/wiki/Kinetic_energy][kinetic energy]] $T$. There are two parts:
 the linear kinetic energy of the centre of mass $m$, and the
 rotational kinetic energy of the rod.
 
-*** Linear kinetic energy
+**** Linear kinetic energy
 
 We know that for a point mass (and we are representing our link's
 centre of mass as a point mass $m$ kg located $\frac{l}{2}$ metres
@@ -107,7 +107,7 @@ T_{lin} &= &\frac{1}{2} m (\dot{x}^{2} + \dot{y}^{2})\\
 T_{lin} &= &\frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2}
 \end{eqnarray}
 
-*** Rotational kinetic energy
+**** Rotational kinetic energy
 
 For rotation, kinetic energy is:
 
@@ -139,7 +139,7 @@ so if we substitute and simplify terms (not shown) we get:
 T = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2}
 \end{equation}
 
-** Potential Energy $U$
+*** Potential Energy $U$
 
 Now let's write down the [[http://en.wikipedia.org/wiki/Potential_energy][potential energy]] $U$. We know from basic
 physics that in general, the potential energy for a mass in earth's
@@ -158,7 +158,7 @@ when the pendulum is pointing straight down, i.e. when $\theta = 0$:
 U = m g r \left( 1-\cos\theta \right)
 \end{equation}
 
-** Lagrangian $L$
+*** Lagrangian $L$
 
 So now we have the Lagrangian $L = T-U$ is:
 
@@ -173,8 +173,6 @@ coordinate, which is $\theta$. The generalized forces $Q_{j}$ are just
 one, so we will write $Q$, and since we chose our generalized
 coordinate to be angular, $\theta$, our generalized force $Q$ is
 actually a [[http://en.wikipedia.org/wiki/Torque][torque]] (the rotational equivalent of a force).
-
-** Equation of motion
 
 Now it's a matter of computing the derivative terms in the
 Euler-Lagrange equation to get an expression giving the torque of the
@@ -216,7 +214,10 @@ between generalized force $Q$ (which is a *torque*), and the *states
 of the system*, $(\theta,\dot{\theta},\ddot{\theta})$ (note actually
 $\dot{\theta}$ doesn't appear in our equations of motion in this case).
 
-** Forward vs Inverse Dynamics
+If you want to see the SymPy code for doing all this calculus, it is
+here: [[file:code/onejoint_lagrange.py][onejoint\_lagrange.py]]
+
+** Equation of motion
 
 Our equation of motion:
 
@@ -256,10 +257,7 @@ This characterizes the passive dynamics of the system (the dynamical
 behaviour of the system in the absence of any external driving
 torque).
 
-If you want to see the SymPy code for doing all this calculus, it is
-here: [[file:code/onejoint_lagrange.py][onejoint\_lagrange.py]]
-
-** Simulating the dynamics of the one-joint arm
+* Simulating the dynamics of the one-joint arm
 
 Let's write a function, as we did earlier in the course for other systems, for the forward dynamics of our one-joint arm:
 
@@ -333,6 +331,11 @@ the elbow joint $E$ at $(e_{x},e_{y})$ and the hand $H$ at
 $(h_{x},h_{y})$. Gravity $g$ is pointing "down" $(-y)$ and joint
 angles $(\theta_{1},\theta_{2})$ are as indicated.
 
+*Note* If you want to skip over the Lagrangian formulation you are
+welcome to, just skip right [[http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-4-2][here]] to the equations of motion.
+
+** Optional: The Lagrangian
+
 As before we will be using the Euler-Lagrange equation to derive the equations of motion:
 
 \begin{equation}
@@ -348,12 +351,6 @@ L = T - U
 Here we will have two generalized coordinates $\theta_{1}$ and
 $\theta_{2}$, and so our generalized forces $Q_{1}$ and $Q_{2}$ will
 correspond to shoulder torque and elbow torque, respectively.
-
-*Note* If you want to skip over the Lagrangian formulation you are
-welcome to, just skip right [[http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-3-4][here]] to the equations of motion.
-
-
-** Kinetic Energy
 
 Again we must write expressions for linear and rotational kinetic energy.
 
@@ -405,7 +402,7 @@ Total kinetic energy is then:
 T &= &Tlin_{1} + Tlin_{2} + Trot_{1} + Trot_{2}\\
 \end{eqnarray}
 
-** Potential energy
+*** Potential energy
 
 Just as for the onejoint arm we have potential energy of each link.
 
@@ -414,7 +411,7 @@ U_{1} &= &m_{1} g r_{1}(1-\cos\theta_{1})\\
 U_{2} &= &m_{2} g \left( l_{1}(1-\cos\theta_{1}) + r_{2}(1-\cos(\theta_{1}+\theta_{2}))  \right)
 \end{eqnarray}
 
-** Lagrangian
+*** Lagrangian
 
 We then define the lagrangian $L$ as
 
@@ -483,18 +480,19 @@ If you look at the Coriolis/centrifugal terms $C$ you also see a
 similar pattern but for velocities. Shoulder torque $Q_{1}$ depends
 (via $C_{1}$) on /elbow velocity/ $\dot{\theta_{2}}$ and on the product
 of shoulder and elbow velocities
-$\dot{\theta_{1}}\dot{theta_{2}}$. Elbow torque $Q_{2}$ depends (via
+$\dot{\theta_{1}}\dot{\theta_{2}}$. Elbow torque $Q_{2}$ depends (via
 $C_{2}$) on shoulder velocity squared $\dot{\theta_{1}}^{2}$. These are
 Coriolis-centrifugal interaction torques.
 
 So when torque at one joint depends on velocities and/or accelerations
-at another joint, we call these effects *joint interaction torques*.
+at another joint, we call these effects *joint interaction torques*. These interaction torques may be large, and significantly affect limb movement, especially when velocities and/or accelerations are large.
 
-*** Inverse vs Forward Dynamics Equations of Motion
+* Simulating the dynamics of the two-joint arm
 
-The equations above are inverse dynamics equations: they give the
-shoulder and elbow joint torques required (for example by muscles) to
-generate a particular arm kinematic trajectory.
+The equation of motion above for the two joint arm are inverse
+dynamics equations: they give the shoulder and elbow joint torques
+required (for example by muscles) to generate a particular arm
+kinematic trajectory.
 
 To get the forward dynamics equations of motion, we just need to do a little bit of algebra. Let's first write our inverse dynamics equations from above, in matrix form:
 
@@ -523,8 +521,6 @@ and for a passive arm with no external (driving) torques (e.g. from muscles) thi
 \begin{equation}
 \ddot{\theta} = \left( M^{-1} \right) \left( -C-G \right)
 \end{equation}
-
-** Simulating the dynamics of the two-joint arm
 
 Here is a Python function that implements the forward dynamics equations of a passive two-joint arm:
 
@@ -566,6 +562,45 @@ elbow joint angles and velocities. It will also show a rudimentary
 animation of the resulting motion of the arm.
 
 [[file:code/twojointarm_passive.py][twojointarm\_passive.py]]
+
+* Does the brain know about interaction torques? (yes)
+
+Joint interaction torques can be large and can significantly affect
+limb motion.
+
+- Hollerbach, J. M., & Flash, T. (1982). Dynamic interactions between limb segments during planar arm movement. Biological cybernetics, 44(1), 67-77.
+
+
+There is empirical evidence from studies of human arm movement that
+the CNS neurally represents these effects, and compensates for them in
+a predictive manner, when planning and controlling arm movements:
+
+- Hasan, Z., & Karst, G. M. (1989). Muscle activity for initiation of
+  planar, two-joint arm movements in different
+  directions. Experimental Brain Research, 76(3), 651-655.
+
+- Virji-Babul, N., & Cooke, J. D. (1995). Influence of joint
+  interactional effects on the coordination of planar two-joint arm
+  movements. Experimental brain research, 103(3), 451-459.
+
+- Sainburg, R. L., Ghilardi, M. F., Poizner, H. & Ghez,
+  C. (1995). Control of limb dynamics in normal subjects and patients
+  without proprioception. Journal of Neurophysiology, 73(2), 820-835.
+
+- Gribble, P. L., & Ostry, D. J. (1999). Compensation for interaction
+  torques during single-and multijoint limb movement. Journal of
+  neurophysiology, 82(5), 2310-2326.
+
+- Sainburg, R. L., Ghez, C., & Kalakanis, D. (1999). Intersegmental
+  dynamics are controlled by sequential anticipatory, error
+  correction, and postural mechanisms. Journal of Neurophysiology,
+  81(3), 1045-1056.
+
+- Koshland, G. F., Galloway, J. C., & Nevoret-Bell,
+  C. J. (2000). Control of the wrist in three-joint arm movements to
+  multiple directions in the horizontal plane. Journal of
+  neurophysiology, 83(5), 3188-3195.
+
 
 
 [ next ]

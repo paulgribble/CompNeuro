@@ -63,7 +63,7 @@ def joints_to_hand(A,aparams):
 		H[i,1] = E[i,1] + (l2 * sin(A[i,0]+A[i,1]))
 	return H,E
 
-def animatearm(state,t,aparams):
+def animatearm(state,t,aparams,step=5):
 	"""
 	animate the twojointarm
 	"""
@@ -79,19 +79,20 @@ def animatearm(state,t,aparams):
 	tt = title("%4.2f sec" % 0.00)
 	xlim([-l1-l2, l1+l2])
 	ylim([-l1-l2, l1+l2])
-	skip = 3
-	for i in range(len(t)):
+	dt = t[1]-t[0]
+	step = 5
+	for i in xrange(0,shape(state)[0]-step,step):
 		p1.set_xdata((E[i,0]))
 		p1.set_ydata((E[i,1]))
 		p2.set_xdata((H[i,0]))
 		p2.set_ydata((H[i,1]))
 		p3.set_xdata((0,E[i,0],H[i,0]))
 		p3.set_ydata((0,E[i,1],H[i,1]))
-		tt.set_text("%4.2f sec" % (i*0.001))
+		tt.set_text("%4.2f sec" % (i*dt))
 		draw()
 		
 state0 = [0*pi/180, 90*pi/180, 0, 0] # initial joint angles and vels
-t = arange(10001.)/1000               # 10 seconds at 1000 Hz
+t = arange(2001.)/200                # 10 seconds at 200 Hz
 state = odeint(twojointarm, state0, t, args=(aparams,))
 
 animatearm(state,t,aparams)
