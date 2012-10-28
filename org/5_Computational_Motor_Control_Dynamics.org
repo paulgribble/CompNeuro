@@ -601,6 +601,8 @@ a predictive manner, when planning and controlling arm movements:
   multiple directions in the horizontal plane. Journal of
   neurophysiology, 83(5), 3188-3195.
 
+* How does the brain plan and control movements? Kinematic vs Dynamic models
 
+x
 
 [ next ]
