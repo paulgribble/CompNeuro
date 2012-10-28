@@ -632,7 +632,7 @@ the final target location of a point-to-point movement.
 
 * How does the brain plan and control movement?
 
-Geogeopoulos and colleagues in the 1980s recorded electrical activity
+Georgopoulos and colleagues in the 1980s recorded electrical activity
 of single motor cortical neurons in awake, behaving monkeys during
 two-joint arm movemnets. The general goal was to find out if patterns
 of neural activity could inform the question of how the brain controls
@@ -676,15 +676,63 @@ empirically observed.
   representation of speed and direction during reaching. Journal of
   Neurophysiology, 82(5), 2676-2692.
 
+** An Alternate View
+
+A paper by Mussa-Ivaldi in 1988 showed that in fact the Georgopoulos
+finding that broadly tuned neurons seem to encode hand movement
+kinematics does not imply that the brain encodes
+kinematics... Mussa-Ivaldi showed that because in the motor system so
+many kinematic and dynamic variables are correlated, broadly tuned
+neurons in motor cortex could be shown to "encode" many intrinsic and
+extrinsic kinematic and dynamic variables.
+
+- Mussa-Ivaldi, F. A. (1988). Do neurons in the motor cortex encode
+  movement direction? An alternative hypothesis. Neuroscience Letters,
+  91(1), 106-111.
+
 ** Neural Prosthetics
 
-These results have been directly translated into the very applied
-problem of using brain activity to control neural prosthetics,
-e.g. robotic prosthetic limbs.
+The Georgopoulos results have been directly translated into the very
+applied problem of using brain activity to control neural prosthetics,
+e.g. robotic prosthetic limbs. Form a practical point of view, it may
+not matter how cortical neurons encode movement, as long as we can
+build computational models (even just statistical models) of the
+relationship between cortical activity and limb motion. Here are some
+examples.
+
+- Chapin, J. K., Moxon, K. A., Markowitz, R. S., & Nicolelis,
+  M. A. (1999). Real-time control of a robot arm using simultaneously
+  recorded neurons in the motor cortex. Nature neuroscience, 2,
+  664-670.
 
 - Taylor, D. M., Tillery, S. I. H., & Schwartz, A. B. (2002). Direct
   cortical control of 3D neuroprosthetic devices. Science, 296(5574),
   1829-1832.
+
+- Donoghue, J. P. (2002). Connecting cortex to machines: recent
+  advances in brain interfaces. Nature Neuroscience, 5, 1085-1088.
+
+- Wolpaw, J. R., & McFarland, D. J. (2004). Control of a
+  two-dimensional movement signal by a noninvasive brain-computer
+  interface in humans. Proceedings of the National Academy of Sciences
+  of the United States of America, 101(51), 17849-17854.
+
+- Musallam, S., Corneil, B. D., Greger, B., Scherberger, H., &
+  Andersen, R. A. (2004). Cognitive control signals for neural
+  prosthetics. Science, 305(5681), 258-262.
+
+- Hochberg, L. R., Serruya, M. D., Friehs, G. M., Mukand, J. A.,
+  Saleh, M., Caplan, A. H., ... & Donoghue, J. P. (2006). Neuronal
+  ensemble control of prosthetic devices by a human with
+  tetraplegia. Nature, 442(7099), 164-171.
+
+- Santhanam, G., Ryu, S. I., Byron, M. Y., Afshar, A., & Shenoy,
+  K. V. (2006). A high-performance brain–computer interface. nature,
+  442(7099), 195-198.
+
+- Velliste, M., Perel, S., Spalding, M. C., Whitford, A. S., &
+  Schwartz, A. B. (2008). Cortical control of a prosthetic arm for
+  self-feeding. Nature, 453(7198), 1098-1101.
 
 
 * Why are kinematic transformations important?

@@ -88,7 +88,7 @@ Let's derive the two parts of $L$ ($T$ and $U$) and then we will see
 how to get the equations of motion by running $L$ through the
 Euler-Lagrange equation to get generalized forces $Q_{j}$.
 
-*** Kinetic Energy $T$
+*** Kinetic Energy
 
 So first let's write down the [[http://en.wikipedia.org/wiki/Kinetic_energy][kinetic energy]] $T$. There are two parts:
 the linear kinetic energy of the centre of mass $m$, and the
@@ -139,7 +139,7 @@ so if we substitute and simplify terms (not shown) we get:
 T = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2}
 \end{equation}
 
-*** Potential Energy $U$
+*** Potential Energy
 
 Now let's write down the [[http://en.wikipedia.org/wiki/Potential_energy][potential energy]] $U$. We know from basic
 physics that in general, the potential energy for a mass in earth's
@@ -158,7 +158,7 @@ when the pendulum is pointing straight down, i.e. when $\theta = 0$:
 U = m g r \left( 1-\cos\theta \right)
 \end{equation}
 
-*** Lagrangian $L$
+*** Lagrangian
 
 So now we have the Lagrangian $L = T-U$ is:
 
@@ -587,9 +587,9 @@ a predictive manner, when planning and controlling arm movements:
   C. (1995). Control of limb dynamics in normal subjects and patients
   without proprioception. Journal of Neurophysiology, 73(2), 820-835.
 
-- Gribble, P. L., & Ostry, D. J. (1999). Compensation for interaction
-  torques during single-and multijoint limb movement. Journal of
-  neurophysiology, 82(5), 2310-2326.
+- Gribble, P. L., & Ostry, D. J. (1999). [[http://www.gribblelab.org/publications/1999_JNeurophysiol_gribble.pdf][Compensation for interaction
+  torques during single-and multijoint limb movement]]. Journal of
+  Neurophysiology, 82(5), 2310-2326.
 
 - Sainburg, R. L., Ghez, C., & Kalakanis, D. (1999). Intersegmental
   dynamics are controlled by sequential anticipatory, error
@@ -601,17 +601,64 @@ a predictive manner, when planning and controlling arm movements:
   multiple directions in the horizontal plane. Journal of
   neurophysiology, 83(5), 3188-3195.
 
-* How does the brain plan and control movements? Kinematic vs Dynamic models
+* Kinematic vs Dynamic models of motor control
 
 We saw in the previous topic about kinematic models of movement
 (e.g. minimum-jerk) that computational models of movement at the
 kinematic level are capable of predicting a range of characteristics
 of naturalistic voluntary arm movements.
 
+** Behavioural studies
+
+Here are two examples of behavioural studies looking at the question
+of whether the brain plans arm movements in terms of kinematics or
+dynamics.
+
+- Flanagan, J. R., & Rao, A. K. (1995). Trajectory adaptation to a
+  nonlinear visuomotor transformation: evidence of motion planning in
+  visually perceived space. Journal of neurophysiology, 74(5),
+  2174-2178.
+
+- Wolpert, D. M., Ghahramani, Z., & Jordan, M. I. (1995). Are arm
+  trajectories planned in kinematic or dynamic coordinates? An
+  adaptation study. Experimental brain research, 103(3), 460-470.
+
+*** Computational models of Dynamics planning
+
+Here are examples of computational models that propose dynamic
+variables (e.g. torques) are used to plan arm movements.
+
+- Uno, Y., Kawato, M., & Suzuki, R. (1989). Formation and control of
+  optimal trajectory in human multijoint arm movement. Biological
+  cybernetics, 61(2), 89-101.
+
+- Nakano, E., Imamizu, H., Osu, R., Uno, Y., Gomi, H., Yoshioka, T., &
+  Kawato, M. (1999). Quantitative examinations of internal
+  representations for arm trajectory planning: minimum commanded
+  torque change model. Journal of Neurophysiology, 81(5), 2140-2155.
+
+- Kawato, M. (1999). Internal models for motor control and trajectory
+  planning. Current opinion in neurobiology, 9(6), 718-727.
+
+- Wolpert, D. M., & Kawato, M. (1998). Multiple paired forward and
+  inverse models for motor control. Neural Networks, 11(7), 1317-1329.
+
+- Wolpert, D. M., Miall, R. C., & Kawato, M. (1998). Internal models
+  in the cerebellum. Trends in cognitive sciences, 2(9), 338-347.
+
+- Haruno, M., Wolpert, D. M., & Kawato, M. (2001). Mosaic model for
+  sensorimotor learning and control. Neural computation, 13(10),
+  2201-2220.
+
+** Electrophysiological studies
+
 Empirical studies after the Georgopoulos series of papers investigated
 more systematically the question of kinematic- versus dynamic planning
 of arm movements, and the question of what motor brain areas
-represent.
+represent. What investigators found is that in fact the activity of
+motor cortex cells is modulated by all sorts of "intrinsic" variables
+like background level of load force (e.g. mechanical loads) and arm
+orientation.
 
 - Kalaska, J. F., Cohen, D. A., Hyde, M. L., & Prud'Homme,
   M. (1989). A comparison of movement direction-related versus load
@@ -630,10 +677,10 @@ represent.
   cortex and parietal area 5. Journal of neurophysiology, 78(5),
   2413-2426.
 
-- Sergio, L. E., Hamel-Pâquet, C., & Kalaska, J. F. (2005). Motor
-  cortex neural correlates of output kinematics and kinetics during
-  isometric-force and arm-reaching tasks. Journal of neurophysiology,
-  94(4), 2353-2378.
+- Gandolfo, F., Li, C. S., Benda, B. J., Schioppa, C. P., & Bizzi,
+  E. (2000). Cortical correlates of learning in monkeys adapting to a
+  new dynamical environment. Proceedings of the National Academy of
+  Sciences, 97(5), 2259-2263.
 
 - Cabel, D. W., Cisek, P., & Scott, S. H. (2001). Neural activity in
   primary motor cortex related to mechanical loads applied to the
@@ -641,46 +688,31 @@ represent.
   neurophysiology, 86(4), 2102-2108.
 
 - Scott, S. H., Gribble, P. L., Graham, K. M., & Cabel,
-  D. W. (2001). Dissociation between hand motion and population
-  vectors from neural activity in motor cortex. Nature, 413(6852),
+  D. W. (2001). [[http://www.gribblelab.org/publications/2001_Nature_scott.pdf][Dissociation between hand motion and population
+  vectors from neural activity in motor cortex]]. Nature, 413(6852),
   161-164.
 
-- Gribble, P. L., & Scott, S. H. (2002). Overlap of internal models in
-  motor cortex for mechanical loads during reaching. Nature,
+- Li, C. S. R., Padoa-Schioppa, C., & Bizzi, E. (2001). Neuronal
+  correlates of motor performance and motor learning in the primary
+  motor cortex of monkeys adapting to an external force field. Neuron,
+  30(2), 593-607.
+
+- Gribble, P. L., & Scott, S. H. (2002). [[http://www.gribblelab.org/publications/2002_Nature_gribble.pdf][Overlap of internal models in
+  motor cortex for mechanical loads during reaching]]. Nature,
   417(6892), 938-941.
 
+- Gandolfo, F., Li, C. S., Benda, B. J., Schioppa, C. P., & Bizzi,
+  E. (2000). Cortical correlates of learning in monkeys adapting to a
+  new dynamical environment. Proceedings of the National Academy of
+  Sciences, 97(5), 2259-2263.
 
-x maybe representation is mixed
+Some argue for a mixed representation in primary motor cortex.
 
 - Kakei, S., Hoffman, D. S., & Strick, P. L. (1999). Muscle and
   movement representations in the primary motor cortex. Science,
   285(5436), 2136-2139.
 
-
-x computational modeling shows not unique prediction
-
-- Mussa-Ivaldi, F. A. (1988). Do neurons in the motor cortex encode
-  movement direction? An alternative hypothesis. Neuroscience Letters,
-  91(1), 106-111.
-
-x models using motor cortex neurons to directly code muscle activation
-also predict population-vector coding of hand direction (and other
-parameters too)
-
-- Todorov, E. (2000). Direct cortical control of muscle activation in
-  voluntary arm movements: a model. nature neuroscience, 3, 391-398.
-
-- Guigon, E., Baraduc, P., & Desmurget, M. (2007). Coding of
-  movement‐and force‐related information in primate primary motor
-  cortex: a computational approach. European Journal of Neuroscience,
-  26(1), 250-260.
-
-- Ajemian, R., Green, A., Bullock, D., Sergio, L., Kalaska, J., &
-  Grossberg, S. (2008). Assessing the function of motor cortex:
-  single-neuron models of how neural response is modulated by limb
-  biomechanics. Neuron, 58(3), 414-428.
-
-other motor brain areas appear to have different balance of kinematics
+Other motor brain areas appear to have different balance of kinematics
 vs dynamics representation
 
 - Thach, W. T. (1978). Correlation of neural discharge with pattern
@@ -697,7 +729,7 @@ vs dynamics representation
   kinematics, not movement dynamics. Experimental Brain Research,
   80(2), 351-364.
 
-x reviews
+Some review articles on the topic:
 
 - Georgopoulos, A. P. (1995). Current issues in directional motor
   control. Trends in neurosciences, 18(11), 506-510.
@@ -710,6 +742,26 @@ x reviews
   goal-directed movements: insights from neurophysiological studies on
   non-human primates. Current opinion in neurobiology, 13(6), 671-677.
 
+*** Computational Models: Cortical control
+
+A number of computational models have been described to explore how
+motor cortex controls arm movement. One of the common themes has been
+that models using motor cortex neurons to directly code muscle
+activation also predict population-vector coding of hand direction
+(and other dynamics parameters too).
+
+- Todorov, E. (2000). Direct cortical control of muscle activation in
+  voluntary arm movements: a model. nature neuroscience, 3, 391-398.
+
+- Guigon, E., Baraduc, P., & Desmurget, M. (2007). Coding of
+  movement‐and force‐related information in primate primary motor
+  cortex: a computational approach. European Journal of Neuroscience,
+  26(1), 250-260.
+
+- Ajemian, R., Green, A., Bullock, D., Sergio, L., Kalaska, J., &
+  Grossberg, S. (2008). Assessing the function of motor cortex:
+  single-neuron models of how neural response is modulated by limb
+  biomechanics. Neuron, 58(3), 414-428.
 
 
 [ next ]
