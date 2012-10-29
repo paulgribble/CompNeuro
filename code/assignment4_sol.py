@@ -23,7 +23,7 @@ def minjerk(H1x,H1y,H2x,H2y,t,n):
     tau = T[i]/t
     Hx[i] = H1x + ((H1x-H2x)*(15*(tau**4) - (6*tau**5) - (10*tau**3)))
     Hy[i] = H1y + ((H1y-H2y)*(15*(tau**4) - (6*tau**5) - (10*tau**3)))
-    return T,Hx,Hy
+  return T,Hx,Hy
 
 
 # Question 1
@@ -70,7 +70,7 @@ def hand_to_joints(hx,hy,l1,l2):
     a1 = a1 + pi
   elif a1 > pi:
     a1 = a1 - pi
-    return a1,a2
+  return a1,a2
 
 
 # Question 3
@@ -105,6 +105,7 @@ axis('equal')
 xlabel('HAND POSITION X (m)')
 ylabel('HAND POSITION Y (m)')
 title('HAND SPACE')
+
 
 # Question 4
 l1,l2 = 0.34, 0.46

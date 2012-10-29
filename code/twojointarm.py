@@ -226,7 +226,7 @@ def plot_trajectory(t,H,A):
 	xlabel('SHOULDER ANGLE (deg)')
 	ylabel('ELBOW ANGLE (deg)')
 
-def animatearm(state,t,aparams,step=3):
+def animatearm(state,t,aparams,step=3,crumbs=0):
 	"""
 	animate the twojointarm
 	"""
@@ -251,6 +251,8 @@ def animatearm(state,t,aparams,step=3):
 		p2.set_ydata((H[i,1]))
 		p3.set_xdata((0,E[i,0],H[i,0]))
 		p3.set_ydata((0,E[i,1],H[i,1]))
+		if crumbs==1:
+			plot(H[i,0],H[i,1],'b.')
 		tt.set_text("%4.2f sec" % (i*dt))
 		draw()
 
