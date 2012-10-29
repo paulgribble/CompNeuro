@@ -1,5 +1,7 @@
 # ipython --pylab
 
+# two joint arm in a vertical plane, with gravity
+
 from scipy.integrate import odeint
 
 # forward dynamics equations of our passive two-joint arm
@@ -63,7 +65,7 @@ def joints_to_hand(A,aparams):
 		H[i,1] = E[i,1] + (l2 * sin(A[i,0]+A[i,1]))
 	return H,E
 
-def animatearm(state,t,aparams,step=5):
+def animatearm(state,t,aparams,step=3):
 	"""
 	animate the twojointarm
 	"""
@@ -76,11 +78,11 @@ def animatearm(state,t,aparams,step=5):
 	p1, = plot(E[0,0],E[0,1],'b.')
 	p2, = plot(H[0,0],H[0,1],'b.')
 	p3, = plot((0,E[0,0],H[0,0]),(0,E[0,1],H[0,1]),'b-')
-	tt = title("%4.2f sec" % 0.00)
 	xlim([-l1-l2, l1+l2])
 	ylim([-l1-l2, l1+l2])
 	dt = t[1]-t[0]
-	step = 5
+	tt = title("Click on this plot to continue...")
+	ginput(1)
 	for i in xrange(0,shape(state)[0]-step,step):
 		p1.set_xdata((E[i,0]))
 		p1.set_ydata((E[i,1]))
@@ -90,6 +92,7 @@ def animatearm(state,t,aparams,step=5):
 		p3.set_ydata((0,E[i,1],H[i,1]))
 		tt.set_text("%4.2f sec" % (i*dt))
 		draw()
+
 		
 state0 = [0*pi/180, 90*pi/180, 0, 0] # initial joint angles and vels
 t = arange(2001.)/200                # 10 seconds at 200 Hz

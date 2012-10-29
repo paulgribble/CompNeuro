@@ -91,8 +91,9 @@
 - course notes: [[file:5_Computational_Motor_Control_Dynamics.html][5: Computational Motor Control: Dynamics]]
 - read *at least two* of the papers listed in the course notes
 - [[file:code/twojointarm.py][twojointarm.py]] utility functions and Python code for doing inverse
-  and forward dynamics of a two-joint arm with external driving
-  torques
+  and forward dynamics of a two-joint arm in a horizontal plane (no
+  gravity) with external driving torques, and animating the resulting
+  arm motion
 -----
 
 ** Nov 5, 8 : Computational Motor Control: Muscle Models

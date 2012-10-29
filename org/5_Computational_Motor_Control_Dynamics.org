@@ -316,7 +316,9 @@ animate_arm(state,t)
 * Equations of motion for a two-joint arm
 
 To derive the equations of motion for a two-jointarm arm we will
-follow the same basic steps as above for the one-joint arm.
+follow the same basic steps as above for the one-joint arm. Note again
+that we are now putting the arm in a vertical plane, with gravity
+pointing down.
 
 #+ATTR_HTML: width="500px" align="center"
 #+CAPTION: Schematic of a two-joint arm in a vertical plane

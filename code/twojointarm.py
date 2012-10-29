@@ -1,5 +1,7 @@
 # ipython --pylab
 
+# two joint arm in a horizontal plane, no gravity
+
 # compute a min-jerk trajectory
 def minjerk(H1,H2,t,n):
 	"""
@@ -107,15 +109,13 @@ def getTorque(TorquesIN, TorquesTIME, ti):
 def compute_dynamics_terms(A,Ad,aparams):
 	"""
 	Given a desired set of joint angles A=(a1,a2) and joint velocities Ad=(a1d,a2d),
-	returns M, C and G matrices associated with inertial, and centrifugal/coriolis
-	and gravity terms
+	returns M and C matrices associated with inertial and centrifugal/coriolis terms
 	"""
 	a1,a2,a1d,a2d = A[0],A[1],Ad[0],Ad[1]
 	l1,l2 = aparams['l1'], aparams['l2']
 	m1,m2 = aparams['m1'], aparams['m2']
 	i1,i2 = aparams['i1'], aparams['i2']
 	r1,r2 = aparams['r1'], aparams['r2']
-	g = aparams['g']
 	M11 = i1 + i2 + (m1*r1*r1) + (m2*((l1*l1) + (r2*r2) + (2*l1*r2*cos(a2))))
 	M12 = i2 + (m2*((r2*r2) + (l1*r2*cos(a2))))
 	M21 = M12
@@ -124,10 +124,7 @@ def compute_dynamics_terms(A,Ad,aparams):
 	C1 = -(m2*l1*a2d*a2d*r2*sin(a2)) - (2*m2*l1*a1d*a2d*r2*sin(a2))
 	C2 = m2*l1*a1d*a1d*r2*sin(a2)
 	C = matrix([[C1],[C2]])
-	G1 = (g*sin(a1)*((m2*l1)+(m1*r1))) + (g*m2*r2*sin(a1+a2))
-	G2 = g*m2*r2*sin(a1+a2)
-	G = matrix([[G1],[G2]])
-	return M,C,G
+	return M,C
 
 # inverse dynamics
 def inverse_dynamics(A,Ad,Add,aparams):
@@ -139,9 +136,9 @@ def inverse_dynamics(A,Ad,Add,aparams):
 	n = shape(A)[0]
 	T = zeros((n,2))
 	for i in range(n):
-		M,C,G = compute_dynamics_terms(A[i,:],Ad[i,:],aparams)
+		M,C = compute_dynamics_terms(A[i,:],Ad[i,:],aparams)
 		ACC = matrix([[Add[i,0]],[Add[i,1]]])
-		Qi = M*ACC + C + G
+		Qi = M*ACC + C
 		T[i,0],T[i,1] = Qi[0,0],Qi[1,0]
 	return T
 
@@ -152,9 +149,9 @@ def forward_dynamics(state, t, aparams, TorquesIN, TorquesTIME):
 	"""
 	a1, a2, a1d, a2d = state   # unpack the four state variables
 	Q = getTorque(TorquesIN, TorquesTIME, t)
-	M,C,G = compute_dynamics_terms(state[0:2],state[2:4],aparams)
-	# Q = M*ACC + C + G
-	ACC = inv(M) * (Q-C-G)
+	M,C = compute_dynamics_terms(state[0:2],state[2:4],aparams)
+	# Q = M*ACC + C
+	ACC = inv(M) * (Q-C)
 	return [a1d, a2d, ACC[0,0], ACC[1,0]]
 
 # Utility function to return hand+joint kinematics for
@@ -244,7 +241,6 @@ aparams = {
 	'm2' : 1.65,
 	'i1' : 0.025,  # kg*m*m
 	'i2' : 0.075,
-	'g'  : 9.81    # gravitational constant
 }
 
 # Get a desired trajectory between two arm positions defined by
@@ -280,4 +276,3 @@ state = odeint(forward_dynamics, state0, tt, args=(aparams, TorquesIN, t,))
 
 Hsim,Esim = joints_to_hand(state,aparams)
 plot_trajectory(tt,Hsim,state[:,[0,1]])
-
