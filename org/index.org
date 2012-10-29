@@ -94,6 +94,7 @@
   and forward dynamics of a two-joint arm in a horizontal plane (no
   gravity) with external driving torques, and animating the resulting
   arm motion
+- [[file:assignment5.pdf][assignment5.pdf]]
 -----
 
 ** Nov 5, 8 : Computational Motor Control: Muscle Models
