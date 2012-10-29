@@ -87,6 +87,7 @@
 
 -----
 ** Oct 29, Nov 1 : Computational Motor Control: Dynamics
+- [[file:code/assignment4_sol.py][assignment4\_sol.py]]
 - course notes: [[file:5_Computational_Motor_Control_Dynamics.html][5: Computational Motor Control: Dynamics]]
 - read *at least two* of the papers listed in the course notes
 - [[file:code/twojointarm.py][twojointarm.py]] utility functions and Python code for doing inverse
