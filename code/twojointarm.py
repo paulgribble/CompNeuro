@@ -226,6 +226,34 @@ def plot_trajectory(t,H,A):
 	xlabel('SHOULDER ANGLE (deg)')
 	ylabel('ELBOW ANGLE (deg)')
 
+def animatearm(state,t,aparams,step=3):
+	"""
+	animate the twojointarm
+	"""
+	A = state[:,[0,1]]
+	A[:,0] = A[:,0]
+	H,E = joints_to_hand(A,aparams)
+	l1,l2 = aparams['l1'], aparams['l2']
+	figure()
+	plot(0,0,'b.')
+	p1, = plot(E[0,0],E[0,1],'b.')
+	p2, = plot(H[0,0],H[0,1],'b.')
+	p3, = plot((0,E[0,0],H[0,0]),(0,E[0,1],H[0,1]),'b-')
+	xlim([-l1-l2, l1+l2])
+	ylim([-l1-l2, l1+l2])
+	dt = t[1]-t[0]
+	tt = title("Click on this plot to continue...")
+	ginput(1)
+	for i in xrange(0,shape(state)[0]-step,step):
+		p1.set_xdata((E[i,0]))
+		p1.set_ydata((E[i,1]))
+		p2.set_xdata((H[i,0]))
+		p2.set_ydata((H[i,1]))
+		p3.set_xdata((0,E[i,0],H[i,0]))
+		p3.set_ydata((0,E[i,1],H[i,1]))
+		tt.set_text("%4.2f sec" % (i*dt))
+		draw()
+
 
 ##############################################################################
 #############################  THE FUN PART  #################################
@@ -276,3 +304,6 @@ state = odeint(forward_dynamics, state0, tt, args=(aparams, TorquesIN, t,))
 
 Hsim,Esim = joints_to_hand(state,aparams)
 plot_trajectory(tt,Hsim,state[:,[0,1]])
+
+animatearm(state,tt,aparams)
+
