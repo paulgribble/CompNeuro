@@ -430,6 +430,11 @@ Q_{1} &= &\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta_{1}}} \righ
 Q_{2} &= &\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta_{2}}} \right) - \left( \frac{\partial L}{\partial \theta_{2}} \right)
 \end{eqnarray}
 
+For those that are interested, here is a SymPy program that implements
+the Lagrangian approach to get the equations of motion for a two-joint arm:
+
+[[file:code/twojointarm_lagrange.py][twojointarm\_lagrange.py]]
+
 ** Equations of Motion
 
 What we end up with (I won't take you step by through all the

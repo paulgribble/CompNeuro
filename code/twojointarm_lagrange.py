@@ -48,14 +48,20 @@ ddtdldqd2 = simplify(diff(dldqd2,t))
 Q2 = ddtdldqd2 - dldq2
 
 # simplify!
+# converts floats that are really integers to integers, gets rid of "1.0"
 Q1 = simplify(nsimplify(Q1))
 Q2 = simplify(nsimplify(Q2))
-Q1 = collect(Q1, sin(a1(t)))
-Q2 = collect(Q2, sin(a1(t)))
+# magic sauce to further simplify with some trigonometric identities
+Q1 = Q1.rewrite(exp).expand().powsimp().rewrite(sin).expand()
+Q2 = Q2.rewrite(exp).expand().powsimp().rewrite(sin).expand()
+# collect derivative terms
 Q1 = collect(Q1, Derivative(Derivative(a1(t),t),t))
 Q1 = collect(Q1, Derivative(Derivative(a2(t),t),t))
 Q2 = collect(Q2, Derivative(Derivative(a1(t),t),t))
 Q2 = collect(Q2, Derivative(Derivative(a2(t),t),t))
+# collect sin() terms
+Q1 = collect(Q1, sin(a1(t)))
+Q2 = collect(Q2, sin(a1(t)))
 
 pprint(Q1)
 pprint(Q2)
