@@ -771,6 +771,10 @@ I coded up a little "game" that let's you control a two-joint arm with
 realistic limb dynamics, to hit targets that appear in the arm's
 workspace (not unlike many actual motor control experiments).
 
+#+ATTR_HTML: width="400px" align="center"
+#+CAPTION: Two-joint arm video game
+[[file:figs/twojointarmgame.png]]
+
 You use the [d,f,j,k] keys to control 4 "muscles" that deliver torques
 to the shoulder and elbow:
 
