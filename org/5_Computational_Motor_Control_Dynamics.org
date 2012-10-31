@@ -765,5 +765,53 @@ activation also predict population-vector coding of hand direction
   single-neuron models of how neural response is modulated by limb
   biomechanics. Neuron, 58(3), 414-428.
 
+* Two-joint arm video game
+
+I coded up a little "game" that let's you control a two-joint arm with
+realistic limb dynamics, to hit targets that appear in the arm's
+workspace (not unlike many actual motor control experiments).
+
+You use the [d,f,j,k] keys to control 4 "muscles" that deliver torques
+to the shoulder and elbow:
+
+- d = pectoralis (shoulder flexor)
+- f = posterior deltoid (shoulder extensor)
+- j = biceps (elbow flexor)
+- k = triceps (elbow extensor)
+
+there is no real muscle model right now, they just deliver torques to
+the joints
+
+The goal is to move the arm around the workspace so that the endpoint
+(hand) hits the red targets as they pop up. Hit as many red targets as
+you can before the clock runs down.
+
+Hit the spacebar to "reset" the arm to it's home position. This is
+handy in case your arm starts spinning like a propellor ;) although
+each spacebar-reset costs you 1 point.
+
+Apart from being a challenging "game", this is a nice little toy demo
+of the problem of what the brain is faced with when it has to figure
+out what time-varying neural control signals to send down to muscles,
+so that your hand moves to a desired location in cartesian space.
+
+Here is the game: [[file:code/twojointarm_game.py][twojointarm\_game.py]]
+
+You will need to install the [[http://www.pygame.org/][pygame]] add-on package for python. On a
+Debian-based GNU/Linux system (like Ubuntu) just type at a
+command-line prompt:
+
+=sudo apt-get install python-pygame=
+
+On Mac/Windows etc, see the pygame homepage for installation
+instructions.
+
+To start the game, at a command-line prompt type:
+
+=python twojointarm_game.py=
+
+At the end of the game it will print out your score to the command
+line.
+
 
 [ next ]
