@@ -15,6 +15,10 @@
   1:00pm, in NSC 245A
 - The instructor is Paul Gribble (email: paul [at] gribblelab [dot] org)
 - course [[file:syllabus.pdf][syllabus.pdf]]
+- We will use several chapters from a book on computational motor
+  control: "The Computational Neurobiology of Reaching and Pointing"
+  by Reza Shadmehr and Steven P. Wise, MIT Press, 2005. [ [[http://goo.gl/QKykK][google books
+  link]] ] [ [[file:readings/SW_00_cover_info.pdf][cover info]] ]
 
 ** Note there is an enrolment limit of 14 registered students in the course
 - Please contact Carol Anderson ([[mailto:canders3@uwo.ca][canders3@uwo.ca]]) to register
@@ -82,6 +86,7 @@
 ** Oct 22, 25 : Computational Motor Control: Kinematics
 - course notes: [[file:4_Computational_Motor_Control_Kinematics.html][4: Computational Motor Control: Kinematics]]
 - read *at least two* of the papers listed in the course notes
+- read Shadmehr & Wise book, [[file:readings/SW_18.pdf][Chapter 18]]
 - [[file:assignment4.pdf][assignment4.pdf]]
 - [[file:code/minjerk.py][minjerk.py]]
 
@@ -90,6 +95,8 @@
 - [[file:code/assignment4_sol.py][assignment4\_sol.py]]
 - course notes: [[file:5_Computational_Motor_Control_Dynamics.html][5: Computational Motor Control: Dynamics]]
 - read *at least two* of the papers listed in the course notes
+- read Shadmehr & Wise book, [[file:readings/SW_20.pdf][Chapter 20]] and [[file:readings/SW_21.pdf][Chapter 21]] (and [[file:readings/SW_22.pdf][Chapter 22]]
+  if you are interested in the topic)
 - [[file:code/twojointarm.py][twojointarm.py]] utility functions and Python code for doing inverse
   and forward dynamics of a two-joint arm in a horizontal plane (no
   gravity) with external driving torques, and animating the resulting
@@ -98,12 +105,14 @@
 -----
 
 ** Nov 5, 8 : Computational Motor Control: Muscle Models
+- read Shadmehr & Wise book, [[file:readings/SW_7.pdf][Chapter 7]] and [[file:readings/SW_8.pdf][Chapter 8]]
 
 -----
 ** Nov 12, 15 : Computational Models of Learning: Perceptrons & Multi-Layer Neural Networks
 - for a really nice overview of all sort of NNs, see: [[https://www.coursera.org/course/neuralnets][Neural Networks
   for Machine Learning]] (Geoff Hinton, Univ Toronto, Coursera online
   course)
+- read Shadmher & Wise book, [[file:readings/SW_24.pdf][Chapter 24]]
 
 -----
 ** Nov 19, 22 : Computational Models of Learning: Other Neural Network Architectures
