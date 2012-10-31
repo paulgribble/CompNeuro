@@ -86,7 +86,7 @@
 ** Oct 22, 25 : Computational Motor Control: Kinematics
 - course notes: [[file:4_Computational_Motor_Control_Kinematics.html][4: Computational Motor Control: Kinematics]]
 - read *at least two* of the papers listed in the course notes
-- read Shadmehr & Wise book, [[file:readings/SW_18.pdf][Chapter 18]]
+- read Shadmehr & Wise book, [[file:readings/SW_18.pdf][Chapter 18]] and [[file:readings/SW_19.pdf][Chapter 19]]
 - [[file:assignment4.pdf][assignment4.pdf]]
 - [[file:code/minjerk.py][minjerk.py]]
 
