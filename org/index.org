@@ -101,15 +101,15 @@
   and forward dynamics of a two-joint arm in a horizontal plane (no
   gravity) with external driving torques, and animating the resulting
   arm motion
-- try your hand at this [[file:code/twojointarm_game.py][game]] in which you have to control a two-joint
-  arm to hit as many targets as you can before time runs out. Use the
-  [d,f,j,k] keys to control [sf,se,ef,ee] joint torques (s=shoulder,
-  e=elbow, f=flexor, e=extensor). Spacebar will "reset" the arm to its
-  home position, handy if your arm starts spinning out of control
-  (though each time you use spacebar your score will be decremented by
-  one). Start the game by typing =python twojointarm_game.py= at the
-  command line. At the end of the game your score will be printed out
-  on the command line.
+-  [[file:code/twojointarm_game.py][twojointarm\_game.py]] : try your hand at this game in which you have
+   to control a two-joint arm to hit as many targets as you can before
+   time runs out. Use the [d,f,j,k] keys to control [sf,se,ef,ee]
+   joint torques (s=shoulder, e=elbow, f=flexor, e=extensor). Spacebar
+   will "reset" the arm to its home position, handy if your arm starts
+   spinning out of control (though each time you use spacebar your
+   score will be decremented by one). Start the game by typing =python
+   twojointarm_game.py= at the command line. At the end of the game
+   your score will be printed out on the command line.
 - [[file:assignment5.pdf][assignment5.pdf]]
 -----
 

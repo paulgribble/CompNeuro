@@ -306,6 +306,7 @@ legend(('torque1','torque2'))
 
 from scipy.integrate import odeint
 from scipy.interpolate import interp1d
+
 state0 = [A[0,0], A[0,1], Ad[0,0], Ad[0,1]]
 tt = linspace(t[0],t[-1],100)
 state = odeint(forward_dynamics, state0, tt, args=(aparams, TorquesIN, t,))
@@ -316,4 +317,25 @@ Hsim,Esim = joints_to_hand(state,aparams)
 plot_trajectory(tt,Hsim,state[:,[0,1]])
 
 animatearm(state,tt,aparams)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
