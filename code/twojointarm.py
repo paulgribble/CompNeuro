@@ -33,6 +33,7 @@ def joints_to_hand(A,aparams):
 	"""
 	Given joint angles A=(a1,a2) and anthropometric params aparams,
 	returns hand position H=(hx,hy) and elbow position E=(ex,ey)
+	Note: A must be type matrix
 	"""
 	l1 = aparams['l1']
 	l2 = aparams['l2']
@@ -51,6 +52,7 @@ def hand_to_joints(H,aparams):
 	"""
 	Given hand position H=(hx,hy) and anthropometric params aparams,
 	returns joint angles A=(a1,a2)
+	Note: H must be type matrix
 	"""
 	l1 = aparams['l1']
 	l2 = aparams['l2']
@@ -100,6 +102,7 @@ def getTorque(TorquesIN, TorquesTIME, ti):
 	"""
 	Given a desired torque command (TorquesIN) defined over a time vector (TorquesTIME),
 	returns an interpolated torque command at an intermediate time point ti
+	Note: TorquesIN and TorquesTIME must be type matrix
 	"""
 	t1 = interp(ti, TorquesTIME, TorquesIN[:,0])
 	t2 = interp(ti, TorquesTIME, TorquesIN[:,1])
@@ -132,6 +135,7 @@ def inverse_dynamics(A,Ad,Add,aparams):
 	inverse dynamics of a two-link planar arm
 	Given joint angles A=(a1,a2), velocities Ad=(a1d,a2d) and accelerations Add=(a1dd,a2dd),
 	returns joint torques Q required to generate that movement
+	Note: A, Ad and Add must be type matrix
 	"""
 	n = shape(A)[0]
 	T = zeros((n,2))
@@ -146,6 +150,7 @@ def inverse_dynamics(A,Ad,Add,aparams):
 def forward_dynamics(state, t, aparams, TorquesIN, TorquesTIME):
 	"""
 	forward dynamics of a two-link planar arm
+	note: TorquesIN and TorquesTIME must be type matrix
 	"""
 	a1, a2, a1d, a2d = state   # unpack the four state variables
 	Q = getTorque(TorquesIN, TorquesTIME, t)
@@ -196,6 +201,9 @@ def get_min_jerk_movement(H1,H2,movtime,padtime=0.2):
 
 # utility function to plot a trajectory
 def plot_trajectory(t,H,A):
+	"""
+	Note: H and A must be of type matrix
+	"""
 	hx,hy = H[:,0],H[:,1]
 	a1,a2 = A[:,0],A[:,1]
 	figure()
