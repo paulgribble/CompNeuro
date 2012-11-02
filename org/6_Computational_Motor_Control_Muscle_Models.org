@@ -13,6 +13,107 @@
 
 * Introduction
 
+Here we will add muscles with neural efferent inputs and afferent
+feedback, to our arm model. We will start with very simplified models of muscle force and work up to more physiologically realistic models. For the purpose of easy demonstration and simulation we will revert back to a single-joint arm model.
+
+* Modelling simple torque muscles: constant torque
+
+In the previous section we built a model of the skeletal dynamics a
+forearm. As a first step to implement "torque muscles", we will use a
+simple dynamic equation of motion of a single joint arm in a vertical
+plane, with gravity:
+
+#+ATTR_HTML: width="400px" align="center"
+#+CAPTION: Schematic of a simple one-joint arm in a vertical plane with one muscle
+[[file:figs/onejointarm_muscle.png]]
+
+\begin{equation}
+I \ddot{\theta} = m g l_{z} \cos \theta + T_{m}
+\end{equation}
+
+where $m$ is the mass of the segment, $g$ is the gravitational
+constant (9.81 m/s/s), $l_{z}$ is the distance of the centre of mass
+from the joint, and $\theta$ and $\ddot{\theta}$ are joint angular
+position and acceleration, respectively. The new term we are now
+adding, $T_{m}$, is the net joint torque due to muscle contraction.
+
+Here is what a simple Python function would look like for simulating these dynamics:
+
+#+BEGIN_SRC python
+def onejointmuscle(state,t,Tm):
+  m = 1.65    # kg
+  g = -9.81   # m/s/s
+  lz = 0.179  # metres
+  I = 0.0779  # kg m**2
+  a = state[0]
+  ad = state[1]
+  add = (m*g*lz*cos(a) + Tm) / I
+  return [ad,add]
+#+END_SRC
+
+You can download a full program here that implements a simulation and animation of this version of the arm:
+
+[[file:code/onejointmuscle_1.py][onejointmuscle\_1.py]]
+
+** Questions
+
+1. Play with the $T_{m}$ parameter until you arrive at a value that
+   maintains the arm at an angle of 30 degrees.
+
+2. What value of muscle torque $T_{m} is required to maintain the arm
+   at 45 degrees?
+
+
+* Modelling simple torque muscles: two antagonistic muscles
+
+Now we add a second "muscle" so we have $T_{mf}$ from a "flexor"
+muscle (like biceps brachii) and $T_{me}$ from an "extensor" muscle
+(like triceps brachii).
+
+#+ATTR_HTML: width="400px" align="center"
+#+CAPTION: Schematic of a simple one-joint arm in a vertical plane with two antagonistic muscles
+[[file:figs/onejointarm_muscle2.png]]
+
+Now our dynamics equation looks like this:
+
+\begin{equation}
+I \ddot{\theta} = m g l_{z} \cos \theta + T_{mf} - T_{me}
+\end{equation}
+
+Note how the two muscles act to produce torque in opposite directions.
+
+Here is a new version of the Python function:
+
+#+BEGIN_SRC python
+def onejointmuscle(state,t,Tmf,Tme):
+  m = 1.65    # kg
+  g = -9.81   # m/s/s
+  lz = 0.179  # metres
+  I = 0.0779  # kg m**2
+  a = state[0]
+  ad = state[1]
+  add = (m*g*lz*cos(a) + Tmf - Tme) / I
+  return [ad,add]
+#+END_SRC
+
+You can download a full program here that implements a simulation and animation of this version of the arm:
+
+[[file:code/onejointmuscle_2.py][onejointmuscle\_2.py]]
+
+** Questions
+
+1. Say the initial position of the forearm is $\pi/4$ radians with
+   zero initial velocity. What static muscle torques $T_{mf},T_{me}$
+   are needed to make the arm stay put?
+
+2. Using your answer from Question 1 as a starting point, what happens
+   if you increase $T_{mf}$ and $T_{me}$ by the same amount (e.g. by
+   1.0 Nm)?
+
+
+* Modelling simple torque muscles: linear springs
+ 
 x
+
 
 [ next ]
