@@ -32,6 +32,7 @@
 3. [[file:3_Modelling_Action_Potentials.html][Modelling Action Potentials]]
 4. [[file:4_Computational_Motor_Control_Kinematics.html][Computational Motor Control: Kinematics]]
 5. [[file:5_Computational_Motor_Control_Dynamics.html][Computational Motor Control: Dynamics]]
+6. [[file:6_Computational_Motor_Control_Muscle_Models.html][Computational Motor Control: Muscle Models]]
 
 -----
 * Schedule & Topics
@@ -115,6 +116,8 @@
 
 ** Nov 5, 8 : Computational Motor Control: Muscle Models
 - read Shadmehr & Wise book, [[file:readings/SW_7.pdf][Chapter 7]] and [[file:readings/SW_8.pdf][Chapter 8]]
+- supplementary documents: [[http://www.shadmehrlab.org/book/musclemodel.pdf][musclemodel.pdf]]
+- course notes: [[file:6_Computational_Motor_Control_Muscle_Models.html][6: Computational Motor Control: Muscle Models]]
 
 -----
 ** Nov 12, 15 : Computational Models of Learning: Perceptrons & Multi-Layer Neural Networks

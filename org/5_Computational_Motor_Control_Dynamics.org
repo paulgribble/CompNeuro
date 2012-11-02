@@ -823,4 +823,4 @@ At the end of the game it will print out your score to the command
 line.
 
 
-[ next ]
+[ [[6_Computational_Motor_Control_Muscle_Models.html][Computational Motor Control: Muscle Models]] ]
