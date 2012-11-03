@@ -5,7 +5,7 @@ from scipy.integrate import odeint
 def onejointmuscle(state,t,Tm):
 	m = 1.65    # kg
 	g = -9.81   # m/s/s
-	lz = 0.179  # metres
+	l = 0.179   # metres
 	I = 0.0779  # kg m**2
 	a = state[0]
 	ad = state[1]

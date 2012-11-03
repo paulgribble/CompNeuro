@@ -9,7 +9,7 @@ def onejointmuscle(state,t,Tmf,Tme):
 	I = 0.0779  # kg m**2
 	a = state[0]
 	ad = state[1]
-	add = (m*g*lz*cos(a) + Tmf - Tme) / Ie
+	add = (m*g*lz*cos(a) + Tmf - Tme) / I
 	return [ad,add]
 
 state0 = [30*pi/180, 0] # 30 deg initial position and 0 deg/s initial velocity

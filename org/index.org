@@ -20,9 +20,6 @@
   by Reza Shadmehr and Steven P. Wise, MIT Press, 2005. [ [[http://goo.gl/QKykK][google books
   link]] ] [ [[file:readings/SW_00_cover_info.pdf][cover info]] ]
 
-** Note there is an enrolment limit of 14 registered students in the course
-- Please contact Carol Anderson ([[mailto:canders3@uwo.ca][canders3@uwo.ca]]) to register
-
 -----
 * Course Notes
 
@@ -115,8 +112,8 @@
 -----
 
 ** Nov 5, 8 : Computational Motor Control: Muscle Models
-- read Shadmehr & Wise book, [[file:readings/SW_7.pdf][Chapter 7]] and [[file:readings/SW_8.pdf][Chapter 8]]
-- supplementary documents: [[http://www.shadmehrlab.org/book/musclemodel.pdf][musclemodel.pdf]]
+- read Shadmehr & Wise book, [[file:readings/SW_7.pdf][Chapter 7]] and [[file:readings/SW_8.pdf][Chapter 8]] and supplementary
+  documents: [[http://www.shadmehrlab.org/book/musclemodel.pdf][musclemodel.pdf]]
 - course notes: [[file:6_Computational_Motor_Control_Muscle_Models.html][6: Computational Motor Control: Muscle Models]]
 
 -----

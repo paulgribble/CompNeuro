@@ -290,7 +290,7 @@ Here is what a simple Python function would look like for simulating these dynam
 <pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,Tm):
   m = 1.65    <span style="color: #af0000;"># kg</span>
   g = -9.81   <span style="color: #af0000;"># m/s/s</span>
-  lz = 0.179  <span style="color: #af0000;"># metres</span>
+  l = 0.179   <span style="color: #af0000;"># metres</span>
   I = 0.0779  <span style="color: #af0000;"># kg m**2</span>
   a = state[0]
   ad = state[1]
@@ -318,7 +318,7 @@ You can download a full program here that implements a simulation and animation 
    maintains the arm at an angle of 30 degrees.
 
 </li>
-<li>What value of muscle torque $T<sub>m</sub> is required to maintain the arm
+<li>What value of muscle torque \(T_{m}\) is required to maintain the arm
    at 45 degrees?
 </li>
 </ol>
