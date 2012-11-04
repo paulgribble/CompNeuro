@@ -14,7 +14,9 @@
 * Introduction
 
 Here we will add muscles with neural efferent inputs and afferent
-feedback, to our arm model. We will start with very simplified models of muscle force and work up to more physiologically realistic models. For the purpose of easy demonstration and simulation we will revert back to a single-joint arm model.
+feedback, to our arm model. We will start with very simplified models
+of muscle force and work up to descriptions of more physiologically
+realistic models.
 
 * Modelling simple torque muscles
 
@@ -362,7 +364,7 @@ musculoskeletal model and its mathematical description can be found in:
   2985-94
 
 #+ATTR_HTML: width="400px" align="center"
-#+CAPTION: Schematic of "full-blown" musculoskeletal model found in Kistemaker et al. (2010).
+#+CAPTION: Schematic of "full-blown" musculoskeletal model described in Kistemaker et al. (2010).
 [[file:figs/fullblownschematic.png]]
 
 In addition to the Hill-type muscle model, a model of activation
@@ -421,5 +423,284 @@ locomotion, posture and balance, jumping, etc. Here are a few:
   regulator facilitates control of a two-degree-of-freedom wrist. The
   Journal of Neuroscience, 30(28), 9431-9444.
 
+* How are muscles controlled?
+
+Once we have a physiologically realistic model of muscle force
+generation, the question arises, how does the brain control movement?
+How does the brain determine what time-varying patterns of stimulaton
+to send down to muscles, in order to generate a desired movement?
+
+A key insight is that there are many complex, non-linear relationships
+that sit in between neural control signals to muscles, and the arm
+movement that ultimately results. These include muscle mechanical
+properties that we have seen like force-length and force-velocity
+relationships, joint angle-dependent muscle moment arms, and there are
+many others including gradual development of muscle force over time
+(due to calcium kinetics), and dynamics introduced by series elastic
+elements (e.g. tendons).
+
+Something we haven't talked about much yet is that the activation of
+spinal motoneurones controlling a muscle is determined not only by
+central efferent neural control signals but is also influence by
+afferent signals such as those from muscle spindles, golgi tendon
+organs, and signals from spinal interneurons. Thus the activation
+signal that gets ultimately sent to activate a muscle is determined by
+a very complex interplay between central efferent "control" signals,
+properties of the neuromuscular "plant", and afferent feedback
+signals.
+
+Once you start to build up computational models that include all of
+these features in a realistic way, it's practically (and in some cases
+theoretically) impossible to "invert the system", and derive equations
+that give the neural control signals for a given desired movement. One
+influential model of motor control that proposes a physiologically
+motivated solution to the problem of how the brain controls movement,
+given these complexities, is the Equilibrium-Point Hypothesis.
+
+**  Equilibrium-Point Control
+
+Something you may have noticed about the simplified arm models
+presented above, is that when you have opposing muscles around a
+joint, the balance of forces between the two muscles defines an
+equilibrium joint angle - an angle for which the joint torques
+balance. According to the *Equilibrium Point Hypothesis*, movement
+arises by neurally controlled shifts in the equilibrium position of
+the limb from one static posture to another. Descending neural control
+signals define an equilibrium position for the limb, and movement is
+produced by gradually shifting this centrally specified equilibrium
+position over time.
+
+Patterns of time varying muscle forces (and hence muscle activation
+patterns as measured by EMG) are not explicitly planned by the nervous
+system but rather unfold as a natural consequence of the shifting
+equilibrium position of the limb and the spring-like properties of
+neurally activated muscle. This arrangement greatly simplifies the
+task of movement planning, eliminating the need to perform the often
+complex, nonlinear "inversions" required in order to explicitly
+specify the dynamics of multi-joint movement.
+
+Two main variants of the EP hypothesis have been offered, and are
+known as the $\alpha$ and $\lambda$ versions. Original proposals have
+centered around the control of movements at a single joint such as the
+elbow. According to the α version of the model proposed by Bizzi and
+colleagues, descending control signals specify levels of $\alpha$
+motoneurone (MN) activity for antagonist muscles about a joint. For a
+given level of flexor and extensor MN activity, an equilibrium joint
+angle is specified as the angle at which flexor and extensor forces
+balance. Movement is produced from one joint angle to another through
+reciprocal changes to the balance of flexor and extensor MN
+activity. As the balance of forces change, the limb moves to a new
+position at which muscle forces, as defined by the new levels of
+flexor and extensor MN activation, balance. In addition joint
+stiffness may be controlled independent of movement through
+simultaneous increases or decreases in flexor and extensor MN
+activation, leading to muscle cocontraction around a joint.
+
+In the $\alpha$ version of the EP hypothesis proprioception and
+afferent feedback play a limited role in MN activation, which is
+determined wholly by descending control signals. This assumption is
+based on studies of head movement and single joint elbow movement in
+monkeys showing that when unexpected loads are applied during
+movement, final position is not achieved until the loads are removed
+(Bizzi, Polit, & Morasso, 1976; Bizzi, Dev, Morasso, & Polit,
+1978). In other words, load dependent changes in proprioceptive input
+did not alter neural input to muscles. Additional studies on
+deafferented animals showed that motor performance was relatively
+unaffected when proprioceptive input was eliminated altogether (Polit
+& Bizzi, 1978; Polit & Bizzi, 1979), supporting the idea that afferent
+information plays a minimal role in the achievement of final limb
+position. It should be noted however that normal execution of movement
+in the deafferented preparation was dependent on the animal having
+knowledge (through vision) of the initial position of their limb
+relative to the body. This suggests that even under these conditions
+afferent information plays some role in programming limb movement. The
+α version is a force control model since it posits that the centrally
+controlled variable is MN activation.
+
+In contrast to the $\alpha$ version, in the $\lambda$ version of the
+EP hypothesis proprioception plays a central role in movement, and in
+particular in determining MN activation levels. Consistent with
+physiological studies (see Houk & Rymer, 1981 and Rothwell, 1994 for
+reviews), in the $\lambda$ version MN activation is determined by both
+central drive and afferent feedback from muscle spindles (Feldman,
+Adamovich, Ostry, & Flanagan, 1990). Descending control signals
+specify a threshold joint angle for MN recruitment ($\lambda$), such
+that as the difference between the current joint angle and $\lambda$
+increases, MN activation and muscle force increase. The physiological
+mechanism underlying this increase is assumed to be the tonic stretch
+reflex (Feldman, Adamovich, Ostry, & Flanagan, 1990). Thus in contrast
+to the $\alpha$ version, in the $\lambda$ model EMG activity is a
+consequence of the shifting equilibrium and afferent reflexes, rather
+than a quantity under direct central control.
+
+An appealing property of EP models is that at their heart they include
+the interaction between central efferent control signals and afferent
+signals, and their dual influence on muscle forces and movement.
+
+Here are some papers on the EP hypothesis. There are many others.
+
+- Bizzi, E., Accornero, N., Chapple, W., & Hogan, N. (1982). Arm
+  trajectory formation in monkeys. Experimental Brain Research, 46(1),
+  139-143.
+
+- Feldman, A. G. (1986). Once more on the equilibrium-point hypothesis
+  (lambda model) for motor control. Journal of motor behavior,
+  18(1), 17.
+
+- Bizzi, E., Hogan, N., Mussa-Ivaldi, F. A., & Giszter,
+  S. (1992). Does the nervous system use equilibrium-point control to
+  guide single and multiple joint movements?. Behavioral and Brain
+  sciences, 15(04), 603-613.
+
+- Gomi, H., & Kawato, M. (1996). Equilibrium-point control hypothesis
+  examined by measured arm stiffness during multijoint
+  movement. Science, 272(5258), 117-120.
+
+- Gribble, P. L., Ostry, D. J., Sanguineti, V., & Laboissière,
+  R. (1998). Are complex control signals required for human arm
+  movement?. Journal of Neurophysiology, 79(3), 1409-1424.
+
+- Shadmehr, R. (1998). [[http://www.jhu.edu/shadmehr/Reprints/eqpoint.pdf][The equilibrium point hypothesis for control of
+  movement]]. Dept. of Bio. Eng. Johns Hopkins University.
+
+- Gribble, P. L., & Ostry, D. J. (2000). Compensation for loads during
+  arm movements using equilibrium-point control. Experimental Brain
+  Research, 135(4), 474-482.
+
+** Force Control Models
+
+In force control models, the hypothesis is that the brain is able to
+compute open-loop (no feedback) neural control signals to muscles for
+a given movement by using so-called "internal models" of the
+neuromuscular plant. This is an old concept from engineering and
+robotics that has been recently applied to the neural control of
+movement by the brain. The idea is that through experience, the brain
+learns an accurate "input-output" map of the motor system: the
+relationship between control inputs and motor outputs. This is known
+as a /forward model/. In these models the brain also has a neural
+representation of the /inverse model/, where given a desired movement
+the brain uses the inverse model to compute required control signals
+that produce that movement. The proposal also involves the idea that
+the brain can use the forward model to /predict/ the consequences of a
+given motor command, and use that prediction as a proxy for feedback
+of the actual movement (which is delayed due to neural feedback
+delays, which can be quite long), to update the command, and hence
+achieve motor learning.
+
+A major challenge to this class of models, in particular the idea of
+an inverse model, is centered around the criticism that a full
+characterization of the complete dynamics of the full-blown
+neuromuscular system, and a neural representation of its inverse, is
+wildly unrealistic. There is much empirical evidence that the motor
+system engages in "prediction" of the consquences of motor commands,
+and hence the idea of a forward model, at least in principle, is less
+controversial.
+
+- Miall, R. C., & Wolpert, D. M. (1996). Forward models for
+  physiological motor control. Neural networks, 9(8), 1265-1279.
+
+- Wolpert, D. M., & Kawato, M. (1998). Multiple paired forward and
+  inverse models for motor control. Neural Networks, 11(7), 1317-1329.
+
+- Wolpert, D. M., Miall, R. C., & Kawato, M. (1998). Internal models
+  in the cerebellum. Trends in cognitive sciences, 2(9), 338-347.
+
+- Kawato, M. (1999). Internal models for motor control and trajectory
+  planning. Current opinion in neurobiology, 9(6), 718-727.
+
+- Desmurget, M., & Grafton, S. (2000). Forward modeling allows
+  feedback control for fast reaching movements. Trends in cognitive
+  sciences, 4(11), 423-431.
+
+- Ostry, D., & Feldman, A. (2003). A critical evaluation of the force
+  control hypothesis in motor control. Experimental Brain Research,
+  153(3), 275-288.
+
+- Pasalar, S., Roitman, A. V., Durfee, W. K., & Ebner,
+  T. J. (2006). Force field effects on cerebellar Purkinje cell
+  discharge with implications for internal models. Nature
+  neuroscience, 9(11), 1404-1411.
+
+** Hybrid Models
+
+There is debate about the extent to which "pure" EP models can account
+for features of motor control and motor learning such as compensation
+for interaction torques, and motor learning. Thus hybrid models have
+been proposed in which there is a combination of "adjustable"
+open-loop control signals and EP-style feedback-control signals. This
+however does not solve the question of how the brain learns to shape
+the open-loop control signals.
+
+Some review articles that cover these topics:
+
+- Wolpert, D. M., & Ghahramani, Z. (2000). Computational principles of
+  movement neuroscience. nature neuroscience, 3, 1212-1217.
+
+- Wolpert, D. M., Ghahramani, Z., & Flanagan,
+  J. R. (2001). Perspectives and problems in motor learning. Trends in
+  cognitive sciences, 5(11), 487-494.
+
+- Shadmehr, R., Smith, M. A., & Krakauer, J. W. (2010). Error
+  correction, sensory prediction, and adaptation in motor
+  control. Annual review of neuroscience, 33, 89-108.
+
+- Krakauer, J. W., & Mazzoni, P. (2011). Human sensorimotor learning:
+  adaptation, skill, and beyond. Current opinion in neurobiology,
+  21(4), 636-644.
+
+** Learning using feedback signals to train feedforward controllers
+
+One of the challenges in the motor system when we start to think about
+learning from errors, is that movement errors are in a different
+coordinate frame than the control signals that lead to those
+errors. When our brain "guesses" at the control signals necessary to
+stimulate our arm muscles so that we throw a basketball towards a net,
+and we miss the net to the right, the motor error is in cartesian
+coordinates (the ball was 10 cm too high). How do we transform that
+"distal" error into an appropriate change in neural control signal to
+arm muscles?
+
+*** A Neural Network model using combined Forward and Inverse Models
+
+Michael Jordan (no, not [[http://en.wikipedia.org/wiki/Michael_Jordan][that one]], I'm talking about [[http://www.cs.berkeley.edu/~jordan/][the statistician
+from MIT/Berkeley]]) and David Rumelhart proposed a solution to this
+that involves a clever combination of forward and inverse internal
+models, arrange in a multi-layer neural network. The basic idea is
+that first, a forward model is trained, for example by "motor
+babbling". The brain sends out (initially wildly incorrect) motor
+commands, but monitors the input/output relationships, and models
+that, in the form of a forward model. Once trained even to a partial
+extent, the forward model is able to predict (at least partially) the
+motor output given a motor command input. Once the forward model is
+trained at least to be partially accurate, it can be used to transform
+motor errors into required changes in motor commands.
+
+- Jordan, M. I., & Rumelhart, D. E. (1992). Forward models: Supervised
+  learning with a distal teacher. Cognitive science, 16(3), 307-354.
+
+We haven't talked about neural networks yet, but it is our next topic,
+so we will return to this idea again alter.
+
+*** Feedback Error Learning
+
+Another interesting theory called /feedback error learning/ proposes
+that the CNS uses afferent feedback signals from a simplistic (and
+only partially accurate) feedback controller (e.g. at the spinal cord)
+as a "teaching signal" to train an accurate central neural controller.
+
+- Miyamoto, H., Kawato, M., Setoyama, T., & Suzuki,
+  R. (1988). Feedback-error-learning neural network for trajectory
+  control of a robotic manipulator. Neural Networks, 1(3), 251-265.
+
+- Kawato, M., & Gomi, H. (1992). A computational model of four regions
+  of the cerebellum based on feedback-error learning. Biological
+  cybernetics, 68(2), 95-103.
+
+- Predictive and feedback performance errors are signaled in the
+  simple spike discharge of individual purkinje cells. Popa LS, Hewitt
+  AL, Ebner TJ.  J Neurosci. 2012 Oct 31;32(44):15345-58.
+
+We will return to the question of motor learning after we talk about
+neural network models and learning more generally.
 
 [ next ]
