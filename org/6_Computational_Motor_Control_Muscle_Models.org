@@ -191,6 +191,10 @@ T_{flex} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{+} \\
 T_{ext} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{-}
 \end{eqnarray}
 
+#+ATTR_HTML: width="400px" align="center"
+#+CAPTION: Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles with dampers
+[[file:figs/onejointarm_muscle4.png]]
+
 #+BEGIN_SRC python
 def onejointmuscle(state,t,a0):
 	m = 1.65    # kg
