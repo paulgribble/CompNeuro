@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>6. Computational Motor Control: Muscle</title>
-<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="6. Computational Motor Control: Muscle"/>
 <meta name="generator" content="Org-mode"/>
 <meta name="generated" content="fall 2012"/>
@@ -220,27 +220,38 @@ for the JavaScript code below.
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">Introduction</a></li>
-<li><a href="#sec-2">Modelling simple torque muscles: constant torque</a>
+<li><a href="#sec-2">Modelling simple torque muscles</a>
 <ul>
-<li><a href="#sec-2-1">Questions</a></li>
+<li><a href="#sec-2-1">Constant Torque Muscle</a>
+<ul>
+<li><a href="#sec-2-1-1">Questions</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">Modelling simple torque muscles: two antagonistic muscles</a>
+<li><a href="#sec-2-2">Two Antagonistic Torque Muscles</a>
 <ul>
-<li><a href="#sec-3-1">Questions</a></li>
+<li><a href="#sec-2-2-1">Questions</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">Modelling simple torque muscles: linear springs</a>
+<li><a href="#sec-2-3">Muscles as Linear Springs</a>
 <ul>
-<li><a href="#sec-4-1">Questions</a></li>
+<li><a href="#sec-2-3-1">Questions</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">Modelling simple torque muscles: linear spring-dampers</a>
+<li><a href="#sec-2-4">Muscles as Linear Spring-Dampers</a>
 <ul>
-<li><a href="#sec-5-1">Questions</a></li>
+<li><a href="#sec-2-4-1">Questions</a></li>
+</ul></li>
 </ul>
 </li>
-<li><a href="#sec-6">Introduction to Hill-type muscle models</a></li>
+<li><a href="#sec-3">Introduction to Hill-type muscle models</a>
+<ul>
+<li><a href="#sec-3-1">The SE</a></li>
+<li><a href="#sec-3-2">The CE: the force-length relationship</a></li>
+<li><a href="#sec-3-3">The CE: the force-velocity relationship</a></li>
+<li><a href="#sec-3-4">Modeling the interaction between muscle and skeleton</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">Simulations with a musculoskeletal model</a></li>
 </ul>
 </div>
 </div>
@@ -262,8 +273,16 @@ feedback, to our arm model. We will start with very simplified models of muscle 
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Modelling simple torque muscles: constant torque</h2>
+<h2 id="sec-2">Modelling simple torque muscles</h2>
 <div class="outline-text-2" id="text-2">
+
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1">Constant Torque Muscle</h3>
+<div class="outline-text-3" id="text-2-1">
 
 
 <p>
@@ -275,7 +294,7 @@ plane, with gravity:
 
 <div class="figure">
 <p><img src="figs/onejointarm_muscle.png" width="400px" align="center" alt="figs/onejointarm_muscle.png" /></p>
-<p>Schematic of a simple one-joint arm in a vertical plane with one muscle</p>
+<p>Schematic of a simple one-joint arm in a vertical plane with one muscle.</p>
 </div>
 
 
@@ -318,9 +337,9 @@ You can download a full program here that implements a simulation and animation 
 
 </div>
 
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1">Questions</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1">Questions</h4>
+<div class="outline-text-4" id="text-2-1-1">
 
 
 <ol>
@@ -340,9 +359,9 @@ You can download a full program here that implements a simulation and animation 
 
 </div>
 
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Modelling simple torque muscles: two antagonistic muscles</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2">Two Antagonistic Torque Muscles</h3>
+<div class="outline-text-3" id="text-2-2">
 
 
 <p>
@@ -353,7 +372,7 @@ muscle (like biceps brachii) and \(T_{me}\) from an "extensor" muscle
 
 <div class="figure">
 <p><img src="figs/onejointarm_muscle2.png" width="400px" align="center" alt="figs/onejointarm_muscle2.png" /></p>
-<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic muscles</p>
+<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic muscles.</p>
 </div>
 
 <p>
@@ -395,9 +414,9 @@ You can download a full program here that implements a simulation and animation 
 
 </div>
 
-<div id="outline-container-3-1" class="outline-3">
-<h3 id="sec-3-1">Questions</h3>
-<div class="outline-text-3" id="text-3-1">
+<div id="outline-container-2-2-1" class="outline-4">
+<h4 id="sec-2-2-1">Questions</h4>
+<div class="outline-text-4" id="text-2-2-1">
 
 
 <ol>
@@ -419,9 +438,9 @@ You can download a full program here that implements a simulation and animation 
 
 </div>
 
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">Modelling simple torque muscles: linear springs</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3">Muscles as Linear Springs</h3>
+<div class="outline-text-3" id="text-2-3">
 
 
 <p> 
@@ -438,7 +457,7 @@ T_{m} = -k(\theta-\theta_{0})
 
 <div class="figure">
 <p><img src="figs/onejointarm_muscle3.png" width="400px" align="center" alt="figs/onejointarm_muscle3.png" /></p>
-<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles</p>
+<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles.</p>
 </div>
 
 <p>
@@ -502,9 +521,9 @@ You can download a full program here that implements a simulation and animation 
 
 </div>
 
-<div id="outline-container-4-1" class="outline-3">
-<h3 id="sec-4-1">Questions</h3>
-<div class="outline-text-3" id="text-4-1">
+<div id="outline-container-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1">Questions</h4>
+<div class="outline-text-4" id="text-2-3-1">
 
 
 <ol>
@@ -527,9 +546,9 @@ You can download a full program here that implements a simulation and animation 
 
 </div>
 
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">Modelling simple torque muscles: linear spring-dampers</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4">Muscles as Linear Spring-Dampers</h3>
+<div class="outline-text-3" id="text-2-4">
 
 
 <p>
@@ -548,7 +567,7 @@ T_{ext} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{-}
 
 <div class="figure">
 <p><img src="figs/onejointarm_muscle4.png" width="400px" align="center" alt="figs/onejointarm_muscle4.png" /></p>
-<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles with dampers</p>
+<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles with dampers.</p>
 </div>
 
 
@@ -579,9 +598,9 @@ You can download a full program here that implements a simulation and animation 
 
 </div>
 
-<div id="outline-container-5-1" class="outline-3">
-<h3 id="sec-5-1">Questions</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-2-4-1" class="outline-4">
+<h4 id="sec-2-4-1">Questions</h4>
+<div class="outline-text-4" id="text-2-4-1">
 
 
 <ol>
@@ -598,14 +617,291 @@ You can download a full program here that implements a simulation and animation 
 
 </div>
 </div>
+</div>
 
 </div>
 
-<div id="outline-container-6" class="outline-2">
-<h2 id="sec-6">Introduction to Hill-type muscle models</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">Introduction to Hill-type muscle models</h2>
+<div class="outline-text-2" id="text-3">
 
 
+<p>
+In reality, muscles show way more complicated behaviour then depicted
+in the last section. Over the last decades, several different types of
+muscle models have been proposed in the literature. Most commonly used
+are the Huxley model (Distrubuted Moments Model) and the Hill-type
+muscle model. The main difference between the two models is that the
+Huxley model is a structural model, whereas the Hill-type muscle model
+is strictly phenomenological. Although both models have their own
+specific strengths and weaknesses, in general these models both
+describe the dynamic behaviour of real muscles fairly well. Hill-type
+muscle models are more frequently used, mainly because they are easier
+to implement.
+</p>
+
+<div class="figure">
+<p><img src="figs/hillmuscle.png" width="300px" align="center" alt="figs/hillmuscle.png" /></p>
+<p>Schematic of a Hill-type muscle model.</p>
+</div>
+
+<p>
+The Hill-type muscle model is build around three elements: a parallel
+elastic element (PE) a contractile element (CE) and a serial element
+(SE). The PE represents the collagen tissue that is present in the
+muscle belly. The CE represents the actual contractile properties of
+the muscle and the SE represents all the tendinous tissue in series
+with the CE. Below, a short simplified description of the elements is
+provided.
+</p>
+
+</div>
+
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1">The SE</h3>
+<div class="outline-text-3" id="text-3-1">
+
+
+<p>
+Collagen tissue is a passive material that behaves like a non-linear
+spring. Although the behavior of a tendon (or aponeurosis, etc) is
+quite complex, the "normal" working range is well described by a
+quadratic spring:
+</p>
+
+
+\begin{equation}
+F_{SE} = \left( \left[ k_{SE}(l_{SE_0} - l_{SE}) \right]^{+} \right)^{2}
+\end{equation}
+
+<p>
+Here, \(k_{SE}\) is the tendon stiffness, \(l_{SE}\) the tendon length and
+\(l_{SE_0}\) the tendon slack length. \(k_{SE}\) is usually measured in
+vivo using very fast perturbations, for example using the so-called
+"quick-release experiment":
+</p>
+<ul>
+<li>Hof, AL. In vivo measurement of the series elasticity release curve
+  of human triceps surae muscle. J Biomech 1998 Sep;31(9):793-800
+</li>
+</ul>
+
+
+<p>
+The slack length of tendons are muscle specific and are in general
+measured in cadaver studies. Here is an example of the (relative)
+force-length curve of a SE:
+</p>
+
+<div class="figure">
+<p><img src="figs/forcelengthse.png" width="250px" align="center" alt="figs/forcelengthse.png" /></p>
+<p>The force-length curve of a SE. Force is plotted relative to the maximal isometric force of the muscle.</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2">The CE: the force-length relationship</h3>
+<div class="outline-text-3" id="text-3-2">
+
+
+<p>
+Due to their contractile proteins (actin and myosin, etc.), muscles
+are capable of actively generating force. In contrast with the Huxley
+model, the Hill-type muscle model does not model the interactions of
+the proteins themselves, but rather the experimentally observed
+mechanical behaviour of these interactions. Two salient mechanical
+phenomena are typically observed in muscles: the force-length
+relationship and the force-velocity relationship. To keep things
+computationally simple, without harming the descriptive power of the
+model too much, the isometric force-length relationship is often
+described by a parabola:
+</p>
+
+<div class="figure">
+<p><img src="figs/forcelengthce.png" width="300px" align="center" alt="figs/forcelengthce.png" /></p>
+<p>The isometric CE force (relative to the maximum isometric force) as a function of the length of the CE. The dashed line represents the isometric force when the muscle is stimulated half the maximum. Depicted is also the PE force. Note that the l<sub>PE</sub> is equal to l<sub>CE</sub>. The total force-length relationship is the sum of the active CE and passive PE force-length relationship. Also shown is the passive force of the PE: a quadratic spring that is similar to that of the SE.</p>
+</div>
+
+<p>
+The maximal isometric force of a real muscle can be estimated from
+cadaver studies by counting the amount of sarcomeres in parallel (or
+measuring the physiological cross-sectional area). The optimum length
+of a muscle can be estimated by counting the amount of sarcomeres in
+series, see for example:
+</p>
+<ul>
+<li>Murray WM, Buchanan TS, and Delp SL. The isometric functional
+  capacity of muscles that cross the elbow. J Biomech 33: 943-952, 200
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3">The CE: the force-velocity relationship</h3>
+<div class="outline-text-3" id="text-3-3">
+
+
+<p>
+The force-velocity relationship is a bit more difficult that the
+force-length relationship. This relationship describes the phenomenon
+that the (maximal) force that muscles can deliver depends on the speed
+with which they contract. If the muscle shortens (concentric
+contraction), the maximal force decreases and if the muscle lengthens
+(eccentric contraction) the maximal force increases:
+</p>
+
+<div class="figure">
+<p><img src="figs/forcevelocity.png" width="300px" align="center" alt="figs/forcevelocity.png" /></p>
+<p>The CE force as a function of the contraction velocity. The dashed line represents the force-velocity curve when the muscle is stimulated half the maximal value.</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4">Modeling the interaction between muscle and skeleton</h3>
+<div class="outline-text-3" id="text-3-4">
+
+
+<p>
+In the previous section we have implicitly assumed that the "length"
+of the torque muscles change linearly with joint angle. In reality,
+the length of the whole muscle (i.e. the muscle tendon complex length
+l<sub>MTC</sub>), depends also its origin and insertion and on the anatomy of
+the structures it is crossing. The relationship between l<sub>MTC</sub> and
+joint angle is obtained in cadaver studies using a very elegant
+technique proposed by Grieve et al. in 1978 (Biomechanics VI-A,
+International series on Biomechanics, University Park Press,
+Baltimore). First, at a reference position, the l<sub>MTC</sub> of a muscle is
+measured. Then, a piece of tendon is cut out and removed, and the
+distance between the two remaining parts is measured as a function of
+joint angle. The obtained data gives the change of l<sub>MTC</sub> as a function
+of the angle. Together with the reference length, the kinematic
+relationship between l<sub>MTC</sub> and joint angle is known. But what about
+the mechanical interaction?
+</p>
+<p>
+The muscles deliver a torque on the skeleton. The torque delivered by
+a muscle equals the force they deliver multiplied with the moment arm
+(lever arm) of that muscle. But what about the moment arms of real
+muscles? The nice thing about measuring l<sub>MTC</sub> as a function of joint
+angle, is that one gets the moment arm as a function of joint angle
+for free! Using the principle of "virtual energy", one can easily
+deduce that the moment arm equals the change in muscle length divided
+by the change in joint angle (thus, the derivative of l<sub>MTC</sub> with
+respect to joint angle:
+</p>
+
+
+\begin{equation}
+momentarm = \frac{\partial l_{MTC}}{\partial \theta}
+\end{equation}
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">Simulations with a musculoskeletal model</h2>
+<div class="outline-text-2" id="text-4">
+
+
+<p>
+Over the last decades several changes have been suggested to improve
+the predictive capacities of the Hill-type muscle model. For the
+interested reader, a detailed overview of a "full-blown"
+musculoskeletal model and its mathematical description can be found in:
+</p>
+<ul>
+<li>Kistemaker DA, Wong JD, Gribble PL (2010) The Central Nervous System
+  does not minimize energy cost in arm movements. J Neurophysiol, 104,
+  2985-94
+</li>
+</ul>
+
+
+
+<div class="figure">
+<p><img src="figs/fullblownschematic.png" width="400px" align="center" alt="figs/fullblownschematic.png" /></p>
+<p>Schematic of "full-blown" musculoskeletal model found in Kistemaker et al. (2010).</p>
+</div>
+
+<p>
+In addition to the Hill-type muscle model, a model of activation
+dynamics is added. Activation dynamics is the process that takes place
+when an action potential arrives at a muscle. This AP causes the
+release of Ca2+ from the sarcoplasmatic reticulum in the intercellular
+which leads to free binding places for cross-bridges between actin and
+myosin. 
+</p>
+<p>
+There are many examples in the literature of using physiologically
+realistic (to varying degrees) musculoskeletal models to investigate
+questions of neural control of movement, sensory-motor learning, etc,
+in all sorts of model systems like arm movements, speech production,
+locomotion, posture and balance, jumping, etc. Here are a few:
+</p>
+<ul>
+<li>Kuo, A. D. (1995). An optimal control model for analyzing human
+  postural balance. Biomedical Engineering, IEEE Transactions on,
+  42(1), 87-101.
+
+</li>
+<li>Taga, G. (1995). A model of the neuro-musculo-skeletal system for
+  human locomotion. Biological cybernetics, 73(2), 97-111.
+
+</li>
+<li>Gribble, P. L., &amp; Ostry, D. J. (1996). Origins of the power law
+  relation between movement velocity and curvature: modeling the
+  effects of muscle mechanics and limb dynamics. Journal of
+  Neurophysiology, 76(5), 2853-2860.
+
+</li>
+<li>Bobbert, M. F., Gerritsen, K. G., Litjens, M. C., &amp; Van Soest,
+  A. J. (1996). Why is countermovement jump height greater than squat
+  jump height?. Medicine and Science in Sports and Exercise, 28,
+  1402-1412.
+
+</li>
+<li>Gribble, P. L., Ostry, D. J., Sanguineti, V., &amp; Laboissière,
+  R. (1998). Are complex control signals required for human arm
+  movement?. Journal of Neurophysiology, 79(3), 1409-1424.
+
+</li>
+<li>Sanguineti, V., Laboissiere, R., &amp; Ostry, D. J. (1998). A dynamic
+  biomechanical model for neural control of speech production. The
+  Journal of the Acoustical Society of America, 103, 1615.
+
+</li>
+<li>Todorov, E. (2000). Direct cortical control of muscle activation in
+  voluntary arm movements: a model. Nature Neuroscience, 3, 391-398.
+
+</li>
+<li>Cheng, E. J., Brown, I. E., &amp; Loeb, G. E. (2000). Virtual muscle: a
+  computational approach to understanding the effects of muscle
+  properties on motor control. Journal of neuroscience methods,
+  101(2), 117-130.
+
+</li>
+<li>Guigon, E., Baraduc, P., &amp; Desmurget, M. (2007). Computational motor
+  control: redundancy and invariance. Journal of neurophysiology,
+  97(1), 331-347.
+
+</li>
+<li>Raphael, G., Tsianos, G. A., &amp; Loeb, G. E. (2010). Spinal-like
+  regulator facilitates control of a two-degree-of-freedom wrist. The
+  Journal of Neuroscience, 30(28), 9431-9444.
+</li>
+</ul>
 
 
 
