@@ -230,7 +230,17 @@ for the JavaScript code below.
 <li><a href="#sec-3-1">Questions</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">Modelling simple torque muscles: linear springs</a></li>
+<li><a href="#sec-4">Modelling simple torque muscles: linear springs</a>
+<ul>
+<li><a href="#sec-4-1">Questions</a></li>
+</ul>
+</li>
+<li><a href="#sec-5">Modelling simple torque muscles: linear spring-dampers</a>
+<ul>
+<li><a href="#sec-5-1">Questions</a></li>
+</ul>
+</li>
+<li><a href="#sec-6">Introduction to Hill-type muscle models</a></li>
 </ul>
 </div>
 </div>
@@ -415,8 +425,181 @@ You can download a full program here that implements a simulation and animation 
 
 
 <p> 
-x
+A very coarse approximation of muscle behaviour is that the muscles
+deliver a torque that depends linearly on joint angle. This is
+essentially the same as a spring:
 </p>
+
+
+\begin{equation}
+T_{m} = -k(\theta-\theta_{0})
+\end{equation}
+
+
+<div class="figure">
+<p><img src="figs/onejointarm_muscle3.png" width="400px" align="center" alt="figs/onejointarm_muscle3.png" /></p>
+<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles</p>
+</div>
+
+<p>
+Note that for simplicity we are ignoring muscle <a href="http://muscle.ucsd.edu/musintro/ma.shtml">moment arms</a> and we are
+assuming they are constant with respect to joint angle.
+</p>
+<p>
+The \(\theta_{0}\) parameter is the "rest length" angle for the elbow joint angle. This is the angle at which the muscles produce no force.
+</p>
+<p>
+You may have noticed that our spring muscles can "push" as well as pull. To fix this we adjust the muscle equation a bit:
+</p>
+
+
+\begin{eqnarray}
+T_{flex} &= &\left[ -k(\theta - \theta_{0}) \right]^{+} \\
+T_{ext} &= &\left[ -k(\theta - \theta_{0}) \right]^{-}
+\end{eqnarray}
+
+<p>
+The notation \(y=\left[x\right]^{+}\) and \(y=\left[x\right]^{-}\) means
+that \(y\) is \(x\) when \(x&gt;0\) (and zero otherwise) or \(-x\) when \(x&lt;0\) (or
+zero otherwise), respectively.
+</p>
+<p>
+So the equation of motion for linear spring-like muscles is:
+</p>
+
+
+\begin{equation}
+I \ddot{\theta} = m g l_{z} \cos\theta + \left[ -k(\theta - \theta_{0}) \right]^{+} + \left[ -k(\theta - \theta_{0}) \right]^{-}
+\end{equation}
+
+<p>
+Here is a Python function that implements this:
+</p>
+
+
+
+<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,a0):
+        m = 1.65    <span style="color: #af0000;"># kg</span>
+        g = -9.81   <span style="color: #af0000;"># m/s/s</span>
+        lz = 0.179  <span style="color: #af0000;"># metres</span>
+        I = 0.0779  <span style="color: #af0000;"># kg m**2</span>
+        k = -10.0   <span style="color: #af0000;"># Nm/rad</span>
+        a = state[0]
+        ad = state[1]
+        Tmf = <span style="color: #5f5f87;">max</span>(k*(a-a0),0)
+        Tme = <span style="color: #5f5f87;">min</span>(k*(a-a0),0)
+        add = (m*g*lz*cos(a) + Tmf + Tme) / I
+        <span style="color: #af00ff;">return</span> [ad,add]
+</pre>
+
+
+<p>
+You can download a full program here that implements a simulation and animation of this version of the arm:
+</p>
+<p>
+<a href="code/onejointmuscle_3.py">onejointmuscle_3.py</a>
+</p>
+
+</div>
+
+<div id="outline-container-4-1" class="outline-3">
+<h3 id="sec-4-1">Questions</h3>
+<div class="outline-text-3" id="text-4-1">
+
+
+<ol>
+<li>Play with the simulation found in <a href="code/onejointmuscle_3.py">onejointmuscle_3.py</a>. Vary the
+   value of <code>k</code>. What happens to the motion of the arm?
+
+</li>
+<li>Vary the value of <code>a0</code>. What happens?
+
+</li>
+<li>How would you change the code so that each muscle had its own
+   stiffness parameter <code>k</code> and its own rest angle <code>a0</code>?
+</li>
+</ol>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">Modelling simple torque muscles: linear spring-dampers</h2>
+<div class="outline-text-2" id="text-5">
+
+
+<p>
+A better approximation (yet still too coarse for good predictions
+about realistic muscle behaviour) is to incorporate a <a href="http://en.wikipedia.org/wiki/Dashpot">damper</a> in the
+muscle. A damper is a mechanical unit that delivers an opposing force
+that is proportional to velocity. It acts to "damp out" oscillations. Muscle force in a real muscle is also proportional to velocity, but in a more complex way, which we will see later. For now let's assume linear damping:
+</p>
+
+
+\begin{eqnarray}
+T_{flex} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{+} \\
+T_{ext} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{-}
+\end{eqnarray}
+
+
+<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,a0):
+        m = 1.65    <span style="color: #af0000;"># kg</span>
+        g = -9.81   <span style="color: #af0000;"># m/s/s</span>
+        lz = 0.179  <span style="color: #af0000;"># metres</span>
+        I = 0.0779  <span style="color: #af0000;"># kg m**2</span>
+        k = -10.0   <span style="color: #af0000;"># Nm/rad</span>
+        b =  0.5    <span style="color: #af0000;"># Nms/rad</span>
+        a = state[0]
+        ad = state[1]
+        Tmf = <span style="color: #5f5f87;">max</span>((k*(a-a0)) - (b*ad),0)
+        Tme = <span style="color: #5f5f87;">min</span>((k*(a-a0)) - (b*ad),0)
+        add = (m*g*lz*cos(a) + Tmf + Tme) / I
+        <span style="color: #af00ff;">return</span> [ad,add]
+</pre>
+
+
+<p>
+You can download a full program here that implements a simulation and animation of this version of the arm:
+</p>
+<p>
+<a href="code/onejointmuscle_4.py">onejointmuscle_4.py</a>
+</p>
+
+</div>
+
+<div id="outline-container-5-1" class="outline-3">
+<h3 id="sec-5-1">Questions</h3>
+<div class="outline-text-3" id="text-5-1">
+
+
+<ol>
+<li>Play with the simulation found in <a href="code/onejointmuscle_4.py">onejointmuscle_4.py</a>. Vary the
+   value of <code>b</code>. What happens to the motion of the arm?
+
+</li>
+<li>Can you find a combination of <code>k</code>, <code>b</code> and <code>a0</code> that makes the arm
+   rest in a stable equilibrium at \(\theta = -\pi/6\) radians?
+</li>
+</ol>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6">Introduction to Hill-type muscle models</h2>
+<div class="outline-text-2" id="text-6">
+
+
+
+
 
 <p>
 [ next ]

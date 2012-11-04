@@ -113,7 +113,116 @@ You can download a full program here that implements a simulation and animation 
 
 * Modelling simple torque muscles: linear springs
  
-x
+A very coarse approximation of muscle behaviour is that the muscles
+deliver a torque that depends linearly on joint angle. This is
+essentially the same as a spring:
+
+\begin{equation}
+T_{m} = -k(\theta-\theta_{0})
+\end{equation}
+
+#+ATTR_HTML: width="400px" align="center"
+#+CAPTION: Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles
+[[file:figs/onejointarm_muscle3.png]]
+
+Note that for simplicity we are ignoring muscle [[http://muscle.ucsd.edu/musintro/ma.shtml][moment arms]] and we are
+assuming they are constant with respect to joint angle.
+
+The $\theta_{0}$ parameter is the "rest length" angle for the elbow joint angle. This is the angle at which the muscles produce no force.
+
+You may have noticed that our spring muscles can "push" as well as pull. To fix this we adjust the muscle equation a bit:
+
+\begin{eqnarray}
+T_{flex} &= &\left[ -k(\theta - \theta_{0}) \right]^{+} \\
+T_{ext} &= &\left[ -k(\theta - \theta_{0}) \right]^{-}
+\end{eqnarray}
+
+The notation $y=\left[x\right]^{+}$ and $y=\left[x\right]^{-}$ means
+that $y$ is $x$ when $x>0$ (and zero otherwise) or $-x$ when $x<0$ (or
+zero otherwise), respectively.
+
+So the equation of motion for linear spring-like muscles is:
+
+\begin{equation}
+I \ddot{\theta} = m g l_{z} \cos\theta + \left[ -k(\theta - \theta_{0}) \right]^{+} + \left[ -k(\theta - \theta_{0}) \right]^{-}
+\end{equation}
+
+Here is a Python function that implements this:
+
+#+BEGIN_SRC python
+def onejointmuscle(state,t,a0):
+	m = 1.65    # kg
+	g = -9.81   # m/s/s
+	lz = 0.179  # metres
+	I = 0.0779  # kg m**2
+	k = -10.0   # Nm/rad
+	a = state[0]
+	ad = state[1]
+	Tmf = max(k*(a-a0),0)
+	Tme = min(k*(a-a0),0)
+	add = (m*g*lz*cos(a) + Tmf + Tme) / I
+	return [ad,add]
+#+END_SRC
+
+You can download a full program here that implements a simulation and animation of this version of the arm:
+
+[[file:code/onejointmuscle_3.py][onejointmuscle\_3.py]]
+
+** Questions
+
+1. Play with the simulation found in [[file:code/onejointmuscle_3.py][onejointmuscle\_3.py]]. Vary the
+   value of =k=. What happens to the motion of the arm?
+
+2. Vary the value of =a0=. What happens?
+
+3. How would you change the code so that each muscle had its own
+   stiffness parameter =k= and its own rest angle =a0=?
+
+
+* Modelling simple torque muscles: linear spring-dampers
+
+A better approximation (yet still too coarse for good predictions
+about realistic muscle behaviour) is to incorporate a [[http://en.wikipedia.org/wiki/Dashpot][damper]] in the
+muscle. A damper is a mechanical unit that delivers an opposing force
+that is proportional to velocity. It acts to "damp out" oscillations. Muscle force in a real muscle is also proportional to velocity, but in a more complex way, which we will see later. For now let's assume linear damping:
+
+\begin{eqnarray}
+T_{flex} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{+} \\
+T_{ext} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{-}
+\end{eqnarray}
+
+#+BEGIN_SRC python
+def onejointmuscle(state,t,a0):
+	m = 1.65    # kg
+	g = -9.81   # m/s/s
+	lz = 0.179  # metres
+	I = 0.0779  # kg m**2
+	k = -10.0   # Nm/rad
+	b =  0.5    # Nms/rad
+	a = state[0]
+	ad = state[1]
+	Tmf = max((k*(a-a0)) - (b*ad),0)
+	Tme = min((k*(a-a0)) - (b*ad),0)
+	add = (m*g*lz*cos(a) + Tmf + Tme) / I
+	return [ad,add]
+#+END_SRC
+
+You can download a full program here that implements a simulation and animation of this version of the arm:
+
+[[file:code/onejointmuscle_4.py][onejointmuscle\_4.py]]
+
+** Questions
+
+1. Play with the simulation found in [[file:code/onejointmuscle_4.py][onejointmuscle\_4.py]]. Vary the
+   value of =b=. What happens to the motion of the arm?
+
+2. Can you find a combination of =k=, =b= and =a0= that makes the arm
+   rest in a stable equilibrium at $\theta = -\pi/6$ radians?
+
+
+* Introduction to Hill-type muscle models
+
+
 
 
 [ next ]
