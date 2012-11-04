@@ -657,6 +657,11 @@ variables (e.g. torques) are used to plan arm movements.
   sensorimotor learning and control. Neural computation, 13(10),
   2201-2220.
 
+A cool paper on insect flight:
+
+- Berman, G. J., & Wang, Z. J. (2007). Energy-minimizing kinematics in
+  hovering insect flight. Journal of Fluid Mechanics, 582(1), 153-168.
+
 ** Electrophysiological studies
 
 Empirical studies after the Georgopoulos series of papers investigated
