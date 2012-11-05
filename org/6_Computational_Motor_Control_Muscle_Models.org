@@ -667,13 +667,13 @@ from MIT/Berkeley]]) and David Rumelhart proposed a solution to this
 that involves a clever combination of forward and inverse internal
 models, arrange in a multi-layer neural network. The basic idea is
 that first, a forward model is trained, for example by "motor
-babbling". The brain sends out (initially wildly incorrect) motor
-commands, but monitors the input/output relationships, and models
-that, in the form of a forward model. Once trained even to a partial
-extent, the forward model is able to predict (at least partially) the
-motor output given a motor command input. Once the forward model is
-trained at least to be partially accurate, it can be used to transform
-motor errors into required changes in motor commands.
+babbling". The brain sends out (initially incorrect) motor commands,
+but monitors the input/output relationships, and models that, in the
+form of a forward model. Once trained even to a partial extent, the
+forward model is able to predict (at least partially) the motor output
+given a motor command input. Once the forward model is trained at
+least to be partially accurate, it can be used to transform motor
+errors into required changes in motor commands.
 
 - Jordan, M. I., & Rumelhart, D. E. (1992). Forward models: Supervised
   learning with a distal teacher. Cognitive science, 16(3), 307-354.
