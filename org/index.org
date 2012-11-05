@@ -112,11 +112,11 @@
 -----
 
 ** Nov 5, 8 : Computational Motor Control: Muscle Models
-- [[file:code/assignment5_sol.py][assignment5\_sol.py]] and [[file:assignment5_figures.pdf][assignment5\_figures.pdf]]
+- assignment5\_sol.py and assignment5\_figures.py: coming soon ...
 - read Shadmehr & Wise book, [[file:readings/SW_07.pdf][Chapter 7]] and [[file:readings/SW_08.pdf][Chapter 8]] and supplementary
   documents: [[http://www.shadmehrlab.org/book/musclemodel.pdf][musclemodel.pdf]]
 - course notes: [[file:6_Computational_Motor_Control_Muscle_Models.html][6: Computational Motor Control: Muscle Models]]
-- assignment 6:
+- assignment 6: coming soon ...
 
 -----
 ** Nov 12, 15 : Computational Models of Learning: Perceptrons & Multi-Layer Neural Networks
@@ -139,10 +139,15 @@
   about how the brain works.
 - presentations are limited to *7 minutes each*! Note: this is
   difficult to pull off, you will have to practice your talk out
-  loud. Also be careful to choose your slides carefully.
+  loud. Also be careful to choose your slides carefully. There will be
+  a timer and a loud gong.
 - Question period will be limited to 1 to 2 minutes per talk.
-- Each student giving a talk must also submit a short paper in the
-  style of the [[http://www.jneurosci.org/site/misc/ifa_features.xhtml]["Journal Club"]] feature in the Journal of Neuroscience.
+- Each student giving a talk must also submit a short essay on their
+  chosen paper. Your essay should follow the "Content and Format"
+  style of the [[http://www.jneurosci.org/site/misc/ifa_features.xhtml]["Journal Club"]] feature in the Journal of
+  Neuroscience. You can choose any paper you want, it doesn't have to
+  be a J. Neurosci. paper and it doesn't have to have been published
+  within the past 2 months.
 
 -----
 * Links
