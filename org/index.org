@@ -148,6 +148,10 @@
   Neuroscience. You can choose any paper you want, it doesn't have to
   be a J. Neurosci. paper and it doesn't have to have been published
   within the past 2 months.
+- Essays are due Sunday Dec 9th, 2012, no later than 11:59pm
+  EST. Please send your essay to me by email, as a single .pdf
+  file. The filename should be =<lastname>_essay.pdf=
+  (e.g. =gribble\_essay.pdf=).
 
 -----
 * Links
