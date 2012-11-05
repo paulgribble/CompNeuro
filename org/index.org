@@ -112,7 +112,7 @@
 -----
 
 ** Nov 5, 8 : Computational Motor Control: Muscle Models
-- [[file:code/assignment5_sol.py][assignment5\_sol.py]] and [[file:code/assignment5_figures.pdf][assignment5\_figures.pdf]]: coming soon ...
+- assignment5\_sol.py and [[file:figs/assignment5_figures.pdf][assignment5\_figures.pdf]] : coming soon ...
 - read Shadmehr & Wise book, [[file:readings/SW_07.pdf][Chapter 7]] and [[file:readings/SW_08.pdf][Chapter 8]] and supplementary
   documents: [[http://www.shadmehrlab.org/book/musclemodel.pdf][musclemodel.pdf]]
 - course notes: [[file:6_Computational_Motor_Control_Muscle_Models.html][6: Computational Motor Control: Muscle Models]]

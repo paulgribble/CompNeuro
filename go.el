@@ -35,7 +35,7 @@
 
 	("CompNeuro_figs"
 	 :base-directory "figs/"
-	 :base-extension "png\\|jpg"
+	 :base-extension "png\\|jpg\\|pdf"
 	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/figs/"
 	 :publishing-function org-publish-attachment
 	 :recursive t
