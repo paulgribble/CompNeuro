@@ -133,6 +133,16 @@
 
 -----
 ** Dec 3 : student presentations
+- each of the 12 students registered in the course will present one
+  paper from the literature in their research area in which a
+  computational modelling approach was used to address a question
+  about how the brain works.
+- presentations are limited to *7 minutes each*! Note: this is
+  difficult to pull off, you will have to practice your talk out
+  loud. Also be careful to choose your slides carefully.
+- Question period will be limited to 1 to 2 minutes per talk.
+- Each student giving a talk must also submit a short paper in the
+  style of the [[http://www.jneurosci.org/site/misc/ifa_features.xhtml]["Journal Club"]] feature in the Journal of Neuroscience.
 
 -----
 * Links
