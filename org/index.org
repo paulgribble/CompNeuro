@@ -120,10 +120,21 @@
 
 -----
 ** Nov 12, 15 : Computational Models of Learning: Perceptrons & Multi-Layer Neural Networks
+- some lecture slides: [[file:figs/lecture5.pdf][lecture5.pdf]]
+- Readings:
+  - [[file:readings/Trappenberg5.pdf][Trappenberg5.pdf]], [[file:readings/Trappenberg6.pdf][Trappenberg6.pdf]], [[file:readings/Robinson92.pdf][Robinson92.pdf]], [[file:readings/Mitchell4.pdf][Mitchell4.pdf]]
+    (4.8 optional)
+  - Optional: [[file:readings/Haykin0.pdf][Haykin0.pdf]],  [[file:readings/Haykin1.pdf][Haykin1.pdf]],  [[file:readings/Haykin4.pdf][Haykin4.pdf]]
+  - tutorial: [[http://galaxy.agh.edu.pl/~vlsi/AI/backp_t_en/backprop.html][Principles of training multi-layer neural network using
+    backpropagation]]
+- A classic reference: McClelland & Rumelhart PDP books [[file:readings/PDP.pdf][PDP.pdf]],
+  [[file:readings/PDP_Handbook.pdf][PDP\_Handbook.pdf]]
+- [[http://www.cs.toronto.edu/~hinton/absps/sciam93.pdf][Simulating Brain Damage]]
 - for a really nice overview of all sort of NNs, see: [[https://www.coursera.org/course/neuralnets][Neural Networks
   for Machine Learning]] (Geoff Hinton, Univ Toronto, Coursera online
   course)
-- read Shadmher & Wise book, [[file:readings/SW_24.pdf][Chapter 24]]
+- for thoughts about motor learning, read Shadmher & Wise book,
+  [[file:readings/SW_24.pdf][Chapter 24]]
 
 -----
 ** Nov 19, 22 : Computational Models of Learning: Other Neural Network Architectures
@@ -186,6 +197,20 @@
   (youtube video) iPython Notebook stuff starts at about 1:15:40, and
   parallel programming stuff starts at around 2:13:00
 - [[http://nbviewer.ipython.org/][IPython Notebook Viewer]]
+
+** Machine Learning Resources
+- [[http://yann.lecun.com/exdb/mnist/][The MNIST Database of handwritten digits]]
+- [[http://archive.ics.uci.edu/ml/][UCI Machine Learning Repository]]
+- [[http://cs.nyu.edu/~roweis/data.html][Some datasets for machine learning: digits, faces, text, speech]]
+- [[http://www.dacya.ucm.es/jam/download.htm][Software tools for reinforcement learning, neural networks and robotics]]
+- [[http://kasrl.org/jaffe.html][The Japanese Female Facial Expression (JAFFE) Database]]
+- [[http://www.socsci.ru.nl:8180/RaFD2/RaFD?p=main][Radboud Faces Database]]
+- [[http://mplab.ucsd.edu/wordpress/?page_id=48][Machine Perception Laboratory Demos]]
+- [[http://mplab.ucsd.edu/grants/project1/free-software/MPTWebSite/introduction.html][Machine Perception Toolbox]]
+- [[http://www.cs.toronto.edu/~hinton/][Geoff Hinton's Webpage]] (with lots of demos, tutorials, talks and
+  papers on Neural Networks)
+- [[http://www.cs.toronto.edu/~hinton/csc321/][Introduction to Neural Networks and Machine Learning]] (U of T course
+  by Geoff Hinton)
 
 -----
 
