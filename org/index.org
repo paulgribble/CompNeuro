@@ -116,7 +116,8 @@
 - read Shadmehr & Wise book, [[file:readings/SW_07.pdf][Chapter 7]] and [[file:readings/SW_08.pdf][Chapter 8]] and supplementary
   documents: [[http://www.shadmehrlab.org/book/musclemodel.pdf][musclemodel.pdf]]
 - course notes: [[file:6_Computational_Motor_Control_Muscle_Models.html][6: Computational Motor Control: Muscle Models]]
-- assignment 6: coming soon ...
+- assignment 6: catch up on readings.
+- *note* no class on Thurs Nov 8.
 
 -----
 ** Nov 12, 15 : Computational Models of Learning: Perceptrons & Multi-Layer Neural Networks
