@@ -137,6 +137,7 @@
 - for thoughts about motor learning, read Shadmher & Wise book,
   [[file:readings/SW_24.pdf][Chapter 24]]
 - Software: [[http://pybrain.org/][PyBrain]]
+- code examples: [[file:code/xor.py][xor.py]] [[file:code/mnist.tgz][mnist.tgz]]
 
 -----
 ** Nov 19, 22 : Computational Models of Learning: Other Neural Network Architectures
