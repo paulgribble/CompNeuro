@@ -39,7 +39,7 @@ def layer_deltas(err, act):
 
 # a function to update weights
 # N is learning rate parameter and M is momentum parameter
-def layer_update_weights(wgt, deltas, act, wgt_prev_change):
+def layer_weight_change(deltas, act):
 	return transpose(act)*deltas
 
 
@@ -97,11 +97,11 @@ for i in range(maxepochs):            						# iterate over epochs
 
 		# update the weights !
 		# output weights
-		wgt_out_change = layer_update_weights(wgt_out, deltas_out, act_hid, wgt_out_prev_change)
+		wgt_out_change = layer_weight_change(deltas_out, act_hid)
 		wgt_out = wgt_out + (N * wgt_out_change) + (M * wgt_out_prev_change)
 		wgt_out_prev_change = wgt_out_change
 		# hidden weights
-		wgt_hid_change = layer_update_weights(wgt_hid, deltas_hid, act_inp, wgt_hid_prev_change)
+		wgt_hid_change = layer_weight_change(deltas_hid, act_inp)
 		wgt_hid = wgt_hid + (N * wgt_hid_change) + (M * wgt_hid_prev_change)
 		wgt_hid_prev_change = wgt_hid_change
 
