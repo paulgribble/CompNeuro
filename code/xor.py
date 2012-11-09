@@ -70,7 +70,7 @@ wgt_out_prev_change = zeros(shape(wgt_out)) # for first epoch
 wgt_hid_prev_change = zeros(shape(wgt_hid)) # for first epoch
 maxepochs = 10000
 errors = zeros((maxepochs,1))
-N = 0.05 # learning rate parameter
+N = 0.01 # learning rate parameter
 M = 0.10 # momentum parameter
 
 # train the sucker!
@@ -85,7 +85,7 @@ for i in range(maxepochs):            						# iterate over epochs
 
 		# compute error gradients for each layer,
 		# starting from the output layer and working backwards
-		err_out = xor_out[j,:] - act_out 
+		err_out = (xor_out[j,:] - act_out)
 		deltas_out = layer_deltas(err_out, act_out)
 		err_hid = layer_errors(deltas_out, wgt_out)
 		deltas_hid = layer_deltas(err_hid, act_hid)
