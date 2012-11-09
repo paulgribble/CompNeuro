@@ -73,12 +73,18 @@ wgt_hid = rand(2,2)*0.4 - 0.2		# [inp1,inp2]       x-> [hid1,hid2]
 wgt_out = rand(2,1)*0.4 - 0.2		# [hid1,hid2      ] x-> [out1]
 wgt_out_prev_change = zeros(shape(wgt_out)) # for first epoch
 wgt_hid_prev_change = zeros(shape(wgt_hid)) # for first epoch
-maxepochs = 10000
+maxepochs = 1000
 errors = zeros((maxepochs,1))
 N = 0.05 # learning rate parameter
 M = 0.10 # momentum parameter
 
-# train the sucker!
+# we are going to plot the network's performance over the course of learning
+# inputs will be a regular grid of [inp1,inp2] points
+n_grid = 20
+g_grid = linspace(-1.0, 2.0, n_grid)
+g1,g2 = meshgrid(g_grid, g_grid)
+figure()
+
 for i in range(maxepochs):            						# iterate over epochs
 	net_out = zeros(shape(xor_out))
 	for j in range(shape(xor_in)[0]): 						# iterate over training examples
@@ -107,11 +113,24 @@ for i in range(maxepochs):            						# iterate over epochs
 
 	# compute errors across all targets
 	errors[i] = 0.5*sum(square(net_out - xor_out))
-	if ((i % 100)==0):
+	if ((i % 1)==0):
 		print "*** EPOCH %4d/%4d : SSE = %6.5f" % (i,maxepochs,errors[i])
 		print net_out
+		# now do our plotting
+		net_perf = zeros(shape(g1))
+		for i1 in range(n_grid):
+			for i2 in range(n_grid):
+				act_inp = matrix([g1[i1,i2],g2[i1,i2]])
+				act_hid = layer_forward(act_inp, wgt_hid)
+				o_grid = layer_forward(act_hid, wgt_out)
+				o_grid = int(o_grid >= 0.50) # hardlim
+				net_perf[i1,i2] = o_grid
+		cla()
+		imshow(net_perf, extent=[-1,2,-1,2])
+		plot((0,0,1,1),(0,1,0,1),'ws',markersize=10)
+		axis([-1, 2, -1, 2])
+		draw()
 
-# plot SSE over time
 figure()
 subplot(2,1,1)
 plot(errors)
