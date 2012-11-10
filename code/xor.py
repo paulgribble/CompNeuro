@@ -1,5 +1,5 @@
 # feedforward neural network trained with backpropagation
-# input(2) -> hidden(2) -> output(1)
+# input(2+bias) -> hidden(2+bias) -> output(1)
 # trained on the XOR problem
 # Paul Gribble, November 2012
 # paul [at] gribblelab [dot] org
@@ -38,13 +38,19 @@ xor_out = matrix([[0.0],
 		  [1.0],
 		  [0.0]	])
 
-# initialize our nnet : input(2) -> hidden(2) -> output(1)
-# initialize network weights to small random values
-wgt_hid = rand(2,2)*0.5 - 0.25		# [inp1,inp2] x-> [hid1,hid2]
-wgt_out = rand(2,1)*0.5 - 0.25		# [hid1,hid2] x-> [out1]
-wgt_out_prev_change = zeros(shape(wgt_out))
-wgt_hid_prev_change = zeros(shape(wgt_hid))
-maxepochs = 10000
+# out nnet: input(2+bias) -> hidden(2+bias) -> output(1)
+# initialize weights and biases to small random values
+sigw = 0.5
+w_hid = rand(2,2)*sigw		# [inp1,inp2] x-> [hid1,hid2]
+b_hid = rand(1,2)*sigw		# 1.0 -> [b_hid1,b_hid2]
+w_out = rand(2,1)*sigw		# [hid1,hid2] x-> [out1]
+b_out = rand(1,1)*sigw		# 1.0 -> [b_out1]
+w_out_prev_change = zeros(shape(w_out))
+b_out_prev_change = zeros(shape(b_out))
+w_hid_prev_change = zeros(shape(w_hid))
+b_hid_prev_change = zeros(shape(b_hid))
+
+maxepochs = 5000
 errors = zeros((maxepochs,1))
 N = 0.01 # learning rate parameter
 M = 0.10 # momentum parameter
@@ -55,23 +61,30 @@ for i in range(maxepochs):
 	for j in range(shape(xor_in)[0]): # for each training example
 		# forward pass
 		act_inp = xor_in[j,:]
-		act_hid = tansig( act_inp * wgt_hid )
-		act_out = tansig( act_hid * wgt_out )
+		act_hid = tansig( (act_inp * w_hid) + b_hid )
+		act_out = tansig( (act_hid * w_out) + b_out )
 		net_out[j,:] = act_out[0,:]
 
 		# error gradients starting at outputs and working backwards
 		err_out = (act_out - xor_out[j,:])
 		deltas_out = multiply(dtansig(act_out), err_out)
-		err_hid = deltas_out * transpose(wgt_out)
+		err_hid = deltas_out * transpose(w_out)
 		deltas_hid = multiply(dtansig(act_hid), err_hid)
 
-		# update the weights!
-		wgt_out_change = -2.0 * transpose(act_hid)*deltas_out
-		wgt_out = wgt_out + (N * wgt_out_change) + (M * wgt_out_prev_change)
-		wgt_out_prev_change = wgt_out_change
-		wgt_hid_change = -2.0 * transpose(act_inp)*deltas_hid
-		wgt_hid = wgt_hid + (N * wgt_hid_change) + (M * wgt_hid_prev_change)
-		wgt_hid_prev_change = wgt_hid_change
+		# update the weights and bias units
+		w_out_change = -2.0 * transpose(act_hid)*deltas_out
+		w_out = w_out + (N * w_out_change) + (M * w_out_prev_change)
+		w_out_prev_change = w_out_change
+		b_out_change = -2.0 * deltas_out
+		b_out = b_out + (N * b_out_change) + (M * b_out_prev_change)
+		b_out_prev_change = b_out_change
+
+		w_hid_change = -2.0 * transpose(act_inp)*deltas_hid
+		w_hid = w_hid + (N * w_hid_change) + (M * w_hid_prev_change)
+		w_hid_prev_change = w_hid_change
+		b_hid_change = -2.0 * deltas_hid
+		b_hid = b_out + (N * b_hid_change) + (M * b_hid_prev_change)
+		b_hid_prev_change = b_hid_change
 
 	# compute errors across all targets
 	errors[i] = 0.5 * sum(square(net_out - xor_out))

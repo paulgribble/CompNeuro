@@ -1,5 +1,5 @@
 # feedforward neural network trained with backpropagation
-# input(2) -> hidden(2) -> output(1)
+# input(2+bias) -> hidden(2+bias) -> output(1)
 # trained on the XOR problem
 # Paul Gribble, November 2012
 # paul [at] gribblelab [dot] org
@@ -26,24 +26,30 @@ def dtansig(x):
 
 # numpy matrix of input examples
 # 4 training examples, each with 2 inputs
-xor_in = matrix([	[0.0, 0.0],
-					[0.0, 1.0],
-					[1.0, 0.0],
-					[1.0, 1.0]	])
+xor_in = matrix([[0.0, 0.0],
+		 [0.0, 1.0],
+		 [1.0, 0.0],
+		 [1.0, 1.0]	])
 
 # numpy matrix of corresponding outputs
 # 4 training examples, each with 1 output
-xor_out = matrix([	[0.0],
-					[1.0],
-					[1.0],
-					[0.0]	])
+xor_out = matrix([[0.0],
+		  [1.0],
+		  [1.0],
+		  [0.0]	])
 
-# initialize our nnet : input(2) -> hidden(2) -> output(1)
-# initialize network weights to small random values
-wgt_hid = rand(2,2)*0.5 - 0.25		# [inp1,inp2] x-> [hid1,hid2]
-wgt_out = rand(2,1)*0.5 - 0.25		# [hid1,hid2] x-> [out1]
-wgt_out_prev_change = zeros(shape(wgt_out))
-wgt_hid_prev_change = zeros(shape(wgt_hid))
+# out nnet: input(2+bias) -> hidden(2+bias) -> output(1)
+# initialize weights and biases to small random values
+sigw = 0.5
+w_hid = rand(2,2)*sigw		# [inp1,inp2] x-> [hid1,hid2]
+b_hid = rand(1,2)*sigw		# 1.0 -> [b_hid1,b_hid2]
+w_out = rand(2,1)*sigw		# [hid1,hid2] x-> [out1]
+b_out = rand(1,1)*sigw		# 1.0 -> [b_out1]
+w_out_prev_change = zeros(shape(w_out))
+b_out_prev_change = zeros(shape(b_out))
+w_hid_prev_change = zeros(shape(w_hid))
+b_hid_prev_change = zeros(shape(b_hid))
+
 maxepochs = 1000
 errors = zeros((maxepochs,1))
 N = 0.01 # learning rate parameter
@@ -57,28 +63,35 @@ g1,g2 = meshgrid(g_grid, g_grid)
 figure()
 
 # train the sucker!
-for i in range(maxepochs):						# iterate over epochs
+for i in range(maxepochs):
 	net_out = zeros(shape(xor_out))
-	for j in range(shape(xor_in)[0]):			# iterate over training examples
+	for j in range(shape(xor_in)[0]): # for each training example
 		# forward pass
-		act_inp = xor_in[j,:]					# select the first training example
-		act_hid = tansig( act_inp * wgt_hid )	# hidden unit activations
-		act_out = tansig( act_hid * wgt_out )	# output unit activations
+		act_inp = xor_in[j,:]
+		act_hid = tansig( (act_inp * w_hid) + b_hid )
+		act_out = tansig( (act_hid * w_out) + b_out )
 		net_out[j,:] = act_out[0,:]
 
-		# error gradients starting from outputs and working backwards
+		# error gradients starting at outputs and working backwards
 		err_out = (act_out - xor_out[j,:])
 		deltas_out = multiply(dtansig(act_out), err_out)
-		err_hid = deltas_out * transpose(wgt_out)
+		err_hid = deltas_out * transpose(w_out)
 		deltas_hid = multiply(dtansig(act_hid), err_hid)
 
-		# update the weights!
-		wgt_out_change = -2.0 * transpose(act_hid)*deltas_out
-		wgt_out = wgt_out + (N * wgt_out_change) + (M * wgt_out_prev_change)
-		wgt_out_prev_change = wgt_out_change
-		wgt_hid_change = -2.0 * transpose(act_inp)*deltas_hid
-		wgt_hid = wgt_hid + (N * wgt_hid_change) + (M * wgt_hid_prev_change)
-		wgt_hid_prev_change = wgt_hid_change
+		# update the weights and bias units
+		w_out_change = -2.0 * transpose(act_hid)*deltas_out
+		w_out = w_out + (N * w_out_change) + (M * w_out_prev_change)
+		w_out_prev_change = w_out_change
+		b_out_change = -2.0 * deltas_out
+		b_out = b_out + (N * b_out_change) + (M * b_out_prev_change)
+		b_out_prev_change = b_out_change
+
+		w_hid_change = -2.0 * transpose(act_inp)*deltas_hid
+		w_hid = w_hid + (N * w_hid_change) + (M * w_hid_prev_change)
+		w_hid_prev_change = w_hid_change
+		b_hid_change = -2.0 * deltas_hid
+		b_hid = b_out + (N * b_hid_change) + (M * b_hid_prev_change)
+		b_hid_prev_change = b_hid_change
 
 	# compute errors across all targets
 	errors[i] = 0.5 * sum(square(net_out - xor_out))
@@ -90,7 +103,7 @@ for i in range(maxepochs):						# iterate over epochs
 		for i1 in range(n_grid):
 			for i2 in range(n_grid):
 				act_inp = matrix([g1[i1,i2],g2[i1,i2]])
-				o_grid = tansig(tansig(act_inp * wgt_hid) * wgt_out)
+				o_grid = tansig( (tansig( (act_inp * w_hid) + b_hid ) * w_out) + b_out )
 				o_grid = int(o_grid >= 0.50) # hardlim
 				net_perf[i1,i2] = o_grid
 		cla()
