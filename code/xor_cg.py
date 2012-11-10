@@ -94,7 +94,7 @@ w0 = hstack((reshape(wgt_in,(1,n_in*n_hid)),
 
 # optimize using conjugate gradient descent
 out = fmin_cg(f, w0, fprime=fd, args=(params,),
-	      full_output=1, retall=1)
+	      full_output=True, retall=True, disp=True)
 wopt,fopt,func_calls,grad_calls,warnflag,allvecs = out
                    
 
