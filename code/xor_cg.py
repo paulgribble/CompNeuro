@@ -8,10 +8,6 @@
 
 # ipython --pylab
 
-##########################
-# some utility functions #
-##########################
-
 import time
 random.seed(int(time.time()))
 
@@ -66,21 +62,21 @@ def fd(x,params):
 	grad_hid = transpose(pat_in)*deltas_hid
 	return pack_weights(grad_hid, grad_out, params)
 
-##########################
-#     the good stuff     #
-##########################
+############################
+#   train on XOR mapping   #
+############################
 
 from scipy.optimize import fmin_cg
 
-xor_in = matrix([	[0.0, 0.0],
-			[0.0, 1.0],
-			[1.0, 0.0],
-			[1.0, 1.0]	])
+xor_in = matrix([[0.0, 0.0],
+		 [0.0, 1.0],
+		 [1.0, 0.0],
+		 [1.0, 1.0]	])
 
-xor_out = matrix([	[0.0],
-			[1.0],
-			[1.0],
-			[0.0]	])
+xor_out = matrix([[0.0],
+		  [1.0],
+		  [1.0],
+		  [0.0]	])
 
 # network parameters
 n_in = shape(xor_in)[1]
@@ -97,20 +93,11 @@ w0 = hstack((reshape(wgt_in,(1,n_in*n_hid)),
 	     reshape(wgt_out,(1,n_hid*n_out))))[0]
 
 # optimize using conjugate gradient descent
-w,f,fn,gn,warnflag,allvecs = fmin_cg(f, w0, fprime=fd, args=(params,),
-				     full_output=1, retall=1)
+out = fmin_cg(f, w0, fprime=fd, args=(params,),
+	      full_output=1, retall=1)
+wopt,fopt,func_calls,grad_calls,warnflag,allvecs = out
+                   
 
 # print net performance
-net_out = net_forward(w,params)
+net_out = net_forward(wopt,params)
 print net_out.round(3)
-
-
-
-
-
-
-
-
-
-
-

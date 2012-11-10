@@ -26,17 +26,17 @@ def dtansig(x):
 
 # numpy matrix of input examples
 # 4 training examples, each with 2 inputs
-xor_in = matrix([	[0.0, 0.0],
-					[0.0, 1.0],
-					[1.0, 0.0],
-					[1.0, 1.0]	])
+xor_in = matrix([[0.0, 0.0],
+		 [0.0, 1.0],
+		 [1.0, 0.0],
+		 [1.0, 1.0]	])
 
 # numpy matrix of corresponding outputs
 # 4 training examples, each with 1 output
-xor_out = matrix([	[0.0],
-					[1.0],
-					[1.0],
-					[0.0]	])
+xor_out = matrix([[0.0],
+		  [1.0],
+		  [1.0],
+		  [0.0]	])
 
 # initialize our nnet : input(2) -> hidden(2) -> output(1)
 # initialize network weights to small random values
@@ -50,16 +50,16 @@ N = 0.01 # learning rate parameter
 M = 0.10 # momentum parameter
 
 # train the sucker!
-for i in range(maxepochs):						# iterate over epochs
+for i in range(maxepochs):
 	net_out = zeros(shape(xor_out))
-	for j in range(shape(xor_in)[0]):			# iterate over training examples
+	for j in range(shape(xor_in)[0]): # for each training example
 		# forward pass
-		act_inp = xor_in[j,:]					# select the first training example
-		act_hid = tansig( act_inp * wgt_hid )	# hidden unit activations
-		act_out = tansig( act_hid * wgt_out )	# output unit activations
+		act_inp = xor_in[j,:]
+		act_hid = tansig( act_inp * wgt_hid )
+		act_out = tansig( act_hid * wgt_out )
 		net_out[j,:] = act_out[0,:]
 
-		# error gradients starting from outputs and working backwards
+		# error gradients starting at outputs and working backwards
 		err_out = (act_out - xor_out[j,:])
 		deltas_out = multiply(dtansig(act_out), err_out)
 		err_hid = deltas_out * transpose(wgt_out)
