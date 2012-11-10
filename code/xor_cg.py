@@ -86,11 +86,10 @@ n_pats = shape(xor_in)[0]
 params = [n_in, n_hid, n_out, xor_in, xor_out]
 
 # initialize weights to small random values
-wgt_in = rand(n_in,n_hid)*0.2 - 0.1
-wgt_out = rand(n_hid,n_out)*0.2 - 0.1
+wgt_hid = matrix(rand(n_in,n_hid))*0.2 - 0.1
+wgt_out = matrix(rand(n_hid,n_out))*0.2 - 0.1
 # pack weights into a single long array
-w0 = hstack((reshape(wgt_in,(1,n_in*n_hid)),
-	     reshape(wgt_out,(1,n_hid*n_out))))[0]
+w0 = pack_weights(wgt_hid, wgt_out, params)
 
 # optimize using conjugate gradient descent
 out = fmin_cg(f, w0, fprime=fd, args=(params,),
