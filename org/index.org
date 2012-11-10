@@ -139,8 +139,8 @@
 - Software: [[http://pybrain.org/][PyBrain]]
 - code examples:
   - [[file:code/xor.py][xor.py]] 
+  - [[file:code/xor_cg.py][xor\_cg.py]]
   - [[file:code/xor_plot.py][xor\_plot.py]]
-  - [[file:xode/xor_cg.py][xor\_cg.py]]
   - [[file:code/mnist.tgz][mnist.tgz]]
 - [[http://yann.lecun.com/exdb/mnist/][MNIST Database of handwritten digits]]
 - [[http://arxiv.org/abs/1003.0358][Deep Big Simple Neural Nets Excel on Handwritten Digit Recognition]]
