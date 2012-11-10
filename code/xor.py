@@ -110,8 +110,12 @@ for i in range(maxepochs):            						# iterate over epochs
 figure()
 subplot(2,1,1)
 plot(errors)
+xlabel('EPOCH')
+ylabel('SS_ERROR')
 subplot(2,1,2)
 plot(log(errors))
+xlabel('EPOCH')
+ylabel('LOG (SS_ERROR)')
 
 
 

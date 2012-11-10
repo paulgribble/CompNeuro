@@ -15,94 +15,47 @@
 import time
 random.seed(int(time.time()))
 
-# sigmoid activation function
 def tansig(x):
+	""" sigmoid activation function """
 	return tanh(x)
 
-# derivative of sigmoid function
-# (needed for calculating error gradients using backprop)
 def dtansig(x):
-	# in case x is a vector, multiply() will do element-wise multiplication
-	return 1.0 - (multiply(x,x))
-
-# a function that will compute activations of a layer
-def layer_forward(act, wgt):
-	return tansig( act * wgt )
-
-# a function to compute errors for a layer
-def layer_errors(deltas, wgt):
-	return deltas * transpose(wgt)
-
-# a function that will compute error gradients for a layer
-def layer_deltas(err, act):
-	return multiply(dtansig(act), err) # element-wise multiply
-
-# a function to update weights
-# N is learning rate parameter and M is momentum parameter
-def layer_update_weights(wgt, deltas, act, wgt_prev_change):
-	return transpose(act)*deltas
-
-def net_acts(wgt_hid, wgt_out, pat_in):
-	# forward pass
-	act_inp = pat_in						   # select the first training example
-	act_hid = layer_forward(act_inp, wgt_hid)  # hidden unit activations
-	act_out = layer_forward(act_hid, wgt_out)  # output unit activations
-	return act_inp, act_hid, act_out
+	""" derivative of sigmoid function """
+	return 1.0 - (multiply(x,x))						 # element-wise multiplication
 
 def net_forward(x, params):
-	n_in = params[0]
-	n_hid = params[1]
-	n_out = params[2]
-	pat_in = params[3]
-	pat_out = params[4]
+	""" propagate inputs through the network and return outputs """
+	n_in, n_hid, n_out = params[0], params[1], params[2] # unpack parameters from params list
+	pat_in, pat_out = params[3], params[4]
 	n_pat = shape(pat_in)[0]
-	wgt_hid = reshape(x[0:n_in*n_hid], (n_in,n_hid))
+	wgt_hid = reshape(x[0:n_in*n_hid], (n_in,n_hid))	 # weights as matrices
 	wgt_out = reshape(x[n_in*n_hid:], (n_hid,n_out))
-	net_out = zeros((n_pat,n_out))
-	for j in range(n_pat):
-		act_inp,act_hid,act_out = net_acts(wgt_hid, wgt_out, pat_in[j,:])
-		net_out[j,:] = act_out
-	return net_out
+	return tansig(tansig(pat_in * wgt_hid) * wgt_out)	 # return network output
 
 def f(x,params):
-	n_in = params[0]
-	n_hid = params[1]
-	n_out = params[2]
-	pat_in = params[3]
+	""" returns the cost (SSE) of a given weight vector """
 	pat_out = params[4]
-	n_pat = shape(pat_in)[0]
-	wgt_hid = reshape(x[0:n_in*n_hid], (n_in,n_hid))
-	wgt_out = reshape(x[n_in*n_hid:], (n_hid,n_out))
-	cost = 0.0
-	for i in range(n_pat):
-		act_inp,act_hid,act_out = net_acts(wgt_hid, wgt_out, pat_in)
-		cost += 0.5*sum(square(pat_out - act_out))
-	print cost
-	return cost
+	return sum(square(net_forward(x,params) - pat_out))
 
 def fd(x,params):
-	n_in = params[0]
-	n_hid = params[1]
-	n_out = params[2]
-	pat_in = params[3]
-	pat_out = params[4]
+	""" returns the gradients (dW/dE) for the weight vector """
+	n_in, n_hid, n_out = params[0], params[1], params[2] # unpack parameters from params list
+	pat_in, pat_out = params[3], params[4]
 	n_pat = shape(pat_in)[0]
-	wgt_hid = reshape(x[0:n_in*n_hid], (n_in,n_hid))
+	wgt_hid = reshape(x[0:n_in*n_hid], (n_in,n_hid))	 # 
 	wgt_out = reshape(x[n_in*n_hid:], (n_hid,n_out))
-	g = zeros(shape(x))
-	for j in range(n_pat):
-		act_inp,act_hid,act_out = net_acts(wgt_hid, wgt_out, pat_in)
-		err_out = pat_out - act_out
-		err_sse = 0.5*sum(square(err_out))
-		deltas_out = layer_deltas(err_out, act_out)
-		err_hid = layer_errors(deltas_out, wgt_out)
-		deltas_hid = layer_deltas(err_hid, act_hid)
-		grad_hid = transpose(act_inp)*deltas_hid
-		grad_out = transpose(act_hid)*deltas_out
-		g_j = hstack((reshape(grad_hid,(1,n_in*n_hid)), reshape(grad_out,(1,n_hid*n_out))))[0]
-		g_j = array(g_j[0,:])[0]
-		g += g_j/n_pat
-	return -g
+	act_hid = tansig( pat_in * wgt_hid )				 # unit activations
+	act_out = tansig( act_hid * wgt_out )
+	err_out = act_out - pat_out							 # output errors
+	deltas_out = multiply(dtansig(act_out), err_out)     # output deltas
+	err_hid = deltas_out * transpose(wgt_out)            # hidden errors
+	deltas_hid = multiply(dtansig(act_hid), err_hid)     # hidden deltas
+	grad_out = transpose(act_hid)*deltas_out			 # output gradients
+	grad_hid = transpose(pat_in)*deltas_hid		     	 # hidden gradients
+	# rearrange gradients as single vector
+	g_j = hstack((reshape(grad_hid,(1,n_in*n_hid)), reshape(grad_out,(1,n_hid*n_out))))[0]
+	g_j = array(g_j[0,:])[0]
+	return g_j
 
 ##########################
 #     the good stuff     #
@@ -120,22 +73,25 @@ xor_out = matrix([	[0.0],
 					[1.0],
 					[0.0]	])
 
+# network parameters
 n_in = shape(xor_in)[1]
 n_hid = 2
 n_out = shape(xor_out)[1]
 n_pats = shape(xor_in)[0]
-wgt_in = rand(n_in,n_hid)*0.4 - 0.2
-wgt_out = rand(n_hid,n_out)*0.4 - 0.2
-
-w0 = hstack((reshape(wgt_in,(1,n_in*n_hid)), reshape(wgt_out,(1,n_hid*n_out))))[0]
 params = [n_in, n_hid, n_out, xor_in, xor_out]
+
+# initialize weights to small random values
+wgt_in = rand(n_in,n_hid)*0.2 - 0.1
+wgt_out = rand(n_hid,n_out)*0.2 - 0.1
+# pack weights into a single long array
+w0 = hstack((reshape(wgt_in,(1,n_in*n_hid)), reshape(wgt_out,(1,n_hid*n_out))))[0]
 
 # optimize using conjugate gradient descent
 w,f,fn,gn,warnflag,allvecs = fmin_cg(f, w0, fprime=fd, args=(params,), full_output=1, retall=1)
 
 # print net performance
-net_forward(w,params)
-
+net_out = net_forward(w,params)
+print net_out.round(3)
 
 
 
