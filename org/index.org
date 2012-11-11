@@ -145,7 +145,9 @@
   - [[file:code/mnist.tgz][mnist.tgz]] uses PyBrain to learn MNIST dataset
 - [[http://yann.lecun.com/exdb/mnist/][MNIST Database of handwritten digits]]
 - [[http://arxiv.org/abs/1003.0358][Deep Big Simple Neural Nets Excel on Handwritten Digit Recognition]]
-- [[http://www.cs.toronto.edu/~hinton/adi/index.htm][Hinton deep network digit demo]]
+- Geoff Hinton [[http://www.cs.toronto.edu/~hinton/adi/index.htm][deep network digit demo]]
+- Geoff Hinton video [[http://www.youtube.com/watch?v=AyzOUbkUf3M][The Next Generation of Neural Network]]
+
 -----
 ** Nov 19, 22 : Computational Models of Learning: Other Neural Network Architectures
 
