@@ -146,8 +146,8 @@
 - [[http://yann.lecun.com/exdb/mnist/][MNIST Database of handwritten digits]]
 - [[http://arxiv.org/abs/1003.0358][Deep Big Simple Neural Nets Excel on Handwritten Digit Recognition]]
 - After doing some readings, *Watch this*: Geoff Hinton video [[http://www.youtube.com/watch?v=AyzOUbkUf3M][The Next Generation of Neural Network]]
-- Play with this: Geoff Hinton [[http://www.cs.toronto.edu/~hinton/adi/index.htm][deep network digit demo]]
-
+  - Play with this: Geoff Hinton [[http://www.cs.toronto.edu/~hinton/adi/index.htm][deep network digit demo]]
+  - Here is [[http://www.cs.toronto.edu/~hinton/MatlabForSciencePaper.html][his code]] (MATLAB)
 -----
 ** Nov 19, 22 : Computational Models of Learning: Other Neural Network Architectures
 
