@@ -121,7 +121,7 @@
 
 -----
 ** Nov 12, 15 : Computational Models of Learning: Perceptrons & Multi-Layer Neural Networks
-- some lecture slides: [[file:readings/nn_slides.pdf][nn_slides.pdf]]
+- some lecture slides: [[file:readings/nn_slides.pdf][nn\_slides.pdf]]
 - Readings:
   - [[file:readings/Trappenberg5.pdf][Trappenberg5.pdf]], [[file:readings/Trappenberg6.pdf][Trappenberg6.pdf]], [[file:readings/Robinson92.pdf][Robinson92.pdf]], [[file:readings/Mitchell4.pdf][Mitchell4.pdf]]
     (4.8 optional)
