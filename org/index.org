@@ -137,6 +137,7 @@
 - for thoughts about motor learning, read Shadmher & Wise book,
   [[file:readings/SW_24.pdf][Chapter 24]]
 - Software: [[http://pybrain.org/][PyBrain]]
+  - there is also this: [[http://leenissen.dk/fann/wp/help/installing-fann/][FANN: Fast Artificial Neural Network Library]]
 - code examples:
   - [[file:code/xor_aima.py][xor\_aima.py]] from [[http://aima.cs.berkeley.edu/][Norvig & Russell's book]]
   - [[file:code/xor.py][xor.py]] my code, vectorized numpy matrices

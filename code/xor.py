@@ -83,7 +83,7 @@ for i in range(maxepochs):
 		w_hid = w_hid + (N * w_hid_change) + (M * w_hid_prev_change)
 		w_hid_prev_change = w_hid_change
 		b_hid_change = -2.0 * deltas_hid
-		b_hid = b_out + (N * b_hid_change) + (M * b_hid_prev_change)
+		b_hid = b_hid + (N * b_hid_change) + (M * b_hid_prev_change)
 		b_hid_prev_change = b_hid_change
 
 	# compute errors across all targets
