@@ -116,7 +116,7 @@
 - read Shadmehr & Wise book, [[file:readings/SW_07.pdf][Chapter 7]] and [[file:readings/SW_08.pdf][Chapter 8]] and supplementary
   documents: [[http://www.shadmehrlab.org/book/musclemodel.pdf][musclemodel.pdf]]
 - course notes: [[file:6_Computational_Motor_Control_Muscle_Models.html][6: Computational Motor Control: Muscle Models]]
-- assignment 6: catch up on readings.
+- assignment: catch up on readings.
 - *note* no class on Thurs Nov 8.
 
 -----
@@ -149,6 +149,9 @@
 - After doing some readings, *Watch this*: Geoff Hinton video [[http://www.youtube.com/watch?v=AyzOUbkUf3M][The Next Generation of Neural Network]]
   - Play with this: Geoff Hinton [[http://www.cs.toronto.edu/~hinton/adi/index.htm][deep network digit demo]]
   - Here is [[http://www.cs.toronto.edu/~hinton/MatlabForSciencePaper.html][his code]] (MATLAB)
+- [[file:readings/NeuralNetworksII.pdf][NeuralNetworksII.pdf]] slides
+- [[file:code/assignment6.py][assignment6.py]] and [[file:code/traindata.pickle][traindata.pickle]] due Friday Nov 23, 11:59pm EST
+
 -----
 ** Nov 19, 22 : Computational Models of Learning: Other Neural Network Architectures
 
