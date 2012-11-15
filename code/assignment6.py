@@ -10,10 +10,10 @@ fid.close()
 # traindata['inputs'] are inputs (2 per training example)
 # traindata['outputs'] are outputs (1 per training example)
 
-i1 = where(traindata['outputs']==1)
-i2 = where(traindata['outputs']==2)
-i3 = where(traindata['outputs']==3)
-i4 = where(traindata['outputs']==4)
+i1 = where(traindata['outputs']==1)[0]
+i2 = where(traindata['outputs']==2)[0]
+i3 = where(traindata['outputs']==3)[0]
+i4 = where(traindata['outputs']==4)[0]
 figure()
 plot(traindata['inputs'][i1,0],traindata['inputs'][i1,1],'bs')
 plot(traindata['inputs'][i2,0],traindata['inputs'][i2,1],'rs')
@@ -36,6 +36,5 @@ ylabel('INPUT 2')
 # 4 = [0.0, 0.0, 0.0, 1.0]
 #       The hidden layer transfer function should be tansig
 #       The output layer transfer function should be logsig
-
 
 
