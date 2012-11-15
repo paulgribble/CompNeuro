@@ -149,7 +149,7 @@
 - After doing some readings, *Watch this*: Geoff Hinton video [[http://www.youtube.com/watch?v=AyzOUbkUf3M][The Next Generation of Neural Network]]
   - Play with this: Geoff Hinton [[http://www.cs.toronto.edu/~hinton/adi/index.htm][deep network digit demo]]
   - Here is [[http://www.cs.toronto.edu/~hinton/MatlabForSciencePaper.html][his code]] (MATLAB)
-- [[file:readings/NeuralNetworksII.pdf][NeuralNetworksII.pdf]] slides
+- [[file:readings/NeuralNetworks2.pdf][NeuralNetworks2.pdf]] slides
 - [[file:code/assignment6.py][assignment6.py]] and [[file:code/traindata.pickle][traindata.pickle]] due Friday Nov 23, 11:59pm EST
 
 -----
