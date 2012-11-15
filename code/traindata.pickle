@@ -4,8 +4,8 @@ p1
 cnumpy.core.multiarray
 _reconstruct
 p2
-(cnumpy
-ndarray
+(cnumpy.matrixlib.defmatrix
+matrix
 p3
 (I0
 tp4
