@@ -53,7 +53,7 @@ b_hid_prev_change = zeros(shape(b_hid))
 maxepochs = 5000
 errors = zeros((maxepochs,1))
 N = 0.01 # learning rate parameter
-M = 0.10 # momentum parameter
+M = 0.05 # momentum parameter
 
 # train the sucker!
 for i in range(maxepochs):
