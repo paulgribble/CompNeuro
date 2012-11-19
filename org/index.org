@@ -120,7 +120,7 @@
 - *note* no class on Thurs Nov 8.
 
 -----
-** Nov 12, 15 : Computational Models of Learning: Perceptrons & Multi-Layer Neural Networks
+** Nov 12, 15 : Computational Models of Learning part 1
 - some lecture slides: [[file:readings/nn_slides.pdf][nn\_slides.pdf]]
 - Readings:
   - [[file:readings/Trappenberg5.pdf][Trappenberg5.pdf]], [[file:readings/Trappenberg6.pdf][Trappenberg6.pdf]], [[file:readings/Robinson92.pdf][Robinson92.pdf]], [[file:readings/Mitchell4.pdf][Mitchell4.pdf]]
@@ -146,20 +146,41 @@
   - [[file:code/mnist.tgz][mnist.tgz]] uses PyBrain to learn MNIST dataset
 - [[http://yann.lecun.com/exdb/mnist/][MNIST Database of handwritten digits]]
 - [[http://arxiv.org/abs/1003.0358][Deep Big Simple Neural Nets Excel on Handwritten Digit Recognition]]
-- After doing some readings, *Watch this*: Geoff Hinton video [[http://www.youtube.com/watch?v=AyzOUbkUf3M][The Next Generation of Neural Network]]
-  - Play with this: Geoff Hinton [[http://www.cs.toronto.edu/~hinton/adi/index.htm][deep network digit demo]]
-  - Here is [[http://www.cs.toronto.edu/~hinton/MatlabForSciencePaper.html][his code]] (MATLAB)
 - [[file:readings/NeuralNetworks2.pdf][NeuralNetworks2.pdf]] slides
 - [[file:code/assignment6.py][assignment6.py]] and [[file:code/traindata.pickle][traindata.pickle]] due Friday Nov 23, 11:59pm EST
 
 -----
-** Nov 19, 22 : Computational Models of Learning: Other Neural Network Architectures
+** Nov 19, 22 : Computational Models of Learning part 2
 - more code demos of feedforward networks
-- MNIST example, Radboud Face example
-- Intro to unsupervised learning
+  - MNIST example, Radboud Face example
+- recurrent neural networks ([[http://en.wikipedia.org/wiki/Recurrent_neural_network][wiki)]]
+  - [[http://130.102.79.1/~mikael/papers/rn_dallas.pdf][A guide to recurrent neural networks and backpropagation]] (M. Boden)
+  - [[http://www.bcl.hamilton.ie/~barak/papers/CMU-CS-90-196.pdf][Dynamic Recurrent Neural Networks]] (B.A. Pearlmutter)
+  - [[http://minds.jacobs-university.de/sites/default/files/uploads/papers/ESNTutorialRev.pdf][A tutorial on training recurrent neural networks]] (H. Jaeger)
+  - echo state networks [[http://www.scholarpedia.org/article/Echo_state_network][scholarpedia]]
+  - papers:
+    - [[file:readings/Wada_1993_NeuralNetworks.pdf][Wada, 1993]] A Neural Network Model for Arm Trajectory Formation
+      Using Forward and Inverse Dynamics Models
+    - [[file:readings/Lukashin_1993_BiolCybern.pdf][Lukashin, 1993]] A dynamical neural network model for motor
+      cortical activity during movement: population coding of movement
+      trajectories
+    - [[file:readings/Pearlmutter_1989_NeuralComputation.pdf][Pearlmutter, 1989]] Learning State Space Trajectories in Recurrent
+      Neural Networks
+- intro to unsupervised learning
+  - autoencoders [[http://en.wikipedia.org/wiki/Autoencoder][wiki]]
+  - Hopfield nets [[http://en.wikipedia.org/wiki/Hopfield_net][wiki]]
+  - Boltzmann machines [[http://en.wikipedia.org/wiki/Boltzmann_machine][wiki]] 
+  - Restricted Bolztmann machines [[http://en.wikipedia.org/wiki/Restricted_Boltzmann_machine][wiki]]
+- multi-layer generative networks
+  - [[file:readings/Hinton2006Montreal.pdf][Hinton2006Montreal.pdf]]
+  - [[file:readings/Hinton2007tics.pdf][Hinton2007tics.pdf]]
+  - video: [[http://www.youtube.com/watch?v%3DAyzOUbkUf3M][The Next Generation of Neural Networks]]
+  - [[http://www.cs.toronto.edu/~hinton/adi/index.htm][deep network digit demo]]
 
 -----
-** Nov 26, 29 : Computational Models of Learning: Unsupervised Learning
+** Nov 26, 29 : Computational Models of Learning part 3
+- self-organizing maps [[http://en.wikipedia.org/wiki/Kohonen_map][wiki]], [[file:readings/AflaloGraziano2006.pdf][AflaloGraziano2006.pdf]]
+- reinforcement learning [[http://en.wikipedia.org/wiki/Reinforcement_learning][wiki]], [[http://webdocs.cs.ualberta.ca/~sutton/book/ebook/the-book.html][Sutton & Barto book]]
 
 -----
 ** Dec 3 : student presentations
