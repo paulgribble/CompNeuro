@@ -123,6 +123,7 @@
 ** Nov 12, 15 : Computational Models of Learning part 1
 - some lecture slides: [[file:readings/nn_slides.pdf][nn\_slides.pdf]]
 - Readings:
+  - [[file:readings/Jain_1996_NNetTutorial.pdf][Artificial Neural Networks: A Tutorial]] Jain & Mao, 1996
   - [[file:readings/Trappenberg5.pdf][Trappenberg5.pdf]], [[file:readings/Trappenberg6.pdf][Trappenberg6.pdf]], [[file:readings/Robinson92.pdf][Robinson92.pdf]], [[file:readings/Mitchell4.pdf][Mitchell4.pdf]]
     (4.8 optional)
   - Optional: [[file:readings/Haykin0.pdf][Haykin0.pdf]],  [[file:readings/Haykin1.pdf][Haykin1.pdf]],  [[file:readings/Haykin4.pdf][Haykin4.pdf]]
@@ -151,6 +152,7 @@
 
 -----
 ** Nov 19, 22 : Computational Models of Learning part 2
+- [[file:readings/NeuralNetworks3.pdf][NeuralNetworks3.pdf]] slides
 - more code demos of feedforward networks
   - MNIST example, Radboud Face example
 - recurrent neural networks ([[http://en.wikipedia.org/wiki/Recurrent_neural_network][wiki)]]
@@ -251,6 +253,7 @@
   papers on Neural Networks)
 - [[http://www.cs.toronto.edu/~hinton/csc321/][Introduction to Neural Networks and Machine Learning]] (U of T course
   by Geoff Hinton)
+- [[http://www.cnbc.cmu.edu/~mharm/research/tools/mikenet/][MikeNet Neural Network Simulator]] (C library)
 
 -----
 
