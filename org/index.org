@@ -144,7 +144,6 @@
   - [[file:code/xor.py][xor.py]] my code, vectorized numpy matrices
   - [[file:code/xor_plot.py][xor\_plot.py]] same as above, plots during training to visualize network performance
   - [[file:code/xor_cg.py][xor\_cg.py]] my code, uses backprop to compute gradients and conjugate gradient descent to optimize weights
-  - [[file:code/mnist.tgz][mnist.tgz]] uses PyBrain to learn MNIST dataset
 - [[http://yann.lecun.com/exdb/mnist/][MNIST Database of handwritten digits]]
 - [[http://arxiv.org/abs/1003.0358][Deep Big Simple Neural Nets Excel on Handwritten Digit Recognition]]
 - [[file:readings/NeuralNetworks2.pdf][NeuralNetworks2.pdf]] slides
@@ -154,8 +153,9 @@
 - [[file:code/assignment6.py][assignment6.py]] and [[file:code/traindata.pickle][traindata.pickle]]
 - [[file:readings/NeuralNetworks3.pdf][NeuralNetworks3.pdf]] slides
 - more code demos of feedforward networks
-  - MNIST example  [[file:code/mnist.tgz][mnist.tgz]]
-  - vowel classification [[file:code/PetersonBarneyVowels.tgz][PetersonBarneyVowels.tgz]]
+  - handwritten digit example  [[file:readings/mnist.tgz][mnist.tgz]]
+  - vowel classification example [[file:readings/PetersonBarneyVowels.tgz][PetersonBarneyVowels.tgz]]
+  - facial expression example [[file:readings/RadboudFaces.tgz][RadboudFaces.tgz]]
 - recurrent neural networks ([[http://en.wikipedia.org/wiki/Recurrent_neural_network][wiki)]]
   - [[http://130.102.79.1/~mikael/papers/rn_dallas.pdf][A guide to recurrent neural networks and backpropagation]] (M. Boden)
   - [[http://www.bcl.hamilton.ie/~barak/papers/CMU-CS-90-196.pdf][Dynamic Recurrent Neural Networks]] (B.A. Pearlmutter)
