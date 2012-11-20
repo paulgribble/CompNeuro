@@ -179,6 +179,7 @@
   - [[file:readings/Hinton2007tics.pdf][Hinton2007tics.pdf]]
   - video: [[http://www.youtube.com/watch?v%3DAyzOUbkUf3M][The Next Generation of Neural Networks]]
   - [[http://www.cs.toronto.edu/~hinton/adi/index.htm][deep network digit demo]]
+- Mark Schmidt's [[http://www.di.ens.fr/~mschmidt/Software/minFunc.html][minFunc]] MATLAB routines for unconstrained optimization
 
 -----
 ** Nov 26, 29 : Computational Models of Learning part 3
