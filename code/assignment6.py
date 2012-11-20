@@ -109,15 +109,16 @@ def f(x,params):
 	t = params[4]
 	y = net_forward(x,params)
 	sse = sum(square(t-y))
-	w_cost = 0.01 # cost on sum of squared weights
-	cost = sse + (w_cost*sum(square(x))/len(x))
-	print cost
+	w_cost = params[5]*sum(square(x))
+	cost = sse + w_cost
+	print "sse=%7.5f wcost=%7.5f" % (sse,w_cost)
 	return cost
 
 def fd(x,params):
 	""" returns the gradients (dW/dE) for the weight vector """
 	n_in, n_hid, n_out = params[0], params[1], params[2]
 	pat_in, pat_out = params[3], params[4]
+	w_cost = params[5]
 	w_hid,b_hid,w_out,b_out = unpack_weights(x, params)
 	act_hid = tansig( (pat_in * w_hid) + b_hid )
 	act_out = logsig( (act_hid * w_out) + b_out )
@@ -126,9 +127,13 @@ def fd(x,params):
 	err_hid = deltas_out * transpose(w_out)
 	deltas_hid = multiply(dtansig(act_hid), err_hid)
 	grad_w_out = transpose(act_hid)*deltas_out
+	grad_w_out = grad_w_out + (2*w_cost*grad_w_out)
 	grad_b_out = sum(deltas_out,0)
+	grad_b_out = grad_b_out + (2*w_cost*grad_b_out)
 	grad_w_hid = transpose(pat_in)*deltas_hid
+	grad_w_hid = grad_w_hid + (2*w_cost*grad_w_hid)
 	grad_b_hid = sum(deltas_hid,0)
+	grad_b_hid = grad_b_hid + (2*w_cost*grad_b_hid)
 	return pack_weights(grad_w_hid, grad_b_hid, grad_w_out, grad_b_out, params)
 
 ############################################################
@@ -139,12 +144,13 @@ def fd(x,params):
 n_in = shape(train_in)[1]
 n_hid = 4
 n_out = shape(train_out)[1]
-params = [n_in, n_hid, n_out, train_in, train_out]
+w_cost = 0.01
+params = [n_in, n_hid, n_out, train_in, train_out, w_cost]
 
 # initialize weights to small random (uniformly distributed)
 # values between -0.10 and +0.10
 nw = n_in*n_hid + n_hid + n_hid*n_out + n_out
-w0 = rand(nw)*0.1 - 0.05
+w0 = random.rand(nw)*0.1 - 0.05
 
 # optimize using conjugate gradient descent
 out = fmin_cg(f, w0, fprime=fd, args=(params,),
