@@ -243,6 +243,7 @@
 - [[http://nbviewer.ipython.org/][IPython Notebook Viewer]]
 
 ** Machine Learning Resources
+- [[http://scikit-learn.org/][scikit-learn: machine learning in Python]]
 - [[http://yann.lecun.com/exdb/mnist/][The MNIST Database of handwritten digits]]
 - [[http://archive.ics.uci.edu/ml/][UCI Machine Learning Repository]]
 - [[http://cs.nyu.edu/~roweis/data.html][Some datasets for machine learning: digits, faces, text, speech]]
