@@ -183,11 +183,13 @@
 
 -----
 ** Nov 26, 29 : Computational Models of Learning part 3
+- [[file:readings/NeuralNetworks4.pdf][NeuralNetworks4.pdf]] slides
+- self-organizing maps [[http://en.wikipedia.org/wiki/Kohonen_map][wiki]], [[file:readings/AflaloGraziano2006.pdf][AflaloGraziano2006.pdf]]
+- [[file:code/hopfield.tgz][hopfield.tgz]] MATLAB demo code
+- [[file:code/som1.m][som1.m]] MATLAB demo code
 - autoencoders & deep belief nets
   -  [[https://code.google.com/p/matrbm/][RBM & DBN MATLAB code]]
-- self-organizing maps [[http://en.wikipedia.org/wiki/Kohonen_map][wiki]], [[file:readings/AflaloGraziano2006.pdf][AflaloGraziano2006.pdf]]
 - reinforcement learning [[http://en.wikipedia.org/wiki/Reinforcement_learning][wiki]], [[http://webdocs.cs.ualberta.ca/~sutton/book/ebook/the-book.html][Sutton & Barto book]]
-- [[file:code/hopfield.tgz][hopfield.tgz]] MATLAB demo code
 
 -----
 ** Dec 3 : student presentations
