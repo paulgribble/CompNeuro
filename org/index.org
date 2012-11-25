@@ -187,6 +187,7 @@
   -  [[https://code.google.com/p/matrbm/][RBM & DBN MATLAB code]]
 - self-organizing maps [[http://en.wikipedia.org/wiki/Kohonen_map][wiki]], [[file:readings/AflaloGraziano2006.pdf][AflaloGraziano2006.pdf]]
 - reinforcement learning [[http://en.wikipedia.org/wiki/Reinforcement_learning][wiki]], [[http://webdocs.cs.ualberta.ca/~sutton/book/ebook/the-book.html][Sutton & Barto book]]
+- [[file:code/hopfield.tgz][hopfield.tgz]] MATLAB demo code
 
 -----
 ** Dec 3 : student presentations
@@ -261,7 +262,7 @@
 - [[http://www.cnbc.cmu.edu/~mharm/research/tools/mikenet/][MikeNet Neural Network Simulator]] (C library)
 - [[http://deeplearning.net/][Deep Learning]] resource site for deep belief nets etc
 - [[http://www.iro.umontreal.ca/~bengioy/papers/ftml_book.pdf][Learning Deep Architectures for AI]] (book) by Yoshua Bengio
-
+- [[http://www.cs.cmu.edu/afs/cs/academic/class/15782-f06/matlab/][MATLAB neural network code]] demos by Dave Touretzky
 
 -----
 
