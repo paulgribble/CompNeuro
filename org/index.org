@@ -202,6 +202,9 @@
   loud. Also be careful to choose your slides carefully. There will be
   a timer and a loud gong.
 - Question period will be limited to 1 to 2 minutes per talk.
+- The order of talks will be alphabetical by your last name. A first,
+  Z last. We will need to start at 2pm sharp.
+
 - Each student giving a talk must also submit a short essay on their
   chosen paper. Your essay should follow the "Content and Format"
   style of the [[http://www.jneurosci.org/site/misc/ifa_features.xhtml]["Journal Club"]] feature in the Journal of
