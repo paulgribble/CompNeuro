@@ -161,6 +161,11 @@
   - [[http://www.bcl.hamilton.ie/~barak/papers/CMU-CS-90-196.pdf][Dynamic Recurrent Neural Networks]] (B.A. Pearlmutter)
   - [[http://minds.jacobs-university.de/sites/default/files/uploads/papers/ESNTutorialRev.pdf][A tutorial on training recurrent neural networks]] (H. Jaeger)
   - echo state networks [[http://www.scholarpedia.org/article/Echo_state_network][scholarpedia]]
+   - Buonomano D. (2009) Harnessing Chaos in Recurrent Neural
+     Networks. Neuron 63(4):423-425.
+   - Sussillo, D., & Abbott, L. F. (2009). Generating coherent
+     patterns of activity from chaotic neural networks. Neuron, 63(4),
+     544-557.
   - papers:
     - [[file:readings/Wada_1993_NeuralNetworks.pdf][Wada, 1993]] A Neural Network Model for Arm Trajectory Formation
       Using Forward and Inverse Dynamics Models
