@@ -65,7 +65,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -114,7 +114,7 @@ for the JavaScript code in this tag.
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
  *
- * Copyright (C) 2012  MathJax
+ * Copyright (C) 2012-2013  MathJax
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,7 +137,7 @@ for the JavaScript code in this tag.
 @licstart  The following is the entire license notice for the
 JavaScript code below.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code below is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -214,11 +214,6 @@ for the JavaScript code below.
 
 
 
-
-
-
-
-
 <hr/>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
@@ -256,14 +251,14 @@ for the JavaScript code below.
 In this section we will use a model of voltage-gated ion channels in a
 single neuron to simulate action potentials. The model is based on the
 work by Hodgkin &amp; Huxley in the 1940s and 1950s
-[<sub></sub><a href="#HH1952">1</a>][<sub></sub><a href="#HH1990">2</a>]. A good reference to refresh your memory about
+\cite{HH1952,HH1990}. A good reference to refresh your memory about
 how ion channels in a neuron work is the Kandel, Schwartz &amp; Jessel
-book "Principles of Neural Science" [<sub></sub><a href="#kandel2000principles">4</a>].
+book "Principles of Neural Science" \cite{kandel2000principles}.
 </p>
 <p>
 To model the action potential we will use an article by Ekeberg et              
 al. (1991) published in Biological Cybernetics
-[<sub></sub><a href="#ekeberg1991">3</a>]. When reading the article you can focus on the
+\cite{ekeberg1991}. When reading the article you can focus on the
 first three pages (up to paragraph 2.3) and try to find answers to the
 following questions:
 </p>
@@ -330,7 +325,7 @@ process underlying the origin of an action potential.
 
 <p>
 The figure above, adapted from Ekeberg et al., 1991
-[<sub></sub><a href="#ekeberg1991">3</a>], schematically illustrates the model of a
+\cite{ekeberg1991}, schematically illustrates the model of a
 neuron. In panel A we see a soma, and multiple dendrites. Each of
 these can be modelled by an electrical "compartment" (Panel B) and the
 passive interactions between them can be modelled as a pretty standard
@@ -618,55 +613,55 @@ labels.
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># ipython --pylab</span>
+<pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">ipython --pylab</span>
 
-<span style="color: #af0000;"># import some needed functions</span>
-<span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
+<span style="color: #b22222;"># </span><span style="color: #b22222;">import some needed functions</span>
+<span style="color: #a020f0;">from</span> scipy.integrate <span style="color: #a020f0;">import</span> odeint
 
-<span style="color: #af0000;"># set up a dictionary of parameters</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">set up a dictionary of parameters</span>
 
-<span style="color: #af5f00;">E_params</span> = {
-        <span style="color: #87005f;">'E_leak'</span> : -7.0e-2,
-        <span style="color: #87005f;">'G_leak'</span> : 3.0e-09,
-        <span style="color: #87005f;">'C_m'</span>    : 3.0e-11,
-        <span style="color: #87005f;">'I_ext'</span>  : 0*1.0e-10
+<span style="color: #a0522d;">E_params</span> = {
+        <span style="color: #8b2252;">'E_leak'</span> : -7.0e-2,
+        <span style="color: #8b2252;">'G_leak'</span> : 3.0e-09,
+        <span style="color: #8b2252;">'C_m'</span>    : 3.0e-11,
+        <span style="color: #8b2252;">'I_ext'</span>  : 0*1.0e-10
 }
 
-<span style="color: #af5f00;">Na_params</span> = {
-        <span style="color: #87005f;">'Na_E'</span>          : 5.0e-2,
-        <span style="color: #87005f;">'Na_G'</span>          : 1.0e-6,
-        <span style="color: #87005f;">'k_Na_act'</span>      : 3.0e+0,
-        <span style="color: #87005f;">'A_alpha_m_act'</span> : 2.0e+5,
-        <span style="color: #87005f;">'B_alpha_m_act'</span> : -4.0e-2,
-        <span style="color: #87005f;">'C_alpha_m_act'</span> : 1.0e-3,
-        <span style="color: #87005f;">'A_beta_m_act'</span>  : 6.0e+4,
-        <span style="color: #87005f;">'B_beta_m_act'</span>  : -4.9e-2,
-        <span style="color: #87005f;">'C_beta_m_act'</span>  : 2.0e-2,
-        <span style="color: #87005f;">'l_Na_inact'</span>    : 1.0e+0,
-        <span style="color: #87005f;">'A_alpha_m_inact'</span> : 8.0e+4,
-        <span style="color: #87005f;">'B_alpha_m_inact'</span> : -4.0e-2,
-        <span style="color: #87005f;">'C_alpha_m_inact'</span> : 1.0e-3,
-        <span style="color: #87005f;">'A_beta_m_inact'</span>  : 4.0e+2,
-        <span style="color: #87005f;">'B_beta_m_inact'</span>  : -3.6e-2,
-        <span style="color: #87005f;">'C_beta_m_inact'</span>  : 2.0e-3
+<span style="color: #a0522d;">Na_params</span> = {
+        <span style="color: #8b2252;">'Na_E'</span>          : 5.0e-2,
+        <span style="color: #8b2252;">'Na_G'</span>          : 1.0e-6,
+        <span style="color: #8b2252;">'k_Na_act'</span>      : 3.0e+0,
+        <span style="color: #8b2252;">'A_alpha_m_act'</span> : 2.0e+5,
+        <span style="color: #8b2252;">'B_alpha_m_act'</span> : -4.0e-2,
+        <span style="color: #8b2252;">'C_alpha_m_act'</span> : 1.0e-3,
+        <span style="color: #8b2252;">'A_beta_m_act'</span>  : 6.0e+4,
+        <span style="color: #8b2252;">'B_beta_m_act'</span>  : -4.9e-2,
+        <span style="color: #8b2252;">'C_beta_m_act'</span>  : 2.0e-2,
+        <span style="color: #8b2252;">'l_Na_inact'</span>    : 1.0e+0,
+        <span style="color: #8b2252;">'A_alpha_m_inact'</span> : 8.0e+4,
+        <span style="color: #8b2252;">'B_alpha_m_inact'</span> : -4.0e-2,
+        <span style="color: #8b2252;">'C_alpha_m_inact'</span> : 1.0e-3,
+        <span style="color: #8b2252;">'A_beta_m_inact'</span>  : 4.0e+2,
+        <span style="color: #8b2252;">'B_beta_m_inact'</span>  : -3.6e-2,
+        <span style="color: #8b2252;">'C_beta_m_inact'</span>  : 2.0e-3
 }
 
-<span style="color: #af5f00;">K_params</span> = {
-        <span style="color: #87005f;">'k_E'</span>           : -9.0e-2,
-        <span style="color: #87005f;">'k_G'</span>           : 2.0e-7,
-        <span style="color: #87005f;">'k_K'</span>           : 4.0e+0,
-        <span style="color: #87005f;">'A_alpha_m_act'</span> : 2.0e+4,
-        <span style="color: #87005f;">'B_alpha_m_act'</span> : -3.1e-2,
-        <span style="color: #87005f;">'C_alpha_m_act'</span> : 8.0e-4,
-        <span style="color: #87005f;">'A_beta_m_act'</span>  : 5.0e+3,
-        <span style="color: #87005f;">'B_beta_m_act'</span>  : -2.8e-2,
-        <span style="color: #87005f;">'C_beta_m_act'</span>  : 4.0e-4
+<span style="color: #a0522d;">K_params</span> = {
+        <span style="color: #8b2252;">'k_E'</span>           : -9.0e-2,
+        <span style="color: #8b2252;">'k_G'</span>           : 2.0e-7,
+        <span style="color: #8b2252;">'k_K'</span>           : 4.0e+0,
+        <span style="color: #8b2252;">'A_alpha_m_act'</span> : 2.0e+4,
+        <span style="color: #8b2252;">'B_alpha_m_act'</span> : -3.1e-2,
+        <span style="color: #8b2252;">'C_alpha_m_act'</span> : 8.0e-4,
+        <span style="color: #8b2252;">'A_beta_m_act'</span>  : 5.0e+3,
+        <span style="color: #8b2252;">'B_beta_m_act'</span>  : -2.8e-2,
+        <span style="color: #8b2252;">'C_beta_m_act'</span>  : 4.0e-4
 }
 
-<span style="color: #af5f00;">params</span> = {
-        <span style="color: #87005f;">'E_params'</span>  : E_params,
-        <span style="color: #87005f;">'Na_params'</span> : Na_params,
-        <span style="color: #87005f;">'K_params'</span>  : K_params
+<span style="color: #a0522d;">params</span> = {
+        <span style="color: #8b2252;">'E_params'</span>  : E_params,
+        <span style="color: #8b2252;">'Na_params'</span> : Na_params,
+        <span style="color: #8b2252;">'K_params'</span>  : K_params
 }
 </pre>
 
@@ -677,7 +672,7 @@ We could have stored the four values in <code>E_params</code> in an array like t
 
 
 
-<pre class="src src-python"><span style="color: #af5f00;">E_params</span> = array([-7.0e-2, 3.0e-09, 6.0e-11, 0*1.0e-10])
+<pre class="src src-python"><span style="color: #a0522d;">E_params</span> = array([-7.0e-2, 3.0e-09, 6.0e-11, 0*1.0e-10])
 </pre>
 
 
@@ -687,8 +682,8 @@ but then we would have to access particular values by indexing into that array w
 
 
 
-<pre class="src src-python"><span style="color: #af5f00;">E_leak</span> = E_params[0]
-<span style="color: #af5f00;">G_leak</span> = E_params[1]
+<pre class="src src-python"><span style="color: #a0522d;">E_leak</span> = E_params[0]
+<span style="color: #a0522d;">G_leak</span> = E_params[1]
 </pre>
 
 
@@ -698,8 +693,8 @@ Instead, if we use a dictionary, we can index into the structure using alphanume
 
 
 
-<pre class="src src-python">E_params[<span style="color: #87005f;">'E_leak'</span>]
-E_params[<span style="color: #87005f;">'G_leak'</span>]
+<pre class="src src-python">E_params[<span style="color: #8b2252;">'E_leak'</span>]
+E_params[<span style="color: #8b2252;">'G_leak'</span>]
 </pre>
 
 
@@ -723,58 +718,58 @@ by step.
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># define our ODE function</span>
+<pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">define our ODE function</span>
 
-<span style="color: #af00ff;">def</span> <span style="color: #0000ff;">neuron</span>(state, t, params):
-        <span style="color: #87005f;">"""</span>
-<span style="color: #87005f;">         Purpose: simulate Hodgkin and Huxley model for the action potential using</span>
-<span style="color: #87005f;">         the equations from Ekeberg et al, Biol Cyb, 1991.</span>
-<span style="color: #87005f;">         Input: state ([E m h n] (ie [membrane potential; activation of</span>
-<span style="color: #87005f;">                  Na++ channel; inactivation of Na++ channel; activation of K+</span>
-<span style="color: #87005f;">                  channel]),</span>
-<span style="color: #87005f;">                t (time),</span>
-<span style="color: #87005f;">                and the params (parameters of neuron; see Ekeberg et al).</span>
-<span style="color: #87005f;">         Output: statep (state derivatives).</span>
-<span style="color: #87005f;">        """</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">neuron</span>(state, t, params):
+        <span style="color: #8b2252;">"""</span>
+<span style="color: #8b2252;">         Purpose: simulate Hodgkin and Huxley model for the action potential using</span>
+<span style="color: #8b2252;">         the equations from Ekeberg et al, Biol Cyb, 1991.</span>
+<span style="color: #8b2252;">         Input: state ([E m h n] (ie [membrane potential; activation of</span>
+<span style="color: #8b2252;">                  Na++ channel; inactivation of Na++ channel; activation of K+</span>
+<span style="color: #8b2252;">                  channel]),</span>
+<span style="color: #8b2252;">                t (time),</span>
+<span style="color: #8b2252;">                and the params (parameters of neuron; see Ekeberg et al).</span>
+<span style="color: #8b2252;">         Output: statep (state derivatives).</span>
+<span style="color: #8b2252;">        """</span>
 
-        E = state[0]
-        m = state[1]
-        h = state[2]
-        n = state[3]
+        <span style="color: #a0522d;">E</span> = state[0]
+        <span style="color: #a0522d;">m</span> = state[1]
+        <span style="color: #a0522d;">h</span> = state[2]
+        <span style="color: #a0522d;">n</span> = state[3]
 
-        Epar = params[<span style="color: #87005f;">'E_params'</span>]
-        Na   = params[<span style="color: #87005f;">'Na_params'</span>]
-        K    = params[<span style="color: #87005f;">'K_params'</span>]
+        <span style="color: #a0522d;">Epar</span> = params[<span style="color: #8b2252;">'E_params'</span>]
+        <span style="color: #a0522d;">Na</span>   = params[<span style="color: #8b2252;">'Na_params'</span>]
+        <span style="color: #a0522d;">K</span>    = params[<span style="color: #8b2252;">'K_params'</span>]
 
-        <span style="color: #af0000;"># external current (from "voltage clamp", other compartments, other neurons, etc)</span>
-        I_ext = Epar[<span style="color: #87005f;">'I_ext'</span>]
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">external current (from "voltage clamp", other compartments, other neurons, etc)</span>
+        <span style="color: #a0522d;">I_ext</span> = Epar[<span style="color: #8b2252;">'I_ext'</span>]
 
-        <span style="color: #af0000;"># calculate Na rate functions and I_Na</span>
-        alpha_act = Na[<span style="color: #87005f;">'A_alpha_m_act'</span>] * (E-Na[<span style="color: #87005f;">'B_alpha_m_act'</span>]) / (1.0 - exp((Na[<span style="color: #87005f;">'B_alpha_m_act'</span>]-E) / Na[<span style="color: #87005f;">'C_alpha_m_act'</span>]))
-        beta_act = Na[<span style="color: #87005f;">'A_beta_m_act'</span>] * (Na[<span style="color: #87005f;">'B_beta_m_act'</span>]-E) / (1.0 - exp((E-Na[<span style="color: #87005f;">'B_beta_m_act'</span>]) / Na[<span style="color: #87005f;">'C_beta_m_act'</span>]) )
-        dmdt = ( alpha_act * (1.0 - m) ) - ( beta_act * m )
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">calculate Na rate functions and I_Na</span>
+        <span style="color: #a0522d;">alpha_act</span> = Na[<span style="color: #8b2252;">'A_alpha_m_act'</span>] * (E-Na[<span style="color: #8b2252;">'B_alpha_m_act'</span>]) / (1.0 - exp((Na[<span style="color: #8b2252;">'B_alpha_m_act'</span>]-E) / Na[<span style="color: #8b2252;">'C_alpha_m_act'</span>]))
+        <span style="color: #a0522d;">beta_act</span> = Na[<span style="color: #8b2252;">'A_beta_m_act'</span>] * (Na[<span style="color: #8b2252;">'B_beta_m_act'</span>]-E) / (1.0 - exp((E-Na[<span style="color: #8b2252;">'B_beta_m_act'</span>]) / Na[<span style="color: #8b2252;">'C_beta_m_act'</span>]) )
+        <span style="color: #a0522d;">dmdt</span> = ( alpha_act * (1.0 - m) ) - ( beta_act * m )
 
-        alpha_inact = Na[<span style="color: #87005f;">'A_alpha_m_inact'</span>] * (Na[<span style="color: #87005f;">'B_alpha_m_inact'</span>]-E) / (1.0 - exp((E-Na[<span style="color: #87005f;">'B_alpha_m_inact'</span>]) / Na[<span style="color: #87005f;">'C_alpha_m_inact'</span>]))
-        beta_inact  = Na[<span style="color: #87005f;">'A_beta_m_inact'</span>] / (1.0 + (exp((Na[<span style="color: #87005f;">'B_beta_m_inact'</span>]-E) / Na[<span style="color: #87005f;">'C_beta_m_inact'</span>])))
-        dhdt = ( alpha_inact*(1.0 - h) ) - ( beta_inact*h )
+        <span style="color: #a0522d;">alpha_inact</span> = Na[<span style="color: #8b2252;">'A_alpha_m_inact'</span>] * (Na[<span style="color: #8b2252;">'B_alpha_m_inact'</span>]-E) / (1.0 - exp((E-Na[<span style="color: #8b2252;">'B_alpha_m_inact'</span>]) / Na[<span style="color: #8b2252;">'C_alpha_m_inact'</span>]))
+        <span style="color: #a0522d;">beta_inact</span>  = Na[<span style="color: #8b2252;">'A_beta_m_inact'</span>] / (1.0 + (exp((Na[<span style="color: #8b2252;">'B_beta_m_inact'</span>]-E) / Na[<span style="color: #8b2252;">'C_beta_m_inact'</span>])))
+        <span style="color: #a0522d;">dhdt</span> = ( alpha_inact*(1.0 - h) ) - ( beta_inact*h )
 
-        <span style="color: #af0000;"># Na-current:</span>
-        I_Na =(Na[<span style="color: #87005f;">'Na_E'</span>]-E) * Na[<span style="color: #87005f;">'Na_G'</span>] * (m**Na[<span style="color: #87005f;">'k_Na_act'</span>]) * h
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">Na-current:</span>
+        <span style="color: #a0522d;">I_Na</span> =(Na[<span style="color: #8b2252;">'Na_E'</span>]-E) * Na[<span style="color: #8b2252;">'Na_G'</span>] * (m**Na[<span style="color: #8b2252;">'k_Na_act'</span>]) * h
 
-        <span style="color: #af0000;"># calculate K rate functions and I_K</span>
-        alpha_kal = K[<span style="color: #87005f;">'A_alpha_m_act'</span>] * (E-K[<span style="color: #87005f;">'B_alpha_m_act'</span>]) / (1.0 - exp((K[<span style="color: #87005f;">'B_alpha_m_act'</span>]-E) / K[<span style="color: #87005f;">'C_alpha_m_act'</span>]))
-        beta_kal = K[<span style="color: #87005f;">'A_beta_m_act'</span>] * (K[<span style="color: #87005f;">'B_beta_m_act'</span>]-E) / (1.0 - exp((E-K[<span style="color: #87005f;">'B_beta_m_act'</span>]) / K[<span style="color: #87005f;">'C_beta_m_act'</span>]))
-        dndt = ( alpha_kal*(1.0 - n) ) - ( beta_kal*n )
-        I_K = (K[<span style="color: #87005f;">'k_E'</span>]-E) * K[<span style="color: #87005f;">'k_G'</span>] * n**K[<span style="color: #87005f;">'k_K'</span>]
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">calculate K rate functions and I_K</span>
+        <span style="color: #a0522d;">alpha_kal</span> = K[<span style="color: #8b2252;">'A_alpha_m_act'</span>] * (E-K[<span style="color: #8b2252;">'B_alpha_m_act'</span>]) / (1.0 - exp((K[<span style="color: #8b2252;">'B_alpha_m_act'</span>]-E) / K[<span style="color: #8b2252;">'C_alpha_m_act'</span>]))
+        <span style="color: #a0522d;">beta_kal</span> = K[<span style="color: #8b2252;">'A_beta_m_act'</span>] * (K[<span style="color: #8b2252;">'B_beta_m_act'</span>]-E) / (1.0 - exp((E-K[<span style="color: #8b2252;">'B_beta_m_act'</span>]) / K[<span style="color: #8b2252;">'C_beta_m_act'</span>]))
+        <span style="color: #a0522d;">dndt</span> = ( alpha_kal*(1.0 - n) ) - ( beta_kal*n )
+        <span style="color: #a0522d;">I_K</span> = (K[<span style="color: #8b2252;">'k_E'</span>]-E) * K[<span style="color: #8b2252;">'k_G'</span>] * n**K[<span style="color: #8b2252;">'k_K'</span>]
 
-        <span style="color: #af0000;"># leak current</span>
-        I_leak = (Epar[<span style="color: #87005f;">'E_leak'</span>]-E) * Epar[<span style="color: #87005f;">'G_leak'</span>]
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">leak current</span>
+        <span style="color: #a0522d;">I_leak</span> = (Epar[<span style="color: #8b2252;">'E_leak'</span>]-E) * Epar[<span style="color: #8b2252;">'G_leak'</span>]
 
-        <span style="color: #af0000;"># calculate derivative of E</span>
-        dEdt = (I_leak + I_K + I_Na + I_ext) / Epar[<span style="color: #87005f;">'C_m'</span>]
-        statep = [dEdt, dmdt, dhdt, dndt]
+        <span style="color: #b22222;"># </span><span style="color: #b22222;">calculate derivative of E</span>
+        <span style="color: #a0522d;">dEdt</span> = (I_leak + I_K + I_Na + I_ext) / Epar[<span style="color: #8b2252;">'C_m'</span>]
+        <span style="color: #a0522d;">statep</span> = [dEdt, dmdt, dhdt, dndt]
 
-        <span style="color: #af00ff;">return</span> statep
+        <span style="color: #a020f0;">return</span> statep
 </pre>
 
 
@@ -787,17 +782,17 @@ external current by changing the value of the
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># simulate</span>
+<pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">simulate</span>
 
-<span style="color: #af0000;"># set initial states and time vector</span>
-<span style="color: #af5f00;">state0</span> = [-70e-03, 0, 1, 0]
-<span style="color: #af5f00;">t</span> = arange(0, 0.2, 0.001)
+<span style="color: #b22222;"># </span><span style="color: #b22222;">set initial states and time vector</span>
+<span style="color: #a0522d;">state0</span> = [-70e-03, 0, 1, 0]
+<span style="color: #a0522d;">t</span> = arange(0, 0.2, 0.001)
 
-<span style="color: #af0000;"># let's inject some external current</span>
-params[<span style="color: #87005f;">'E_params'</span>][<span style="color: #87005f;">'I_ext'</span>] = 1.0e-10
+<span style="color: #b22222;"># </span><span style="color: #b22222;">let's inject some external current</span>
+params[<span style="color: #8b2252;">'E_params'</span>][<span style="color: #8b2252;">'I_ext'</span>] = 1.0e-10
 
-<span style="color: #af0000;"># run simulation</span>
-<span style="color: #af5f00;">state</span> = odeint(neuron, state0, t, args=(params,))
+<span style="color: #b22222;"># </span><span style="color: #b22222;">run simulation</span>
+<span style="color: #a0522d;">state</span> = odeint(neuron, state0, t, args=(params,))
 </pre>
 
 
@@ -807,22 +802,22 @@ Finally, we plot the results:
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># plot the results</span>
+<pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">plot the results</span>
 
 figure(figsize=(8,12))
 subplot(4,1,1)
 plot(t, state[:,0])
-title(<span style="color: #87005f;">'membrane potential'</span>)
+title(<span style="color: #8b2252;">'membrane potential'</span>)
 subplot(4,1,2)
 plot(t, state[:,1])
-title(<span style="color: #87005f;">'Na2+ channel activation'</span>)
+title(<span style="color: #8b2252;">'Na2+ channel activation'</span>)
 subplot(4,1,3)
 plot(t, state[:,2])
-title(<span style="color: #87005f;">'Na2+ channel inactivation'</span>)
+title(<span style="color: #8b2252;">'Na2+ channel inactivation'</span>)
 subplot(4,1,4)
 plot(t, state[:,3])
-title(<span style="color: #87005f;">'K+ channel activation'</span>)
-xlabel(<span style="color: #87005f;">'TIME (sec)'</span>)
+title(<span style="color: #8b2252;">'K+ channel activation'</span>)
+xlabel(<span style="color: #8b2252;">'TIME (sec)'</span>)
 </pre>
 
 
@@ -895,73 +890,6 @@ pointing.
 <p>
 [ <a href="4_Computational_Motor_Control_Kinematics.html">Computational Motor Control: Kinematics</a> ]
 </p></div>
-</div>
-
-<div id="bibliography">
-<h2>References</h2>
-
-<table>
-
-<tr valign="top">
-<td align="right" class="bibtexnumber">
-[<a name="HH1952">1</a>]
-</td>
-<td class="bibtexitem">
-A.&nbsp;L. Hodgkin and A.&nbsp;F. Huxley.
- A quantitative description of membrane current and its application
-  to conduction and excitation in nerve.
- <em>J. Physiol. (Lond.)</em>, 117(4):500-544, Aug 1952.
-[&nbsp;<a href="refs_bib.html#HH1952">bib</a>&nbsp;]
-
-</td>
-</tr>
-
-
-<tr valign="top">
-<td align="right" class="bibtexnumber">
-[<a name="HH1990">2</a>]
-</td>
-<td class="bibtexitem">
-A.&nbsp;L. Hodgkin, A.&nbsp;F. Huxley, A.&nbsp;L. Hodgkin, and A.&nbsp;F. Huxley.
- A quantitative description of membrane current and its application
-  to conduction and excitation in nerve. 1952.
- <em>Bull. Math. Biol.</em>, 52(1-2):25-71, 1990.
-[&nbsp;<a href="refs_bib.html#HH1990">bib</a>&nbsp;]
-
-</td>
-</tr>
-
-
-<tr valign="top">
-<td align="right" class="bibtexnumber">
-[<a name="ekeberg1991">3</a>]
-</td>
-<td class="bibtexitem">
-O.&nbsp;Ekeberg, P.&nbsp;Wallen, A.&nbsp;Lansner, H.&nbsp;Traven, L.&nbsp;Brodin, and S.&nbsp;Grillner.
- A computer based model for realistic simulations of neural
-  networks. I. The single neuron and synaptic interaction.
- <em>Biol Cybern</em>, 65(2):81-90, 1991.
-[&nbsp;<a href="refs_bib.html#ekeberg1991">bib</a>&nbsp;]
-
-</td>
-</tr>
-
-
-<tr valign="top">
-<td align="right" class="bibtexnumber">
-[<a name="kandel2000principles">4</a>]
-</td>
-<td class="bibtexitem">
-E.R. Kandel, J.H. Schwartz, T.M. Jessell, et&nbsp;al.
- <em>Principles of neural science</em>, volume&nbsp;4.
- McGraw-Hill New York, 2000.
-[&nbsp;<a href="refs_bib.html#kandel2000principles">bib</a>&nbsp;]
-
-</td>
-</tr>
-</table><hr/><p><em>This file was generated by
-<a href="http://www.lri.fr/~filliatr/bibtex2html/">bibtex2html</a> 1.97.</em></p>
-
 </div>
 </div>
 

@@ -65,7 +65,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -114,7 +114,7 @@ for the JavaScript code in this tag.
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
  *
- * Copyright (C) 2012  MathJax
+ * Copyright (C) 2012-2013  MathJax
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,7 +137,7 @@ for the JavaScript code in this tag.
 @licstart  The following is the entire license notice for the
 JavaScript code below.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code below is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -387,31 +387,31 @@ and vice-versa.
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># make up an elbow trajectory (pretend this was recorded in an experiment)</span>
-<span style="color: #af5f00;">t</span> = linspace(0,1,200)
-<span style="color: #af5f00;">theta</span> = sin(2*pi*t/4)
+<pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">make up an elbow trajectory (pretend this was recorded in an experiment)</span>
+<span style="color: #a0522d;">t</span> = linspace(0,1,200)
+<span style="color: #a0522d;">theta</span> = sin(2*pi*t/4)
 figure()
 subplot(2,3,(1,2))
 plot(t,theta*180/pi)
-xlabel(<span style="color: #87005f;">'TIME (sec)'</span>)
-ylabel(<span style="color: #87005f;">'ELBOW ANGLE (deg)'</span>)
-<span style="color: #af0000;"># compute hand position Hx,Hy</span>
-<span style="color: #af5f00;">l</span> = 0.45
-<span style="color: #af5f00;">Hx</span> = l * cos(theta)
-<span style="color: #af5f00;">Hy</span> = l * sin(theta)
+xlabel(<span style="color: #8b2252;">'TIME (sec)'</span>)
+ylabel(<span style="color: #8b2252;">'ELBOW ANGLE (deg)'</span>)
+<span style="color: #b22222;"># </span><span style="color: #b22222;">compute hand position Hx,Hy</span>
+<span style="color: #a0522d;">l</span> = 0.45
+<span style="color: #a0522d;">Hx</span> = l * cos(theta)
+<span style="color: #a0522d;">Hy</span> = l * sin(theta)
 subplot(2,3,(4,5))
-plot(t,Hx,<span style="color: #87005f;">'b-'</span>)
-plot(t,Hy,<span style="color: #87005f;">'r-'</span>)
-xlabel(<span style="color: #87005f;">'TIME (sec)'</span>)
-ylabel(<span style="color: #87005f;">'HAND POSITION (m)'</span>)
-legend((<span style="color: #87005f;">'Hx'</span>,<span style="color: #87005f;">'Hy'</span>),loc=<span style="color: #87005f;">'lower right'</span>)
+plot(t,Hx,<span style="color: #8b2252;">'b-'</span>)
+plot(t,Hy,<span style="color: #8b2252;">'r-'</span>)
+xlabel(<span style="color: #8b2252;">'TIME (sec)'</span>)
+ylabel(<span style="color: #8b2252;">'HAND POSITION (m)'</span>)
+legend((<span style="color: #8b2252;">'Hx'</span>,<span style="color: #8b2252;">'Hy'</span>),loc=<span style="color: #8b2252;">'lower right'</span>)
 subplot(2,3,(3,6))
-plot((0,Hx[0]),(0,Hy[0]),<span style="color: #87005f;">'g-'</span>)
-plot((0,Hx[-1]),(0,Hy[-1]),<span style="color: #87005f;">'r-'</span>)
-plot(Hx[0:-1:10],Hy[0:-1:10],<span style="color: #87005f;">'k.'</span>)
-xlabel(<span style="color: #87005f;">'X (m)'</span>)
-ylabel(<span style="color: #87005f;">'Y (m)'</span>)
-axis(<span style="color: #87005f;">'equal'</span>)
+plot((0,Hx[0]),(0,Hy[0]),<span style="color: #8b2252;">'g-'</span>)
+plot((0,Hx[-1]),(0,Hy[-1]),<span style="color: #8b2252;">'r-'</span>)
+plot(Hx[0:-1:10],Hy[0:-1:10],<span style="color: #8b2252;">'k.'</span>)
+xlabel(<span style="color: #8b2252;">'X (m)'</span>)
+ylabel(<span style="color: #8b2252;">'Y (m)'</span>)
+axis(<span style="color: #8b2252;">'equal'</span>)
 </pre>
 
 
@@ -479,59 +479,59 @@ correspond to cartesian hand positions.
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># Function to transform joint angles (a1,a2) to hand position (Hx,Hy)</span>
-<span style="color: #af00ff;">def</span> <span style="color: #0000ff;">joints_to_hand</span>(a1,a2,l1,l2):
-  Ex = l1 * cos(a1)
-  Ey = l1 * sin(a1)
-  Hx = Ex + (l2 * cos(a1+a2))
-  Hy = Ey + (l2 * sin(a1+a2))
-  <span style="color: #af00ff;">return</span> Ex,Ey,Hx,Hy
+<pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">Function to transform joint angles (a1,a2) to hand position (Hx,Hy)</span>
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">joints_to_hand</span>(a1,a2,l1,l2):
+  <span style="color: #a0522d;">Ex</span> = l1 * cos(a1)
+  <span style="color: #a0522d;">Ey</span> = l1 * sin(a1)
+  <span style="color: #a0522d;">Hx</span> = Ex + (l2 * cos(a1+a2))
+  <span style="color: #a0522d;">Hy</span> = Ey + (l2 * sin(a1+a2))
+  <span style="color: #a020f0;">return</span> Ex,Ey,Hx,Hy
 
-<span style="color: #af0000;"># limb geometry</span>
-<span style="color: #af5f00;">l1</span> = 0.34 <span style="color: #af0000;"># metres</span>
-<span style="color: #af5f00;">l2</span> = 0.46 <span style="color: #af0000;"># metres</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">limb geometry</span>
+<span style="color: #a0522d;">l1</span> = 0.34 <span style="color: #b22222;"># </span><span style="color: #b22222;">metres</span>
+<span style="color: #a0522d;">l2</span> = 0.46 <span style="color: #b22222;"># </span><span style="color: #b22222;">metres</span>
 
-<span style="color: #af0000;"># decide on a range of joint angles</span>
-<span style="color: #af5f00;">n1steps</span> = 10
-<span style="color: #af5f00;">n2steps</span> = 10
-<span style="color: #af5f00;">a1range</span> = linspace(0*pi/180, 120*pi/180, n1steps) <span style="color: #af0000;"># shoulder</span>
-<span style="color: #af5f00;">a2range</span> = linspace(0*pi/180, 120*pi/180, n2steps)   <span style="color: #af0000;"># elbow</span>
+<span style="color: #b22222;"># </span><span style="color: #b22222;">decide on a range of joint angles</span>
+<span style="color: #a0522d;">n1steps</span> = 10
+<span style="color: #a0522d;">n2steps</span> = 10
+<span style="color: #a0522d;">a1range</span> = linspace(0*pi/180, 120*pi/180, n1steps) <span style="color: #b22222;"># </span><span style="color: #b22222;">shoulder</span>
+<span style="color: #a0522d;">a2range</span> = linspace(0*pi/180, 120*pi/180, n2steps)   <span style="color: #b22222;"># </span><span style="color: #b22222;">elbow</span>
 
-<span style="color: #af0000;"># sample all combinations and plot joint and hand coordinates</span>
-<span style="color: #af5f00;">f</span>=figure(figsize=(8,12))
-<span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">range</span>(n1steps):
-  <span style="color: #af00ff;">for</span> j <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">range</span>(n2steps):
+<span style="color: #b22222;"># </span><span style="color: #b22222;">sample all combinations and plot joint and hand coordinates</span>
+<span style="color: #a0522d;">f</span>=figure(figsize=(8,12))
+<span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n1steps):
+  <span style="color: #a020f0;">for</span> j <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">range</span>(n2steps):
     subplot(2,1,1)
-    plot(a1range[i]*180/pi,a2range[j]*180/pi,<span style="color: #87005f;">'r+'</span>)
-    ex,ey,hx,hy = joints_to_hand(a1range[i], a2range[j], l1, l2)
+    plot(a1range[i]*180/pi,a2range[j]*180/pi,<span style="color: #8b2252;">'r+'</span>)
+    <span style="color: #a0522d;">ex</span>,<span style="color: #a0522d;">ey</span>,<span style="color: #a0522d;">hx</span>,<span style="color: #a0522d;">hy</span> = joints_to_hand(a1range[i], a2range[j], l1, l2)
     subplot(2,1,2)
-    plot(hx, hy, <span style="color: #87005f;">'r+'</span>)
+    plot(hx, hy, <span style="color: #8b2252;">'r+'</span>)
 subplot(2,1,1)
-xlabel(<span style="color: #87005f;">'Shoulder Angle (deg)'</span>)
-ylabel(<span style="color: #87005f;">'Elbow Angle (deg)'</span>)
-title(<span style="color: #87005f;">'Joint Space'</span>)
+xlabel(<span style="color: #8b2252;">'Shoulder Angle (deg)'</span>)
+ylabel(<span style="color: #8b2252;">'Elbow Angle (deg)'</span>)
+title(<span style="color: #8b2252;">'Joint Space'</span>)
 subplot(2,1,2)
-xlabel(<span style="color: #87005f;">'Hand Position X (m)'</span>)
-ylabel(<span style="color: #87005f;">'Hand Position Y (m)'</span>)
-title(<span style="color: #87005f;">'Hand Space'</span>)
-<span style="color: #af5f00;">a1</span> = a1range[n1steps/2]
-<span style="color: #af5f00;">a2</span> = a2range[n2steps/2]
-ex,ey,hx,hy = joints_to_hand(a1,a2,l1,l2)
+xlabel(<span style="color: #8b2252;">'Hand Position X (m)'</span>)
+ylabel(<span style="color: #8b2252;">'Hand Position Y (m)'</span>)
+title(<span style="color: #8b2252;">'Hand Space'</span>)
+<span style="color: #a0522d;">a1</span> = a1range[n1steps/2]
+<span style="color: #a0522d;">a2</span> = a2range[n2steps/2]
+<span style="color: #a0522d;">ex</span>,<span style="color: #a0522d;">ey</span>,<span style="color: #a0522d;">hx</span>,<span style="color: #a0522d;">hy</span> = joints_to_hand(a1,a2,l1,l2)
 subplot(2,1,1)
-plot(a1*180/pi,a2*180/pi,<span style="color: #87005f;">'bo'</span>,markersize=5)
-axis(<span style="color: #87005f;">'equal'</span>)
-<span style="color: #af5f00;">xl</span> = get(get(f,<span style="color: #87005f;">'axes'</span>)[0],<span style="color: #87005f;">'xlim'</span>)
-<span style="color: #af5f00;">yl</span> = get(get(f,<span style="color: #87005f;">'axes'</span>)[0],<span style="color: #87005f;">'ylim'</span>)
-plot((xl[0],xl[1]),(a2*180/pi,a2*180/pi),<span style="color: #87005f;">'b-'</span>)
-plot((a1*180/pi,a1*180/pi),(yl[0],yl[1]),<span style="color: #87005f;">'b-'</span>)
+plot(a1*180/pi,a2*180/pi,<span style="color: #8b2252;">'bo'</span>,markersize=5)
+axis(<span style="color: #8b2252;">'equal'</span>)
+<span style="color: #a0522d;">xl</span> = get(get(f,<span style="color: #8b2252;">'axes'</span>)[0],<span style="color: #8b2252;">'xlim'</span>)
+<span style="color: #a0522d;">yl</span> = get(get(f,<span style="color: #8b2252;">'axes'</span>)[0],<span style="color: #8b2252;">'ylim'</span>)
+plot((xl[0],xl[1]),(a2*180/pi,a2*180/pi),<span style="color: #8b2252;">'b-'</span>)
+plot((a1*180/pi,a1*180/pi),(yl[0],yl[1]),<span style="color: #8b2252;">'b-'</span>)
 subplot(2,1,2)
-plot((0,ex,hx),(0,ey,hy),<span style="color: #87005f;">'b-'</span>)
-plot(hx,hy,<span style="color: #87005f;">'bo'</span>,markersize=5)
-axis(<span style="color: #87005f;">'equal'</span>)
-<span style="color: #af5f00;">xl</span> = get(get(f,<span style="color: #87005f;">'axes'</span>)[1],<span style="color: #87005f;">'xlim'</span>)
-<span style="color: #af5f00;">yl</span> = get(get(f,<span style="color: #87005f;">'axes'</span>)[1],<span style="color: #87005f;">'ylim'</span>)
-plot((xl[0],xl[1]),(hy,hy),<span style="color: #87005f;">'b-'</span>)
-plot((hx,hx),(yl[0],yl[1]),<span style="color: #87005f;">'b-'</span>)
+plot((0,ex,hx),(0,ey,hy),<span style="color: #8b2252;">'b-'</span>)
+plot(hx,hy,<span style="color: #8b2252;">'bo'</span>,markersize=5)
+axis(<span style="color: #8b2252;">'equal'</span>)
+<span style="color: #a0522d;">xl</span> = get(get(f,<span style="color: #8b2252;">'axes'</span>)[1],<span style="color: #8b2252;">'xlim'</span>)
+<span style="color: #a0522d;">yl</span> = get(get(f,<span style="color: #8b2252;">'axes'</span>)[1],<span style="color: #8b2252;">'ylim'</span>)
+plot((xl[0],xl[1]),(hy,hy),<span style="color: #8b2252;">'b-'</span>)
+plot((hx,hx),(yl[0],yl[1]),<span style="color: #8b2252;">'b-'</span>)
 </pre>
 
 
@@ -677,22 +677,22 @@ any Debian-based GNU/Linux), just type <code>sudo apt-get install python-sympy</
 
 
 
-<pre class="src src-python"><span style="color: #af0000;"># import sympy</span>
-<span style="color: #af00ff;">from</span> sympy <span style="color: #af00ff;">import</span> *
-<span style="color: #af0000;"># define these variables as symbolic (not numeric)</span>
-a1,a2,l1,l2 = symbols(<span style="color: #87005f;">'a1 a2 l1 l2'</span>)
-<span style="color: #af0000;"># forward kinematics for Hx and Hy</span>
-<span style="color: #af5f00;">hx</span> = l1*cos(a1) + l2*cos(a1+a2)
-<span style="color: #af5f00;">hy</span> = l1*sin(a1) + l2*sin(a1+a2)
-<span style="color: #af0000;"># use sympy diff() to get partial derivatives for Jacobian matrix</span>
-<span style="color: #af5f00;">J11</span> = diff(hx,a1)
-<span style="color: #af5f00;">J12</span> = diff(hx,a2)
-<span style="color: #af5f00;">J21</span> = diff(hy,a1)
-<span style="color: #af5f00;">J22</span> = diff(hy,a2)
-<span style="color: #af00ff;">print</span> J11
-<span style="color: #af00ff;">print</span> J12
-<span style="color: #af00ff;">print</span> J21
-<span style="color: #af00ff;">print</span> J22
+<pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">import sympy</span>
+<span style="color: #a020f0;">from</span> sympy <span style="color: #a020f0;">import</span> *
+<span style="color: #b22222;"># </span><span style="color: #b22222;">define these variables as symbolic (not numeric)</span>
+<span style="color: #a0522d;">a1</span>,<span style="color: #a0522d;">a2</span>,<span style="color: #a0522d;">l1</span>,<span style="color: #a0522d;">l2</span> = symbols(<span style="color: #8b2252;">'a1 a2 l1 l2'</span>)
+<span style="color: #b22222;"># </span><span style="color: #b22222;">forward kinematics for Hx and Hy</span>
+<span style="color: #a0522d;">hx</span> = l1*cos(a1) + l2*cos(a1+a2)
+<span style="color: #a0522d;">hy</span> = l1*sin(a1) + l2*sin(a1+a2)
+<span style="color: #b22222;"># </span><span style="color: #b22222;">use sympy diff() to get partial derivatives for Jacobian matrix</span>
+<span style="color: #a0522d;">J11</span> = diff(hx,a1)
+<span style="color: #a0522d;">J12</span> = diff(hx,a2)
+<span style="color: #a0522d;">J21</span> = diff(hy,a1)
+<span style="color: #a0522d;">J22</span> = diff(hy,a2)
+<span style="color: #a020f0;">print</span> J11
+<span style="color: #a020f0;">print</span> J12
+<span style="color: #a020f0;">print</span> J21
+<span style="color: #a020f0;">print</span> J22
 </pre>
 
 
@@ -731,19 +731,19 @@ and now we can write a Python function that returns the Jacobian, given a set of
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">jacobian</span>(A,aparams):
-   <span style="color: #87005f;">"""</span>
-<span style="color: #87005f;">   Given joint angles A=(a1,a2)</span>
-<span style="color: #87005f;">   returns the Jacobian matrix J(q) = dH/dA</span>
-<span style="color: #87005f;">   """</span>
-   l1 = aparams[<span style="color: #87005f;">'l1'</span>]
-   l2 = aparams[<span style="color: #87005f;">'l2'</span>]
-   dHxdA1 = -l1*sin(A[0]) - l2*sin(A[0]+A[1])
-   dHxdA2 = -l2*sin(A[0]+A[1])
-   dHydA1 = l1*cos(A[0]) + l2*cos(A[0]+A[1])
-   dHydA2 = l2*cos(A[0]+A[1])
-   J = matrix([[dHxdA1,dHxdA2],[dHydA1,dHydA2]])
-   <span style="color: #af00ff;">return</span> J
+<pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">jacobian</span>(A,aparams):
+   <span style="color: #8b2252;">"""</span>
+<span style="color: #8b2252;">   Given joint angles A=(a1,a2)</span>
+<span style="color: #8b2252;">   returns the Jacobian matrix J(q) = dH/dA</span>
+<span style="color: #8b2252;">   """</span>
+   <span style="color: #a0522d;">l1</span> = aparams[<span style="color: #8b2252;">'l1'</span>]
+   <span style="color: #a0522d;">l2</span> = aparams[<span style="color: #8b2252;">'l2'</span>]
+   <span style="color: #a0522d;">dHxdA1</span> = -l1*sin(A[0]) - l2*sin(A[0]+A[1])
+   <span style="color: #a0522d;">dHxdA2</span> = -l2*sin(A[0]+A[1])
+   <span style="color: #a0522d;">dHydA1</span> = l1*cos(A[0]) + l2*cos(A[0]+A[1])
+   <span style="color: #a0522d;">dHydA2</span> = l2*cos(A[0]+A[1])
+   <span style="color: #a0522d;">J</span> = matrix([[dHxdA1,dHxdA2],[dHydA1,dHydA2]])
+   <span style="color: #a020f0;">return</span> J
 </pre>
 
 
@@ -757,12 +757,12 @@ and now we can use the Jacobian to compute hand velocities, given joint angular 
 \end{equation}
 
 
-<pre class="src src-python"><span style="color: #af5f00;">aparams</span> = {<span style="color: #87005f;">'l1'</span> : 0.3384, <span style="color: #87005f;">'l2'</span> : 0.4554}
-<span style="color: #af5f00;">A</span> = array([45.0,90.0])*pi/180       <span style="color: #af0000;"># joint angles</span>
-<span style="color: #af5f00;">Ad</span> = matrix([[-5.0],[3.0]])*pi/180  <span style="color: #af0000;"># joint velocities</span>
-<span style="color: #af5f00;">J</span> = jacobian(A,aparams)
-<span style="color: #af5f00;">Hd</span> = J*Ad
-<span style="color: #af00ff;">print</span> Hd
+<pre class="src src-python"><span style="color: #a0522d;">aparams</span> = {<span style="color: #8b2252;">'l1'</span> : 0.3384, <span style="color: #8b2252;">'l2'</span> : 0.4554}
+<span style="color: #a0522d;">A</span> = array([45.0,90.0])*pi/180       <span style="color: #b22222;"># </span><span style="color: #b22222;">joint angles</span>
+<span style="color: #a0522d;">Ad</span> = matrix([[-5.0],[3.0]])*pi/180  <span style="color: #b22222;"># </span><span style="color: #b22222;">joint velocities</span>
+<span style="color: #a0522d;">J</span> = jacobian(A,aparams)
+<span style="color: #a0522d;">Hd</span> = J*Ad
+<span style="color: #a020f0;">print</span> Hd
 </pre>
 
 
@@ -841,19 +841,19 @@ SymPy part):
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">jacobiand</span>(A,Ad,aparams):
-<span style="color: #87005f;">"""</span>
-<span style="color: #87005f;">Given joint angles A=(a1,a2) and velocities Ad=(a1d,a2d)</span>
-<span style="color: #87005f;">returns the time derivative of the Jacobian matrix d/dt (J)</span>
-<span style="color: #87005f;">"""</span>
-<span style="color: #af5f00;">l1</span> = aparams[<span style="color: #87005f;">'l1'</span>]
-<span style="color: #af5f00;">l2</span> = aparams[<span style="color: #87005f;">'l2'</span>]
-<span style="color: #af5f00;">Jd11</span> = -l1*cos(A[0])*Ad[0] - l2*(Ad[0] + Ad[1])*cos(A[0] + A[1])
-<span style="color: #af5f00;">Jd12</span> = -l2*(Ad[0] + Ad[1])*cos(A[0] + A[1])
-<span style="color: #af5f00;">Jd21</span> = -l1*sin(A[0])*Ad[0] - l2*(Ad[0] + Ad[1])*sin(A[0] + A[1])
-<span style="color: #af5f00;">Jd22</span> = -l2*(Ad[0] + Ad[1])*sin(A[0] + A[1])
-<span style="color: #af5f00;">Jd</span> = matrix([[Jd11, Jd12],[Jd21, Jd22]])
-<span style="color: #af00ff;">return</span> Jd
+<pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">jacobiand</span>(A,Ad,aparams):
+<span style="color: #8b2252;">"""</span>
+<span style="color: #8b2252;">Given joint angles A=(a1,a2) and velocities Ad=(a1d,a2d)</span>
+<span style="color: #8b2252;">returns the time derivative of the Jacobian matrix d/dt (J)</span>
+<span style="color: #8b2252;">"""</span>
+<span style="color: #a0522d;">l1</span> = aparams[<span style="color: #8b2252;">'l1'</span>]
+<span style="color: #a0522d;">l2</span> = aparams[<span style="color: #8b2252;">'l2'</span>]
+<span style="color: #a0522d;">Jd11</span> = -l1*cos(A[0])*Ad[0] - l2*(Ad[0] + Ad[1])*cos(A[0] + A[1])
+<span style="color: #a0522d;">Jd12</span> = -l2*(Ad[0] + Ad[1])*cos(A[0] + A[1])
+<span style="color: #a0522d;">Jd21</span> = -l1*sin(A[0])*Ad[0] - l2*(Ad[0] + Ad[1])*sin(A[0] + A[1])
+<span style="color: #a0522d;">Jd22</span> = -l2*(Ad[0] + Ad[1])*sin(A[0] + A[1])
+<span style="color: #a0522d;">Jd</span> = matrix([[Jd11, Jd12],[Jd21, Jd22]])
+<span style="color: #a020f0;">return</span> Jd
 </pre>
 
 

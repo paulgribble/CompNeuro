@@ -65,7 +65,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -114,7 +114,7 @@ for the JavaScript code in this tag.
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
  *
- * Copyright (C) 2012  MathJax
+ * Copyright (C) 2012-2013  MathJax
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,7 +137,7 @@ for the JavaScript code in this tag.
 @licstart  The following is the entire license notice for the
 JavaScript code below.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code below is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -331,15 +331,15 @@ Here is what a simple Python function would look like for simulating these dynam
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,Tm):
-  m = 1.65    <span style="color: #af0000;"># kg</span>
-  g = -9.81   <span style="color: #af0000;"># m/s/s</span>
-  l = 0.179   <span style="color: #af0000;"># metres</span>
-  I = 0.0779  <span style="color: #af0000;"># kg m**2</span>
-  a = state[0]
-  ad = state[1]
-  add = (m*g*lz*cos(a) + Tm) / I
-  <span style="color: #af00ff;">return</span> [ad,add]
+<pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,Tm):
+  <span style="color: #a0522d;">m</span> = 1.65    <span style="color: #b22222;"># </span><span style="color: #b22222;">kg</span>
+  <span style="color: #a0522d;">g</span> = -9.81   <span style="color: #b22222;"># </span><span style="color: #b22222;">m/s/s</span>
+  <span style="color: #a0522d;">l</span> = 0.179   <span style="color: #b22222;"># </span><span style="color: #b22222;">metres</span>
+  <span style="color: #a0522d;">I</span> = 0.0779  <span style="color: #b22222;"># </span><span style="color: #b22222;">kg m**2</span>
+  <span style="color: #a0522d;">a</span> = state[0]
+  <span style="color: #a0522d;">ad</span> = state[1]
+  <span style="color: #a0522d;">add</span> = (m*g*lz*cos(a) + Tm) / I
+  <span style="color: #a020f0;">return</span> [ad,add]
 </pre>
 
 
@@ -408,15 +408,15 @@ Here is a new version of the Python function:
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,Tmf,Tme):
-  m = 1.65    <span style="color: #af0000;"># kg</span>
-  g = -9.81   <span style="color: #af0000;"># m/s/s</span>
-  lz = 0.179  <span style="color: #af0000;"># metres</span>
-  I = 0.0779  <span style="color: #af0000;"># kg m**2</span>
-  a = state[0]
-  ad = state[1]
-  add = (m*g*lz*cos(a) + Tmf - Tme) / I
-  <span style="color: #af00ff;">return</span> [ad,add]
+<pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,Tmf,Tme):
+  <span style="color: #a0522d;">m</span> = 1.65    <span style="color: #b22222;"># </span><span style="color: #b22222;">kg</span>
+  <span style="color: #a0522d;">g</span> = -9.81   <span style="color: #b22222;"># </span><span style="color: #b22222;">m/s/s</span>
+  <span style="color: #a0522d;">lz</span> = 0.179  <span style="color: #b22222;"># </span><span style="color: #b22222;">metres</span>
+  <span style="color: #a0522d;">I</span> = 0.0779  <span style="color: #b22222;"># </span><span style="color: #b22222;">kg m**2</span>
+  <span style="color: #a0522d;">a</span> = state[0]
+  <span style="color: #a0522d;">ad</span> = state[1]
+  <span style="color: #a0522d;">add</span> = (m*g*lz*cos(a) + Tmf - Tme) / I
+  <span style="color: #a020f0;">return</span> [ad,add]
 </pre>
 
 
@@ -512,18 +512,18 @@ Here is a Python function that implements this:
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,a0):
-        m = 1.65    <span style="color: #af0000;"># kg</span>
-        g = -9.81   <span style="color: #af0000;"># m/s/s</span>
-        lz = 0.179  <span style="color: #af0000;"># metres</span>
-        I = 0.0779  <span style="color: #af0000;"># kg m**2</span>
-        k = -10.0   <span style="color: #af0000;"># Nm/rad</span>
-        a = state[0]
-        ad = state[1]
-        Tmf = <span style="color: #5f5f87;">max</span>(k*(a-a0),0)
-        Tme = <span style="color: #5f5f87;">min</span>(k*(a-a0),0)
-        add = (m*g*lz*cos(a) + Tmf + Tme) / I
-        <span style="color: #af00ff;">return</span> [ad,add]
+<pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,a0):
+        <span style="color: #a0522d;">m</span> = 1.65    <span style="color: #b22222;"># </span><span style="color: #b22222;">kg</span>
+        <span style="color: #a0522d;">g</span> = -9.81   <span style="color: #b22222;"># </span><span style="color: #b22222;">m/s/s</span>
+        <span style="color: #a0522d;">lz</span> = 0.179  <span style="color: #b22222;"># </span><span style="color: #b22222;">metres</span>
+        <span style="color: #a0522d;">I</span> = 0.0779  <span style="color: #b22222;"># </span><span style="color: #b22222;">kg m**2</span>
+        <span style="color: #a0522d;">k</span> = -10.0   <span style="color: #b22222;"># </span><span style="color: #b22222;">Nm/rad</span>
+        <span style="color: #a0522d;">a</span> = state[0]
+        <span style="color: #a0522d;">ad</span> = state[1]
+        <span style="color: #a0522d;">Tmf</span> = <span style="color: #483d8b;">max</span>(k*(a-a0),0)
+        <span style="color: #a0522d;">Tme</span> = <span style="color: #483d8b;">min</span>(k*(a-a0),0)
+        <span style="color: #a0522d;">add</span> = (m*g*lz*cos(a) + Tmf + Tme) / I
+        <span style="color: #a020f0;">return</span> [ad,add]
 </pre>
 
 
@@ -588,19 +588,19 @@ T_{ext} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{-}
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,a0):
-        m = 1.65    <span style="color: #af0000;"># kg</span>
-        g = -9.81   <span style="color: #af0000;"># m/s/s</span>
-        lz = 0.179  <span style="color: #af0000;"># metres</span>
-        I = 0.0779  <span style="color: #af0000;"># kg m**2</span>
-        k = -10.0   <span style="color: #af0000;"># Nm/rad</span>
-        b =  0.5    <span style="color: #af0000;"># Nms/rad</span>
-        a = state[0]
-        ad = state[1]
-        Tmf = <span style="color: #5f5f87;">max</span>((k*(a-a0)) - (b*ad),0)
-        Tme = <span style="color: #5f5f87;">min</span>((k*(a-a0)) - (b*ad),0)
-        add = (m*g*lz*cos(a) + Tmf + Tme) / I
-        <span style="color: #af00ff;">return</span> [ad,add]
+<pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,a0):
+        <span style="color: #a0522d;">m</span> = 1.65    <span style="color: #b22222;"># </span><span style="color: #b22222;">kg</span>
+        <span style="color: #a0522d;">g</span> = -9.81   <span style="color: #b22222;"># </span><span style="color: #b22222;">m/s/s</span>
+        <span style="color: #a0522d;">lz</span> = 0.179  <span style="color: #b22222;"># </span><span style="color: #b22222;">metres</span>
+        <span style="color: #a0522d;">I</span> = 0.0779  <span style="color: #b22222;"># </span><span style="color: #b22222;">kg m**2</span>
+        <span style="color: #a0522d;">k</span> = -10.0   <span style="color: #b22222;"># </span><span style="color: #b22222;">Nm/rad</span>
+        <span style="color: #a0522d;">b</span> =  0.5    <span style="color: #b22222;"># </span><span style="color: #b22222;">Nms/rad</span>
+        <span style="color: #a0522d;">a</span> = state[0]
+        <span style="color: #a0522d;">ad</span> = state[1]
+        <span style="color: #a0522d;">Tmf</span> = <span style="color: #483d8b;">max</span>((k*(a-a0)) - (b*ad),0)
+        <span style="color: #a0522d;">Tme</span> = <span style="color: #483d8b;">min</span>((k*(a-a0)) - (b*ad),0)
+        <span style="color: #a0522d;">add</span> = (m*g*lz*cos(a) + Tmf + Tme) / I
+        <span style="color: #a020f0;">return</span> [ad,add]
 </pre>
 
 

@@ -1,5 +1,5 @@
 (require 'org-publish)
-(require 'org-exp-bibtex)
+(require 'ox-bibtex)
 (setq org-publish-project-alist
       '(
 
@@ -20,7 +20,7 @@
 	("CompNeuro_html"
 	 :base-directory "html/"
 	 :base-extension "css\\|html"
-	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/"
+	 :publishing-directory "/ssh:plg@toro.ssc.uwo.ca:~/gribblelab.org/compneuro/"
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
@@ -28,7 +28,7 @@
 	("CompNeuro_bibhtml"
 	 :base-directory "org/"
 	 :base-extension "html\\|css"
-	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/"
+	 :publishing-directory "/ssh:plg@toro.ssc.uwo.ca:~/gribblelab.org/compneuro/"
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
@@ -36,7 +36,7 @@
 	("CompNeuro_figs"
 	 :base-directory "figs/"
 	 :base-extension "png\\|jpg\\|pdf"
-	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/figs/"
+	 :publishing-directory "/ssh:plg@toro.ssc.uwo.ca:~/gribblelab.org/compneuro/figs/"
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )
@@ -44,7 +44,7 @@
 	("CompNeuro_code"
 	 :base-directory "code/"
 	 :base-extension "c\\|h\\|txt\\|csv\\|py\\|tgz\\|pickle\\|m"
-	 :publishing-directory "/ssh:admin@leviathan.ssc.uwo.ca:~/gribblelab.org/compneuro/code/"
+	 :publishing-directory "/ssh:plg@toro.ssc.uwo.ca:~/gribblelab.org/compneuro/code/"
 	 :publishing-function org-publish-attachment
 	 :recursive t
 	 )

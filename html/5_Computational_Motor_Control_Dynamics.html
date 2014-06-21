@@ -65,7 +65,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -114,7 +114,7 @@ for the JavaScript code in this tag.
  * @licstart  The following is the entire license notice for the
  *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
  *
- * Copyright (C) 2012  MathJax
+ * Copyright (C) 2012-2013  MathJax
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,7 +137,7 @@ for the JavaScript code in this tag.
 @licstart  The following is the entire license notice for the
 JavaScript code below.
 
-Copyright (C) 2012  Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code below is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -661,26 +661,26 @@ Let's write a function, as we did earlier in the course for other systems, for t
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">from</span> scipy.integrate <span style="color: #af00ff;">import</span> odeint
-<span style="color: #af00ff;">def</span> <span style="color: #0000ff;">onejointarm</span>(state,t):
-   theta = state[0]      <span style="color: #af0000;"># joint angle (rad)</span>
-   theta_dot = state[1]  <span style="color: #af0000;"># joint velocity (rad/s)</span>
-   m = 1.65              <span style="color: #af0000;"># kg</span>
-   r = 0.50              <span style="color: #af0000;"># link length (m)</span>
-   g = 9.81              <span style="color: #af0000;"># gravitational constant (m/s/s)</span>
-   i = 0.025             <span style="color: #af0000;"># moment of inertia (kg m m)</span>
-   theta_ddot = -(m*g*r*sin(theta)) / (i + (m*r*r))
-   <span style="color: #af00ff;">return</span> [theta_dot, theta_ddot]
+<pre class="src src-python"><span style="color: #a020f0;">from</span> scipy.integrate <span style="color: #a020f0;">import</span> odeint
+<span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointarm</span>(state,t):
+   <span style="color: #a0522d;">theta</span> = state[0]      <span style="color: #b22222;"># </span><span style="color: #b22222;">joint angle (rad)</span>
+   <span style="color: #a0522d;">theta_dot</span> = state[1]  <span style="color: #b22222;"># </span><span style="color: #b22222;">joint velocity (rad/s)</span>
+   <span style="color: #a0522d;">m</span> = 1.65              <span style="color: #b22222;"># </span><span style="color: #b22222;">kg</span>
+   <span style="color: #a0522d;">r</span> = 0.50              <span style="color: #b22222;"># </span><span style="color: #b22222;">link length (m)</span>
+   <span style="color: #a0522d;">g</span> = 9.81              <span style="color: #b22222;"># </span><span style="color: #b22222;">gravitational constant (m/s/s)</span>
+   <span style="color: #a0522d;">i</span> = 0.025             <span style="color: #b22222;"># </span><span style="color: #b22222;">moment of inertia (kg m m)</span>
+   <span style="color: #a0522d;">theta_ddot</span> = -(m*g*r*sin(theta)) / (i + (m*r*r))
+   <span style="color: #a020f0;">return</span> [theta_dot, theta_ddot]
 
-<span style="color: #af5f00;">t</span> = linspace(0.0,10.0,1001)   <span style="color: #af0000;"># 10 seconds sampled at 1000 Hz</span>
-<span style="color: #af5f00;">state0</span> = [90.0*pi/180.0, 0.0] <span style="color: #af0000;"># 90 deg initial angle, 0 deg/sec initial velocity</span>
-<span style="color: #af5f00;">state</span> = odeint(onejointarm, state0, t)
+<span style="color: #a0522d;">t</span> = linspace(0.0,10.0,1001)   <span style="color: #b22222;"># </span><span style="color: #b22222;">10 seconds sampled at 1000 Hz</span>
+<span style="color: #a0522d;">state0</span> = [90.0*pi/180.0, 0.0] <span style="color: #b22222;"># </span><span style="color: #b22222;">90 deg initial angle, 0 deg/sec initial velocity</span>
+<span style="color: #a0522d;">state</span> = odeint(onejointarm, state0, t)
 
 figure()
 plot(t,state*180/pi)
-legend((<span style="color: #87005f;">'theta'</span>,<span style="color: #87005f;">'thetadot'</span>))
-xlabel(<span style="color: #87005f;">'TIME (sec)'</span>)
-ylabel(<span style="color: #87005f;">'THETA (deg) &amp; THETA_DOT (deg/sec)'</span>)
+legend((<span style="color: #8b2252;">'theta'</span>,<span style="color: #8b2252;">'thetadot'</span>))
+xlabel(<span style="color: #8b2252;">'TIME (sec)'</span>)
+ylabel(<span style="color: #8b2252;">'THETA (deg) &amp; THETA_DOT (deg/sec)'</span>)
 </pre>
 
 
@@ -696,19 +696,19 @@ Here's a little function that will animate the arm:
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">animate_arm</span>(state,t):
-   l = 0.5
+<pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">animate_arm</span>(state,t):
+   <span style="color: #a0522d;">l</span> = 0.5
    figure(figsize=(12,6))
-   plot(0,0,<span style="color: #87005f;">'r.'</span>)
-   p, = plot((0,l*sin(state[0,0])),(0,-l*cos(state[0,0])),<span style="color: #87005f;">'b-'</span>)
-   tt = title(<span style="color: #87005f;">"%4.2f sec"</span> % 0.00)
+   plot(0,0,<span style="color: #8b2252;">'r.'</span>)
+   p, = plot((0,l*sin(state[0,0])),(0,-l*cos(state[0,0])),<span style="color: #8b2252;">'b-'</span>)
+   <span style="color: #a0522d;">tt</span> = title(<span style="color: #8b2252;">"%4.2f sec"</span> % 0.00)
    xlim([-l-.05,l+.05])
    ylim([-l,.10])
-   step = 3
-   <span style="color: #af00ff;">for</span> i <span style="color: #af00ff;">in</span> <span style="color: #5f5f87;">xrange</span>(1,shape(state)[0]-10,step):
+   <span style="color: #a0522d;">step</span> = 3
+   <span style="color: #a020f0;">for</span> i <span style="color: #a020f0;">in</span> <span style="color: #483d8b;">xrange</span>(1,shape(state)[0]-10,step):
       p.set_xdata((0,l*sin(state[i,0])))
       p.set_ydata((0,-l*cos(state[i,0])))
-      tt.set_text(<span style="color: #87005f;">"%4.2f sec"</span> % (i*0.01))
+      tt.set_text(<span style="color: #8b2252;">"%4.2f sec"</span> % (i*0.01))
       draw()
 
 animate_arm(state,t)
@@ -1077,35 +1077,35 @@ Here is a Python function that implements the forward dynamics equations of a pa
 
 
 
-<pre class="src src-python"><span style="color: #af00ff;">def</span> <span style="color: #0000ff;">twojointarm</span>(state,t,aparams):
-        <span style="color: #87005f;">"""</span>
-<span style="color: #87005f;">        passive two-joint arm in a vertical plane</span>
-<span style="color: #87005f;">        X is fwd(+) and back(-)</span>
-<span style="color: #87005f;">        Y is up(+) and down(-)</span>
-<span style="color: #87005f;">        gravity acts down</span>
-<span style="color: #87005f;">        shoulder angle a1 relative to Y vert, +ve counter-clockwise</span>
-<span style="color: #87005f;">        elbow angle a2 relative to upper arm, +ve counter-clockwise</span>
-<span style="color: #87005f;">        """</span>
-        a1,a2,a1d,a2d = state
-        l1,l2 = aparams[<span style="color: #87005f;">'l1'</span>], aparams[<span style="color: #87005f;">'l2'</span>]
-        m1,m2 = aparams[<span style="color: #87005f;">'m1'</span>], aparams[<span style="color: #87005f;">'m2'</span>]
-        i1,i2 = aparams[<span style="color: #87005f;">'i1'</span>], aparams[<span style="color: #87005f;">'i2'</span>]
-        r1,r2 = aparams[<span style="color: #87005f;">'r1'</span>], aparams[<span style="color: #87005f;">'r2'</span>]
-        g = 9.81
-        M11 = i1 + i2 + (m1*r1*r1) + (m2*((l1*l1) + (r2*r2) + (2*l1*r2*cos(a2))))
-        M12 = i2 + (m2*((r2*r2) + (l1*r2*cos(a2))))
-        M21 = M12
-        M22 = i2 + (m2*r2*r2)
-        M = matrix([[M11,M12],[M21,M22]])
-        C1 = -(m2*l1*a2d*a2d*r2*sin(a2)) - (2*m2*l1*a1d*a2d*r2*sin(a2))
-        C2 = m2*l1*a1d*a1d*r2*sin(a2)
-        C = matrix([[C1],[C2]])
-        G1 = (g*sin(a1)*((m2*l1)+(m1*r1))) + (g*m2*r2*sin(a1+a2))
-        G2 = g*m2*r2*sin(a1+a2)
-        G = matrix([[G1],[G2]])
-        ACC = inv(M) * (-C-G)
-        a1dd,a2dd = ACC[0,0],ACC[1,0]
-        <span style="color: #af00ff;">return</span> [a1d, a2d, a1dd, a2dd]
+<pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">twojointarm</span>(state,t,aparams):
+        <span style="color: #8b2252;">"""</span>
+<span style="color: #8b2252;">        passive two-joint arm in a vertical plane</span>
+<span style="color: #8b2252;">        X is fwd(+) and back(-)</span>
+<span style="color: #8b2252;">        Y is up(+) and down(-)</span>
+<span style="color: #8b2252;">        gravity acts down</span>
+<span style="color: #8b2252;">        shoulder angle a1 relative to Y vert, +ve counter-clockwise</span>
+<span style="color: #8b2252;">        elbow angle a2 relative to upper arm, +ve counter-clockwise</span>
+<span style="color: #8b2252;">        """</span>
+        <span style="color: #a0522d;">a1</span>,<span style="color: #a0522d;">a2</span>,<span style="color: #a0522d;">a1d</span>,<span style="color: #a0522d;">a2d</span> = state
+        <span style="color: #a0522d;">l1</span>,<span style="color: #a0522d;">l2</span> = aparams[<span style="color: #8b2252;">'l1'</span>], aparams[<span style="color: #8b2252;">'l2'</span>]
+        <span style="color: #a0522d;">m1</span>,<span style="color: #a0522d;">m2</span> = aparams[<span style="color: #8b2252;">'m1'</span>], aparams[<span style="color: #8b2252;">'m2'</span>]
+        <span style="color: #a0522d;">i1</span>,<span style="color: #a0522d;">i2</span> = aparams[<span style="color: #8b2252;">'i1'</span>], aparams[<span style="color: #8b2252;">'i2'</span>]
+        <span style="color: #a0522d;">r1</span>,<span style="color: #a0522d;">r2</span> = aparams[<span style="color: #8b2252;">'r1'</span>], aparams[<span style="color: #8b2252;">'r2'</span>]
+        <span style="color: #a0522d;">g</span> = 9.81
+        <span style="color: #a0522d;">M11</span> = i1 + i2 + (m1*r1*r1) + (m2*((l1*l1) + (r2*r2) + (2*l1*r2*cos(a2))))
+        <span style="color: #a0522d;">M12</span> = i2 + (m2*((r2*r2) + (l1*r2*cos(a2))))
+        <span style="color: #a0522d;">M21</span> = M12
+        <span style="color: #a0522d;">M22</span> = i2 + (m2*r2*r2)
+        <span style="color: #a0522d;">M</span> = matrix([[M11,M12],[M21,M22]])
+        <span style="color: #a0522d;">C1</span> = -(m2*l1*a2d*a2d*r2*sin(a2)) - (2*m2*l1*a1d*a2d*r2*sin(a2))
+        <span style="color: #a0522d;">C2</span> = m2*l1*a1d*a1d*r2*sin(a2)
+        <span style="color: #a0522d;">C</span> = matrix([[C1],[C2]])
+        <span style="color: #a0522d;">G1</span> = (g*sin(a1)*((m2*l1)+(m1*r1))) + (g*m2*r2*sin(a1+a2))
+        <span style="color: #a0522d;">G2</span> = g*m2*r2*sin(a1+a2)
+        <span style="color: #a0522d;">G</span> = matrix([[G1],[G2]])
+        <span style="color: #a0522d;">ACC</span> = inv(M) * (-C-G)
+        <span style="color: #a0522d;">a1dd</span>,<span style="color: #a0522d;">a2dd</span> = ACC[0,0],ACC[1,0]
+        <span style="color: #a020f0;">return</span> [a1d, a2d, a1dd, a2dd]
 </pre>
 
 
