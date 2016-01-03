@@ -4,11 +4,9 @@
 #+AUTHOR:    Paul Gribble & Dinant Kistemaker
 #+EMAIL:     paul@gribblelab.org
 #+DATE:      fall 2012
-#+LINK_UP:http://www.gribblelab.org/compneuro/4_Computational_Motor_Control_Kinematics.html
-#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+#+HTML_LINK_UP:http://www.gribblelab.org/compneuro/4_Computational_Motor_Control_Kinematics.html
+#+HTML_LINK_HOME: http://www.gribblelab.org/compneuro/index.html
 
------
-[TABLE-OF-CONTENTS]
 -----
 
 * Introduction
@@ -28,7 +26,7 @@ complex dynamical behaviour.
 Let's start with a simple one-joint planar arm (like an elbow joint),
 and let's put it in a vertical plane, with gravity acting down:
 
-#+ATTR_HTML: width="400px" align="center"
+#+ATTR_HTML: :width 400px  :align center
 #+CAPTION: Schematic of a simple one-joint arm in a vertical plane
 [[file:figs/elbow_dynamics.png]]
 
@@ -284,7 +282,7 @@ xlabel('TIME (sec)')
 ylabel('THETA (deg) & THETA_DOT (deg/sec)')
 #+END_SRC
 
-#+ATTR_HTML: width="600px" align="center"
+#+ATTR_HTML: :width 600px :align center
 #+CAPTION: Dynamics of passive one-joint arm
 [[file:figs/onejointarm_passive.png]]
 
@@ -309,7 +307,7 @@ def animate_arm(state,t):
 animate_arm(state,t)
 #+END_SRC
 
-#+ATTR_HTML: width="600px" align="center"
+#+ATTR_HTML: :width 600px :align center
 #+CAPTION: Animation of passive one-joint arm
 [[file:figs/onejointanimation.png]]
 
@@ -320,7 +318,7 @@ follow the same basic steps as above for the one-joint arm. Note again
 that we are now putting the arm in a vertical plane, with gravity
 pointing down.
 
-#+ATTR_HTML: width="500px" align="center"
+#+ATTR_HTML: :width 500px :align center
 #+CAPTION: Schematic of a two-joint arm in a vertical plane
 [[file:figs/twojointarm_dynamics.png]]
 
@@ -781,7 +779,7 @@ I coded up a little "game" that let's you control a two-joint arm with
 realistic limb dynamics, to hit targets that appear in the arm's
 workspace (not unlike many actual motor control experiments).
 
-#+ATTR_HTML: width="400px" align="center"
+#+ATTR_HTML: :width 400px :align center
 #+CAPTION: Two-joint arm video game
 [[file:figs/twojointarmgame.png]]
 
@@ -828,4 +826,4 @@ At the end of the game it will print out your score to the command
 line.
 
 
-[ [[6_Computational_Motor_Control_Muscle_Models.html][Computational Motor Control: Muscle Models]] ]
+[ [[file:6_Computational_Motor_Control_Muscle_Models.html][Computational Motor Control: Muscle Models]] ]

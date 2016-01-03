@@ -21,6 +21,14 @@
   link]] ] [ [[file:readings/SW_00_cover_info.pdf][cover info]] ]
 
 -----
+* Code
+
+When there is a python script linked in the notes, you will get a
+permissions error when clicking on it. I haven't figured out how to
+avoid this yet. In the meantime, all code can be downloaded here in
+this tarred gzipped archive: [[file:code.tgz][code.tgz]]
+
+-----
 * Course Notes
 
 0. [@0] [[file:0_Setup_Your_Computer.html][Setup Your Computer]]

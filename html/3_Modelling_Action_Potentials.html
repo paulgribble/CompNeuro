@@ -1,65 +1,100 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2016-01-03 Sun 11:43 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>3. Modelling Action Potentials</title>
-<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
-<meta name="title" content="3. Modelling Action Potentials"/>
-<meta name="generator" content="Org-mode"/>
-<meta name="generated" content="fall 2012"/>
-<meta name="author" content="Paul Gribble &amp; Dinant Kistemaker"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Paul Gribble &amp; Dinant Kistemaker" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
-  .title  { text-align: center; }
-  .todo   { color: red; }
-  .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
-</style><link rel="stylesheet" type="text/css" href="mystyle.css" />
+</style>
+<link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -106,181 +141,157 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
-/**
- *
- * @source: http://orgmode.org/mathjax/MathJax.js
- *
- * @licstart  The following is the entire license notice for the
- *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- * Copyright (C) 2012-2013  MathJax
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @licend  The above is the entire license notice
- * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- */
-
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code below.
-
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
-
-The JavaScript code below is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code below.
-*/
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+<div id="org-div-home-and-up">
  <a accesskey="h" href="http://www.gribblelab.org/compneuro/2_Modelling_Dynamical_Systems.html"> UP </a>
  |
  <a accesskey="H" href="http://www.gribblelab.org/compneuro/index.html"> HOME </a>
-</div>
-
-<div id="preamble">
-
-</div>
-
-<div id="content">
+</div><div id="content">
 <h1 class="title">3. Modelling Action Potentials</h1>
-
-
-
-<hr/>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Introduction</a></li>
-<li><a href="#sec-2">Simulating the Hodgkin &amp; Huxley model</a>
+<li><a href="#orgheadline1">Introduction</a></li>
+<li><a href="#orgheadline2">Simulating the Hodgkin &amp; Huxley model</a>
 <ul>
-<li><a href="#sec-2-1">The neuron model</a>
+<li><a href="#orgheadline3">The neuron model</a>
 <ul>
-<li><a href="#sec-2-1-1">Passive Properties</a></li>
-<li><a href="#sec-2-1-2">Sodium channels (Na)</a></li>
-<li><a href="#sec-2-1-3">Potassium channels (K)</a></li>
-<li><a href="#sec-2-1-4">Summary</a></li>
+<li><a href="#orgheadline4">Passive Properties</a></li>
+<li><a href="#orgheadline5">Sodium channels (Na)</a></li>
+<li><a href="#orgheadline6">Potassium channels (K)</a></li>
+<li><a href="#orgheadline7">Summary</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-2">Python code</a></li>
+<li><a href="#orgheadline8">Python code</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">Things to try</a></li>
-<li><a href="#sec-4">Next steps</a></li>
+<li><a href="#orgheadline9">Things to try</a></li>
+<li><a href="#orgheadline10">Next steps</a></li>
 </ul>
 </div>
 </div>
+<div id="bibliography">
+<h2>References</h2>
 
-<hr/>
+</div>
+<table>
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="HH1952">1</a>]
+</td>
+<td class="bibtexitem">
+A.&nbsp;L. Hodgkin and A.&nbsp;F. Huxley.
+ A quantitative description of membrane current and its application
+  to conduction and excitation in nerve.
+ <em>J. Physiol. (Lond.)</em>, 117(4):500--544, Aug 1952.
+[&nbsp;<a href="refs_bib.html#HH1952">bib</a>&nbsp;]
+
+</td>
+</tr>
 
 
-<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Introduction</h2>
-<div class="outline-text-2" id="text-1">
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="HH1990">2</a>]
+</td>
+<td class="bibtexitem">
+A.&nbsp;L. Hodgkin, A.&nbsp;F. Huxley, A.&nbsp;L. Hodgkin, and A.&nbsp;F. Huxley.
+ A quantitative description of membrane current and its application
+  to conduction and excitation in nerve. 1952.
+ <em>Bull. Math. Biol.</em>, 52(1-2):25--71, 1990.
+[&nbsp;<a href="refs_bib.html#HH1990">bib</a>&nbsp;]
+
+</td>
+</tr>
 
 
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="ekeberg1991">3</a>]
+</td>
+<td class="bibtexitem">
+O.&nbsp;Ekeberg, P.&nbsp;Wallen, A.&nbsp;Lansner, H.&nbsp;Traven, L.&nbsp;Brodin, and S.&nbsp;Grillner.
+ A computer based model for realistic simulations of neural
+  networks. I. The single neuron and synaptic interaction.
+ <em>Biol Cybern</em>, 65(2):81--90, 1991.
+[&nbsp;<a href="refs_bib.html#ekeberg1991">bib</a>&nbsp;]
+
+</td>
+</tr>
+
+
+<tr valign="top">
+<td align="right" class="bibtexnumber">
+[<a name="kandel2000principles">4</a>]
+</td>
+<td class="bibtexitem">
+E.R. Kandel, J.H. Schwartz, T.M. Jessell, et&nbsp;al.
+ <em>Principles of neural science</em>, volume&nbsp;4.
+ McGraw-Hill New York, 2000.
+[&nbsp;<a href="refs_bib.html#kandel2000principles">bib</a>&nbsp;]
+
+</td>
+</tr>
+</table>
+
+<hr  />
+
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Introduction</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 In this section we will use a model of voltage-gated ion channels in a
 single neuron to simulate action potentials. The model is based on the
 work by Hodgkin &amp; Huxley in the 1940s and 1950s
-\cite{HH1952,HH1990}. A good reference to refresh your memory about
+[<a href="#HH1952">1</a>,<a href="#HH1990">2</a>]. A good reference to refresh your memory about
 how ion channels in a neuron work is the Kandel, Schwartz &amp; Jessel
-book "Principles of Neural Science" \cite{kandel2000principles}.
+book "Principles of Neural Science" [<a href="#kandel2000principles">4</a>].
 </p>
+
 <p>
 To model the action potential we will use an article by Ekeberg et              
 al. (1991) published in Biological Cybernetics
-\cite{ekeberg1991}. When reading the article you can focus on the
+[<a href="#ekeberg1991">3</a>]. When reading the article you can focus on the
 first three pages (up to paragraph 2.3) and try to find answers to the
 following questions:
 </p>
-<ul>
-<li>How many differential equations are there?
-</li>
-<li>What is the order of the system described in equations 1-9?
-</li>
-<li>What are the states and state derivatives of the system?
-</li>
+
+<ul class="org-ul">
+<li>How many differential equations are there?</li>
+<li>What is the order of the system described in equations 1-9?</li>
+<li>What are the states and state derivatives of the system?</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Simulating the Hodgkin &amp; Huxley model</h2>
-<div class="outline-text-2" id="text-2">
-
-
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Simulating the Hodgkin &amp; Huxley model</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Before we begin coding up the model, it may be useful to remind you of
 a fundamental law of electricity, one that relates electrical
@@ -289,7 +300,6 @@ conductance \(G\), the reciprocal of resistance). This of course is
 known as <a href="http://en.wikipedia.org/wiki/Ohm's_law">Ohm's law</a>:
 </p>
 
-
 \begin{equation}
 V = IR
 \end{equation}
@@ -297,7 +307,6 @@ V = IR
 <p>
 or 
 </p>
-
 
 \begin{equation}
 V = \frac{I}{G}
@@ -309,23 +318,21 @@ electric circuit including two types of ion channels: sodium and
 potassium channels. We will use this model to better understand the
 process underlying the origin of an action potential.
 </p>
-
 </div>
 
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1">The neuron model</h3>
-<div class="outline-text-3" id="text-2-1">
-
-
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">The neuron model</h3>
+<div class="outline-text-3" id="text-orgheadline3">
 
 <div class="figure">
-<p><img src="figs/ekeberg_fig1.png" width="400px" align="center" alt="figs/ekeberg_fig1.png" /></p>
-<p>Schematic of Ekeberg et al. 1991 neuron model</p>
+<p><img src="figs/ekeberg_fig1.png" alt="ekeberg_fig1.png" width="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Schematic of Ekeberg et al. 1991 neuron model</p>
 </div>
 
 <p>
 The figure above, adapted from Ekeberg et al., 1991
-\cite{ekeberg1991}, schematically illustrates the model of a
+[<a href="#ekeberg1991">3</a>], schematically illustrates the model of a
 neuron. In panel A we see a soma, and multiple dendrites. Each of
 these can be modelled by an electrical "compartment" (Panel B) and the
 passive interactions between them can be modelled as a pretty standard
@@ -334,12 +341,14 @@ compartmental models of neurons). In panel C, we see an expanded model
 of the Soma from panel A. Here, a number of active ion channels are
 included in the model of the soma.
 </p>
+
 <p>
 For our purposes here, we will focus on the soma, and we will not
 include any additional dendrites in our implementation of the
 model. Thus essentially we will be modelling what appears in panel C,
 and at that, only a subset.
 </p>
+
 <p>
 In panel C we see that the soma can be modelled as an electrical
 circuit with a sodium ion channel (Na), a potassium ion channel (K), a
@@ -347,14 +356,11 @@ calcium ion channel (Ca), and a calcium-dependent potassium channel
 (K(Ca)). What we will be concerned with simulating, ultimately, is the
 intracellular potential E.
 </p>
-
 </div>
 
-<div id="outline-container-2-1-1" class="outline-4">
-<h4 id="sec-2-1-1">Passive Properties</h4>
-<div class="outline-text-4" id="text-2-1-1">
-
-
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">Passive Properties</h4>
+<div class="outline-text-4" id="text-orgheadline4">
 <p>
 Equation (1) of Ekeberg is a differential equation describing the
 relation between the time derivative of the membrane potential \(E\) as
@@ -362,7 +368,6 @@ a function of the passive leak current through the membrane, and the
 current through the ion channels. Note that Ekeberg uses \(E\) instead
 of the typical \(V\) symbol to represent electrical potential.
 </p>
-
 
 \begin{equation}
 \frac{dE}{dt} = \frac{(E_{leak}-E)G_{m} + \sum{\left(E_{comp}-E\right)}G_{core} + I_{channels}}{C_{m}}
@@ -377,6 +382,7 @@ to the sum of a bunch of other terms, divided by membrane capacitance
 physics that <a href="http://en.wikipedia.org/wiki/Capacitance">capacitance</a> is a measure of the ability of something to
 store an electrical charge.
 </p>
+
 <p>
 The "bunch of other things" is a sum of three things, actually, (from
 left to right): a passive leakage current, plus a term characterizing
@@ -387,6 +393,7 @@ of the equation \(\sum{\left(E_{comp}-E\right)}G_{core}\) which
 represents the sum of currents from adjacent compartments (we have
 none).
 </p>
+
 <p>
 We are also going to include in our model an external current
 \(I_{ext}\). This can essentially represent the sum of currents coming
@@ -396,7 +403,6 @@ experiment. This is what we as experimenters can manipulate, for
 example, to see how neuron spiking behaviour changes. So what we will
 actually be working with is this:
 </p>
-
 
 \begin{equation}
 \frac{dE}{dt} = \frac{(E_{leak}-E)G_{m} + I_{channels} + I_{ext}}{C_{m}}
@@ -409,19 +415,15 @@ will only be including two, the potassium channel (K) and the sodium
 channel (Na).
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-2-1-2" class="outline-4">
-<h4 id="sec-2-1-2">Sodium channels (Na)</h4>
-<div class="outline-text-4" id="text-2-1-2">
-
-
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">Sodium channels (Na)</h4>
+<div class="outline-text-4" id="text-orgheadline5">
 <p>
 The current through sodium channels that enter the soma are
 represented by equation (2) in Ekeberg et al. (1991):
 </p>
-
 
 \begin{equation}
 I_{Na} = (E_{Na} - E_{soma})G_{Na}m^{3}h
@@ -434,11 +436,11 @@ parameters: \(E_{Na}\) is the reversal potential, \(G_{Na}\) is the
 maximum sodium conductance throught the membrane, and \(E_{soma}\) is
 the membrane potential of the soma.
 </p>
+
 <p>
 The activation \(m\) of the sodium channels is described by the
 differential equation (3) in Ekeberg et al. (1991):
 </p>
-
 
 \begin{equation}
 \frac{dm}{dt} = \alpha_{m}(1-m) - \beta_{m}m
@@ -453,7 +455,6 @@ voltage-gated. Equation (4) in Ekeberg et al. (1991) gives these
 relationships:
 </p>
 
-
 \begin{eqnarray}
 \alpha_{m} &= &\frac{A(E_{soma}-B)}{1-e^{(B-E_{soma})/C}}\\
 \beta_{m} &= &\frac{A(B-E_{soma})}{1-e^{(E_{soma}-B)/C}}
@@ -464,10 +465,10 @@ A tricky bit in the Ekeberg et al. (1991) paper is that the \(A\), \(B\)
 and \(C\) parameters above are different for \(\alpha\) and \(\beta\) even
 though there is no difference in the symbols used in the equations.
 </p>
+
 <p>
 The inactivation of the sodium channels is described by a similar set of equations: a differential equation giving the rate of change of the sodium channel deactivation, from Ekeberg et al. (1991) equation (5):
 </p>
-
 
 \begin{equation}
 \frac{dh}{dt} = \alpha_{h}(1-h) - \beta_{h}h
@@ -477,7 +478,6 @@ The inactivation of the sodium channels is described by a similar set of equatio
 and equations specifying how \(\alpha_{h}\) and \(\beta_{h}\) are
 voltage-dependent, given in Ekeberg et al. (1991) equation (6):
 </p>
-
 
 \begin{eqnarray}
 \alpha_{h} &= &\frac{A(B-E_{soma})}{1-e^{(E_{soma}-B)/C}}\\
@@ -489,6 +489,7 @@ Note again that although the terms \(A\), \(B\) and \(C\) are different for
 \(\alpha_{h}\) and \(\beta_{h}\) even though they are represented by the
 same symbols in the equations.
 </p>
+
 <p>
 So in summary, for the sodium channels, we have two state variables:
 \((m,h)\) representing the activation (\(m\)) and deactivation (\(h\)) of
@@ -503,21 +504,17 @@ values specific to \(\alpha\) and \(\beta\) and \(m\) and \(h\) (see Table 1
 of Ekeberg et al., 1991).
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-2-1-3" class="outline-4">
-<h4 id="sec-2-1-3">Potassium channels (K)</h4>
-<div class="outline-text-4" id="text-2-1-3">
-
-
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6">Potassium channels (K)</h4>
+<div class="outline-text-4" id="text-orgheadline6">
 <p>
 The potassium channels are represted in a similar way, although in
 this case there is only channel activation, and no inactivation. In
 Ekeberg et al. (1991) the three equations (7), (8) and (9) represent
 the potassium channels:
 </p>
-
 
 \begin{equation}
 I_{k} = (E_{k}-E_{soma})G_{k}n^{4}
@@ -534,7 +531,6 @@ which represent the fact that the potassium channel is also
 voltage-gated:
 </p>
 
-
 \begin{eqnarray}
 \alpha_{n} &= &\frac{A(E_{soma}-B)}{1-e^{(B-E_{soma})/C}}\\
 \beta_{n} &= &\frac{A(B-E_{soma})}{1-e^{(E_{soma}-B)/C}}
@@ -544,39 +540,34 @@ voltage-gated:
 Again, the parameter values for \((A,B,C)\) can be found in Ekeberg et
 al., (1991) Table 1.
 </p>
+
 <p>
 To summarize, the potassium channel has a single state variable \(n\)
 representing the activation of the potassium channel.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-2-1-4" class="outline-4">
-<h4 id="sec-2-1-4">Summary</h4>
-<div class="outline-text-4" id="text-2-1-4">
-
-
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Summary</h4>
+<div class="outline-text-4" id="text-orgheadline7">
 <p>
 We have a model now that includes four state variables:
 </p>
-<ol>
-<li>\(E\) representing the potential in the soma, given by differential equation (1) in Ekeberg et al., (1991)
-</li>
-<li>\(m\) representing the activation of sodium channels, Ekeberg equation (3)
-</li>
-<li>\(h\) representing the inactivation of sodium channels, Ekeberg equation (5)
-</li>
-<li>\(n\) representing the activation of potassium channels, Ekeberg equation (8)
-</li>
-</ol>
 
+<ol class="org-ol">
+<li>\(E\) representing the potential in the soma, given by differential equation (1) in Ekeberg et al., (1991)</li>
+<li>\(m\) representing the activation of sodium channels, Ekeberg equation (3)</li>
+<li>\(h\) representing the inactivation of sodium channels, Ekeberg equation (5)</li>
+<li>\(n\) representing the activation of potassium channels, Ekeberg equation (8)</li>
+</ol>
 
 <p>
 Each of the differential equations that define how to compute state
 derivatives, involve \((\alpha,\beta)\) terms that are given by Ekeberg
 equations (4) (for \(m\)), (6) (for \(h\)) and (9) (for \(n\)).
 </p>
+
 <p>
 So what we have to do in order to simulate the dynamic behaviour of
 this neuron over time, is simply to implement these equations in
@@ -585,14 +576,11 @@ simulate it over time using the <code>odeint()</code> function.
 </p>
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2">Python code</h3>
-<div class="outline-text-3" id="text-2-2">
-
-
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Python code</h3>
+<div class="outline-text-3" id="text-orgheadline8">
 <p>
 A full code listing of a model including sodium and potassium channels
 can be found here: <a href="code/ekeberg1.py">ekeberg1.py</a>. Admittedly, this system involves more
@@ -600,6 +588,7 @@ equations, and more parameters, than the other simple "toy" systems
 that we saw in the previous section. The fundamental ideas are the
 same however, so let's step through things bit by bit.
 </p>
+
 <p>
 We begin by setting up all of the necessary model parameters (there
 are many). They are found in Ekeberg et al. (1991) Tables 1 and 2. I
@@ -611,7 +600,7 @@ parameter), with a dictionary, we can index into it using string
 labels.
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">ipython --pylab</span>
 
@@ -664,44 +653,45 @@ labels.
         <span style="color: #8b2252;">'K_params'</span>  : K_params
 }
 </pre>
-
+</div>
 
 <p>
 We could have stored the four values in <code>E_params</code> in an array like this:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a0522d;">E_params</span> = array([-7.0e-2, 3.0e-09, 6.0e-11, 0*1.0e-10])
 </pre>
-
+</div>
 
 <p>
 but then we would have to access particular values by indexing into that array with integers like this:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a0522d;">E_leak</span> = E_params[0]
 <span style="color: #a0522d;">G_leak</span> = E_params[1]
 </pre>
-
+</div>
 
 <p>
 Instead, if we use a dictionary, we can index into the structure using alphanumeric strings as index values, like this:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python">E_params[<span style="color: #8b2252;">'E_leak'</span>]
 E_params[<span style="color: #8b2252;">'G_leak'</span>]
 </pre>
-
+</div>
 
 <p>
 You don't have to use a dictionary to store the parameter values, but
 I find it a really useful way to maintain readability.
 </p>
+
 <p>
 Our next bit of code is the implementation of the ODE function
 itself. Remember, our ultimate goal is to model \(E\), the potential
@@ -716,7 +706,7 @@ defined by their own differential equations, Ekeberg equations (3),
 by step.
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">define our ODE function</span>
 
@@ -771,7 +761,7 @@ by step.
 
         <span style="color: #a020f0;">return</span> statep
 </pre>
-
+</div>
 
 <p>
 Next we run a simulation by setting up our initial states, and a time
@@ -780,7 +770,7 @@ external current by changing the value of the
 <code>params['E_params']['I_ext']</code> entry in the <code>params</code> dictionary.
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">simulate</span>
 
@@ -794,13 +784,13 @@ params[<span style="color: #8b2252;">'E_params'</span>][<span style="color: #8b2
 <span style="color: #b22222;"># </span><span style="color: #b22222;">run simulation</span>
 <span style="color: #a0522d;">state</span> = odeint(neuron, state0, t, args=(params,))
 </pre>
-
+</div>
 
 <p>
 Finally, we plot the results:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">plot the results</span>
 
@@ -819,63 +809,51 @@ plot(t, state[:,3])
 title(<span style="color: #8b2252;">'K+ channel activation'</span>)
 xlabel(<span style="color: #8b2252;">'TIME (sec)'</span>)
 </pre>
-
+</div>
 
 <p>
 Here is what you should see:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/ekeberg1.png" width="400px" align="center" alt="figs/ekeberg1.png" /></p>
-<p>Spiking neuron simulation based on Ekeberg et al., 1991</p>
+<p><img src="figs/ekeberg1.png" alt="ekeberg1.png" width="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 2:</span> Spiking neuron simulation based on Ekeberg et al., 1991</p>
+</div>
+</div>
+</div>
 </div>
 
-</div>
-</div>
-
-</div>
-
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Things to try</h2>
-<div class="outline-text-2" id="text-3">
-
-
-<ol>
+<div id="outline-container-orgheadline9" class="outline-2">
+<h2 id="orgheadline9">Things to try</h2>
+<div class="outline-text-2" id="text-orgheadline9">
+<ol class="org-ol">
 <li>alter the <a href="code/ekeberg1.py">ekeberg1.py</a> code so that the modelled neuron only has the
-   leakage current and external current. In other words, comment out
-   the terms related to sodium and potassium channels. Run a
-   simulation with an initial membrane potential of -70mv and an
-   external current of 0.0mv. What happens and why?
-</li>
+leakage current and external current. In other words, comment out
+the terms related to sodium and potassium channels. Run a
+simulation with an initial membrane potential of -70mv and an
+external current of 0.0mv. What happens and why?</li>
 <li>Change the external current to 1.0e-10 and re-run the
-   simulation. What happens and why?
-</li>
+simulation. What happens and why?</li>
 <li>Add in the terms related to the sodium channel (activation and
-   deactivation). Run a simulation with external current of 1.0e-10
-   and initial states <code>[-70e-03, 0, 1]</code>. What happens and why?
-</li>
+deactivation). Run a simulation with external current of 1.0e-10
+and initial states <code>[-70e-03, 0, 1]</code>. What happens and why?</li>
 <li>Add in the terms related to the potassium channel. Run a simulation
-   with external current of 1.0e-10 and initial states <code>[-70e-03, 0,    1, 0]</code>. What happens and why?
-</li>
+with external current of 1.0e-10 and initial states <code>[-70e-03, 0,
+   1, 0]</code>. What happens and why?</li>
 <li>Play with the external current level (increase it slightly,
-   decrease it slightly, etc). What is the effect on the behaviour of
-   the neuron?
-</li>
+decrease it slightly, etc). What is the effect on the behaviour of
+the neuron?</li>
 <li>What is the minimum amount of external current necessary to
-   generate an action potential? Why?
-</li>
+generate an action potential? Why?</li>
 </ol>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">Next steps</h2>
-<div class="outline-text-2" id="text-4">
-
-
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Next steps</h2>
+<div class="outline-text-2" id="text-orgheadline10">
 <p>
 Next we will be looking at models of motor control. We will be using
 human arm movement as the model system. We will first look at
@@ -887,13 +865,14 @@ muscle, force production, and limb dynamics, with an eye towards a
 modelling the neural control of arm movements such as reaching and
 pointing.
 </p>
+
 <p>
 [ <a href="4_Computational_Motor_Control_Kinematics.html">Computational Motor Control: Kinematics</a> ]
-</p></div>
+</p>
 </div>
 </div>
-
-<div id="postamble">
+</div>
+<div id="postamble" class="status">
 <hr />Paul Gribble &amp; Dinant Kistemaker | fall 2012<br>This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />
 </div>
 </body>

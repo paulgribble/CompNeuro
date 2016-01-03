@@ -4,11 +4,9 @@
 #+AUTHOR:    Paul Gribble & Dinant Kistemaker
 #+EMAIL:     paul@gribblelab.org
 #+DATE:      fall 2012
-#+LINK_UP: http://www.gribblelab.org/compneuro/1_Dynamical_Systems.html
-#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+#+HTML_LINK_UP: http://www.gribblelab.org/compneuro/1_Dynamical_Systems.html
+#+HTML_LINK_HOME: http://www.gribblelab.org/compneuro/index.html
 
------
-[TABLE-OF-CONTENTS]
 -----
 
 * Characterizing a System Using Differential Equations
@@ -21,7 +19,7 @@ it out using our knowledge of physics, or we are simply given the
 equations by someone else. Let's look at a simple mass-spring system
 again.
 
-#+ATTR_HTML: height="200px" align="center"
+#+ATTR_HTML: :height 200px  :align center 
 #+CAPTION: A spring with a mass attached
 [[file:figs/spring-mass.png]]
 
@@ -211,7 +209,7 @@ appropriate time resolution for simulation.
 
 You should see a plot like this:
 
-#+ATTR_HTML: height="400px" align="center"
+#+ATTR_HTML: :height 400px  :align center
 #+CAPTION: Mass-Spring Simulation
 [[file:figs/mass-spring-sim.png]]
 
@@ -343,7 +341,7 @@ show()
 
 You should see something like this:
 
-#+ATTR_HTML: height="400px" align="center"
+#+ATTR_HTML: :height 400px  :align center
 #+CAPTION: Lorenz Attractor
 [[file:figs/lorenz1.png]]
 
@@ -426,13 +424,13 @@ follow each other quite closely for a long time, and then begin to
 diverge at about the 16 second mark. At the end of the animation it
 looks like this:
 
-#+ATTR_HTML: height="400px" align="center"
+#+ATTR_HTML: :height 400px  :align center
 #+CAPTION: Lorenz Attractor
 [[file:figs/lorenz2.png]]
 
 At 19.39 seconds it looks like this:
 
-#+ATTR_HTML: height="400px" align="center"
+#+ATTR_HTML: :height 400px  :align center
 #+CAPTION: Lorenz Attractor
 [[file:figs/lorenz3.png]]
 
@@ -538,7 +536,7 @@ title('Lotka-Volterra equations')
 
 You should see a plot like this:
 
-#+ATTR_HTML: height="400px" align="center"
+#+ATTR_HTML: :height 400px  :align center
 #+CAPTION: Lotka-Volterra Simulation
 [[file:figs/lotkavolterra1.png]]
 
@@ -570,7 +568,7 @@ for i in xrange(1,shape(state)[0]-10,step):
 
 You should see a plot like this:
 
-#+ATTR_HTML: height="400px" align="center"
+#+ATTR_HTML: :height 400px :align center
 #+CAPTION: Lotka-Volterra State-space plot
 [[file:figs/lotkavolterra2.png]]
 

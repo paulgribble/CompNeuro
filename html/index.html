@@ -1,65 +1,100 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2016-01-03 Sun 11:46 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>Computational Modelling in Neuroscience</title>
-<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
-<meta name="title" content="Computational Modelling in Neuroscience"/>
-<meta name="generator" content="Org-mode"/>
-<meta name="generated" content="Fall 2012"/>
-<meta name="author" content="Paul Gribble"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Paul Gribble" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
-  .title  { text-align: center; }
-  .todo   { color: red; }
-  .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
-</style><link rel="stylesheet" type="text/css" href="mystyle.css" />
+</style>
+<link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -106,708 +141,440 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-
 </head>
 <body>
-<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="http://www.gribblelab.org/teaching.html"> UP </a>
- |
- <a accesskey="H" href="http://www.gribblelab.org/"> HOME </a>
-</div>
-
-<div id="preamble">
-
-</div>
-
 <div id="content">
 <h1 class="title">Computational Modelling in Neuroscience</h1>
-
-
-
-<hr/>
-
-<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Administrivia</h2>
-<div class="outline-text-2" id="text-1">
-
-<ul>
-<li>This is the homepage for Neuroscience 9520: Computational Modelling in Neuroscience
-</li>
+<hr  />
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Administrivia</h2>
+<div class="outline-text-2" id="text-orgheadline1">
+<ul class="org-ul">
+<li>This is the homepage for Neuroscience 9520: Computational Modelling in Neuroscience</li>
 <li>Class will be Mondays, 2:00pm - 3:30pm, and Thursdays, 11:30am -
-  1:00pm, in NSC 245A
-</li>
-<li>The instructor is Paul Gribble (email: paul [at] gribblelab [dot] org)
-</li>
-<li>course <a href="syllabus.pdf">syllabus.pdf</a>
-</li>
+1:00pm, in NSC 245A</li>
+<li>The instructor is Paul Gribble (email: paul [at] gribblelab [dot] org)</li>
+<li>course <a href="syllabus.pdf">syllabus.pdf</a></li>
 <li>We will use several chapters from a book on computational motor
-  control: "The Computational Neurobiology of Reaching and Pointing"
-  by Reza Shadmehr and Steven P. Wise, MIT Press, 2005. [ <a href="http://goo.gl/QKykK">google books link</a> ] [ <a href="readings/SW_00_cover_info.pdf">cover info</a> ]
-</li>
+control: "The Computational Neurobiology of Reaching and Pointing"
+by Reza Shadmehr and Steven P. Wise, MIT Press, 2005. [ <a href="http://goo.gl/QKykK">google books
+link</a> ] [ <a href="readings/SW_00_cover_info.pdf">cover info</a> ]</li>
 </ul>
 
-
-
-<hr/>
+<hr  />
 </div>
-
 </div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Code</h2>
+<div class="outline-text-2" id="text-orgheadline2">
+<p>
+When there is a python script linked in the notes, you will get a
+permissions error when clicking on it. I haven't figured out how to
+avoid this yet. In the meantime, all code can be downloaded here in
+this tarred gzipped archive: <a href="code.tgz">code.tgz</a>
+</p>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Course Notes</h2>
-<div class="outline-text-2" id="text-2">
-
-
-<ol>
-<li value="0"><a href="0_Setup_Your_Computer.html">Setup Your Computer</a>
-</li>
-<li><a href="1_Dynamical_Systems.html">Dynamical Systems</a>
-</li>
-<li><a href="2_Modelling_Dynamical_Systems.html">Modelling Dynamical Systems</a>
-</li>
-<li><a href="3_Modelling_Action_Potentials.html">Modelling Action Potentials</a>
-</li>
-<li><a href="4_Computational_Motor_Control_Kinematics.html">Computational Motor Control: Kinematics</a>
-</li>
-<li><a href="5_Computational_Motor_Control_Dynamics.html">Computational Motor Control: Dynamics</a>
-</li>
-<li><a href="6_Computational_Motor_Control_Muscle_Models.html">Computational Motor Control: Muscle Models</a>
-</li>
+<hr  />
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3">Course Notes</h2>
+<div class="outline-text-2" id="text-orgheadline3">
+<ol class="org-ol">
+<li value="0"><a href="0_Setup_Your_Computer.html">Setup Your Computer</a></li>
+<li><a href="1_Dynamical_Systems.html">Dynamical Systems</a></li>
+<li><a href="2_Modelling_Dynamical_Systems.html">Modelling Dynamical Systems</a></li>
+<li><a href="3_Modelling_Action_Potentials.html">Modelling Action Potentials</a></li>
+<li><a href="4_Computational_Motor_Control_Kinematics.html">Computational Motor Control: Kinematics</a></li>
+<li><a href="5_Computational_Motor_Control_Dynamics.html">Computational Motor Control: Dynamics</a></li>
+<li><a href="6_Computational_Motor_Control_Muscle_Models.html">Computational Motor Control: Muscle Models</a></li>
 </ol>
 
-
-
-<hr/>
+<hr  />
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4">Schedule &amp; Topics</h2>
+<div class="outline-text-2" id="text-orgheadline4">
+<hr  />
+</div>
+<div id="outline-container-orgheadline5" class="outline-3">
+<h3 id="orgheadline5">Sep 10: Introductions &amp; course schedule</h3>
+<div class="outline-text-3" id="text-orgheadline5">
+<ul class="org-ul">
+<li>lecture slides: <a href="lecture1.pdf">lecture1.pdf</a></li>
+<li>please read this: <a href="readings/Trappenberg1.pdf">Trappenberg1.pdf</a></li>
+<li>please read this: <a href="readings/OM1.pdf">OM1.pdf</a> (1st Ed.) or <a href="http://grey.colorado.edu/CompCogNeuro/index.php?title=CCNBook/Intro">CCNBook/Intro</a></li>
+<li>your first assignment: <a href="assignment1.pdf">assignment1.pdf</a> (due Sep 23)</li>
+</ul>
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Schedule &amp; Topics</h2>
-<div class="outline-text-2" id="text-3">
-
-
-
-<hr/>
-
-</div>
-
-<div id="outline-container-3-1" class="outline-3">
-<h3 id="sec-3-1">Sep 10: Introductions &amp; course schedule</h3>
-<div class="outline-text-3" id="text-3-1">
-
-<ul>
-<li>lecture slides: <a href="lecture1.pdf">lecture1.pdf</a>
-</li>
-<li>please read this: <a href="readings/Trappenberg1.pdf">Trappenberg1.pdf</a>
-</li>
-<li>please read this: <a href="readings/OM1.pdf">OM1.pdf</a> (1st Ed.) or <a href="http://grey.colorado.edu/CompCogNeuro/index.php?title=CCNBook/Intro">CCNBook/Intro</a>
-</li>
-<li>your first assignment: <a href="assignment1.pdf">assignment1.pdf</a> (due Sep 23)
-</li>
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Sep 13: Getting your computer set up with Python &amp; scientific libraries</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<ul class="org-ul">
+<li>course notes <a href="0_Setup_Your_Computer.html">0: Setup Your Computer</a></li>
 </ul>
 
-
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2">Sep 13: Getting your computer set up with Python &amp; scientific libraries</h3>
-<div class="outline-text-3" id="text-3-2">
-
-<ul>
-<li>course notes <a href="0_Setup_Your_Computer.html">0: Setup Your Computer</a>
-</li>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Sep 17 : Modelling Dynamical Systems I</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<ul class="org-ul">
+<li>course notes <a href="1_Dynamical_Systems.html">1: Dynamical Systems</a></li>
+<li>course notes <a href="2_Modelling_Dynamical_Systems.html">2: Modelling Dynamical Systems</a></li>
 </ul>
-
-
-
-<hr/>
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-3-3" class="outline-3">
-<h3 id="sec-3-3">Sep 17 : Modelling Dynamical Systems I</h3>
-<div class="outline-text-3" id="text-3-3">
-
-<ul>
-<li>course notes <a href="1_Dynamical_Systems.html">1: Dynamical Systems</a>
-</li>
-<li>course notes <a href="2_Modelling_Dynamical_Systems.html">2: Modelling Dynamical Systems</a>
-</li>
-</ul>
-
-
-</div>
-
-</div>
-
-<div id="outline-container-3-4" class="outline-3">
-<h3 id="sec-3-4">Sep 20: Modelling Dynamical Systems II</h3>
-<div class="outline-text-3" id="text-3-4">
-
-<ul>
-<li>more on dynamical systems
-</li>
-<li><a href="assignment2.pdf">assignment2.pdf</a> (due Sep 30)
-</li>
-<li>code example for using optimization: <a href="code/optimizer_example.py">optimizer_example.py</a>
-</li>
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Sep 20: Modelling Dynamical Systems II</h3>
+<div class="outline-text-3" id="text-orgheadline8">
+<ul class="org-ul">
+<li>more on dynamical systems</li>
+<li><a href="assignment2.pdf">assignment2.pdf</a> (due Sep 30)</li>
+<li>code example for using optimization: <a href="code/optimizer_example.py">optimizer\<sub>example.py</sub></a></li>
 <li>cool demo of <a href="http://www.youtube.com/watch?v=Klw7L0OZbFQ">synchronization of metronomes</a> (and <a href="http://www.youtube.com/watch?v=kqFc4wriBvE">japanese version</a>),
-  plus <a href="https://github.com/paulgribble/metronomes">python code</a> for simulating it
-</li>
+plus <a href="https://github.com/paulgribble/metronomes">python code</a> for simulating it</li>
 </ul>
 
-
-
-<hr/>
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-5" class="outline-3">
-<h3 id="sec-3-5">Sep 24, 27 : no class (Paul away)</h3>
-<div class="outline-text-3" id="text-3-5">
-
-
-
-<hr/>
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Sep 24, 27 : no class (Paul away)</h3>
+<div class="outline-text-3" id="text-orgheadline9">
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-6" class="outline-3">
-<h3 id="sec-3-6">Oct 1, 4 : Modelling Action Potentials - Hodgkin-Huxley models</h3>
-<div class="outline-text-3" id="text-3-6">
-
-<ul>
-<li><a href="readings/ekeberg1991.pdf">Ekeberg et al. (1991)</a> (please read this)
-</li>
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Oct 1, 4 : Modelling Action Potentials - Hodgkin-Huxley models</h3>
+<div class="outline-text-3" id="text-orgheadline10">
+<ul class="org-ul">
+<li><a href="readings/ekeberg1991.pdf">Ekeberg et al. (1991)</a> (please read this)</li>
 <li>optional: see the original Hodgkin &amp; Huxley 1952 paper reprinted in
-  1990: <a href="readings/HH1990.pdf">Hodgkin &amp; Huxley 1952 (1990)</a>
-</li>
+1990: <a href="readings/HH1990.pdf">Hodgkin &amp; Huxley 1952 (1990)</a></li>
 <li>optional: a chapter on <a href="readings/spiking_neuron_models.pdf">Spiking Neuron Models</a> for a general overview
-  of the field
-</li>
-<li>course notes <a href="3_Modelling_Action_Potentials.html">3: Modelling Action Potentials</a>
-</li>
-<li>refresher slides on <a href="readings/action_potentials.pdf">action potentials</a>
-</li>
-<li>YouTube videos on <a href="http://www.youtube.com/watch?v=7EyhsOewnH4">The Action Potential</a> and <a href="http://www.youtube.com/watch?v=LXdTg9jZYvs">Voltage Gated Channels and the Action Potential</a>
-</li>
-<li><a href="assignment3.pdf">assignment3.pdf</a> (due Oct 7) <a href="code/assignment3_params.py">assignment3_params.py</a>
-</li>
-<li><a href="code/assignment2_sol.py">assignment2_sol.py</a>
-</li>
-<li><a href="code/assignment3_sol.py">assignment3_sol.py</a>
-</li>
+of the field</li>
+<li>course notes <a href="3_Modelling_Action_Potentials.html">3: Modelling Action Potentials</a></li>
+<li>refresher slides on <a href="readings/action_potentials.pdf">action potentials</a></li>
+<li>YouTube videos on <a href="http://www.youtube.com/watch?v=7EyhsOewnH4">The Action Potential</a> and <a href="http://www.youtube.com/watch?v=LXdTg9jZYvs">Voltage Gated Channels
+and the Action Potential</a></li>
+<li><a href="assignment3.pdf">assignment3.pdf</a> (due Oct 7) <a href="code/assignment3_params.py">assignment3\<sub>params.py</sub></a></li>
+<li><a href="code/assignment2_sol.py">assignment2\<sub>sol.py</sub></a></li>
+<li><a href="code/assignment3_sol.py">assignment3\<sub>sol.py</sub></a></li>
 </ul>
 
-
-
-<hr/>
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-7" class="outline-3">
-<h3 id="sec-3-7">Oct 8, 11 : no class (thanksgiving, SFN)</h3>
-<div class="outline-text-3" id="text-3-7">
-
-
-
-<hr/>
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11">Oct 8, 11 : no class (thanksgiving, SFN)</h3>
+<div class="outline-text-3" id="text-orgheadline11">
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-8" class="outline-3">
-<h3 id="sec-3-8">Oct 15, 18 : no class (SFN)</h3>
-<div class="outline-text-3" id="text-3-8">
-
-
-
-<hr/>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">Oct 15, 18 : no class (SFN)</h3>
+<div class="outline-text-3" id="text-orgheadline12">
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-9" class="outline-3">
-<h3 id="sec-3-9">Oct 22, 25 : Computational Motor Control: Kinematics</h3>
-<div class="outline-text-3" id="text-3-9">
-
-<ul>
-<li>course notes: <a href="4_Computational_Motor_Control_Kinematics.html">4: Computational Motor Control: Kinematics</a>
-</li>
-<li>read <b>at least two</b> of the papers listed in the course notes
-</li>
-<li>read Shadmehr &amp; Wise book, <a href="readings/SW_18.pdf">Chapter 18</a> and <a href="readings/SW_19.pdf">Chapter 19</a>
-</li>
-<li><a href="assignment4.pdf">assignment4.pdf</a>
-</li>
-<li><a href="code/minjerk.py">minjerk.py</a>
-</li>
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Oct 22, 25 : Computational Motor Control: Kinematics</h3>
+<div class="outline-text-3" id="text-orgheadline13">
+<ul class="org-ul">
+<li>course notes: <a href="4_Computational_Motor_Control_Kinematics.html">4: Computational Motor Control: Kinematics</a></li>
+<li>read <b>at least two</b> of the papers listed in the course notes</li>
+<li>read Shadmehr &amp; Wise book, <a href="readings/SW_18.pdf">Chapter 18</a> and <a href="readings/SW_19.pdf">Chapter 19</a></li>
+<li><a href="assignment4.pdf">assignment4.pdf</a></li>
+<li><a href="code/minjerk.py">minjerk.py</a></li>
 </ul>
 
-
-
-<hr/>
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-10" class="outline-3">
-<h3 id="sec-3-10">Oct 29, Nov 1 : Computational Motor Control: Dynamics</h3>
-<div class="outline-text-3" id="text-3-10">
-
-<ul>
-<li><a href="code/assignment4_sol.py">assignment4_sol.py</a>
-</li>
-<li>course notes: <a href="5_Computational_Motor_Control_Dynamics.html">5: Computational Motor Control: Dynamics</a>
-</li>
-<li>read <b>at least two</b> of the papers listed in the course notes
-</li>
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">Oct 29, Nov 1 : Computational Motor Control: Dynamics</h3>
+<div class="outline-text-3" id="text-orgheadline14">
+<ul class="org-ul">
+<li><a href="code/assignment4_sol.py">assignment4\<sub>sol.py</sub></a></li>
+<li>course notes: <a href="5_Computational_Motor_Control_Dynamics.html">5: Computational Motor Control: Dynamics</a></li>
+<li>read <b>at least two</b> of the papers listed in the course notes</li>
 <li>read Shadmehr &amp; Wise book, <a href="readings/SW_20.pdf">Chapter 20</a> and <a href="readings/SW_21.pdf">Chapter 21</a> (and <a href="readings/SW_22.pdf">Chapter 22</a>
-  if you are interested in the topic)
-</li>
+  if you are interested in the topic)</li>
 <li><a href="code/twojointarm.py">twojointarm.py</a> utility functions and Python code for doing inverse
-  and forward dynamics of a two-joint arm in a horizontal plane (no
-  gravity) with external driving torques, and animating the resulting
-  arm motion
-</li>
-<li><a href="code/twojointarm_game.py">twojointarm_game.py</a> : try your hand at this game in which you have
-   to control a two-joint arm to hit as many targets as you can before
-   time runs out. Use the [d,f,j,k] keys to control [sf,se,ef,ee]
-   joint torques (s=shoulder, e=elbow, f=flexor, e=extensor). Spacebar
-   will "reset" the arm to its home position, handy if your arm starts
-   spinning out of control (though each time you use spacebar your
-   score will be decremented by one). Start the game by typing <code>python    twojointarm_game.py</code> at the command line. At the end of the game
-   your score will be printed out on the command line.
-</li>
-<li><a href="assignment5.pdf">assignment5.pdf</a>
-</li>
+and forward dynamics of a two-joint arm in a horizontal plane (no
+gravity) with external driving torques, and animating the resulting
+arm motion</li>
+<li><a href="code/twojointarm_game.py">twojointarm\<sub>game.py</sub></a> : try your hand at this game in which you have
+to control a two-joint arm to hit as many targets as you can before
+time runs out. Use the [d,f,j,k] keys to control [sf,se,ef,ee]
+joint torques (s=shoulder, e=elbow, f=flexor, e=extensor). Spacebar
+will "reset" the arm to its home position, handy if your arm starts
+spinning out of control (though each time you use spacebar your
+score will be decremented by one). Start the game by typing <code>python
+   twojointarm_game.py</code> at the command line. At the end of the game
+your score will be printed out on the command line.</li>
+<li><a href="assignment5.pdf">assignment5.pdf</a></li>
 </ul>
-
-
-<hr/>
-
+<hr  />
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-3-11" class="outline-3">
-<h3 id="sec-3-11">Nov 5, 8 : Computational Motor Control: Muscle Models</h3>
-<div class="outline-text-3" id="text-3-11">
-
-<ul>
-<li><a href="code/assignment5_sol.py">assignment5_sol.py</a> and <a href="figs/assignment5_figures.pdf">assignment5_figures.pdf</a> : coming soon &hellip;
-</li>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">Nov 5, 8 : Computational Motor Control: Muscle Models</h3>
+<div class="outline-text-3" id="text-orgheadline15">
+<ul class="org-ul">
+<li><a href="code/assignment5_sol.py">assignment5\<sub>sol.py</sub></a> and <a href="figs/assignment5_figures.pdf">assignment5\<sub>figures.pdf</sub></a> : coming soon &#x2026;</li>
 <li>read Shadmehr &amp; Wise book, <a href="readings/SW_07.pdf">Chapter 7</a> and <a href="readings/SW_08.pdf">Chapter 8</a> and supplementary
-  documents: <a href="http://www.shadmehrlab.org/book/musclemodel.pdf">musclemodel.pdf</a>
-</li>
-<li>course notes: <a href="6_Computational_Motor_Control_Muscle_Models.html">6: Computational Motor Control: Muscle Models</a>
-</li>
-<li>assignment: catch up on readings.
-</li>
-<li><b>note</b> no class on Thurs Nov 8.
-</li>
+documents: <a href="http://www.shadmehrlab.org/book/musclemodel.pdf">musclemodel.pdf</a></li>
+<li>course notes: <a href="6_Computational_Motor_Control_Muscle_Models.html">6: Computational Motor Control: Muscle Models</a></li>
+<li>assignment: catch up on readings.</li>
+<li><b>note</b> no class on Thurs Nov 8.</li>
 </ul>
 
-
-
-<hr/>
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-12" class="outline-3">
-<h3 id="sec-3-12">Nov 12, 15 : Computational Models of Learning part 1</h3>
-<div class="outline-text-3" id="text-3-12">
-
-<ul>
-<li>some lecture slides: <a href="readings/nn_slides.pdf">nn_slides.pdf</a>
-</li>
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">Nov 12, 15 : Computational Models of Learning part 1</h3>
+<div class="outline-text-3" id="text-orgheadline16">
+<ul class="org-ul">
+<li>some lecture slides: <a href="readings/nn_slides.pdf">nn\<sub>slides.pdf</sub></a></li>
 <li>Readings:
-<ul>
-<li><a href="readings/Jain_1996_NNetTutorial.pdf">Artificial Neural Networks: A Tutorial</a> Jain &amp; Mao, 1996
-</li>
+<ul class="org-ul">
+<li><a href="readings/Jain_1996_NNetTutorial.pdf">Artificial Neural Networks: A Tutorial</a> Jain &amp; Mao, 1996</li>
 <li><a href="readings/Trappenberg5.pdf">Trappenberg5.pdf</a>, <a href="readings/Trappenberg6.pdf">Trappenberg6.pdf</a>, <a href="readings/Robinson92.pdf">Robinson92.pdf</a>, <a href="readings/Mitchell4.pdf">Mitchell4.pdf</a>
-    (4.8 optional)
-</li>
-<li>Optional: <a href="readings/Haykin0.pdf">Haykin0.pdf</a>,  <a href="readings/Haykin1.pdf">Haykin1.pdf</a>,  <a href="readings/Haykin4.pdf">Haykin4.pdf</a>
-</li>
-<li>tutorial: <a href="http://galaxy.agh.edu.pl/~vlsi/AI/backp_t_en/backprop.html">Principles of training multi-layer neural network using backpropagation</a>
-</li>
-</ul>
-
-</li>
+    (4.8 optional)</li>
+<li>Optional: <a href="readings/Haykin0.pdf">Haykin0.pdf</a>,  <a href="readings/Haykin1.pdf">Haykin1.pdf</a>,  <a href="readings/Haykin4.pdf">Haykin4.pdf</a></li>
+<li>tutorial: <a href="http://galaxy.agh.edu.pl/~vlsi/AI/backp_t_en/backprop.html">Principles of training multi-layer neural network using
+backpropagation</a></li>
+</ul></li>
 <li>A classic reference: McClelland &amp; Rumelhart PDP books <a href="readings/PDP.pdf">PDP.pdf</a>,
-  <a href="readings/PDP_Handbook.pdf">PDP_Handbook.pdf</a>
-</li>
-<li><a href="http://www.cs.toronto.edu/~hinton/absps/sciam93.pdf">Simulating Brain Damage</a>
-</li>
-<li>for a really nice overview of all sort of NNs, see: <a href="https://www.coursera.org/course/neuralnets">Neural Networks for Machine Learning</a> (Geoff Hinton, Univ Toronto, Coursera online
-  course)
-</li>
+<a href="readings/PDP_Handbook.pdf">PDP\<sub>Handbook.pdf</sub></a></li>
+<li><a href="http://www.cs.toronto.edu/~hinton/absps/sciam93.pdf">Simulating Brain Damage</a></li>
+<li>for a really nice overview of all sort of NNs, see: <a href="https://www.coursera.org/course/neuralnets">Neural Networks
+for Machine Learning</a> (Geoff Hinton, Univ Toronto, Coursera online
+course)</li>
 <li>for thoughts about motor learning, read Shadmher &amp; Wise book,
-  <a href="readings/SW_24.pdf">Chapter 24</a>
-</li>
+<a href="readings/SW_24.pdf">Chapter 24</a></li>
 <li>Software: <a href="http://pybrain.org/">PyBrain</a>
-<ul>
-<li>there is also this: <a href="http://leenissen.dk/fann/wp/help/installing-fann/">FANN: Fast Artificial Neural Network Library</a>
-</li>
-</ul>
-
-</li>
+<ul class="org-ul">
+<li>there is also this: <a href="http://leenissen.dk/fann/wp/help/installing-fann/">FANN: Fast Artificial Neural Network Library</a></li>
+</ul></li>
 <li>code examples:
-<ul>
-<li><a href="code/xor_aima.py">xor_aima.py</a> from <a href="http://aima.cs.berkeley.edu/">Norvig &amp; Russell's book</a>
-</li>
-<li><a href="code/xor.py">xor.py</a> my code, vectorized numpy matrices
-</li>
-<li><a href="code/xor_plot.py">xor_plot.py</a> same as above, plots during training to visualize network performance
-</li>
-<li><a href="code/xor_cg.py">xor_cg.py</a> my code, uses backprop to compute gradients and conjugate gradient descent to optimize weights
-</li>
+<ul class="org-ul">
+<li><a href="code/xor_aima.py">xor\<sub>aima.py</sub></a> from <a href="http://aima.cs.berkeley.edu/">Norvig &amp; Russell's book</a></li>
+<li><a href="code/xor.py">xor.py</a> my code, vectorized numpy matrices</li>
+<li><a href="code/xor_plot.py">xor\<sub>plot.py</sub></a> same as above, plots during training to visualize network performance</li>
+<li><a href="code/xor_cg.py">xor\<sub>cg.py</sub></a> my code, uses backprop to compute gradients and conjugate gradient descent to optimize weights</li>
+</ul></li>
+<li><a href="http://yann.lecun.com/exdb/mnist/">MNIST Database of handwritten digits</a></li>
+<li><a href="http://arxiv.org/abs/1003.0358">Deep Big Simple Neural Nets Excel on Handwritten Digit Recognition</a></li>
+<li><a href="readings/NeuralNetworks2.pdf">NeuralNetworks2.pdf</a> slides</li>
 </ul>
 
-</li>
-<li><a href="http://yann.lecun.com/exdb/mnist/">MNIST Database of handwritten digits</a>
-</li>
-<li><a href="http://arxiv.org/abs/1003.0358">Deep Big Simple Neural Nets Excel on Handwritten Digit Recognition</a>
-</li>
-<li><a href="readings/NeuralNetworks2.pdf">NeuralNetworks2.pdf</a> slides
-</li>
-</ul>
-
-
-
-<hr/>
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-13" class="outline-3">
-<h3 id="sec-3-13">Nov 19, 22 : Computational Models of Learning part 2</h3>
-<div class="outline-text-3" id="text-3-13">
-
-<ul>
-<li><a href="code/assignment6.py">assignment6.py</a> and <a href="code/traindata.pickle">traindata.pickle</a>
-</li>
-<li><a href="readings/NeuralNetworks3.pdf">NeuralNetworks3.pdf</a> slides
-</li>
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Nov 19, 22 : Computational Models of Learning part 2</h3>
+<div class="outline-text-3" id="text-orgheadline17">
+<ul class="org-ul">
+<li><a href="code/assignment6.py">assignment6.py</a> and <a href="code/traindata.pickle">traindata.pickle</a></li>
+<li><a href="readings/NeuralNetworks3.pdf">NeuralNetworks3.pdf</a> slides</li>
 <li>more code demos of feedforward networks
-<ul>
-<li>handwritten digit example  <a href="readings/mnist.tgz">mnist.tgz</a>
-</li>
-<li>vowel classification example <a href="readings/PetersonBarneyVowels.tgz">PetersonBarneyVowels.tgz</a>
-</li>
-<li>facial expression example <a href="readings/RadboudFaces.tgz">RadboudFaces.tgz</a>
-</li>
-</ul>
-
-</li>
+<ul class="org-ul">
+<li>handwritten digit example  <a href="readings/mnist.tgz">mnist.tgz</a></li>
+<li>vowel classification example <a href="readings/PetersonBarneyVowels.tgz">PetersonBarneyVowels.tgz</a></li>
+<li>facial expression example <a href="readings/RadboudFaces.tgz">RadboudFaces.tgz</a></li>
+</ul></li>
 <li>recurrent neural networks (<a href="http://en.wikipedia.org/wiki/Recurrent_neural_network">wiki)</a>
-<ul>
-<li><a href="http://130.102.79.1/~mikael/papers/rn_dallas.pdf">A guide to recurrent neural networks and backpropagation</a> (M. Boden)
-</li>
-<li><a href="http://www.bcl.hamilton.ie/~barak/papers/CMU-CS-90-196.pdf">Dynamic Recurrent Neural Networks</a> (B.A. Pearlmutter)
-</li>
-<li><a href="http://minds.jacobs-university.de/sites/default/files/uploads/papers/ESNTutorialRev.pdf">A tutorial on training recurrent neural networks</a> (H. Jaeger)
-</li>
+<ul class="org-ul">
+<li><a href="http://130.102.79.1/~mikael/papers/rn_dallas.pdf">A guide to recurrent neural networks and backpropagation</a> (M. Boden)</li>
+<li><a href="http://www.bcl.hamilton.ie/~barak/papers/CMU-CS-90-196.pdf">Dynamic Recurrent Neural Networks</a> (B.A. Pearlmutter)</li>
+<li><a href="http://minds.jacobs-university.de/sites/default/files/uploads/papers/ESNTutorialRev.pdf">A tutorial on training recurrent neural networks</a> (H. Jaeger)</li>
 <li>echo state networks <a href="http://www.scholarpedia.org/article/Echo_state_network">scholarpedia</a>
-<ul>
+<ul class="org-ul">
 <li>Buonomano D. (2009) Harnessing Chaos in Recurrent Neural
-     Networks. Neuron 63(4):423-425.
-</li>
+Networks. Neuron 63(4):423-425.</li>
 <li>Sussillo, D., &amp; Abbott, L. F. (2009). Generating coherent
-     patterns of activity from chaotic neural networks. Neuron, 63(4),
-     544-557.
-</li>
-</ul>
-
-</li>
+patterns of activity from chaotic neural networks. Neuron, 63(4),
+544-557.</li>
+</ul></li>
 <li>papers:
-<ul>
+<ul class="org-ul">
 <li><a href="readings/Wada_1993_NeuralNetworks.pdf">Wada, 1993</a> A Neural Network Model for Arm Trajectory Formation
-      Using Forward and Inverse Dynamics Models
-</li>
+Using Forward and Inverse Dynamics Models</li>
 <li><a href="readings/Lukashin_1993_BiolCybern.pdf">Lukashin, 1993</a> A dynamical neural network model for motor
-      cortical activity during movement: population coding of movement
-      trajectories
-</li>
+cortical activity during movement: population coding of movement
+trajectories</li>
 <li><a href="readings/Pearlmutter_1989_NeuralComputation.pdf">Pearlmutter, 1989</a> Learning State Space Trajectories in Recurrent
-      Neural Networks
-</li>
-</ul>
-
-</li>
-</ul>
-
-</li>
+Neural Networks</li>
+</ul></li>
+</ul></li>
 <li>intro to unsupervised learning
-<ul>
-<li>autoencoders <a href="http://en.wikipedia.org/wiki/Autoencoder">wiki</a>
-</li>
-<li>Hopfield nets <a href="http://en.wikipedia.org/wiki/Hopfield_net">wiki</a>
-</li>
-<li>Boltzmann machines <a href="http://en.wikipedia.org/wiki/Boltzmann_machine">wiki</a> 
-</li>
-<li>Restricted Bolztmann machines <a href="http://en.wikipedia.org/wiki/Restricted_Boltzmann_machine">wiki</a>
-</li>
-</ul>
-
-</li>
+<ul class="org-ul">
+<li>autoencoders <a href="http://en.wikipedia.org/wiki/Autoencoder">wiki</a></li>
+<li>Hopfield nets <a href="http://en.wikipedia.org/wiki/Hopfield_net">wiki</a></li>
+<li>Boltzmann machines <a href="http://en.wikipedia.org/wiki/Boltzmann_machine">wiki</a></li>
+<li>Restricted Bolztmann machines <a href="http://en.wikipedia.org/wiki/Restricted_Boltzmann_machine">wiki</a></li>
+</ul></li>
 <li>multi-layer generative networks
-<ul>
-<li><a href="readings/Hinton2006Montreal.pdf">Hinton2006Montreal.pdf</a>
-</li>
-<li><a href="readings/Hinton2007tics.pdf">Hinton2007tics.pdf</a>
-</li>
-<li>video: <a href="http://www.youtube.com/watch?v=AyzOUbkUf3M">The Next Generation of Neural Networks</a>
-</li>
-<li><a href="http://www.cs.toronto.edu/~hinton/adi/index.htm">deep network digit demo</a>
-</li>
+<ul class="org-ul">
+<li><a href="readings/Hinton2006Montreal.pdf">Hinton2006Montreal.pdf</a></li>
+<li><a href="readings/Hinton2007tics.pdf">Hinton2007tics.pdf</a></li>
+<li>video: <a href="http://www.youtube.com/watch?v=AyzOUbkUf3M">The Next Generation of Neural Networks</a></li>
+<li><a href="http://www.cs.toronto.edu/~hinton/adi/index.htm">deep network digit demo</a></li>
+</ul></li>
+<li>Mark Schmidt's <a href="http://www.di.ens.fr/~mschmidt/Software/minFunc.html">minFunc</a> MATLAB routines for unconstrained optimization</li>
 </ul>
 
-</li>
-<li>Mark Schmidt's <a href="http://www.di.ens.fr/~mschmidt/Software/minFunc.html">minFunc</a> MATLAB routines for unconstrained optimization
-</li>
-</ul>
-
-
-
-<hr/>
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-14" class="outline-3">
-<h3 id="sec-3-14">Nov 26, 29 : Computational Models of Learning part 3</h3>
-<div class="outline-text-3" id="text-3-14">
-
-<ul>
-<li><a href="readings/NeuralNetworks4.pdf">NeuralNetworks4.pdf</a> slides
-</li>
-<li>self-organizing maps <a href="http://en.wikipedia.org/wiki/Kohonen_map">wiki</a>, <a href="readings/AflaloGraziano2006.pdf">AflaloGraziano2006.pdf</a>
-</li>
-<li><a href="code/hopfield.tgz">hopfield.tgz</a> MATLAB demo code
-</li>
-<li><a href="code/som1.m">som1.m</a> MATLAB demo code
-</li>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18">Nov 26, 29 : Computational Models of Learning part 3</h3>
+<div class="outline-text-3" id="text-orgheadline18">
+<ul class="org-ul">
+<li><a href="readings/NeuralNetworks4.pdf">NeuralNetworks4.pdf</a> slides</li>
+<li>self-organizing maps <a href="http://en.wikipedia.org/wiki/Kohonen_map">wiki</a>, <a href="readings/AflaloGraziano2006.pdf">AflaloGraziano2006.pdf</a></li>
+<li><a href="code/hopfield.tgz">hopfield.tgz</a> MATLAB demo code</li>
+<li><a href="code/som1.m">som1.m</a> MATLAB demo code</li>
 <li>autoencoders &amp; deep belief nets
-<ul>
-<li><a href="https://code.google.com/p/matrbm/">RBM &amp; DBN MATLAB code</a>
-</li>
+<ul class="org-ul">
+<li><a href="https://code.google.com/p/matrbm/">RBM &amp; DBN MATLAB code</a></li>
+</ul></li>
+<li>reinforcement learning <a href="http://en.wikipedia.org/wiki/Reinforcement_learning">wiki</a>, <a href="http://webdocs.cs.ualberta.ca/~sutton/book/ebook/the-book.html">Sutton &amp; Barto book</a></li>
 </ul>
 
-</li>
-<li>reinforcement learning <a href="http://en.wikipedia.org/wiki/Reinforcement_learning">wiki</a>, <a href="http://webdocs.cs.ualberta.ca/~sutton/book/ebook/the-book.html">Sutton &amp; Barto book</a>
-</li>
-</ul>
-
-
-
-<hr/>
+<hr  />
 </div>
-
 </div>
-
-<div id="outline-container-3-15" class="outline-3">
-<h3 id="sec-3-15">Dec 3 : student presentations</h3>
-<div class="outline-text-3" id="text-3-15">
-
-<ul>
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19">Dec 3 : student presentations</h3>
+<div class="outline-text-3" id="text-orgheadline19">
+<ul class="org-ul">
 <li>each of the 12 students registered in the course will present one
-  paper from the literature in their research area in which a
-  computational modelling approach was used to address a question
-  about how the brain works.
-</li>
+paper from the literature in their research area in which a
+computational modelling approach was used to address a question
+about how the brain works.</li>
 <li>presentations are limited to <b>7 minutes each</b>! Note: this is
-  difficult to pull off, you will have to practice your talk out
-  loud. Also be careful to choose your slides carefully. There will be
-  a timer and a loud gong.
-</li>
-<li>Question period will be limited to 1 to 2 minutes per talk.
-</li>
+difficult to pull off, you will have to practice your talk out
+loud. Also be careful to choose your slides carefully. There will be
+a timer and a loud gong.</li>
+<li>Question period will be limited to 1 to 2 minutes per talk.</li>
 <li>The order of talks will be alphabetical by your last name. A first,
-  Z last. We will need to start at 2pm sharp.
+Z last. We will need to start at 2pm sharp.</li>
 
-</li>
 <li>Each student giving a talk must also submit a short essay on their
-  chosen paper. Your essay should follow the "Content and Format"
-  style of the <a href="http://www.jneurosci.org/site/misc/ifa_features.xhtml">"Journal Club"</a> feature in the Journal of
-  Neuroscience. You can choose any paper you want, it doesn't have to
-  be a J. Neurosci. paper and it doesn't have to have been published
-  within the past 2 months.
-</li>
+chosen paper. Your essay should follow the "Content and Format"
+style of the <a href="http://www.jneurosci.org/site/misc/ifa_features.xhtml">"Journal Club"</a> feature in the Journal of
+Neuroscience. You can choose any paper you want, it doesn't have to
+be a J. Neurosci. paper and it doesn't have to have been published
+within the past 2 months.</li>
 <li>Essays are due Sunday Dec 9th, 2012, no later than 11:59pm
-  EST. Please send your essay to me by email, as a single .pdf
-  file. The filename should be <code>&lt;lastname&gt;_essay.pdf</code>
-  (e.g. <code>gribble_essay.pdf</code>).
-</li>
+EST. Please send your essay to me by email, as a single .pdf
+file. The filename should be <code>&lt;lastname&gt;_essay.pdf</code>
+(e.g. <code>gribble\_essay.pdf</code>).</li>
 </ul>
 
-
-
-<hr/>
+<hr  />
 </div>
 </div>
-
 </div>
-
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">Links</h2>
-<div class="outline-text-2" id="text-4">
-
-
-
-</div>
-
-<div id="outline-container-4-1" class="outline-3">
-<h3 id="sec-4-1">Python Introductory Tutorials</h3>
-<div class="outline-text-3" id="text-4-1">
-
-
-<ul>
-<li><a href="http://openbookproject.net/thinkcs/python/english2e/">How to Think Like a Computer Scientist: Learning with Python</a>
-</li>
-<li><a href="http://learnpythonthehardway.org/book/">Learn Python The Hard Way</a>
-</li>
-<li><a href="http://www.diveintopython.net/">Dive Into Python</a>
-</li>
-<li><a href="readings/SciCompPython.pdf">Introduction to Scientific Computing with Python</a>
-</li>
-<li><a href="http://www.pythontutor.com/">Online Python Tutor</a>
-</li>
-<li><a href="https://github.com/profjsb/python-bootcamp">Python Bootcamp</a> (github)
-</li>
-<li><a href="http://www.youtube.com/playlist?list=PLRdRinj2mDqsnazUsGeFq8Fi-2lL77vFF">Python Bootcamp August 2012</a> (YouTube playlist)
-</li>
-<li><a href="http://register.pythonbootcamp.info/agenda">Python Bootcamp August 2012</a> (list of topics &amp; downloads)
-</li>
+<div id="outline-container-orgheadline24" class="outline-2">
+<h2 id="orgheadline24">Links</h2>
+<div class="outline-text-2" id="text-orgheadline24">
+</div><div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20">Python Introductory Tutorials</h3>
+<div class="outline-text-3" id="text-orgheadline20">
+<ul class="org-ul">
+<li><a href="http://openbookproject.net/thinkcs/python/english2e/">How to Think Like a Computer Scientist: Learning with Python</a></li>
+<li><a href="http://learnpythonthehardway.org/book/">Learn Python The Hard Way</a></li>
+<li><a href="http://www.diveintopython.net/">Dive Into Python</a></li>
+<li><a href="readings/SciCompPython.pdf">Introduction to Scientific Computing with Python</a></li>
+<li><a href="http://www.pythontutor.com/">Online Python Tutor</a></li>
+<li><a href="https://github.com/profjsb/python-bootcamp">Python Bootcamp</a> (github)</li>
+<li><a href="http://www.youtube.com/playlist?list=PLRdRinj2mDqsnazUsGeFq8Fi-2lL77vFF">Python Bootcamp August 2012</a> (YouTube playlist)</li>
+<li><a href="http://register.pythonbootcamp.info/agenda">Python Bootcamp August 2012</a> (list of topics &amp; downloads)</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-4-2" class="outline-3">
-<h3 id="sec-4-2">Numpy / SciPy / Matplotlib</h3>
-<div class="outline-text-3" id="text-4-2">
-
-
-<ul>
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21">Numpy / SciPy / Matplotlib</h3>
+<div class="outline-text-3" id="text-orgheadline21">
+<ul class="org-ul">
 <li><a href="http://youtu.be/vWkb7VahaXQ">Using Numpy Arrays to Perform Mathematical Operations in Python</a>
-  (youtube video)
-</li>
-<li><a href="http://scipy-lectures.github.com/">Python Scientific Lecture Notes</a>
-</li>
-<li><a href="http://www.scipy.org/Plotting_Tutorial">SciPy Plotting Tutorial</a>
-</li>
-<li><a href="http://docs.scipy.org/doc/">Numpy and Scipy Documentation</a>
-</li>
-<li><a href="http://www.scipy.org/Tentative_Numpy_Tutorial">Numpy Tutorial</a>
-</li>
-<li><a href="http://scipy.org/Cookbook">SciPy Cookbook</a>
-</li>
-<li><a href="http://scipy.org/Getting_Started">SciPy Getting Started</a>
-</li>
-<li><a href="http://matplotlib.org/gallery.html">matplotlib gallery</a>
-</li>
+  (youtube video)</li>
+<li><a href="http://scipy-lectures.github.com/">Python Scientific Lecture Notes</a></li>
+<li><a href="http://www.scipy.org/Plotting_Tutorial">SciPy Plotting Tutorial</a></li>
+<li><a href="http://docs.scipy.org/doc/">Numpy and Scipy Documentation</a></li>
+<li><a href="http://www.scipy.org/Tentative_Numpy_Tutorial">Numpy Tutorial</a></li>
+<li><a href="http://scipy.org/Cookbook">SciPy Cookbook</a></li>
+<li><a href="http://scipy.org/Getting_Started">SciPy Getting Started</a></li>
+<li><a href="http://matplotlib.org/gallery.html">matplotlib gallery</a></li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-4-3" class="outline-3">
-<h3 id="sec-4-3">iPython</h3>
-<div class="outline-text-3" id="text-4-3">
-
-
-<ul>
-<li><a href="http://ipython.org/videos.html">iPython videos</a>
-</li>
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22">iPython</h3>
+<div class="outline-text-3" id="text-orgheadline22">
+<ul class="org-ul">
+<li><a href="http://ipython.org/videos.html">iPython videos</a></li>
 <li><a href="http://youtu.be/2G5YTlheCbw">iPython in-depth: high productivity interactive and parallel python</a>
-  (youtube video) iPython Notebook stuff starts at about 1:15:40, and
-  parallel programming stuff starts at around 2:13:00
-</li>
-<li><a href="http://nbviewer.ipython.org/">IPython Notebook Viewer</a>
-</li>
+(youtube video) iPython Notebook stuff starts at about 1:15:40, and
+parallel programming stuff starts at around 2:13:00</li>
+<li><a href="http://nbviewer.ipython.org/">IPython Notebook Viewer</a></li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-4-4" class="outline-3">
-<h3 id="sec-4-4">Machine Learning Resources</h3>
-<div class="outline-text-3" id="text-4-4">
-
-<ul>
-<li><a href="http://scikit-learn.org/">scikit-learn: machine learning in Python</a>
-</li>
-<li><a href="http://yann.lecun.com/exdb/mnist/">The MNIST Database of handwritten digits</a>
-</li>
-<li><a href="http://archive.ics.uci.edu/ml/">UCI Machine Learning Repository</a>
-</li>
-<li><a href="http://cs.nyu.edu/~roweis/data.html">Some datasets for machine learning: digits, faces, text, speech</a>
-</li>
-<li><a href="http://www.dacya.ucm.es/jam/download.htm">Software tools for reinforcement learning, neural networks and robotics</a>
-</li>
-<li><a href="http://kasrl.org/jaffe.html">The Japanese Female Facial Expression (JAFFE) Database</a>
-</li>
-<li><a href="http://www.socsci.ru.nl:8180/RaFD2/RaFD?p=main">Radboud Faces Database</a>
-</li>
-<li><a href="http://mplab.ucsd.edu/wordpress/?page_id=48">Machine Perception Laboratory Demos</a>
-</li>
-<li><a href="http://mplab.ucsd.edu/grants/project1/free-software/MPTWebSite/introduction.html">Machine Perception Toolbox</a>
-</li>
+<div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23">Machine Learning Resources</h3>
+<div class="outline-text-3" id="text-orgheadline23">
+<ul class="org-ul">
+<li><a href="http://scikit-learn.org/">scikit-learn: machine learning in Python</a></li>
+<li><a href="http://yann.lecun.com/exdb/mnist/">The MNIST Database of handwritten digits</a></li>
+<li><a href="http://archive.ics.uci.edu/ml/">UCI Machine Learning Repository</a></li>
+<li><a href="http://cs.nyu.edu/~roweis/data.html">Some datasets for machine learning: digits, faces, text, speech</a></li>
+<li><a href="http://www.dacya.ucm.es/jam/download.htm">Software tools for reinforcement learning, neural networks and robotics</a></li>
+<li><a href="http://kasrl.org/jaffe.html">The Japanese Female Facial Expression (JAFFE) Database</a></li>
+<li><a href="http://www.socsci.ru.nl:8180/RaFD2/RaFD?p=main">Radboud Faces Database</a></li>
+<li><a href="http://mplab.ucsd.edu/wordpress/?page_id=48">Machine Perception Laboratory Demos</a></li>
+<li><a href="http://mplab.ucsd.edu/grants/project1/free-software/MPTWebSite/introduction.html">Machine Perception Toolbox</a></li>
 <li><a href="http://www.cs.toronto.edu/~hinton/">Geoff Hinton's Webpage</a> (with lots of demos, tutorials, talks and
-  papers on Neural Networks)
-</li>
+papers on Neural Networks)</li>
 <li><a href="http://www.cs.toronto.edu/~hinton/csc321/">Introduction to Neural Networks and Machine Learning</a> (U of T course
-  by Geoff Hinton)
-</li>
-<li><a href="http://www.cnbc.cmu.edu/~mharm/research/tools/mikenet/">MikeNet Neural Network Simulator</a> (C library)
-</li>
-<li><a href="http://deeplearning.net/">Deep Learning</a> resource site for deep belief nets etc
-</li>
-<li><a href="http://www.iro.umontreal.ca/~bengioy/papers/ftml_book.pdf">Learning Deep Architectures for AI</a> (book) by Yoshua Bengio
-</li>
-<li><a href="http://www.cs.cmu.edu/afs/cs/academic/class/15782-f06/matlab/">MATLAB neural network code</a> demos by Dave Touretzky
-</li>
+by Geoff Hinton)</li>
+<li><a href="http://www.cnbc.cmu.edu/~mharm/research/tools/mikenet/">MikeNet Neural Network Simulator</a> (C library)</li>
+<li><a href="http://deeplearning.net/">Deep Learning</a> resource site for deep belief nets etc</li>
+<li><a href="http://www.iro.umontreal.ca/~bengioy/papers/ftml_book.pdf">Learning Deep Architectures for AI</a> (book) by Yoshua Bengio</li>
+<li><a href="http://www.cs.cmu.edu/afs/cs/academic/class/15782-f06/matlab/">MATLAB neural network code</a> demos by Dave Touretzky</li>
 </ul>
 
-
-
-<hr/>
-
+<hr  />
+</div>
 </div>
 </div>
 
-</div>
-
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">These notes</h2>
-<div class="outline-text-2" id="text-5">
-
-
+<div id="outline-container-orgheadline25" class="outline-2">
+<h2 id="orgheadline25">These notes</h2>
+<div class="outline-text-2" id="text-orgheadline25">
 <p>
 These notes can be viewed (and downloaded) in their entirety from a
-<a href="https://github.com">github</a> repository here: <a href="https://github.com/paulgribble/CompNeuro">CompNeuro</a>
+<a href="https://github.com/">github</a> repository here: <a href="https://github.com/paulgribble/CompNeuro">CompNeuro</a>
 </p>
 </div>
 </div>
 </div>
-
-<div id="postamble">
+<div id="postamble" class="status">
 <hr />Paul Gribble | Fall 2012<br>This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />
 </div>
 </body>

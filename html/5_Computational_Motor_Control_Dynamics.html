@@ -1,65 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2016-01-03 Sun 11:43 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>5. Computational Motor Control: Dynamics</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="5. Computational Motor Control: Dynamics"/>
-<meta name="generator" content="Org-mode"/>
-<meta name="generated" content="fall 2012"/>
-<meta name="author" content="Paul Gribble &amp; Dinant Kistemaker"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Paul Gribble &amp; Dinant Kistemaker" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
-  .title  { text-align: center; }
-  .todo   { color: red; }
-  .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
-</style><link rel="stylesheet" type="text/css" href="mystyle.css" />
+</style>
+<link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -106,177 +141,96 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
-/**
- *
- * @source: http://orgmode.org/mathjax/MathJax.js
- *
- * @licstart  The following is the entire license notice for the
- *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- * Copyright (C) 2012-2013  MathJax
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @licend  The above is the entire license notice
- * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- */
-
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code below.
-
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
-
-The JavaScript code below is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code below.
-*/
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="http://www.gribblelab.org/compneuro/4_Computational_Motor_Control_Kinematics.html"> UP </a>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="http://www.gribblelab.org/compneuro/index.html"> HOME </a>
-</div>
-
-<div id="preamble">
-
-</div>
-
-<div id="content">
+</div><div id="content">
 <h1 class="title">5. Computational Motor Control: Dynamics</h1>
-
-
-
-<hr/>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Introduction</a></li>
-<li><a href="#sec-2">Equations of motion for a one-joint arm</a>
+<li><a href="#orgheadline1">Introduction</a></li>
+<li><a href="#orgheadline2">Equations of motion for a one-joint arm</a>
 <ul>
-<li><a href="#sec-2-1">Optional: Euler-Lagrange Equation</a>
+<li><a href="#orgheadline3">Optional: Euler-Lagrange Equation</a>
 <ul>
-<li><a href="#sec-2-1-1">Kinetic Energy</a></li>
-<li><a href="#sec-2-1-2">Potential Energy</a></li>
-<li><a href="#sec-2-1-3">Lagrangian</a></li>
+<li><a href="#orgheadline4">Kinetic Energy</a></li>
+<li><a href="#orgheadline7">Potential Energy</a></li>
+<li><a href="#orgheadline8">Lagrangian</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-2">Equation of motion</a></li>
+<li><a href="#orgheadline9">Equation of motion</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">Simulating the dynamics of the one-joint arm</a></li>
-<li><a href="#sec-4">Equations of motion for a two-joint arm</a>
+<li><a href="#orgheadline10">Simulating the dynamics of the one-joint arm</a></li>
+<li><a href="#orgheadline11">Equations of motion for a two-joint arm</a>
 <ul>
-<li><a href="#sec-4-1">Optional: The Lagrangian</a>
+<li><a href="#orgheadline12">Optional: The Lagrangian</a>
 <ul>
-<li><a href="#sec-4-1-1">Linear kinetic energy</a></li>
-<li><a href="#sec-4-1-2">Rotational kinetic energy</a></li>
-<li><a href="#sec-4-1-3">Potential energy</a></li>
-<li><a href="#sec-4-1-4">Lagrangian</a></li>
+<li><a href="#orgheadline13">Linear kinetic energy</a></li>
+<li><a href="#orgheadline14">Rotational kinetic energy</a></li>
+<li><a href="#orgheadline15">Potential energy</a></li>
+<li><a href="#orgheadline16">Lagrangian</a></li>
 </ul>
 </li>
-<li><a href="#sec-4-2">Equations of Motion</a>
+<li><a href="#orgheadline17">Equations of Motion</a>
 <ul>
-<li><a href="#sec-4-2-1">Joint Interaction Torques</a></li>
-</ul></li>
+<li><a href="#orgheadline18">Joint Interaction Torques</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">Simulating the dynamics of the two-joint arm</a></li>
-<li><a href="#sec-6">Does the brain know about interaction torques? (yes)</a></li>
-<li><a href="#sec-7">Kinematic vs Dynamic models of motor control</a>
-<ul>
-<li><a href="#sec-7-1">Behavioural studies</a>
-<ul>
-<li><a href="#sec-7-1-1">Computational models of Dynamics planning</a></li>
 </ul>
 </li>
-<li><a href="#sec-7-2">Electrophysiological studies</a>
+<li><a href="#orgheadline19">Simulating the dynamics of the two-joint arm</a></li>
+<li><a href="#orgheadline20">Does the brain know about interaction torques? (yes)</a></li>
+<li><a href="#orgheadline21">Kinematic vs Dynamic models of motor control</a>
 <ul>
-<li><a href="#sec-7-2-1">Computational Models: Cortical control</a></li>
-</ul></li>
+<li><a href="#orgheadline22">Behavioural studies</a>
+<ul>
+<li><a href="#orgheadline23">Computational models of Dynamics planning</a></li>
 </ul>
 </li>
-<li><a href="#sec-8">Two-joint arm video game</a></li>
+<li><a href="#orgheadline24">Electrophysiological studies</a>
+<ul>
+<li><a href="#orgheadline25">Computational Models: Cortical control</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline26">Two-joint arm video game</a></li>
 </ul>
 </div>
 </div>
+<hr  />
 
-<hr/>
-
-
-<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Introduction</h2>
-<div class="outline-text-2" id="text-1">
-
-
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Introduction</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Here we will talk about deriving the <b>equations of motion</b> for a
 one-joint and then two-joint (planar) arm. We saw in earlier topics
@@ -289,22 +243,21 @@ itself. Surprisingly, even a "simple" two-joint arm ends up having
 complex dynamical behaviour.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Equations of motion for a one-joint arm</h2>
-<div class="outline-text-2" id="text-2">
-
-
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Equations of motion for a one-joint arm</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Let's start with a simple one-joint planar arm (like an elbow joint),
 and let's put it in a vertical plane, with gravity acting down:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/elbow_dynamics.png" width="400px" align="center" alt="figs/elbow_dynamics.png" /></p>
-<p>Schematic of a simple one-joint arm in a vertical plane</p>
+<p><img src="figs/elbow_dynamics.png" alt="elbow_dynamics.png" width="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Schematic of a simple one-joint arm in a vertical plane</p>
 </div>
 
 <p>
@@ -315,9 +268,10 @@ rotational <a href="http://en.wikipedia.org/wiki/Moment_of_inertia">moment of in
 the angle between the horizontal and the link, and we have the force
 of gravity \(g\) acting in the downward direction.
 </p>
+
 <p>
 There are many ways of deriving the equations of motion of a dynamical
-system, including the <a href="http://en.wikipedia.org/wiki/Lagrangian_mechanics">Lagrangian</a>, <a href="http://en.wikipedia.org/wiki/Hamiltonian_mechanics">Hamiltonian</a>, and <a href="http://en.wikipedia.org/wiki/Newton–Euler_equations">Newton-Euler</a>
+system, including the <a href="http://en.wikipedia.org/wiki/Lagrangian_mechanics">Lagrangian</a>, <a href="http://en.wikipedia.org/wiki/Hamiltonian_mechanics">Hamiltonian</a>, and <a href="http://en.wikipedia.org/wiki/Newton%E2%80%93Euler_equations">Newton-Euler</a>
 approaches. They are all different ways to get to the same place (for
 our purposes), the equations of motion relating the inputs
 (e.g. forces and torques) to the dynamical behaviour (accelerations,
@@ -326,38 +280,32 @@ approach here. A great practical book for looking at all sorts of
 examples of the Lagrangian approach, for all sorts of mechanical
 systems, is <a href="http://www.amazon.ca/Schaums-Outline-Lagrangian-Dynamics-Wells/dp/0070692580">Schaum's Outline: Lagrangian Dynamics</a>.
 </p>
+
 <p>
 <b>Note</b>: if you are squeamish about the calculus, or you're just not
 that interested in the nuts and bolts of <i>how</i> to derive equations of
-motion, that's OK &hellip; just skip ahead to <a href="http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-2-2">here</a> and see what the final
+motion, that's OK &#x2026; just skip ahead to <a href="http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-2-2">here</a> and see what the final
 equation of motion looks like.
 </p>
-
 </div>
 
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1">Optional: Euler-Lagrange Equation</h3>
-<div class="outline-text-3" id="text-2-1">
-
-
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Optional: Euler-Lagrange Equation</h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <p>
 The really cool thing about the Lagrangian approach is that you can derive equations of motion using only:
 </p>
-<ol>
-<li>a characterization of the energy (kinetic &amp; potential) of the system
-</li>
-<li>a description of the kinematics of the system
-</li>
-<li>running these through calculus
-</li>
-</ol>
 
+<ol class="org-ol">
+<li>a characterization of the energy (kinetic &amp; potential) of the system</li>
+<li>a description of the kinematics of the system</li>
+<li>running these through calculus</li>
+</ol>
 
 <p>
 The Euler-Lagrange equation gives the "generalized" equations of motion
 as:
 </p>
-
 
 \begin{equation}
 Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \left( \frac{\partial L}{\partial q_{j}} \right)
@@ -367,7 +315,6 @@ Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \l
 where \(j\) indexes into each "generalized coordinate", and where
 </p>
 
-
 \begin{equation}
 L = T - U
 \end{equation}
@@ -376,6 +323,7 @@ L = T - U
 and where \(T\) is the <b>kinetic energy</b> of the system, and \(U\) is
 the <b>potential energy</b> of the system.
 </p>
+
 <p>
 The basic idea is once you derive an expression for \(L\), then you just
 run it through the derivatives in the Euler-Lagrange equation, to get
@@ -383,27 +331,25 @@ the equations of motion in terms of the "generalized forces"
 \(Q_{j}\). I know that sounds a bit opaque, so let's run through a
 concrete example with our single-joint pendulum.
 </p>
+
 <p>
 Let's derive the two parts of \(L\) (\(T\) and \(U\)) and then we will see
 how to get the equations of motion by running \(L\) through the
 Euler-Lagrange equation to get generalized forces \(Q_{j}\).
 </p>
-
 </div>
 
-<div id="outline-container-2-1-1" class="outline-4">
-<h4 id="sec-2-1-1">Kinetic Energy</h4>
-<div class="outline-text-4" id="text-2-1-1">
-
-
+<div id="outline-container-orgheadline4" class="outline-4">
+<h4 id="orgheadline4">Kinetic Energy</h4>
+<div class="outline-text-4" id="text-orgheadline4">
 <p>
 So first let's write down the <a href="http://en.wikipedia.org/wiki/Kinetic_energy">kinetic energy</a> \(T\). There are two parts:
 the linear kinetic energy of the centre of mass \(m\), and the
 rotational kinetic energy of the rod.
 </p>
-<ul>
-<li id="sec-2-1-1-1">Linear kinetic energy<br/>
+</div>
 
+<ul class="org-ul"><li><a id="orgheadline5"></a>Linear kinetic energy<br  /><div class="outline-text-5" id="text-orgheadline5">
 <p>
 We know that for a point mass (and we are representing our link's
 centre of mass as a point mass \(m\) kg located \(\frac{l}{2}\) metres
@@ -411,22 +357,17 @@ away from a rotary joint), the kinetic energy is \(\frac{1}{2}mv^{2}\)
 where \(v\) is velocity:
 </p>
 
-
 \begin{eqnarray}
 T_{lin} &= &\frac{1}{2} m v^{2}\\
 T_{lin} &= &\frac{1}{2} m (\dot{x}^{2} + \dot{y}^{2})\\
 T_{lin} &= &\frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2}
 \end{eqnarray}
+</div></li>
 
-</li>
-</ul>
-<ul>
-<li id="sec-2-1-1-2">Rotational kinetic energy<br/>
-
+<li><a id="orgheadline6"></a>Rotational kinetic energy<br  /><div class="outline-text-5" id="text-orgheadline6">
 <p>
 For rotation, kinetic energy is:
 </p>
-
 
 \begin{equation}
 T_{rot} = \frac{1}{2} i \dot{\theta}^{2}
@@ -436,10 +377,10 @@ T_{rot} = \frac{1}{2} i \dot{\theta}^{2}
 where \(i\) is the moment of inertia and \(\dot{\theta}\) is the angular
 velocity.
 </p>
+
 <p>
 Putting them together, the total kinetic energy of the system is:
 </p>
-
 
 \begin{equation}
 T = \frac{1}{2} m \dot{x}^{2} + \frac{1}{2} m \dot{y}^{2} + \frac{1}{2} i \dot{\theta}^{2}
@@ -451,7 +392,6 @@ centre of mass) to intrinsic \(\theta\) using the following relations,
 which we know from geometry:
 </p>
 
-
 \begin{eqnarray}
 x &= &r \sin\theta\\
 y &= &-r \cos\theta
@@ -461,28 +401,20 @@ y &= &-r \cos\theta
 so if we substitute and simplify terms (not shown) we get:
 </p>
 
-
 \begin{equation}
 T = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2}
 \end{equation}
-
-</li>
-</ul>
+</div></li></ul>
 </div>
 
-</div>
-
-<div id="outline-container-2-1-2" class="outline-4">
-<h4 id="sec-2-1-2">Potential Energy</h4>
-<div class="outline-text-4" id="text-2-1-2">
-
-
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Potential Energy</h4>
+<div class="outline-text-4" id="text-orgheadline7">
 <p>
 Now let's write down the <a href="http://en.wikipedia.org/wiki/Potential_energy">potential energy</a> \(U\). We know from basic
 physics that in general, the potential energy for a mass in earth's
 gravitational field is:
 </p>
-
 
 \begin{equation}
 U = m g h
@@ -495,24 +427,18 @@ let's define the "zero potential energy point" (like the "ground")
 when the pendulum is pointing straight down, i.e. when \(\theta = 0\):
 </p>
 
-
 \begin{equation}
 U = m g r \left( 1-\cos\theta \right)
 \end{equation}
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-2-1-3" class="outline-4">
-<h4 id="sec-2-1-3">Lagrangian</h4>
-<div class="outline-text-4" id="text-2-1-3">
-
-
+<div id="outline-container-orgheadline8" class="outline-4">
+<h4 id="orgheadline8">Lagrangian</h4>
+<div class="outline-text-4" id="text-orgheadline8">
 <p>
 So now we have the Lagrangian \(L = T-U\) is:
 </p>
-
 
 \begin{equation}
 L = T-U = \frac{1}{2} m r^{2} \dot{\theta}^{2} + \frac{1}{2} i \dot{\theta}^{2} - m g r \left( 1-\cos\theta \right)
@@ -527,6 +453,7 @@ one, so we will write \(Q\), and since we chose our generalized
 coordinate to be angular, \(\theta\), our generalized force \(Q\) is
 actually a <a href="http://en.wikipedia.org/wiki/Torque">torque</a> (the rotational equivalent of a force).
 </p>
+
 <p>
 Now it's a matter of computing the derivative terms in the
 Euler-Lagrange equation to get an expression giving the torque of the
@@ -534,7 +461,6 @@ system in terms of the system states. You can do this by hand if
 you're a calculus ninja, or use a symbolic computing package like
 SymPy to do it for you.
 </p>
-
 
 \begin{equation}
 \frac{\partial L}{\partial \theta} = -m g r \sin \theta
@@ -544,7 +470,6 @@ SymPy to do it for you.
 and
 </p>
 
-
 \begin{equation}
 \frac{\partial L}{\partial \dot{\theta}} = \dot{\theta} \left( i + m r^{2} \right)
 \end{equation}
@@ -552,7 +477,6 @@ and
 <p>
 and
 </p>
-
 
 \begin{equation}
 \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta}}  \right) = 
@@ -563,7 +487,6 @@ and
 and remember the Euler-Lagrange equation:
 </p>
 
-
 \begin{equation}
 Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \left( \frac{\partial L}{\partial q_{j}} \right)
 \end{equation}
@@ -572,34 +495,31 @@ Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \l
 so plugging in the values from the calculus/algebra above,
 </p>
 
-
 \begin{equation}
 Q = \ddot{\theta} \left( i + m r^{2}  \right) + m g r \sin\theta
 \end{equation}
 
 <p>
 So this is our <b>equation of motion</b>, it gives us a relationship
-between generalized force \(Q\) (which is a <b>torque</b>), and the <b>states of the system</b>, \((\theta,\dot{\theta},\ddot{\theta})\) (note actually
+between generalized force \(Q\) (which is a <b>torque</b>), and the <b>states
+of the system</b>, \((\theta,\dot{\theta},\ddot{\theta})\) (note actually
 \(\dot{\theta}\) doesn't appear in our equations of motion in this case).
 </p>
+
 <p>
 If you want to see the SymPy code for doing all this calculus, it is
-here: <a href="code/onejoint_lagrange.py">onejoint_lagrange.py</a>
+here: <a href="code/onejoint_lagrange.py">onejoint\<sub>lagrange.py</sub></a>
 </p>
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2">Equation of motion</h3>
-<div class="outline-text-3" id="text-2-2">
-
-
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9">Equation of motion</h3>
+<div class="outline-text-3" id="text-orgheadline9">
 <p>
 Our equation of motion:
 </p>
-
 
 \begin{equation}
 Q = \ddot{\theta} \left( i + m r^{2}  \right) + m g r \sin\theta
@@ -608,24 +528,28 @@ Q = \ddot{\theta} \left( i + m r^{2}  \right) + m g r \sin\theta
 <p>
 where \(Q\) is joint torque (Nm), \(m\) is link mass (kg), \(l\) is link
 length (m), \(g\) is gravitational constant (m/s/s) and \(\theta\) is
-joint angle (radians), gives <b>joint torque as a function of state</b>.
+joint angle (radians), gives <b>joint torque as a function of
+state</b>.
 </p>
+
 <p>
 This is actually the <i>inverse dynamics</i> equation. To say it
 differently, this is the equation we can use to answer the question,
 "what torque do I need at the joint (for example from muscles) in
 order to generate a given dynamic state?"
 </p>
+
 <p>
-For forward simulation of a dynamical system, we need the <i>forward dynamics</i> equation of motion. In other words, we need an equation that
+For forward simulation of a dynamical system, we need the <i>forward
+dynamics</i> equation of motion. In other words, we need an equation that
 gives the derivatives of the system state(s) as a function of the
 system states themselves (and any other quantities, e.g. joint
 torque).
 </p>
+
 <p>
 We can easily solve our equation of motion for \(\ddot{\theta}\):
 </p>
-
 
 \begin{equation}
 \ddot{\theta} = \frac{Q - mgr\sin\theta}{i + mr^{2}}
@@ -634,7 +558,6 @@ We can easily solve our equation of motion for \(\ddot{\theta}\):
 <p>
 Note that if the torque \(Q\) is zero, in other words if there is no <b>input</b> torque to the system, then:
 </p>
-
 
 \begin{equation}
 \ddot{\theta} = \frac{- mgr\sin\theta}{i + mr^{2}}
@@ -647,19 +570,16 @@ torque).
 </p>
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Simulating the dynamics of the one-joint arm</h2>
-<div class="outline-text-2" id="text-3">
-
-
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Simulating the dynamics of the one-joint arm</h2>
+<div class="outline-text-2" id="text-orgheadline10">
 <p>
 Let's write a function, as we did earlier in the course for other systems, for the forward dynamics of our one-joint arm:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">from</span> scipy.integrate <span style="color: #a020f0;">import</span> odeint
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointarm</span>(state,t):
@@ -682,19 +602,20 @@ legend((<span style="color: #8b2252;">'theta'</span>,<span style="color: #8b2252
 xlabel(<span style="color: #8b2252;">'TIME (sec)'</span>)
 ylabel(<span style="color: #8b2252;">'THETA (deg) &amp; THETA_DOT (deg/sec)'</span>)
 </pre>
-
+</div>
 
 
 <div class="figure">
-<p><img src="figs/onejointarm_passive.png" width="600px" align="center" alt="figs/onejointarm_passive.png" /></p>
-<p>Dynamics of passive one-joint arm</p>
+<p><img src="figs/onejointarm_passive.png" alt="onejointarm_passive.png" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 2:</span> Dynamics of passive one-joint arm</p>
 </div>
 
 <p>
 Here's a little function that will animate the arm:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">animate_arm</span>(state,t):
    <span style="color: #a0522d;">l</span> = 0.5
@@ -713,23 +634,20 @@ Here's a little function that will animate the arm:
 
 animate_arm(state,t)
 </pre>
-
+</div>
 
 
 <div class="figure">
-<p><img src="figs/onejointanimation.png" width="600px" align="center" alt="figs/onejointanimation.png" /></p>
-<p>Animation of passive one-joint arm</p>
+<p><img src="figs/onejointanimation.png" alt="onejointanimation.png" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 3:</span> Animation of passive one-joint arm</p>
+</div>
+</div>
 </div>
 
-</div>
-
-</div>
-
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">Equations of motion for a two-joint arm</h2>
-<div class="outline-text-2" id="text-4">
-
-
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">Equations of motion for a two-joint arm</h2>
+<div class="outline-text-2" id="text-orgheadline11">
 <p>
 To derive the equations of motion for a two-jointarm arm we will
 follow the same basic steps as above for the one-joint arm. Note again
@@ -737,9 +655,11 @@ that we are now putting the arm in a vertical plane, with gravity
 pointing down.
 </p>
 
+
 <div class="figure">
-<p><img src="figs/twojointarm_dynamics.png" width="500px" align="center" alt="figs/twojointarm_dynamics.png" /></p>
-<p>Schematic of a two-joint arm in a vertical plane</p>
+<p><img src="figs/twojointarm_dynamics.png" alt="twojointarm_dynamics.png" width="500px" align="center" />
+</p>
+<p><span class="figure-number">Figure 4:</span> Schematic of a two-joint arm in a vertical plane</p>
 </div>
 
 <p>
@@ -752,22 +672,19 @@ the elbow joint \(E\) at \((e_{x},e_{y})\) and the hand \(H\) at
 \((h_{x},h_{y})\). Gravity \(g\) is pointing "down" \((-y)\) and joint
 angles \((\theta_{1},\theta_{2})\) are as indicated.
 </p>
+
 <p>
 <b>Note</b> If you want to skip over the Lagrangian formulation you are
 welcome to, just skip right <a href="http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html#sec-4-2">here</a> to the equations of motion.
 </p>
-
 </div>
 
-<div id="outline-container-4-1" class="outline-3">
-<h3 id="sec-4-1">Optional: The Lagrangian</h3>
-<div class="outline-text-3" id="text-4-1">
-
-
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">Optional: The Lagrangian</h3>
+<div class="outline-text-3" id="text-orgheadline12">
 <p>
 As before we will be using the Euler-Lagrange equation to derive the equations of motion:
 </p>
-
 
 \begin{equation}
 Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \left( \frac{\partial L}{\partial q_{j}} \right)
@@ -776,7 +693,6 @@ Q_{j} = \frac{d}{dt} \left( \frac{\partial L}{\partial \dot{q_{j}}} \right) - \l
 <p>
 where \(j={1,2}\) (see below) and where
 </p>
-
 
 \begin{equation}
 L = T - U
@@ -787,21 +703,18 @@ Here we will have two generalized coordinates \(\theta_{1}\) and
 \(\theta_{2}\), and so our generalized forces \(Q_{1}\) and \(Q_{2}\) will
 correspond to shoulder torque and elbow torque, respectively.
 </p>
+
 <p>
 Again we must write expressions for linear and rotational kinetic energy.
 </p>
-
 </div>
 
-<div id="outline-container-4-1-1" class="outline-4">
-<h4 id="sec-4-1-1">Linear kinetic energy</h4>
-<div class="outline-text-4" id="text-4-1-1">
-
-
+<div id="outline-container-orgheadline13" class="outline-4">
+<h4 id="orgheadline13">Linear kinetic energy</h4>
+<div class="outline-text-4" id="text-orgheadline13">
 <p>
 In general,
 </p>
-
 
 \begin{equation}
 Tlin_{j} = \frac{1}{2} m_{j} v_{j}^{2}
@@ -811,25 +724,19 @@ Tlin_{j} = \frac{1}{2} m_{j} v_{j}^{2}
 for \(j={1,2}\). Expanding \(v_{j}\):
 </p>
 
-
 \begin{eqnarray}
 Tlin_{1} &= &\frac{1}{2} m_{1} \left( \dot{x_{1}}^{2} + \dot{y_{1}}^{2} \right)\\
 Tlin_{2} &= &\frac{1}{2} m_{2} \left( \dot{x_{2}}^{2} + \dot{y_{2}}^{2} \right)\\
 \end{eqnarray}
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-4-1-2" class="outline-4">
-<h4 id="sec-4-1-2">Rotational kinetic energy</h4>
-<div class="outline-text-4" id="text-4-1-2">
-
-
+<div id="outline-container-orgheadline14" class="outline-4">
+<h4 id="orgheadline14">Rotational kinetic energy</h4>
+<div class="outline-text-4" id="text-orgheadline14">
 <p>
 For rotation, kinetic energy is:
 </p>
-
 
 \begin{equation}
 Trot_{j} = \frac{1}{2} i_{j} \dot{\theta_{j}}^{2}
@@ -838,7 +745,6 @@ Trot_{j} = \frac{1}{2} i_{j} \dot{\theta_{j}}^{2}
 <p>
 so
 </p>
-
 
 \begin{eqnarray}
 Trot_{1} &= &\frac{1}{2} i_{1} \dot{\theta_{1}}^{2}\\
@@ -852,7 +758,6 @@ coordinate frame \((\theta_{1},\theta_{2})\) based on the following
 relations from geometry (our forward kinematic equations):
 </p>
 
-
 \begin{eqnarray}
 x_{1} &= &r_{1} \sin \theta_{1}\\
 y_{1} &= &-r_{1} \cos \theta_{1}\\
@@ -864,43 +769,32 @@ y_{2} &= &-l_{1} \cos \theta_{1} - r_{2} \cos \left( \theta_{1}+\theta_{2} \righ
 Total kinetic energy is then:
 </p>
 
-
 \begin{eqnarray}
 T &= &Tlin_{1} + Tlin_{2} + Trot_{1} + Trot_{2}\\
 \end{eqnarray}
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-4-1-3" class="outline-4">
-<h4 id="sec-4-1-3">Potential energy</h4>
-<div class="outline-text-4" id="text-4-1-3">
-
-
+<div id="outline-container-orgheadline15" class="outline-4">
+<h4 id="orgheadline15">Potential energy</h4>
+<div class="outline-text-4" id="text-orgheadline15">
 <p>
 Just as for the onejoint arm we have potential energy of each link.
 </p>
-
 
 \begin{eqnarray}
 U_{1} &= &m_{1} g r_{1}(1-\cos\theta_{1})\\
 U_{2} &= &m_{2} g \left( l_{1}(1-\cos\theta_{1}) + r_{2}(1-\cos(\theta_{1}+\theta_{2}))  \right)
 \end{eqnarray}
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-4-1-4" class="outline-4">
-<h4 id="sec-4-1-4">Lagrangian</h4>
-<div class="outline-text-4" id="text-4-1-4">
-
-
+<div id="outline-container-orgheadline16" class="outline-4">
+<h4 id="orgheadline16">Lagrangian</h4>
+<div class="outline-text-4" id="text-orgheadline16">
 <p>
 We then define the lagrangian \(L\) as
 </p>
-
 
 \begin{eqnarray}
 L &= &T - U\\
@@ -912,7 +806,6 @@ To get the equations of motion we then simply evaluate the
 Euler-Lagrange equation, once for each generalized force (torque):
 </p>
 
-
 \begin{eqnarray}
 Q_{1} &= &\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta_{1}}} \right) - \left( \frac{\partial L}{\partial \theta_{1}} \right)\\
 Q_{2} &= &\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta_{2}}} \right) - \left( \frac{\partial L}{\partial \theta_{2}} \right)
@@ -922,25 +815,22 @@ Q_{2} &= &\frac{d}{dt} \left( \frac{\partial L}{\partial \dot{\theta_{2}}} \righ
 For those that are interested, here is a SymPy program that implements
 the Lagrangian approach to get the equations of motion for a two-joint arm:
 </p>
+
 <p>
-<a href="code/twojointarm_lagrange.py">twojointarm_lagrange.py</a>
+<a href="code/twojointarm_lagrange.py">twojointarm\<sub>lagrange.py</sub></a>
 </p>
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-4-2" class="outline-3">
-<h3 id="sec-4-2">Equations of Motion</h3>
-<div class="outline-text-3" id="text-4-2">
-
-
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Equations of Motion</h3>
+<div class="outline-text-3" id="text-orgheadline17">
 <p>
 What we end up with (I won't take you step by through all the
 calculus) is two equations of motion, one for shoulder torque \(Q_{1}\)
 and one for elbow torque \(Q_{2}\).
 </p>
-
 
 \begin{eqnarray}
 Q_{1} &= &M_{11} \ddot{\theta_{1}} + M_{12} \ddot{\theta_{2}} + C_{1} + G_{1}\\
@@ -950,7 +840,6 @@ Q_{2} &= &M_{21} \ddot{\theta_{1}} + M_{22} \ddot{\theta_{2}} + C_{2} + G_{2}\\
 <p>
 where
 </p>
-
 
 \begin{eqnarray}
 M_{11} &= &i_{1} + i_{2} + m_{1}r_{1}^{2} + m_{2}\left( l_{1}^{2} + r_{2}^{2} + 2 l_{1} r_{2} \cos\theta_{2} \right)\\
@@ -962,7 +851,6 @@ M_{22} &= &i_{2} + m_{2} r_{2}^{2}
 and
 </p>
 
-
 \begin{eqnarray}
 C_{1} &= &- m_{2} l_{1} \dot{\theta_{2}}^{2} r_{2} \sin\theta_{2} - 2 m_{2}  l_{1} \dot{\theta_{1}}\dot{\theta_{2}} r_{2} \sin\theta_{2}\\
 C_{2} &= &m_{2}  l_{1} \dot{\theta_{1}}^{2} r_{2} \sin\theta_{2}
@@ -971,7 +859,6 @@ C_{2} &= &m_{2}  l_{1} \dot{\theta_{1}}^{2} r_{2} \sin\theta_{2}
 <p>
 and
 </p>
-
 
 \begin{eqnarray}
 G_{1} &= &g \sin\theta_{1} \left(m_{2}l_{1} + m_{1}r_{1} \right) + g m_{2} r_{2} \sin(\theta_{1}+\theta_{2})\\
@@ -984,14 +871,11 @@ accelerations). The \(C\) terms are usually called
 <i>Coriolis-centrifugal</i> terms, and the \(G\) terms are the terms due to
 gravity.
 </p>
-
 </div>
 
-<div id="outline-container-4-2-1" class="outline-4">
-<h4 id="sec-4-2-1">Joint Interaction Torques</h4>
-<div class="outline-text-4" id="text-4-2-1">
-
-
+<div id="outline-container-orgheadline18" class="outline-4">
+<h4 id="orgheadline18">Joint Interaction Torques</h4>
+<div class="outline-text-4" id="text-orgheadline18">
 <p>
 Notice something interesting about these two-joint arm equations of
 motion: The torque at the shoulder \(Q_{1}\) depends not just on
@@ -1001,6 +885,7 @@ acceleration \(\ddot{\theta_{2}}\). Similarly, elbow joint torque
 \(\ddot{\theta_{2}}\) but also on shoulder joint acceleration
 \(\ddot{\theta_{1}}\). These are inertial interaction torques.
 </p>
+
 <p>
 If you look at the Coriolis/centrifugal terms \(C\) you also see a
 similar pattern but for velocities. Shoulder torque \(Q_{1}\) depends
@@ -1010,6 +895,7 @@ of shoulder and elbow velocities
 \(C_{2}\)) on shoulder velocity squared \(\dot{\theta_{1}}^{2}\). These are
 Coriolis-centrifugal interaction torques.
 </p>
+
 <p>
 So when torque at one joint depends on velocities and/or accelerations
 at another joint, we call these effects <b>joint interaction torques</b>. These interaction torques may be large, and significantly affect limb movement, especially when velocities and/or accelerations are large.
@@ -1017,24 +903,21 @@ at another joint, we call these effects <b>joint interaction torques</b>. These 
 </div>
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">Simulating the dynamics of the two-joint arm</h2>
-<div class="outline-text-2" id="text-5">
-
-
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">Simulating the dynamics of the two-joint arm</h2>
+<div class="outline-text-2" id="text-orgheadline19">
 <p>
 The equation of motion above for the two joint arm are inverse
 dynamics equations: they give the shoulder and elbow joint torques
 required (for example by muscles) to generate a particular arm
 kinematic trajectory.
 </p>
+
 <p>
 To get the forward dynamics equations of motion, we just need to do a little bit of algebra. Let's first write our inverse dynamics equations from above, in matrix form:
 </p>
-
 
 \begin{equation}
 Q = M \ddot{\theta} + C + G
@@ -1043,7 +926,6 @@ Q = M \ddot{\theta} + C + G
 <p>
 where
 </p>
-
 
 \begin{eqnarray}
 M &= &\left[ \begin{array}{cc} M_{11} &M_{12}\\ M_{21} & M_{22}  \end{array} \right]\\
@@ -1057,7 +939,6 @@ Now to change our equation into a forward dynamics equation, we simply
 need to solve for \(\ddot{\theta}\):
 </p>
 
-
 \begin{equation}
 \ddot{\theta} = \left( M^{-1} \right) \left( Q-C-G \right)
 \end{equation}
@@ -1065,7 +946,6 @@ need to solve for \(\ddot{\theta}\):
 <p>
 and for a passive arm with no external (driving) torques (e.g. from muscles) this simplifies to:
 </p>
-
 
 \begin{equation}
 \ddot{\theta} = \left( M^{-1} \right) \left( -C-G \right)
@@ -1075,7 +955,7 @@ and for a passive arm with no external (driving) torques (e.g. from muscles) thi
 Here is a Python function that implements the forward dynamics equations of a passive two-joint arm:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">twojointarm</span>(state,t,aparams):
         <span style="color: #8b2252;">"""</span>
@@ -1107,7 +987,7 @@ Here is a Python function that implements the forward dynamics equations of a pa
         <span style="color: #a0522d;">a1dd</span>,<span style="color: #a0522d;">a2dd</span> = ACC[0,0],ACC[1,0]
         <span style="color: #a020f0;">return</span> [a1d, a2d, a1dd, a2dd]
 </pre>
-
+</div>
 
 <p>
 Here is a full python program that will do a forward simulation of our
@@ -1115,27 +995,24 @@ passive two-joint arm, starting from specified initial shoulder and
 elbow joint angles and velocities. It will also show a rudimentary
 animation of the resulting motion of the arm.
 </p>
+
 <p>
-<a href="code/twojointarm_passive.py">twojointarm_passive.py</a>
+<a href="code/twojointarm_passive.py">twojointarm\<sub>passive.py</sub></a>
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-6" class="outline-2">
-<h2 id="sec-6">Does the brain know about interaction torques? (yes)</h2>
-<div class="outline-text-2" id="text-6">
-
-
+<div id="outline-container-orgheadline20" class="outline-2">
+<h2 id="orgheadline20">Does the brain know about interaction torques? (yes)</h2>
+<div class="outline-text-2" id="text-orgheadline20">
 <p>
 Joint interaction torques can be large and can significantly affect
 limb motion.
 </p>
-<ul>
-<li>Hollerbach, J. M., &amp; Flash, T. (1982). Dynamic interactions between limb segments during planar arm movement. Biological cybernetics, 44(1), 67-77.
-</li>
-</ul>
 
+<ul class="org-ul">
+<li>Hollerbach, J. M., &amp; Flash, T. (1982). Dynamic interactions between limb segments during planar arm movement. Biological cybernetics, 44(1), 67-77.</li>
+</ul>
 
 
 <p>
@@ -1143,145 +1020,116 @@ There is empirical evidence from studies of human arm movement that
 the CNS neurally represents these effects, and compensates for them in
 a predictive manner, when planning and controlling arm movements:
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Hasan, Z., &amp; Karst, G. M. (1989). Muscle activity for initiation of
-  planar, two-joint arm movements in different
-  directions. Experimental Brain Research, 76(3), 651-655.
+planar, two-joint arm movements in different
+directions. Experimental Brain Research, 76(3), 651-655.</li>
 
-</li>
 <li>Virji-Babul, N., &amp; Cooke, J. D. (1995). Influence of joint
-  interactional effects on the coordination of planar two-joint arm
-  movements. Experimental brain research, 103(3), 451-459.
+interactional effects on the coordination of planar two-joint arm
+movements. Experimental brain research, 103(3), 451-459.</li>
 
-</li>
 <li>Sainburg, R. L., Ghilardi, M. F., Poizner, H. &amp; Ghez,
-  C. (1995). Control of limb dynamics in normal subjects and patients
-  without proprioception. Journal of Neurophysiology, 73(2), 820-835.
+C. (1995). Control of limb dynamics in normal subjects and patients
+without proprioception. Journal of Neurophysiology, 73(2), 820-835.</li>
 
-</li>
-<li>Gribble, P. L., &amp; Ostry, D. J. (1999). <a href="http://www.gribblelab.org/publications/1999_JNeurophysiol_gribble.pdf">Compensation for interaction torques during single-and multijoint limb movement</a>. Journal of
-  Neurophysiology, 82(5), 2310-2326.
+<li>Gribble, P. L., &amp; Ostry, D. J. (1999). <a href="http://www.gribblelab.org/publications/1999_JNeurophysiol_gribble.pdf">Compensation for interaction
+torques during single-and multijoint limb movement</a>. Journal of
+Neurophysiology, 82(5), 2310-2326.</li>
 
-</li>
 <li>Sainburg, R. L., Ghez, C., &amp; Kalakanis, D. (1999). Intersegmental
-  dynamics are controlled by sequential anticipatory, error
-  correction, and postural mechanisms. Journal of Neurophysiology,
-  81(3), 1045-1056.
+dynamics are controlled by sequential anticipatory, error
+correction, and postural mechanisms. Journal of Neurophysiology,
+81(3), 1045-1056.</li>
 
-</li>
 <li>Koshland, G. F., Galloway, J. C., &amp; Nevoret-Bell,
-  C. J. (2000). Control of the wrist in three-joint arm movements to
-  multiple directions in the horizontal plane. Journal of
-  neurophysiology, 83(5), 3188-3195.
-</li>
+C. J. (2000). Control of the wrist in three-joint arm movements to
+multiple directions in the horizontal plane. Journal of
+neurophysiology, 83(5), 3188-3195.</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-7" class="outline-2">
-<h2 id="sec-7">Kinematic vs Dynamic models of motor control</h2>
-<div class="outline-text-2" id="text-7">
-
-
+<div id="outline-container-orgheadline21" class="outline-2">
+<h2 id="orgheadline21">Kinematic vs Dynamic models of motor control</h2>
+<div class="outline-text-2" id="text-orgheadline21">
 <p>
 We saw in the previous topic about kinematic models of movement
 (e.g. minimum-jerk) that computational models of movement at the
 kinematic level are capable of predicting a range of characteristics
 of naturalistic voluntary arm movements.
 </p>
-
 </div>
 
-<div id="outline-container-7-1" class="outline-3">
-<h3 id="sec-7-1">Behavioural studies</h3>
-<div class="outline-text-3" id="text-7-1">
-
-
+<div id="outline-container-orgheadline22" class="outline-3">
+<h3 id="orgheadline22">Behavioural studies</h3>
+<div class="outline-text-3" id="text-orgheadline22">
 <p>
 Here are two examples of behavioural studies looking at the question
 of whether the brain plans arm movements in terms of kinematics or
 dynamics.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Flanagan, J. R., &amp; Rao, A. K. (1995). Trajectory adaptation to a
-  nonlinear visuomotor transformation: evidence of motion planning in
-  visually perceived space. Journal of neurophysiology, 74(5),
-  2174-2178.
+nonlinear visuomotor transformation: evidence of motion planning in
+visually perceived space. Journal of neurophysiology, 74(5),
+2174-2178.</li>
 
-</li>
 <li>Wolpert, D. M., Ghahramani, Z., &amp; Jordan, M. I. (1995). Are arm
-  trajectories planned in kinematic or dynamic coordinates? An
-  adaptation study. Experimental brain research, 103(3), 460-470.
-</li>
+trajectories planned in kinematic or dynamic coordinates? An
+adaptation study. Experimental brain research, 103(3), 460-470.</li>
 </ul>
-
-
-
 </div>
 
-<div id="outline-container-7-1-1" class="outline-4">
-<h4 id="sec-7-1-1">Computational models of Dynamics planning</h4>
-<div class="outline-text-4" id="text-7-1-1">
-
-
+<div id="outline-container-orgheadline23" class="outline-4">
+<h4 id="orgheadline23">Computational models of Dynamics planning</h4>
+<div class="outline-text-4" id="text-orgheadline23">
 <p>
 Here are examples of computational models that propose dynamic
 variables (e.g. torques) are used to plan arm movements.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Uno, Y., Kawato, M., &amp; Suzuki, R. (1989). Formation and control of
-  optimal trajectory in human multijoint arm movement. Biological
-  cybernetics, 61(2), 89-101.
+optimal trajectory in human multijoint arm movement. Biological
+cybernetics, 61(2), 89-101.</li>
 
-</li>
 <li>Nakano, E., Imamizu, H., Osu, R., Uno, Y., Gomi, H., Yoshioka, T., &amp;
-  Kawato, M. (1999). Quantitative examinations of internal
-  representations for arm trajectory planning: minimum commanded
-  torque change model. Journal of Neurophysiology, 81(5), 2140-2155.
+Kawato, M. (1999). Quantitative examinations of internal
+representations for arm trajectory planning: minimum commanded
+torque change model. Journal of Neurophysiology, 81(5), 2140-2155.</li>
 
-</li>
 <li>Kawato, M. (1999). Internal models for motor control and trajectory
-  planning. Current opinion in neurobiology, 9(6), 718-727.
+planning. Current opinion in neurobiology, 9(6), 718-727.</li>
 
-</li>
 <li>Wolpert, D. M., &amp; Kawato, M. (1998). Multiple paired forward and
-  inverse models for motor control. Neural Networks, 11(7), 1317-1329.
+inverse models for motor control. Neural Networks, 11(7), 1317-1329.</li>
 
-</li>
 <li>Wolpert, D. M., Miall, R. C., &amp; Kawato, M. (1998). Internal models
-  in the cerebellum. Trends in cognitive sciences, 2(9), 338-347.
+in the cerebellum. Trends in cognitive sciences, 2(9), 338-347.</li>
 
-</li>
 <li>Haruno, M., Wolpert, D. M., &amp; Kawato, M. (2001). Mosaic model for
-  sensorimotor learning and control. Neural computation, 13(10),
-  2201-2220.
-</li>
+sensorimotor learning and control. Neural computation, 13(10),
+2201-2220.</li>
 </ul>
-
 
 <p>
 A cool paper on insect flight:
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Berman, G. J., &amp; Wang, Z. J. (2007). Energy-minimizing kinematics in
-  hovering insect flight. Journal of Fluid Mechanics, 582(1), 153-168.
-</li>
+hovering insect flight. Journal of Fluid Mechanics, 582(1), 153-168.</li>
 </ul>
-
-
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-7-2" class="outline-3">
-<h3 id="sec-7-2">Electrophysiological studies</h3>
-<div class="outline-text-3" id="text-7-2">
-
-
+<div id="outline-container-orgheadline24" class="outline-3">
+<h3 id="orgheadline24">Electrophysiological studies</h3>
+<div class="outline-text-3" id="text-orgheadline24">
 <p>
 Empirical studies after the Georgopoulos series of papers investigated
 more systematically the question of kinematic- versus dynamic planning
@@ -1291,125 +1139,107 @@ motor cortex cells is modulated by all sorts of "intrinsic" variables
 like background level of load force (e.g. mechanical loads) and arm
 orientation.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Kalaska, J. F., Cohen, D. A., Hyde, M. L., &amp; Prud'Homme,
-  M. (1989). A comparison of movement direction-related versus load
-  direction-related activity in primate motor cortex, using a
-  two-dimensional reaching task. The Journal of neuroscience, 9(6),
-  2080-2102.
+M. (1989). A comparison of movement direction-related versus load
+direction-related activity in primate motor cortex, using a
+two-dimensional reaching task. The Journal of neuroscience, 9(6),
+2080-2102.</li>
 
-</li>
 <li>Scott, S. H., &amp; Kalaska, J. F. (1997). Reaching movements with
-  similar hand paths but different arm orientations. I. Activity of
-  individual cells in motor cortex. Journal of Neurophysiology, 77(2),
-  826-852.
+similar hand paths but different arm orientations. I. Activity of
+individual cells in motor cortex. Journal of Neurophysiology, 77(2),
+826-852.</li>
 
-</li>
 <li>Scott, S. H., Sergio, L. E., &amp; Kalaska, J. F. (1997). Reaching
-  movements with similar hand paths but different arm
-  orientations. II. Activity of individual cells in dorsal premotor
-  cortex and parietal area 5. Journal of neurophysiology, 78(5),
-  2413-2426.
+movements with similar hand paths but different arm
+orientations. II. Activity of individual cells in dorsal premotor
+cortex and parietal area 5. Journal of neurophysiology, 78(5),
+2413-2426.</li>
 
-</li>
 <li>Gandolfo, F., Li, C. S., Benda, B. J., Schioppa, C. P., &amp; Bizzi,
-  E. (2000). Cortical correlates of learning in monkeys adapting to a
-  new dynamical environment. Proceedings of the National Academy of
-  Sciences, 97(5), 2259-2263.
+E. (2000). Cortical correlates of learning in monkeys adapting to a
+new dynamical environment. Proceedings of the National Academy of
+Sciences, 97(5), 2259-2263.</li>
 
-</li>
 <li>Cabel, D. W., Cisek, P., &amp; Scott, S. H. (2001). Neural activity in
-  primary motor cortex related to mechanical loads applied to the
-  shoulder and elbow during a postural task. Journal of
-  neurophysiology, 86(4), 2102-2108.
+primary motor cortex related to mechanical loads applied to the
+shoulder and elbow during a postural task. Journal of
+neurophysiology, 86(4), 2102-2108.</li>
 
-</li>
 <li>Scott, S. H., Gribble, P. L., Graham, K. M., &amp; Cabel,
-  D. W. (2001). <a href="http://www.gribblelab.org/publications/2001_Nature_scott.pdf">Dissociation between hand motion and population vectors from neural activity in motor cortex</a>. Nature, 413(6852),
-  161-164.
+D. W. (2001). <a href="http://www.gribblelab.org/publications/2001_Nature_scott.pdf">Dissociation between hand motion and population
+vectors from neural activity in motor cortex</a>. Nature, 413(6852),
+161-164.</li>
 
-</li>
 <li>Li, C. S. R., Padoa-Schioppa, C., &amp; Bizzi, E. (2001). Neuronal
-  correlates of motor performance and motor learning in the primary
-  motor cortex of monkeys adapting to an external force field. Neuron,
-  30(2), 593-607.
+correlates of motor performance and motor learning in the primary
+motor cortex of monkeys adapting to an external force field. Neuron,
+30(2), 593-607.</li>
 
-</li>
-<li>Gribble, P. L., &amp; Scott, S. H. (2002). <a href="http://www.gribblelab.org/publications/2002_Nature_gribble.pdf">Overlap of internal models in motor cortex for mechanical loads during reaching</a>. Nature,
-  417(6892), 938-941.
+<li>Gribble, P. L., &amp; Scott, S. H. (2002). <a href="http://www.gribblelab.org/publications/2002_Nature_gribble.pdf">Overlap of internal models in
+motor cortex for mechanical loads during reaching</a>. Nature,
+417(6892), 938-941.</li>
 
-</li>
 <li>Gandolfo, F., Li, C. S., Benda, B. J., Schioppa, C. P., &amp; Bizzi,
-  E. (2000). Cortical correlates of learning in monkeys adapting to a
-  new dynamical environment. Proceedings of the National Academy of
-  Sciences, 97(5), 2259-2263.
-</li>
+E. (2000). Cortical correlates of learning in monkeys adapting to a
+new dynamical environment. Proceedings of the National Academy of
+Sciences, 97(5), 2259-2263.</li>
 </ul>
-
 
 <p>
 Some argue for a mixed representation in primary motor cortex.
 </p>
-<ul>
-<li>Kakei, S., Hoffman, D. S., &amp; Strick, P. L. (1999). Muscle and
-  movement representations in the primary motor cortex. Science,
-  285(5436), 2136-2139.
-</li>
-</ul>
 
+<ul class="org-ul">
+<li>Kakei, S., Hoffman, D. S., &amp; Strick, P. L. (1999). Muscle and
+movement representations in the primary motor cortex. Science,
+285(5436), 2136-2139.</li>
+</ul>
 
 <p>
 Other motor brain areas appear to have different balance of kinematics
 vs dynamics representation
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Thach, W. T. (1978). Correlation of neural discharge with pattern
-  and force of muscular activity, joint position, and direction of
-  intended next movement in motor cortex and cerebellum. Journal of
-  neurophysiology, 41(3), 654-676.
+and force of muscular activity, joint position, and direction of
+intended next movement in motor cortex and cerebellum. Journal of
+neurophysiology, 41(3), 654-676.</li>
 
-</li>
 <li>Fortier, P. A., Kalaska, J. F., &amp; Smith, A. M. (1989). Cerebellar
-  neuronal activity related to whole-arm reaching movements in the
-  monkey. Journal of neurophysiology, 62(1), 198-211.
+neuronal activity related to whole-arm reaching movements in the
+monkey. Journal of neurophysiology, 62(1), 198-211.</li>
 
-</li>
 <li>Kalaska, J. F., Cohen, D. A. D., Prud'Homme, M., &amp; Hyde,
-  M. L. (1990). Parietal area 5 neuronal activity encodes movement
-  kinematics, not movement dynamics. Experimental Brain Research,
-  80(2), 351-364.
-</li>
+M. L. (1990). Parietal area 5 neuronal activity encodes movement
+kinematics, not movement dynamics. Experimental Brain Research,
+80(2), 351-364.</li>
 </ul>
-
 
 <p>
 Some review articles on the topic:
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Georgopoulos, A. P. (1995). Current issues in directional motor
-  control. Trends in neurosciences, 18(11), 506-510.
+control. Trends in neurosciences, 18(11), 506-510.</li>
 
-</li>
 <li>Kalaska, J. F., Scott, S. H., Cisek, P., &amp; Sergio,
-  L. E. (1997). Cortical control of reaching movements. Current
-  opinion in neurobiology, 7(6), 849-859.
+L. E. (1997). Cortical control of reaching movements. Current
+opinion in neurobiology, 7(6), 849-859.</li>
 
-</li>
 <li>Scott, S. H. (2003). The role of primary motor cortex in
-  goal-directed movements: insights from neurophysiological studies on
-  non-human primates. Current opinion in neurobiology, 13(6), 671-677.
-</li>
+goal-directed movements: insights from neurophysiological studies on
+non-human primates. Current opinion in neurobiology, 13(6), 671-677.</li>
 </ul>
-
-
-
 </div>
 
-<div id="outline-container-7-2-1" class="outline-4">
-<h4 id="sec-7-2-1">Computational Models: Cortical control</h4>
-<div class="outline-text-4" id="text-7-2-1">
-
-
+<div id="outline-container-orgheadline25" class="outline-4">
+<h4 id="orgheadline25">Computational Models: Cortical control</h4>
+<div class="outline-text-4" id="text-orgheadline25">
 <p>
 A number of computational models have been described to explore how
 motor cortex controls arm movement. One of the common themes has been
@@ -1417,116 +1247,118 @@ that models using motor cortex neurons to directly code muscle
 activation also predict population-vector coding of hand direction
 (and other dynamics parameters too).
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Todorov, E. (2000). Direct cortical control of muscle activation in
-  voluntary arm movements: a model. nature neuroscience, 3, 391-398.
+voluntary arm movements: a model. nature neuroscience, 3, 391-398.</li>
 
-</li>
 <li>Guigon, E., Baraduc, P., &amp; Desmurget, M. (2007). Coding of
-  movement‐and force‐related information in primate primary motor
-  cortex: a computational approach. European Journal of Neuroscience,
-  26(1), 250-260.
+movement‐and force‐related information in primate primary motor
+cortex: a computational approach. European Journal of Neuroscience,
+26(1), 250-260.</li>
 
-</li>
 <li>Ajemian, R., Green, A., Bullock, D., Sergio, L., Kalaska, J., &amp;
-  Grossberg, S. (2008). Assessing the function of motor cortex:
-  single-neuron models of how neural response is modulated by limb
-  biomechanics. Neuron, 58(3), 414-428.
-</li>
+Grossberg, S. (2008). Assessing the function of motor cortex:
+single-neuron models of how neural response is modulated by limb
+biomechanics. Neuron, 58(3), 414-428.</li>
 </ul>
-
-
 </div>
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-8" class="outline-2">
-<h2 id="sec-8">Two-joint arm video game</h2>
-<div class="outline-text-2" id="text-8">
-
-
+<div id="outline-container-orgheadline26" class="outline-2">
+<h2 id="orgheadline26">Two-joint arm video game</h2>
+<div class="outline-text-2" id="text-orgheadline26">
 <p>
 I coded up a little "game" that let's you control a two-joint arm with
 realistic limb dynamics, to hit targets that appear in the arm's
 workspace (not unlike many actual motor control experiments).
 </p>
 
+
 <div class="figure">
-<p><img src="figs/twojointarmgame.png" width="400px" align="center" alt="figs/twojointarmgame.png" /></p>
-<p>Two-joint arm video game</p>
+<p><img src="figs/twojointarmgame.png" alt="twojointarmgame.png" width="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 5:</span> Two-joint arm video game</p>
 </div>
 
 <p>
 You use the [d,f,j,k] keys to control 4 "muscles" that deliver torques
 to the shoulder and elbow:
 </p>
-<ul>
-<li>d = pectoralis (shoulder flexor)
-</li>
-<li>f = posterior deltoid (shoulder extensor)
-</li>
-<li>j = biceps (elbow flexor)
-</li>
-<li>k = triceps (elbow extensor)
-</li>
-</ul>
 
+<ul class="org-ul">
+<li>d = pectoralis (shoulder flexor)</li>
+<li>f = posterior deltoid (shoulder extensor)</li>
+<li>j = biceps (elbow flexor)</li>
+<li>k = triceps (elbow extensor)</li>
+</ul>
 
 <p>
 there is no real muscle model right now, they just deliver torques to
 the joints
 </p>
+
 <p>
 The goal is to move the arm around the workspace so that the endpoint
 (hand) hits the red targets as they pop up. Hit as many red targets as
 you can before the clock runs down.
 </p>
+
 <p>
 Hit the spacebar to "reset" the arm to it's home position. This is
 handy in case your arm starts spinning like a propellor ;) although
 each spacebar-reset costs you 1 point.
 </p>
+
 <p>
 Apart from being a challenging "game", this is a nice little toy demo
 of the problem of what the brain is faced with when it has to figure
 out what time-varying neural control signals to send down to muscles,
 so that your hand moves to a desired location in cartesian space.
 </p>
+
 <p>
-Here is the game: <a href="code/twojointarm_game.py">twojointarm_game.py</a>
+Here is the game: <a href="code/twojointarm_game.py">twojointarm\<sub>game.py</sub></a>
 </p>
+
 <p>
 You will need to install the <a href="http://www.pygame.org/">pygame</a> add-on package for python. On a
 Debian-based GNU/Linux system (like Ubuntu) just type at a
 command-line prompt:
 </p>
+
 <p>
 <code>sudo apt-get install python-pygame</code>
 </p>
+
 <p>
 On Mac/Windows etc, see the pygame homepage for installation
 instructions.
 </p>
+
 <p>
 To start the game, at a command-line prompt type:
 </p>
+
 <p>
 <code>python twojointarm_game.py</code>
 </p>
+
 <p>
 At the end of the game it will print out your score to the command
 line.
 </p>
 
-<p>
-[ <a href="#6_Computational_Motor_Control_Muscle_Models.html">Computational Motor Control: Muscle Models</a> ]
-</p></div>
-</div>
-</div>
 
-<div id="postamble">
+<p>
+[ <a href="6_Computational_Motor_Control_Muscle_Models.html">Computational Motor Control: Muscle Models</a> ]
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
 <hr />Paul Gribble &amp; Dinant Kistemaker | fall 2012<br>This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />
 </div>
 </body>

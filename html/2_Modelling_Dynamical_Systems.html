@@ -1,65 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2016-01-03 Sun 11:43 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>2. Modelling Dynamical Systems</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="2. Modelling Dynamical Systems"/>
-<meta name="generator" content="Org-mode"/>
-<meta name="generated" content="fall 2012"/>
-<meta name="author" content="Paul Gribble &amp; Dinant Kistemaker"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Paul Gribble &amp; Dinant Kistemaker" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
-  .title  { text-align: center; }
-  .todo   { color: red; }
-  .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
-</style><link rel="stylesheet" type="text/css" href="mystyle.css" />
+</style>
+<link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -106,145 +141,62 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
-/**
- *
- * @source: http://orgmode.org/mathjax/MathJax.js
- *
- * @licstart  The following is the entire license notice for the
- *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- * Copyright (C) 2012-2013  MathJax
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @licend  The above is the entire license notice
- * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- */
-
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code below.
-
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
-
-The JavaScript code below is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code below.
-*/
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
+<div id="org-div-home-and-up">
  <a accesskey="h" href="http://www.gribblelab.org/compneuro/1_Dynamical_Systems.html"> UP </a>
  |
  <a accesskey="H" href="http://www.gribblelab.org/compneuro/index.html"> HOME </a>
-</div>
-
-<div id="preamble">
-
-</div>
-
-<div id="content">
+</div><div id="content">
 <h1 class="title">2. Modelling Dynamical Systems</h1>
-
-
-
-<hr/>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Characterizing a System Using Differential Equations</a></li>
-<li><a href="#sec-2">Integrating Differential Equations in Python/SciPy</a>
+<li><a href="#orgheadline1">Characterizing a System Using Differential Equations</a></li>
+<li><a href="#orgheadline2">Integrating Differential Equations in Python/SciPy</a>
 <ul>
-<li><a href="#sec-2-1">The power of modelling and simulation</a></li>
-<li><a href="#sec-2-2">Exercises</a></li>
+<li><a href="#orgheadline3">The power of modelling and simulation</a></li>
+<li><a href="#orgheadline4">Exercises</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">Lorenz Attractor</a></li>
-<li><a href="#sec-4">Predator-Prey model</a>
+<li><a href="#orgheadline5">Lorenz Attractor</a></li>
+<li><a href="#orgheadline6">Predator-Prey model</a>
 <ul>
-<li><a href="#sec-4-1">Exercises</a></li>
+<li><a href="#orgheadline7">Exercises</a></li>
 </ul>
 </li>
-<li><a href="#sec-5">Next steps</a></li>
+<li><a href="#orgheadline8">Next steps</a></li>
 </ul>
 </div>
 </div>
+<hr  />
 
-<hr/>
-
-
-<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Characterizing a System Using Differential Equations</h2>
-<div class="outline-text-2" id="text-1">
-
-
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Characterizing a System Using Differential Equations</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 A dynamical system such as the mass-spring system we saw before, can
 be characterized by the relationship between state variables \(s\) and
@@ -255,16 +207,19 @@ equations by someone else. Let's look at a simple mass-spring system
 again.
 </p>
 
+
 <div class="figure">
-<p><img src="figs/spring-mass.png" height="200px" align="center" alt="figs/spring-mass.png" /></p>
-<p>A spring with a mass attached</p>
+<p><img src="figs/spring-mass.png" alt="spring-mass.png" height="200px" align="center" />
+</p>
+<p><span class="figure-number">Figure 1:</span> A spring with a mass attached</p>
 </div>
 
 <p>
 We know a couple of things about this system. We know from <a href="http://en.wikipedia.org/wiki/Hooke's_law">Hooke's law</a>
 of elasticity that the extension of a spring is directly and linearly
 proportional to the load applied to it. More precisely, the force that
-a spring applies in response to a perturbation from it's <i>resting length</i> (the length at which it doesn't generate any force), is
+a spring applies in response to a perturbation from it's <i>resting
+length</i> (the length at which it doesn't generate any force), is
 linearly proportional, through a constant \(k\), to the difference in
 length between its current length and its resting length (let's call
 this distance \(x\)). For convention let's assume positive values of \(x\)
@@ -272,7 +227,6 @@ correspond to lengthening the spring beyond its resting length, and
 negative values of \(x\) correspond to shortening the spring from its
 resting length.
 </p>
-
 
 \begin{equation}
 F = -kx
@@ -283,12 +237,13 @@ Let's decide that the <i>state variable</i> that we are interested in for
 our system is \(x\). We will refer to \(x\) instead of \(s\) from now on to
 denote our state variable.
 </p>
+
 <p>
-We also know from <a href="http://en.wikipedia.org/wiki/Newton's_laws_of_motion">Newton's laws of motion</a> (specifically <a href="http://en.wikipedia.org/wiki/Newton's_laws_of_motion#Newton.27s_second_law">Newton's second law</a>) that the net force on an object is equal to its mass \(m\)
+We also know from <a href="http://en.wikipedia.org/wiki/Newton's_laws_of_motion">Newton's laws of motion</a> (specifically <a href="http://en.wikipedia.org/wiki/Newton's_laws_of_motion#Newton.27s_second_law">Newton's
+second law</a>) that the net force on an object is equal to its mass \(m\)
 multiplied by its acceleration \(a\) (the second derivative of
 position).
 </p>
-
 
 \begin{equation}
 F = ma
@@ -301,7 +256,6 @@ change (velocity) is denoted \(\dot{x}\) and the rate of change of the
 velocity (i.e. the acceleration) is denoted \(\ddot{x}\).
 </p>
 
-
 \begin{equation}
 F = m \ddot{x}
 \end{equation}
@@ -312,7 +266,6 @@ the spring (\(-kx\)) and also the gravitational force \(g\). So the
 equation characterizing the <i>net forces</i> on the mass is
 </p>
 
-
 \begin{equation}
 \sum{F} = m\ddot{x} = -kx + mg
 \end{equation}
@@ -320,7 +273,6 @@ equation characterizing the <i>net forces</i> on the mass is
 <p>
 or just
 </p>
-
 
 \begin{equation}
 m\ddot{x} = -kx + mg 
@@ -334,6 +286,7 @@ specifies the relationship between the state variables (in this case a
 single state variable \(x\)) and its derivatives (in this case a single
 derivative, \(\ddot{x}\)).
 </p>
+
 <p>
 The reason we want an equation like this, from a practical point of
 view, is that we will be using numerical solvers in Python/Scipy to
@@ -345,7 +298,6 @@ to compute the state derivative \(\ddot{x}\) given the current state
 \(\ddot{x}\).
 </p>
 
-
 \begin{equation}
 \ddot{x} = \frac{-kx}{m} + g
 \end{equation}
@@ -356,14 +308,11 @@ Python/Scipy. At any time point, we can compute the acceleration of
 the mass by the formula above.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Integrating Differential Equations in Python/SciPy</h2>
-<div class="outline-text-2" id="text-2">
-
-
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">Integrating Differential Equations in Python/SciPy</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Here is a Python function that we will be using to simulate the
 mass-spring system. All it does, really, is compute the equation
@@ -373,7 +322,7 @@ have is that we are going to keep track not just of one state variable
 \(x\), i.e. velocity).
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">MassSpring</span>(state,t):
   <span style="color: #b22222;"># </span><span style="color: #b22222;">unpack the state vector</span>
@@ -391,7 +340,7 @@ have is that we are going to keep track not just of one state variable
   <span style="color: #b22222;"># </span><span style="color: #b22222;">return the two state derivatives</span>
   <span style="color: #a020f0;">return</span> [xd, xdd]
 </pre>
-
+</div>
 
 <p>
 Note that the function we wrote takes two arguments as inputs: <code>state</code>
@@ -400,41 +349,34 @@ numerical solver that we will use in Python/Scipy. The <code>state</code>
 variable is actually an <i>array</i> of two values corresponding to \(x\) and
 \(\dot{x}\).
 </p>
+
 <p>
 How does numerical integration (simulation) work? Here is a summary of the steps that a numerical solver takes. First, you have to provide the system with two things:
 </p>
-<ol>
-<li>initial conditions (what are the initial states of the system?)
-</li>
-<li>a time vector over which to simulate
-</li>
-</ol>
 
+<ol class="org-ol">
+<li>initial conditions (what are the initial states of the system?)</li>
+<li>a time vector over which to simulate</li>
+</ol>
 
 <p>
 Given this, the numerical solver will go through the following steps to simulate the system:
 </p>
-<ul>
-<li>calculate state derivatives \(\ddot{x}\) at the initial time (\(t=0\))
-  given the initial states \((x,\dot{x})\)
-</li>
-<li>estimate \(x(t+ \Delta t)\) using \(x(t=0)\), \(\dot{x}(t=0)\) and
-  \(\ddot{x}(t=0)\)
-</li>
-<li>calculate \(\ddot{x}(t=t + \Delta t)\) from \(x(t=t + \Delta t)\) and
-  \(\dot{x}(t=t + \Delta t)\)
-</li>
-<li>estimate \(x(t + 2 \Delta t)\) and \(\dot{x}(t + 2 \Delta t)\) using
-  \(x(t=t + \Delta t)\), \(\dot{x}(t=t + \Delta t)\) and \(\ddot{x}(t=t +
-  \Delta t)\)
-</li>
-<li>calculate \(\ddot{x}(t=t + 2\Delta t)\) from \(x(t=t + 2\Delta t)\) and
-  \(\dot{x}(t=t + 2\Delta t)\)
-</li>
-<li>&hellip; etc
-</li>
-</ul>
 
+<ul class="org-ul">
+<li>calculate state derivatives \(\ddot{x}\) at the initial time (\(t=0\))
+given the initial states \((x,\dot{x})\)</li>
+<li>estimate \(x(t+ \Delta t)\) using \(x(t=0)\), \(\dot{x}(t=0)\) and
+\(\ddot{x}(t=0)\)</li>
+<li>calculate \(\ddot{x}(t=t + \Delta t)\) from \(x(t=t + \Delta t)\) and
+\(\dot{x}(t=t + \Delta t)\)</li>
+<li>estimate \(x(t + 2 \Delta t)\) and \(\dot{x}(t + 2 \Delta t)\) using
+\(x(t=t + \Delta t)\), \(\dot{x}(t=t + \Delta t)\) and \(\ddot{x}(t=t +
+  \Delta t)\)</li>
+<li>calculate \(\ddot{x}(t=t + 2\Delta t)\) from \(x(t=t + 2\Delta t)\) and
+\(\dot{x}(t=t + 2\Delta t)\)</li>
+<li>&#x2026; etc</li>
+</ul>
 
 <p>
 In this way the numerical solver can esimate how the system states
@@ -442,18 +384,20 @@ In this way the numerical solver can esimate how the system states
 known relationship between state derivatives and system states. The
 details of the "estimate" steps above are not something we are going
 to dive into now. Suffice it to say that current estimation algorithms
-are based on the work of two German mathematicians named <a href="http://en.wikipedia.org/wiki/Runge–Kutta_methods">Runge and Kutta</a> in the beginning of the 20th century. These numerical recipies
+are based on the work of two German mathematicians named <a href="http://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods">Runge and
+Kutta</a> in the beginning of the 20th century. These numerical recipies
 are readily available in Scipy (<a href="http://docs.scipy.org/doc/scipy/reference/integrate.html">docs here</a> (and in MATLAB, and other
 numerical software) and are known as ODE solvers (ODE stands for
 <i>ordinary differential equation</i>).
 </p>
+
 <p>
 Here's how we would simulate the mass-spring system above. Launch
 iPython with the <code>--pylab</code> argument (this automatically imports a
 bunch of libraries that we will use, including plotting libraries).
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">from</span> scipy.integrate <span style="color: #a020f0;">import</span> odeint
 
@@ -484,11 +428,12 @@ ylabel(<span style="color: #8b2252;">'STATES'</span>)
 title(<span style="color: #8b2252;">'Mass-Spring System'</span>)
 legend((<span style="color: #8b2252;">'$x$ (m)'</span>, <span style="color: #8b2252;">'$\dot{x}$ (m/sec)'</span>))
 </pre>
-
+</div>
 
 <p>
-<a href="code/mass_spring.py">mass_spring.py</a>
+<a href="code/mass_spring.py">mass\<sub>spring.py</sub></a>
 </p>
+
 <p>
 A couple of notes about the code. I have simply chosen, out of the
 blue, values for the constants \(k\) and \(m\). The <a href="http://en.wikipedia.org/wiki/Gravitational_constant">gravitational constant</a>
@@ -497,13 +442,16 @@ blue, values for the constants \(k\) and \(m\). The <a href="http://en.wikipedia
 (0.1 seconds). We will talk later about the issue of what is an
 appropriate time resolution for simulation.
 </p>
+
 <p>
 You should see a plot like this:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/mass-spring-sim.png" height="400px" align="center" alt="figs/mass-spring-sim.png" /></p>
-<p>Mass-Spring Simulation</p>
+<p><img src="figs/mass-spring-sim.png" alt="mass-spring-sim.png" height="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 2:</span> Mass-Spring Simulation</p>
 </div>
 
 <p>
@@ -512,19 +460,17 @@ spring) over time, and the green line shows the rate of change of \(x\),
 in other words the velocity \(\dot{x}\), over time. These are the two
 states of the system, simulated over time.
 </p>
+
 <p>
 The way to interpret this simulation is, if we start the system at
 \(x=0\) and \(\dot{x}=0\), and simulate for 10 seconds, this is how the
 system would behave.
 </p>
-
 </div>
 
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1">The power of modelling and simulation</h3>
-<div class="outline-text-3" id="text-2-1">
-
-
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">The power of modelling and simulation</h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <p>
 Now you can appreciate the power of mathematical models and
 simulation: given a model that characterizes (to some degree of
@@ -539,64 +485,52 @@ believe that our mathematical model is a reasonable characterization
 of the behaviour of the real system.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2">Exercises</h3>
-<div class="outline-text-3" id="text-2-2">
-
-
-<ol>
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Exercises</h3>
+<div class="outline-text-3" id="text-orgheadline4">
+<ol class="org-ol">
 <li>We have started the system at \(x=0\) which means that the spring is
-   not stretched beyond its resting length (so spring force due to
-   stretch should equal zero), and \(\dot{x}=0\), which means the
-   spring's velocity is zero, i.e. it is not moving. Why does the
-   simulation predict that the spring will begin stretching, then
-   bouncing back and forth?
+not stretched beyond its resting length (so spring force due to
+stretch should equal zero), and \(\dot{x}=0\), which means the
+spring's velocity is zero, i.e. it is not moving. Why does the
+simulation predict that the spring will begin stretching, then
+bouncing back and forth?</li>
 
-</li>
 <li>What is the influence of the sign and magnitude of the stiffness
-   parameter \(k\)?
+parameter \(k\)?</li>
 
-</li>
 <li>In physics, <a href="http://en.wikipedia.org/wiki/Damping">damping</a> can be used to reduce the magnitude of
-   oscillations. Damping generates a force that is directly
-   proportional to velocity (\(F = -b\dot{x}\)). Add damping to the
-   mass-spring system and re-run the simulation. Specify the value of
-   the damping constant \(b=-2.0\). What happens?
+oscillations. Damping generates a force that is directly
+proportional to velocity (\(F = -b\dot{x}\)). Add damping to the
+mass-spring system and re-run the simulation. Specify the value of
+the damping constant \(b=-2.0\). What happens?</li>
 
-</li>
 <li>What is the influence of the sign and magnitude of the damping
-   coefficient \(b\)?
+coefficient \(b\)?</li>
 
-</li>
-<li>Double the mass, and re-run the simulaton. What happens?
+<li>Double the mass, and re-run the simulaton. What happens?</li>
 
-</li>
-<li>How would you add an input force to the system?
-</li>
+<li>How would you add an input force to the system?</li>
 </ol>
-
-
-
+</div>
 </div>
 </div>
 
-</div>
 
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Lorenz Attractor</h2>
-<div class="outline-text-2" id="text-3">
-
-
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Lorenz Attractor</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <p>
 The <a href="http://en.wikipedia.org/wiki/Lorenz_system">Lorenz system</a> is a dynamical system that we will look at briefly,
 as it will allow us to discuss several interesting issues around
-dynamical systems. It is a system often used to illustrate <a href="http://en.wikipedia.org/wiki/Nonlinear_system">non-linear systems</a> theory and <a href="http://en.wikipedia.org/wiki/Chaos_theory">chaos theory</a>. It's sometimes used as a simple
+dynamical systems. It is a system often used to illustrate <a href="http://en.wikipedia.org/wiki/Nonlinear_system">non-linear
+systems</a> theory and <a href="http://en.wikipedia.org/wiki/Chaos_theory">chaos theory</a>. It's sometimes used as a simple
 demonstration of the <a href="http://en.wikipedia.org/wiki/Butterfly_effect">butterfly effect</a> (sensitivity to initial
 conditions).
 </p>
+
 <p>
 The Lorenz system is a simplified mathematical model for atmospheric
 convection. Let's not worry about the details of what it represents,
@@ -604,7 +538,6 @@ for now the important things to note are that it is a system of three
 <i>coupled</i> differential equations, and characterizes a system with
 three state variables \((x,y,z\)).
 </p>
-
 
 \begin{eqnarray}
 \dot{x} &= &\sigma(y-x)\\
@@ -616,7 +549,6 @@ three state variables \((x,y,z\)).
 If you set the three constants \((\sigma,\rho,\beta)\) to specific
 values, the system exhibits <i>chaotic behaviour</i>.
 </p>
-
 
 \begin{eqnarray}
 \sigma &= &10\\
@@ -633,7 +565,7 @@ implements this, set some initial conditions, decide on a time array
 to simulate over, and run the simulation using <code>odeint()</code>.
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">from</span> scipy.integrate <span style="color: #a020f0;">import</span> odeint
 
@@ -671,18 +603,21 @@ ax.set_ylabel(<span style="color: #8b2252;">'y'</span>)
 ax.set_zlabel(<span style="color: #8b2252;">'z'</span>)
 show()
 </pre>
-
+</div>
 
 <p>
 <a href="code/lorenz1.py">lorenz1.py</a>
 </p>
+
 <p>
 You should see something like this:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/lorenz1.png" height="400px" align="center" alt="figs/lorenz1.png" /></p>
-<p>Lorenz Attractor</p>
+<p><img src="figs/lorenz1.png" alt="lorenz1.png" height="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 3:</span> Lorenz Attractor</p>
 </div>
 
 <p>
@@ -692,8 +627,9 @@ with three particular values of \((x,y,z)\) (I chose them arbitrarily),
 and we set the simulation in motion. This is the trajectory, in
 <i>state-space</i>, of the Lorenz system.
 </p>
+
 <p>
-You can see an interesting thing&hellip; the system seems to have two
+You can see an interesting thing&#x2026; the system seems to have two
 stable equilibrium states, or attractors: those circular paths. The
 system circles around in one "neighborhood" in state-space, and then
 flips over and circles around the second neighborhood. The number of
@@ -701,14 +637,15 @@ times it circles in a given neighborhood, and the time at which it
 switches, displays chaotic behaviour, in the sense that they are
 exquisitly sensitive to initial conditions.
 </p>
+
 <p>
 For example let's re-run the simulation but change the initial
 conditions. Let's change them by a very small amount, say
-0.0001&hellip; and let's only change the \(x\) initial state by that very
+0.0001&#x2026; and let's only change the \(x\) initial state by that very
 small amount. We will simulate for 30 seconds.
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a0522d;">t</span> = arange(0.0, 30, 0.01)
 
@@ -751,17 +688,15 @@ pp2, = plot(state2[10,0],state2[10,1],<span style="color: #8b2252;">'r.'</span>,
 <span style="color: #a0522d;">d12</span> = norm(s1-s2) <span style="color: #b22222;"># </span><span style="color: #b22222;">distance</span>
 <span style="color: #a020f0;">print</span> (<span style="color: #8b2252;">"distance = %f for a %f different in initial condition"</span>) % (d12, delta)
 </pre>
-
+</div>
 
 <p>
 <a href="code/lorenz2.py">lorenz2.py</a>
 </p>
 
-
-
-<pre class="example">distance = 32.757253 for a 0.000100 different in initial condition
+<pre class="example">
+distance = 32.757253 for a 0.000100 different in initial condition
 </pre>
-
 
 <p>
 You should see an animation of the two state-space trajectories. For
@@ -769,6 +704,7 @@ convenience we are only plotting \(x\) vs \(y\) and ignoring \(z\). It turns
 out that 3D animations are not trivial in matplotlib (there is a
 library called mayavi that is excellent for 3D stuff).
 </p>
+
 <p>
 The original simulation is shown in blue and the new one (in which the
 initial condition of \(x\) was increased by 0.0001) in red. The two
@@ -777,29 +713,35 @@ diverge at about the 16 second mark. At the end of the animation it
 looks like this:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/lorenz2.png" height="400px" align="center" alt="figs/lorenz2.png" /></p>
-<p>Lorenz Attractor</p>
+<p><img src="figs/lorenz2.png" alt="lorenz2.png" height="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 4:</span> Lorenz Attractor</p>
 </div>
 
 <p>
 At 19.39 seconds it looks like this:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/lorenz3.png" height="400px" align="center" alt="figs/lorenz3.png" /></p>
-<p>Lorenz Attractor</p>
+<p><img src="figs/lorenz3.png" alt="lorenz3.png" height="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 5:</span> Lorenz Attractor</p>
 </div>
 
 <p>
 Note how the two systems are in different "neighborhoods" entirely!
 </p>
+
 <p>
 At the end of the code above we compute the distance between the two
 systems (the 3D distance between their respective \((x,y,z)\) positions
 in state-space), and the distance is a whopping 32.76 units, for a
 0.0001 difference in initial conditions.
 </p>
+
 <p>
 This illustrates how systems with relatively simple differential
 equations characterizing their behaviour, can turn out to be
@@ -818,23 +760,19 @@ sensitive to even tiny changes in initial conditions. This is why
 short-term weather forecasts are relatively accurate, but forecasts
 past a couple of days can turn out to be dead wrong.
 </p>
-
+</div>
 </div>
 
-</div>
 
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">Predator-Prey model</h2>
-<div class="outline-text-2" id="text-4">
-
-
+<div id="outline-container-orgheadline6" class="outline-2">
+<h2 id="orgheadline6">Predator-Prey model</h2>
+<div class="outline-text-2" id="text-orgheadline6">
 <p>
-The <a href="http://en.wikipedia.org/wiki/Lotka–Volterra_equation">Lotka-Volterra equations</a> are two coupled first-order nonlinear
+The <a href="http://en.wikipedia.org/wiki/Lotka%E2%80%93Volterra_equation">Lotka-Volterra equations</a> are two coupled first-order nonlinear
 differential equations that are used to characterize the dynamics of
 biological systems in which a predator population and a prey popuation
 interact. The two populations develop over time according to these equations:
 </p>
-
 
 \begin{eqnarray}
 \dot{x} &= &x(\alpha-\beta y)\\
@@ -849,65 +787,52 @@ populations. The values \((\alpha,\beta,\gamma,\sigma)\) are parameters
 (constants) that characterize different aspects of the two
 populations.
 </p>
+
 <p>
 Assumptions of this simple form of the model are:
 </p>
-<ol>
-<li>prey find ample food at all times
-</li>
-<li>food supply of predators depends entirely on prey population
-</li>
-<li>rate of change of population is proportional to its size
-</li>
-<li>the environment does not change
-</li>
-</ol>
 
+<ol class="org-ol">
+<li>prey find ample food at all times</li>
+<li>food supply of predators depends entirely on prey population</li>
+<li>rate of change of population is proportional to its size</li>
+<li>the environment does not change</li>
+</ol>
 
 <p>
 The parameters can be interepreted as:
 </p>
-<ul>
-<li>\(\alpha\) is the natural growth rate of prey in the absence of predation
-</li>
-<li>\(\beta\) is the death rate per encounter of prey due to predation
-</li>
-<li>\(\sigma\) is related to the growth rate of predators
-</li>
-<li>\(\gamma\) is the natural death rate of predators in the absence of food (prey)
-</li>
-</ul>
 
+<ul class="org-ul">
+<li>\(\alpha\) is the natural growth rate of prey in the absence of predation</li>
+<li>\(\beta\) is the death rate per encounter of prey due to predation</li>
+<li>\(\sigma\) is related to the growth rate of predators</li>
+<li>\(\gamma\) is the natural death rate of predators in the absence of food (prey)</li>
+</ul>
 
 <p>
 Here is some example code showing how to simulate this system. Just as
 before, we need to complete a few steps:
 </p>
-<ol>
-<li>write a Python function that characterizes how the system's state
-   derivatives are related to the system's states (this is given by
-   the equations above)
-</li>
-<li>decide on values of the system parameters
-</li>
-<li>decide on values of the initial conditions of the system (the
-   initial values of the states)
-</li>
-<li>decide on a time span and time resolution for simulating the system
-</li>
-<li>simulate! (i.e. use an ODE solver to integrate the differential
-   equations over time)
-</li>
-<li>examine the states, typically by plotting them
-</li>
-</ol>
 
+<ol class="org-ol">
+<li>write a Python function that characterizes how the system's state
+derivatives are related to the system's states (this is given by
+the equations above)</li>
+<li>decide on values of the system parameters</li>
+<li>decide on values of the initial conditions of the system (the
+initial values of the states)</li>
+<li>decide on a time span and time resolution for simulating the system</li>
+<li>simulate! (i.e. use an ODE solver to integrate the differential
+equations over time)</li>
+<li>examine the states, typically by plotting them</li>
+</ol>
 
 <p>
 Here is some code:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">from</span> scipy.integrate <span style="color: #a020f0;">import</span> odeint
 
@@ -933,15 +858,17 @@ ylabel(<span style="color: #8b2252;">'Population Size'</span>)
 legend((<span style="color: #8b2252;">'x (prey)'</span>,<span style="color: #8b2252;">'y (predator)'</span>))
 title(<span style="color: #8b2252;">'Lotka-Volterra equations'</span>)
 </pre>
-
+</div>
 
 <p>
 You should see a plot like this:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/lotkavolterra1.png" height="400px" align="center" alt="figs/lotkavolterra1.png" /></p>
-<p>Lotka-Volterra Simulation</p>
+<p><img src="figs/lotkavolterra1.png" alt="lotkavolterra1.png" height="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 6:</span> Lotka-Volterra Simulation</p>
 </div>
 
 <p>
@@ -949,7 +876,7 @@ We can also plot the trajectory of the system in <i>state-space</i> (much
 like we did for the Lorenz system above):
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">animation in state-space</span>
 figure()
@@ -970,50 +897,41 @@ pp, = plot(state[10,0],state[10,1],<span style="color: #8b2252;">'b.'</span>,mar
   tt.set_text(<span style="color: #8b2252;">"%d steps"</span> % (i))
   draw()
 </pre>
-
+</div>
 
 <p>
 <a href="code/lotkavolterra.py">lotkavolterra.py</a>
 </p>
+
 <p>
 You should see a plot like this:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/lotkavolterra2.png" height="400px" align="center" alt="figs/lotkavolterra2.png" /></p>
-<p>Lotka-Volterra State-space plot</p>
+<p><img src="figs/lotkavolterra2.png" alt="lotkavolterra2.png" height="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 7:</span> Lotka-Volterra State-space plot</p>
+</div>
 </div>
 
-
-</div>
-
-<div id="outline-container-4-1" class="outline-3">
-<h3 id="sec-4-1">Exercises</h3>
-<div class="outline-text-3" id="text-4-1">
-
-
-<ol>
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Exercises</h3>
+<div class="outline-text-3" id="text-orgheadline7">
+<ol class="org-ol">
 <li>Increase the \(\alpha\) parameter and re-run the simulation. What
-   happens and why?
-</li>
-<li>Set all parameters to 0.2. What happens and why?
-</li>
+happens and why?</li>
+<li>Set all parameters to 0.2. What happens and why?</li>
 <li>Try the following: \((\alpha,\beta,\gamma,\sigma)\) =
-   (0.20, 0.20, 0.02, 0.0). What happens and why?
-</li>
+(0.20, 0.20, 0.02, 0.0). What happens and why?</li>
 </ol>
-
-
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">Next steps</h2>
-<div class="outline-text-2" id="text-5">
-
-
+<div id="outline-container-orgheadline8" class="outline-2">
+<h2 id="orgheadline8">Next steps</h2>
+<div class="outline-text-2" id="text-orgheadline8">
 <p>
 We have seen how to take a set of differential equations that
 characterize the dynamics of a system, and implement them in Python,
@@ -1022,13 +940,14 @@ next topic, we will be applying this to models of single neurons, and
 simulating the dynamics of voltage-gated ion channels, and examining
 how these models predict spiking behaviour.
 </p>
+
 <p>
 [ <a href="3_Modelling_Action_Potentials.html">next</a> ]
-</p></div>
+</p>
 </div>
 </div>
-
-<div id="postamble">
+</div>
+<div id="postamble" class="status">
 <hr />Paul Gribble &amp; Dinant Kistemaker | fall 2012<br>This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />
 </div>
 </body>

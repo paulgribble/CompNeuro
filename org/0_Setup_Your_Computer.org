@@ -4,12 +4,9 @@
 #+AUTHOR:    Paul Gribble
 #+EMAIL:     paul@gribblelab.org
 #+DATE:      fall 2012
-#+LINK_UP: http://www.gribblelab.org/compneuro/index.html
-#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+#+HTML_LINK_UP: http://www.gribblelab.org/compneuro/index.html
+#+HTML_LINK_HOME: http://www.gribblelab.org/compneuro/index.html
 
------
-[TABLE-OF-CONTENTS]
------
 
 * Install Options
 

@@ -4,12 +4,10 @@
 #+AUTHOR:    Paul Gribble & Dinant Kistemaker
 #+EMAIL:     paul@gribblelab.org
 #+DATE:      fall 2012
-#+LINK_UP: http://www.gribblelab.org/compneuro/2_Modelling_Dynamical_Systems.html
-#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+#+HTML_LINK_UP: http://www.gribblelab.org/compneuro/2_Modelling_Dynamical_Systems.html
+#+HTML_LINK_HOME: http://www.gribblelab.org/compneuro/index.html
 #+BIBLIOGRAPHY: refs plain option:-d limit:t
 
------
-[TABLE-OF-CONTENTS]
 -----
 
 * Introduction
@@ -56,7 +54,7 @@ process underlying the origin of an action potential.
 
 ** The neuron model
 
-#+ATTR_HTML: width="400px" align="center"
+#+ATTR_HTML: :width 400px  :align center
 #+CAPTION: Schematic of Ekeberg et al. 1991 neuron model
 [[file:figs/ekeberg_fig1.png]]
 
@@ -446,7 +444,7 @@ xlabel('TIME (sec)')
 
 Here is what you should see:
 
-#+ATTR_HTML: width="400px" align="center"
+#+ATTR_HTML: :width 400px  :align center
 #+CAPTION: Spiking neuron simulation based on Ekeberg et al., 1991
 [[file:figs/ekeberg1.png]]
 

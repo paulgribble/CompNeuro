@@ -4,11 +4,9 @@
 #+AUTHOR:    Paul Gribble & Dinant Kistemaker
 #+EMAIL:     paul@gribblelab.org
 #+DATE:      fall 2012
-#+LINK_UP:http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html
-#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+#+HTML_LINK_UP:http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html
+#+HTML_LINK_HOME: http://www.gribblelab.org/compneuro/index.html
 
------
-[TABLE-OF-CONTENTS]
 -----
 
 * Introduction
@@ -27,7 +25,7 @@ forearm. As a first step to implement "torque muscles", we will use a
 simple dynamic equation of motion of a single joint arm in a vertical
 plane, with gravity:
 
-#+ATTR_HTML: width="400px" align="center"
+#+ATTR_HTML: :width 400px :align center
 #+CAPTION: Schematic of a simple one-joint arm in a vertical plane with one muscle.
 [[file:figs/onejointarm_muscle.png]]
 
@@ -74,7 +72,7 @@ Now we add a second "muscle" so we have $T_{mf}$ from a "flexor"
 muscle (like biceps brachii) and $T_{me}$ from an "extensor" muscle
 (like triceps brachii).
 
-#+ATTR_HTML: width="400px" align="center"
+#+ATTR_HTML: :width 400px :align center
 #+CAPTION: Schematic of a simple one-joint arm in a vertical plane with two antagonistic muscles.
 [[file:figs/onejointarm_muscle2.png]]
 
@@ -125,7 +123,7 @@ essentially the same as a spring:
 T_{m} = -k(\theta-\theta_{0})
 \end{equation}
 
-#+ATTR_HTML: width="400px" align="center"
+#+ATTR_HTML: :width 400px :align center
 #+CAPTION: Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles.
 [[file:figs/onejointarm_muscle3.png]]
 
@@ -195,7 +193,7 @@ T_{flex} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{+} \\
 T_{ext} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{-}
 \end{eqnarray}
 
-#+ATTR_HTML: width="400px" align="center"
+#+ATTR_HTML: :width 400px :align center
 #+CAPTION: Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles with dampers.
 [[file:figs/onejointarm_muscle4.png]]
 
@@ -242,7 +240,7 @@ describe the dynamic behaviour of real muscles fairly well. Hill-type
 muscle models are more frequently used, mainly because they are easier
 to implement.
 
-#+ATTR_HTML: width="300px" align="center"
+#+ATTR_HTML: :width 300px :align center
 #+CAPTION: Schematic of a Hill-type muscle model.
 [[file:figs/hillmuscle.png]]
 
@@ -277,7 +275,7 @@ The slack length of tendons are muscle specific and are in general
 measured in cadaver studies. Here is an example of the (relative)
 force-length curve of a SE:
 
-#+ATTR_HTML: width="250px" align="center"
+#+ATTR_HTML: :width 250px :align center
 #+CAPTION: The force-length curve of a SE. Force is plotted relative to the maximal isometric force of the muscle.
 [[file:figs/forcelengthse.png]]
 
@@ -294,7 +292,7 @@ computationally simple, without harming the descriptive power of the
 model too much, the isometric force-length relationship is often
 described by a parabola:
 
-#+ATTR_HTML: width="300px" align="center"
+#+ATTR_HTML: :width 300px :align center
 #+CAPTION: The isometric CE force (relative to the maximum isometric force) as a function of the length of the CE. The dashed line represents the isometric force when the muscle is stimulated half the maximum. Depicted is also the PE force. Note that the l_PE is equal to l_CE. The total force-length relationship is the sum of the active CE and passive PE force-length relationship. Also shown is the passive force of the PE: a quadratic spring that is similar to that of the SE.
 [[file:figs/forcelengthce.png]]
 
@@ -316,7 +314,7 @@ with which they contract. If the muscle shortens (concentric
 contraction), the maximal force decreases and if the muscle lengthens
 (eccentric contraction) the maximal force increases:
 
-#+ATTR_HTML: width="300px" align="center"
+#+ATTR_HTML: :width 300px :align center
 #+CAPTION: The CE force as a function of the contraction velocity. The dashed line represents the force-velocity curve when the muscle is stimulated half the maximal value.
 [[file:figs/forcevelocity.png]]
 
@@ -363,7 +361,7 @@ musculoskeletal model and its mathematical description can be found in:
   does not minimize energy cost in arm movements. J Neurophysiol, 104,
   2985-94
 
-#+ATTR_HTML: width="400px" align="center"
+#+ATTR_HTML: :width 400px :align center
 #+CAPTION: Schematic of "full-blown" musculoskeletal model described in Kistemaker et al. (2010).
 [[file:figs/fullblownschematic.png]]
 

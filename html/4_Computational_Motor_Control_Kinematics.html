@@ -1,65 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2016-01-03 Sun 11:43 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>4. Computational Motor Control: Kinematics</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="4. Computational Motor Control: Kinematics"/>
-<meta name="generator" content="Org-mode"/>
-<meta name="generated" content="fall 2012"/>
-<meta name="author" content="Paul Gribble &amp; Dinant Kistemaker"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Paul Gribble &amp; Dinant Kistemaker" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
-  .title  { text-align: center; }
-  .todo   { color: red; }
-  .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
-</style><link rel="stylesheet" type="text/css" href="mystyle.css" />
+</style>
+<link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -106,161 +141,78 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
-/**
- *
- * @source: http://orgmode.org/mathjax/MathJax.js
- *
- * @licstart  The following is the entire license notice for the
- *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- * Copyright (C) 2012-2013  MathJax
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @licend  The above is the entire license notice
- * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- */
-
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code below.
-
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
-
-The JavaScript code below is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code below.
-*/
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="http://www.gribblelab.org/compneuro/3_Modelling_Action_Potentials.html"> UP </a>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="http://www.gribblelab.org/compneuro/index.html"> HOME </a>
-</div>
-
-<div id="preamble">
-
-</div>
-
-<div id="content">
+</div><div id="content">
 <h1 class="title">4. Computational Motor Control: Kinematics</h1>
-
-
-
-<hr/>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Introduction</a></li>
-<li><a href="#sec-2">One-joint Elbow Kinematic Model</a>
+<li><a href="#orgheadline1">Introduction</a></li>
+<li><a href="#orgheadline2">One-joint Elbow Kinematic Model</a>
 <ul>
-<li><a href="#sec-2-1">Forward Kinematics</a></li>
-<li><a href="#sec-2-2">Inverse Kinematics</a></li>
+<li><a href="#orgheadline3">Forward Kinematics</a></li>
+<li><a href="#orgheadline4">Inverse Kinematics</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">Two-joint arm</a>
+<li><a href="#orgheadline5">Two-joint arm</a>
 <ul>
-<li><a href="#sec-3-1">Forward Kinematics</a></li>
-<li><a href="#sec-3-2">Inverse Kinematics</a></li>
-<li><a href="#sec-3-3">The Jacobian</a></li>
-<li><a href="#sec-3-4">Inverse Jacobian</a></li>
+<li><a href="#orgheadline6">Forward Kinematics</a></li>
+<li><a href="#orgheadline7">Inverse Kinematics</a></li>
+<li><a href="#orgheadline8">The Jacobian</a></li>
+<li><a href="#orgheadline10">Inverse Jacobian</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">The Redundancy Problem</a></li>
-<li><a href="#sec-5">Computational Models of Kinematics</a>
+<li><a href="#orgheadline11">The Redundancy Problem</a></li>
+<li><a href="#orgheadline14">Computational Models of Kinematics</a>
 <ul>
-<li><a href="#sec-5-1">The Minimum-Jerk Hypothesis</a></li>
-<li><a href="#sec-5-2">Minimum Endpoint Variance</a></li>
+<li><a href="#orgheadline12">The Minimum-Jerk Hypothesis</a></li>
+<li><a href="#orgheadline13">Minimum Endpoint Variance</a></li>
 </ul>
 </li>
-<li><a href="#sec-6">How does the brain plan and control movement?</a>
+<li><a href="#orgheadline15">How does the brain plan and control movement?</a>
 <ul>
-<li><a href="#sec-6-1">An Alternate View</a></li>
-<li><a href="#sec-6-2">Neural Prosthetics</a></li>
+<li><a href="#orgheadline16">An Alternate View</a></li>
+<li><a href="#orgheadline17">Neural Prosthetics</a></li>
 </ul>
 </li>
-<li><a href="#sec-7">Why are kinematic transformations important?</a></li>
-<li><a href="#sec-8">Next Steps</a></li>
+<li><a href="#orgheadline18">Why are kinematic transformations important?</a></li>
+<li><a href="#orgheadline19">Next Steps</a></li>
 </ul>
 </div>
 </div>
+<hr  />
 
-<hr/>
-
-
-<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Introduction</h2>
-<div class="outline-text-2" id="text-1">
-
-
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Introduction</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Here we will talk about kinematic models of the arm. We will start
 with single-joint (elbow) models and progress to two-joint (shoulder,
@@ -271,19 +223,17 @@ transformations. <b>Forward kinematic equations</b> take us from intrinsic
 to extrinsic variables, for example from joint angles to hand
 position. So given a 2-element vector of shoulder and elbow angles
 \((\theta_{1},\theta_{2})\), we can compute what the 2D location of the
-hand is, in a cartesian coordinate system \((H_{x},H_{y})\). <b>Inverse kinematic equations</b> take us in the other direction, from extrinsic
+hand is, in a cartesian coordinate system \((H_{x},H_{y})\). <b>Inverse
+kinematic equations</b> take us in the other direction, from extrinsic
 variables to intrinsic variables, e.g. from hand coordinates to joint
 angles.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">One-joint Elbow Kinematic Model</h2>
-<div class="outline-text-2" id="text-2">
-
-
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2">One-joint Elbow Kinematic Model</h2>
+<div class="outline-text-2" id="text-orgheadline2">
 <p>
 Let's first consider a simple model of an arm movement. To begin with
 we will model a single joint, the elbow joint. Our model will have a
@@ -294,9 +244,11 @@ will include the hand, and for now we will assume that the wrist joint
 is fixed, i.e. it cannot move. For now let's even ignore muscles.
 </p>
 
+
 <div class="figure">
-<p><img src="figs/elbow_kinematics.png" width="600px" align="center" alt="figs/elbow_kinematics.png" /></p>
-<p>Schematic of a simple kinematic model of the elbow joint</p>
+<p><img src="figs/elbow_kinematics.png" alt="elbow_kinematics.png" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Schematic of a simple kinematic model of the elbow joint</p>
 </div>
 
 <p>
@@ -305,20 +257,16 @@ elbow angle \(\theta\), and the extrinsic variable is the hand position
 in cartesian coordinates, which is defined by two values,
 \((H_{x},H_{y})\).
 </p>
-
 </div>
 
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1">Forward Kinematics</h3>
-<div class="outline-text-3" id="text-2-1">
-
-
+<div id="outline-container-orgheadline3" class="outline-3">
+<h3 id="orgheadline3">Forward Kinematics</h3>
+<div class="outline-text-3" id="text-orgheadline3">
 <p>
 What are the forward kinematic equations for our elbow model? We
 simply need to recall our trigonometry from high school (remember
 <a href="http://en.wikipedia.org/wiki/Trigonometry#Mnemonics">SOH-CAH-TOA</a>?):
 </p>
-
 
 \begin{eqnarray}
 H_{x} &= &l \cos(\theta) \\
@@ -332,7 +280,6 @@ before using \(\sin()\) and \(\cos()\), and asked you where my hand is
 located, you could compute this:
 </p>
 
-
 \begin{eqnarray}
 H_{x} &= &l \cos(\theta) &= 0.45 \cos\left(\frac{35*\pi}{180}\right) = 0.37 m\\
 H_{y} &= &l \sin(\theta) &= 0.45 \sin\left(\frac{35*\pi}{180}\right) = 0.26 m\\
@@ -342,14 +289,11 @@ H_{y} &= &l \sin(\theta) &= 0.45 \sin\left(\frac{35*\pi}{180}\right) = 0.26 m\\
 So the hand position would be \((0.37,0.26)\) (measured in metres).
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2">Inverse Kinematics</h3>
-<div class="outline-text-3" id="text-2-2">
-
-
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Inverse Kinematics</h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <p>
 What about the inverse kinematics equations? If I give you the
 position of my hand, and the length of my lower arm, how can you
@@ -357,7 +301,6 @@ compute my elbow joint angle? Remember <a href="http://en.wikipedia.org/wiki/Tri
 opposite (O) over adjacent (A) which in our case is \(H_{y}\) over
 \(H_{x}\) so:
 </p>
-
 
 \begin{equation}
 \tan(\theta) = \frac{H_{y}}{H_{x}}
@@ -367,7 +310,6 @@ opposite (O) over adjacent (A) which in our case is \(H_{y}\) over
 and so:
 </p>
 
-
 \begin{equation}
 \theta = \arctan \left( \frac{H_{y}}{H_{x}} \right)
 \end{equation}
@@ -376,6 +318,7 @@ and so:
 Remember, angles are measured in radians. There are \(2\pi\) radians in
 360 degrees.
 </p>
+
 <p>
 We can of course do more than compute single values, we can compute
 entire trajectories. So for example if I gave you a recording of elbow
@@ -385,7 +328,7 @@ to plot a cartesian-space (e.g. top-down) trajectory of the hand path,
 and vice-versa.
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">make up an elbow trajectory (pretend this was recorded in an experiment)</span>
 <span style="color: #a0522d;">t</span> = linspace(0,1,200)
@@ -413,48 +356,42 @@ xlabel(<span style="color: #8b2252;">'X (m)'</span>)
 ylabel(<span style="color: #8b2252;">'Y (m)'</span>)
 axis(<span style="color: #8b2252;">'equal'</span>)
 </pre>
-
+</div>
 
 
 <div class="figure">
-<p><img src="figs/elbow_movement_kinematics.png" width="800px" align="center" alt="figs/elbow_movement_kinematics.png" /></p>
-<p>Example elbow movement</p>
+<p><img src="figs/elbow_movement_kinematics.png" alt="elbow_movement_kinematics.png" width="800px" align="center" />
+</p>
+<p><span class="figure-number">Figure 2:</span> Example elbow movement</p>
+</div>
+</div>
+</div>
 </div>
 
-</div>
-</div>
-
-</div>
-
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Two-joint arm</h2>
-<div class="outline-text-2" id="text-3">
-
-
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5">Two-joint arm</h2>
+<div class="outline-text-2" id="text-orgheadline5">
 <p>
 Let's introduce a shoulder joint as well:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/twojointarm_kinematics.png" width="600px" align="center" alt="figs/twojointarm_kinematics.png" /></p>
-<p>Schematic of a simple kinematic model of a two-joint arm</p>
+<p><img src="figs/twojointarm_kinematics.png" alt="twojointarm_kinematics.png" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 3:</span> Schematic of a simple kinematic model of a two-joint arm</p>
+</div>
 </div>
 
-
-</div>
-
-<div id="outline-container-3-1" class="outline-3">
-<h3 id="sec-3-1">Forward Kinematics</h3>
-<div class="outline-text-3" id="text-3-1">
-
-
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Forward Kinematics</h3>
+<div class="outline-text-3" id="text-orgheadline6">
 <p>
 Now let's think about the forward and inverse kinematic equations to
 go from intrinsic coordinates, joint angles \((\theta_{1},\theta_{2})\)
 to extrinsic coordinates \((H_{x},H_{y})\). We will compute the elbow
 joint position as an intermediate step.
 </p>
-
 
 \begin{eqnarray}
 E_{x} &= &l_{1} \cos(\theta_{1})\\
@@ -468,16 +405,17 @@ Now if I give you a set of shoulder and elbow joint angles
 \((\theta_{1},\theta_{2})\), you can compute what my hand position
 \((H_{x},H_{y})\) is.
 </p>
+
 <p>
 We can visualize this mapping by doing something like the following:
 decide on a range of shoulder angles and elbow angles that are
 physiologically realistic, and sample that range equally in joint
-space &hellip; then run those joint angles through the forward kinematics
+space &#x2026; then run those joint angles through the forward kinematics
 equations to visualize how those equally-spaced joint angles
 correspond to cartesian hand positions.
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">Function to transform joint angles (a1,a2) to hand position (Hx,Hy)</span>
 <span style="color: #a020f0;">def</span> <span style="color: #0000ff;">joints_to_hand</span>(a1,a2,l1,l2):
@@ -533,20 +471,22 @@ axis(<span style="color: #8b2252;">'equal'</span>)
 plot((xl[0],xl[1]),(hy,hy),<span style="color: #8b2252;">'b-'</span>)
 plot((hx,hx),(yl[0],yl[1]),<span style="color: #8b2252;">'b-'</span>)
 </pre>
-
+</div>
 
 
 <div class="figure">
-<p><img src="figs/twojointarm_kinematics_workspace.png" width="600px" align="center" alt="figs/twojointarm_kinematics_workspace.png" /></p>
-<p>Joint vs Hand Kinematics for Two Joint Arm</p>
+<p><img src="figs/twojointarm_kinematics_workspace.png" alt="twojointarm_kinematics_workspace.png" width="600px" align="center" />
+</p>
+<p><span class="figure-number">Figure 4:</span> Joint vs Hand Kinematics for Two Joint Arm</p>
 </div>
 
 <p>
 Note that in the lower plot, the shoulder location is at the origin,
 \((0,0)\). The blue crosshairs in each subplot correspond to the same
-arm position &mdash; in joint space (top) and in cartesian hand space
+arm position &#x2014; in joint space (top) and in cartesian hand space
 (bottom).
 </p>
+
 <p>
 We can note a few distinct features of this mapping between joint and
 hand space. First, equal spacing across the workspace in joint space
@@ -557,46 +497,41 @@ in hand space. These complexities reflect the fact that the mapping
 between joint space and hand space is <i>non-linear</i>.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2">Inverse Kinematics</h3>
-<div class="outline-text-3" id="text-3-2">
-
-
+<div id="outline-container-orgheadline7" class="outline-3">
+<h3 id="orgheadline7">Inverse Kinematics</h3>
+<div class="outline-text-3" id="text-orgheadline7">
 <p>
 You can start to appreciate the sorts of problems the brain must face
 when planning arm movements. If I want move my hand through a
 particular hand path, what joint angles does that correspond to? We
 must use inverse kinematics to determine this.
 </p>
+
 <p>
 I will leave the inverse kinematics equations up to you to derive as
 one of the steps in your assignment for this topic.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-3-3" class="outline-3">
-<h3 id="sec-3-3">The Jacobian</h3>
-<div class="outline-text-3" id="text-3-3">
-
-
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">The Jacobian</h3>
+<div class="outline-text-3" id="text-orgheadline8">
 <p>
-So far we have looked at kinematic equations for arm positions &mdash; joint
+So far we have looked at kinematic equations for arm positions &#x2014; joint
 angular positions and hand cartesian positions. Here we look at
 velocities (rate of change of position) in the two coordinate frames,
 joint-space and hand-space.
 </p>
+
 <p>
 How can we compute hand velocities \(\frac{dH}{dt}\) given
 joint velocities \(\frac{d\theta}{dt}\)? If we can we
 compute an intermediate term \(\frac{dH}{d\theta}\) then we
 can apply the the <a href="http://en.wikipedia.org/wiki/Chain_rule">Chain Rule</a>:
 </p>
-
 
 \begin{equation}
 \frac{dH}{dt} = \frac{dH}{d\theta} \frac{d\theta}{dt}
@@ -607,7 +542,6 @@ This intermediate term is in fact known as the <b>Jacobian</b>
 (<a href="http://en.wikipedia.org/wiki/Jacobian_matrix_and_determinant">Wikipedia:Jacobian</a>) matrix \(J(\theta)\) and is defined as:
 </p>
 
-
 \begin{equation}
 J(\theta) = \frac{dH}{d\theta}
 \end{equation}
@@ -616,27 +550,26 @@ J(\theta) = \frac{dH}{d\theta}
 and so:
 </p>
 
-
 \begin{equation}
 \frac{dH}{dt} = J(\theta) \frac{d\theta}{dt}
 \end{equation}
 
 <p>
 Note that the Jacobian is written as \(J(\theta)\) which means it is a
-function of joint angles \(\theta\) &mdash; in other words, the four terms
+function of joint angles \(\theta\) &#x2014; in other words, the four terms
 in the Jacobian matrix (see below) change depending on limb
 configuration (joint angles). This means the relationships between
 joint angles and hand coordinates changes depending on where the limb
 is in its workspace. We already have an idea that this is true, from
 the figure above.
 </p>
+
 <p>
 For the sake of notational brevity we will refer to hand
 velocities as \(\dot{H}\) and joint velocities as \(\dot{\theta}\) and we
 will omit (from the notation) the functional dependence of \(J\) on
 \(\theta\):
 </p>
-
 
 \begin{equation}
 \dot{H} = J \dot{\theta}
@@ -648,7 +581,6 @@ vector version of the derivative of a scalar. The Jacobian matrix \(J\)
 encodes relationships between changes in joint angles and changes in
 hand positions.
 </p>
-
 
 \begin{equation}
 J = \frac{dH}{d\theta} = \left[
@@ -666,16 +598,18 @@ term \(\frac{\partial H_{x}}{\partial \theta_{2}}\) represents the
 change in the \(x\) coordinate of the hand given a change in the elbow
 joint angle \(\theta_{2}\).
 </p>
+
 <p>
 So how do we determine the four terms of \(J\)? We have to do calculus
 and differentiate the equations for \(H_{x}\) and \(H_{y}\) with respect
 to the joint angles \(\theta_{1}\) and \(\theta_{2}\). Fortunately we can
 use a Python package for symbolic computation called <a href="http://sympy.org/en/index.html">SymPy</a> to help us
-with the calculus. (you will have to install SymPy&hellip; on Ubuntu (or
-any Debian-based GNU/Linux), just type <code>sudo apt-get install python-sympy</code>)
+with the calculus. (you will have to install SymPy&#x2026; on Ubuntu (or
+any Debian-based GNU/Linux), just type <code>sudo apt-get install
+python-sympy</code>)
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #b22222;"># </span><span style="color: #b22222;">import sympy</span>
 <span style="color: #a020f0;">from</span> sympy <span style="color: #a020f0;">import</span> *
@@ -694,10 +628,10 @@ any Debian-based GNU/Linux), just type <code>sudo apt-get install python-sympy</
 <span style="color: #a020f0;">print</span> J21
 <span style="color: #a020f0;">print</span> J22
 </pre>
+</div>
 
-
-
-<pre class="example">In [12]: print J11
+<pre class="example">
+In [12]: print J11
 -l1*sin(a1) - l2*sin(a1 + a2)
 
 In [13]: print J12
@@ -710,11 +644,9 @@ In [15]: print J22
 l2*cos(a1 + a2)
 </pre>
 
-
 <p>
 So now we have the four terms of the Jacobian:
 </p>
-
 
 \begin{equation}
 J = \left[ \begin{array}{cc}
@@ -729,7 +661,7 @@ J = \left[ \begin{array}{cc}
 and now we can write a Python function that returns the Jacobian, given a set of joint angles:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">jacobian</span>(A,aparams):
    <span style="color: #8b2252;">"""</span>
@@ -745,17 +677,17 @@ and now we can write a Python function that returns the Jacobian, given a set of
    <span style="color: #a0522d;">J</span> = matrix([[dHxdA1,dHxdA2],[dHydA1,dHydA2]])
    <span style="color: #a020f0;">return</span> J
 </pre>
-
+</div>
 
 <p>
 and now we can use the Jacobian to compute hand velocities, given joint angular velocities according to the equation from above:
 </p>
 
-
 \begin{equation}
 \dot{H} = J \dot{\theta}
 \end{equation}
 
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a0522d;">aparams</span> = {<span style="color: #8b2252;">'l1'</span> : 0.3384, <span style="color: #8b2252;">'l2'</span> : 0.4554}
 <span style="color: #a0522d;">A</span> = array([45.0,90.0])*pi/180       <span style="color: #b22222;"># </span><span style="color: #b22222;">joint angles</span>
@@ -764,34 +696,33 @@ and now we can use the Jacobian to compute hand velocities, given joint angular 
 <span style="color: #a0522d;">Hd</span> = J*Ad
 <span style="color: #a020f0;">print</span> Hd
 </pre>
+</div>
 
-
-
-<pre class="example">[[ 0.03212204]
+<pre class="example">
+[[ 0.03212204]
  [-0.00964106]]
 </pre>
-
 
 <p>
 We can visualize the Jacobian by plotting velocity vectors in joint
 space and the corresponding velocity vectors in hand space. See source
-file <a href="code/jacobian_plots.py">jacobian_plots.py</a> for python code.
+file <a href="code/jacobian_plots.py">jacobian\<sub>plots.py</sub></a> for python code.
 </p>
 
+
 <div class="figure">
-<p><img src="figs/jacobian_plots.png" width="700px" align="center" alt="figs/jacobian_plots.png" /></p>
-<p>Visualizing the Jacobian</p>
+<p><img src="figs/jacobian_plots.png" alt="jacobian_plots.png" width="700px" align="center" />
+</p>
+<p><span class="figure-number">Figure 5:</span> Visualizing the Jacobian</p>
+</div>
 </div>
 
-<ul>
-<li id="sec-3-3-1">Accelerations<br/>
-
+<ul class="org-ul"><li><a id="orgheadline9"></a>Accelerations<br  /><div class="outline-text-5" id="text-orgheadline9">
 <p>
 We can also use the Jacobian to compute accelerations at the hand due
 to accelerations at the joint, simply by differentiating our equations
 with respect to time. Remember the equation for velocity:
 </p>
-
 
 \begin{equation}
 \dot{H} = J \dot{\theta}
@@ -802,7 +733,6 @@ for acceleration we just differentiate both sides with respect to
 time:
 </p>
 
-
 \begin{equation}
 \ddot{H} = \frac{d}{dt} \left(\dot{H}\right) = \frac{d}{dt} \left( J \dot{\theta} \right)
 \end{equation}
@@ -810,7 +740,6 @@ time:
 <p>
 and apply the <a href="http://en.wikipedia.org/wiki/Product_rule">Product Rule</a> from calculus:
 </p>
-
 
 \begin{equation}
 \frac{d}{dt} \left( J \dot{\theta} \right) = 
@@ -822,7 +751,6 @@ and apply the <a href="http://en.wikipedia.org/wiki/Product_rule">Product Rule</
 simplifying further,
 </p>
 
-
 \begin{equation}
 \ddot{H} = (J) (\ddot{\theta}) + (\dot{J}) (\dot{\theta})
 \end{equation}
@@ -833,13 +761,14 @@ So if we have joint accelerations \(\ddot{\theta}\) and joint velocities
 derivative of the Jacobian \(\dot{J}\), and we can compute hand
 accelerations \(\ddot{H}\).
 </p>
+
 <p>
 How do we get \(\dot{J}\)? Again we can use SymPy, as above, and we get
 the following: (I will just show the final Python function, not the
 SymPy part):
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">jacobiand</span>(A,Ad,aparams):
 <span style="color: #8b2252;">"""</span>
@@ -855,31 +784,26 @@ SymPy part):
 <span style="color: #a0522d;">Jd</span> = matrix([[Jd11, Jd12],[Jd21, Jd22]])
 <span style="color: #a020f0;">return</span> Jd
 </pre>
-
+</div>
 
 <p>
 Note that the time derivative of the Jacobian, \(\dot{J}\), is a
 function of both joint angles \(\theta\) and joint velocities
 \(\dot{\theta}\).
 </p>
-</li>
-</ul>
+</div></li></ul>
 </div>
 
-</div>
-
-<div id="outline-container-3-4" class="outline-3">
-<h3 id="sec-3-4">Inverse Jacobian</h3>
-<div class="outline-text-3" id="text-3-4">
-
-
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10">Inverse Jacobian</h3>
+<div class="outline-text-3" id="text-orgheadline10">
 <p>
-We have seen how to compute hand velocities and accelerations given joint angles, velocities and accelerations&hellip; but what about inverse kinematics? How do we compute joint velocities given hand velocities? What about joint accelerations given hand accelerations?
+We have seen how to compute hand velocities and accelerations given joint angles, velocities and accelerations&#x2026; but what about inverse kinematics? How do we compute joint velocities given hand velocities? What about joint accelerations given hand accelerations?
 </p>
+
 <p>
 Recall for velocities that:
 </p>
-
 
 \begin{equation}
 J \dot{\theta} = \dot{H}
@@ -890,7 +814,6 @@ To solve for \(\dot{\theta}\) we can simply multiply both sides of the
 equation by the matrix inverse of the Jacobian:
 </p>
 
-
 \begin{equation}
 \dot{\theta} = J^{-1}\dot{H}
 \end{equation}
@@ -898,42 +821,42 @@ equation by the matrix inverse of the Jacobian:
 <p>
 In Numpy you can compute the inverse of a matrix using the <code>inv()</code> function.
 </p>
+
 <p>
 Similarly for accelerations, we can do the following:
 </p>
 
-
 \begin{equation}
 \ddot{\theta} = J^{-1} \left[ \ddot{H} - \left( (\dot{J}) (\dot{\theta})  \right)  \right]
 \end{equation}
-
-
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">The Redundancy Problem</h2>
-<div class="outline-text-2" id="text-4">
 
-
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">The Redundancy Problem</h2>
+<div class="outline-text-2" id="text-orgheadline11">
 <p>
 Notice something important (and unrealistic) about our simple
 two-joint arm model. There is a one-to-one mapping between any two
 joint angles \((\theta_{1},\theta_{2})\) and hand position
-\((H_{x},H_{y})\). That is to say, a given hand position is <i>uniquely defined</i> by a single set of joint angles.
+\((H_{x},H_{y})\). That is to say, a given hand position is <i>uniquely
+defined</i> by a single set of joint angles.
 </p>
+
 <p>
 This is of course convenient for us in a model, and indeed many
 empirical paradigms in sensory-motor neuroscience construct situations
 where this is true, so that it's easy to go between intrinsic and
 extrinsic coordinate frames.
 </p>
+
 <p>
 This is not how it is in the real musculoskeletal system, of course,
 where there is a <i>many-to-one mapping</i> from intrinsic to extrinsic
-coordinates. The human arm has not just two mechanical <i>degrees of freedom</i> (independent ways in which to move) but seven. The shoulder
+coordinates. The human arm has not just two mechanical <i>degrees of
+freedom</i> (independent ways in which to move) but seven. The shoulder
 is like a ball-socket joint, so it can rotate 3 ways (roll, pitch,
 yaw). The elbow can rotate a single way (flexion/extension). The
 forearm, because of the geometry of the radius and ulna bones, can
@@ -943,36 +866,31 @@ say nothing about shoulder translation (the shoulder joint itself can
 be translated up/down and fwd/back) and the many, many degrees of
 freedom of the fingers.
 </p>
+
 <p>
 With 7 DOF at the joint level, and only three cartesian degrees of
 freedom at the hand (the 3D position of the hand) we have 4 extra
 DOF. This means that there is a 4-dimensional "null-space" where joint
-rotations within that 4D null space <i>have no effect on 3D hand position</i>. Another way of putting this is, there are an infinite
+rotations within that 4D null space <i>have no effect on 3D hand
+position</i>. Another way of putting this is, there are an infinite
 number of ways of configuring the 7 joints of the arm to reach a
 single 3D hand position.
 </p>
+
 <p>
 How does the CNS choose to plan and control movements with all of this
 redundancy? This is known in the sensory-motor neuroscience literature
 as the <i>Redundancy Problem</i>.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">Computational Models of Kinematics</h2>
-<div class="outline-text-2" id="text-5">
-
-
-
-</div>
-
-<div id="outline-container-5-1" class="outline-3">
-<h3 id="sec-5-1">The Minimum-Jerk Hypothesis</h3>
-<div class="outline-text-3" id="text-5-1">
-
-
+<div id="outline-container-orgheadline14" class="outline-2">
+<h2 id="orgheadline14">Computational Models of Kinematics</h2>
+<div class="outline-text-2" id="text-orgheadline14">
+</div><div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">The Minimum-Jerk Hypothesis</h3>
+<div class="outline-text-3" id="text-orgheadline12">
 <p>
 One of the early computational models of arm movement kinematics was
 described by Tamar Flash and Neville Hogan. Tamar was a postdoc at MIT
@@ -980,57 +898,53 @@ at the time, working with Neville Hogan, a Professor there (as well as
 with Emilio Bizzi, another Professor at MIT). Tamar is now a Professor
 at the Weizmann Institute of Science in Rehovot, Israel.
 </p>
+
 <p>
 For a long time, researchers had noted striking regularities in the
 hand paths of multi-joint arm movements. Movements were smooth, with
 unimodal, (mostly) symmetric velocity profiles (so-called
 "bell-shaped" velocity profiles).
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Morasso, P. (1981). Spatial control of arm movements. Experimental
-  Brain Research, 42(2), 223-227.
+Brain Research, 42(2), 223-227.</li>
 
-</li>
 <li>Soechting, J. F., &amp; Lacquaniti, F. (1981). Invariant characteristics
-  of a pointing movement in man. The Journal of Neuroscience, 1(7),
-  710-720.
+of a pointing movement in man. The Journal of Neuroscience, 1(7),
+710-720.</li>
 
-</li>
 <li>Abend, W., Bizzi, E., &amp; Morasso, P. (1982). Human arm trajectory
-  formation. Brain: a journal of neurology, 105(Pt 2), 331.
+formation. Brain: a journal of neurology, 105(Pt 2), 331.</li>
 
-</li>
 <li>Atkeson, C. G., &amp; Hollerbach, J. M. (1985). Kinematic features of
-  unrestrained vertical arm movements. The Journal of Neuroscience,
-  5(9), 2318-2330.
-</li>
+unrestrained vertical arm movements. The Journal of Neuroscience,
+5(9), 2318-2330.</li>
 </ul>
-
 
 <p>
 Flash and Hogan investigated these patterns in the context of
-optimization theory &mdash; a theory proposing that the brain plans and
+optimization theory &#x2014; a theory proposing that the brain plans and
 controls movements in an <i>optimal</i> way, where optimal is defined by a
 specific task-related cost function. In other words, the brain chooses
 movement paths and neural control signals that <i>minimize</i> some
 objective cost function.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Todorov, E. (2004). Optimality principles in sensorimotor
-  control. Nature neuroscience, 7(9), 907-915.
+control. Nature neuroscience, 7(9), 907-915.</li>
 
-</li>
 <li>Diedrichsen, J., Shadmehr, R., &amp; Ivry, R. B. (2010). The
-  coordination of movement: optimal feedback control and
-  beyond. Trends in cognitive sciences, 14(1), 31-39.
-</li>
+coordination of movement: optimal feedback control and
+beyond. Trends in cognitive sciences, 14(1), 31-39.</li>
 </ul>
-
 
 <p>
 Flash and Hogan wondered, at the kinematic level, what cost function
 might predict the empirically observed patterns of arm movements?
 </p>
+
 <p>
 They discovered that by minimizing the time integral of the square of
 "jerk", a simple kinematic model predicted many of the regular
@@ -1045,28 +959,22 @@ movements (an explanatory model), the minimum-jerk model turns out to
 be a good descriptive model that is able to predict kinematics of
 multi-joint movement.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Hogan, N. (1984). An organizing principle for a class of voluntary
-  movements. The Journal of Neuroscience, 4(11), 2745-2754.
+movements. The Journal of Neuroscience, 4(11), 2745-2754.</li>
 
-</li>
 <li>Flash, T. and Hogan, N. (1985) The coordination of arm movements: an
-  experimentally confirmed mathematical model. J. Neurosci. 7:
-  1688-1703.
-</li>
+experimentally confirmed mathematical model. J. Neurosci. 7:
+1688-1703.</li>
 </ul>
-
-
-
+</div>
 </div>
 
-</div>
 
-<div id="outline-container-5-2" class="outline-3">
-<h3 id="sec-5-2">Minimum Endpoint Variance</h3>
-<div class="outline-text-3" id="text-5-2">
-
-
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">Minimum Endpoint Variance</h3>
+<div class="outline-text-3" id="text-orgheadline13">
 <p>
 More recently, researchers have investigated how noise (variability)
 in neural control signals affects movement kinematics. One hypothesis
@@ -1079,41 +987,32 @@ that the CNS chooses specific time-varying neural control signals that
 minimize the variability of the endpoint (e.g. hand), for example at
 the final target location of a point-to-point movement.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Harris, C. M., &amp; Wolpert, D. M. (1998). Signal-dependent noise
-  determines motor planning. Nature, 394(6695), 780-784.
+determines motor planning. Nature, 394(6695), 780-784.</li>
 
-</li>
 <li>van Beers, R. J., Haggard, P., &amp; Wolpert, D. M. (2004). The role of
-  execution noise in movement variability. Journal of Neurophysiology,
-  91(2), 1050-1063.
+execution noise in movement variability. Journal of Neurophysiology,
+91(2), 1050-1063.</li>
 
-</li>
 <li>Iguchi, N., Sakaguchi, Y., &amp; Ishida, F. (2005). The minimum endpoint
-  variance trajectory depends on the profile of the signal-dependent
-  noise. Biological cybernetics, 92(4), 219-228.
+variance trajectory depends on the profile of the signal-dependent
+noise. Biological cybernetics, 92(4), 219-228.</li>
 
-</li>
 <li>Churchland, M. M., Afshar, A., &amp; Shenoy, K. V. (2006). A central
-  source of movement variability. Neuron, 52(6), 1085-1096.
+source of movement variability. Neuron, 52(6), 1085-1096.</li>
 
-</li>
 <li>Simmons, G., &amp; Demiris, Y. (2006). Object grasping using the minimum
-  variance model. Biological cybernetics, 94(5), 393-407.
-</li>
+variance model. Biological cybernetics, 94(5), 393-407.</li>
 </ul>
-
-
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-6" class="outline-2">
-<h2 id="sec-6">How does the brain plan and control movement?</h2>
-<div class="outline-text-2" id="text-6">
-
-
+<div id="outline-container-orgheadline15" class="outline-2">
+<h2 id="orgheadline15">How does the brain plan and control movement?</h2>
+<div class="outline-text-2" id="text-orgheadline15">
 <p>
 Georgopoulos and colleagues in the 1980s recorded electrical activity
 of single motor cortical neurons in awake, behaving monkeys during
@@ -1123,86 +1022,70 @@ arm movements, and in particular, how large populations of neurons
 might be coordinated to produce the patterns of arm movements
 empirically observed.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Georgopoulos, A. P., Kalaska, J. F., Caminiti, R., &amp; Massey,
-  J. T. (1982). On the relations between the direction of
-  two-dimensional arm movements and cell discharge in primate motor
-  cortex. The Journal of Neuroscience, 2(11), 1527-1537.
+J. T. (1982). On the relations between the direction of
+two-dimensional arm movements and cell discharge in primate motor
+cortex. The Journal of Neuroscience, 2(11), 1527-1537.</li>
 
-</li>
 <li>Georgopoulos, A. P., Caminiti, R., Kalaska, J. F., &amp; Massey,
-  J. T. (1983). Spatial coding of movement: a hypothesis concerning
-  the coding of movement direction by motor cortical populations. Exp
-  Brain Res Suppl, 7(32), 336.
+J. T. (1983). Spatial coding of movement: a hypothesis concerning
+the coding of movement direction by motor cortical populations. Exp
+Brain Res Suppl, 7(32), 336.</li>
 
-</li>
 <li>Georgopoulos, A. P., Schwartz, A. B., &amp; Kettner,
-  R. E. (1986). Neuronal population coding of movement
-  direction. Science, 233(4771), 1416-1419.
+R. E. (1986). Neuronal population coding of movement
+direction. Science, 233(4771), 1416-1419.</li>
 
-</li>
 <li>Schwartz, A. B., Kettner, R. E., &amp; Georgopoulos,
-  A. P. (1988). Primate motor cortex and free arm movements to visual
-  targets in three-dimensional space. I. Relations between single cell
-  discharge and direction of movement. The Journal of Neuroscience,
-  8(8), 2913-2927.
+A. P. (1988). Primate motor cortex and free arm movements to visual
+targets in three-dimensional space. I. Relations between single cell
+discharge and direction of movement. The Journal of Neuroscience,
+8(8), 2913-2927.</li>
 
-</li>
 <li>Georgopoulos, A. P., Kettner, R. E., &amp; Schwartz,
-  A. B. (1988). Primate motor cortex and free arm movements to visual
-  targets in three-dimensional space. II. Coding of the direction of
-  movement by a neuronal population. The Journal of Neuroscience,
-  8(8), 2928-2937.
+A. B. (1988). Primate motor cortex and free arm movements to visual
+targets in three-dimensional space. II. Coding of the direction of
+movement by a neuronal population. The Journal of Neuroscience,
+8(8), 2928-2937.</li>
 
-</li>
 <li>Kettner, R. E., Schwartz, A. B., &amp; Georgopoulos,
-  A. P. (1988). Primate motor cortex and free arm movements to visual
-  targets in three-dimensional space. III. Positional gradients and
-  population coding of movement direction from various movement
-  origins. The journal of Neuroscience, 8(8), 2938-2947.
+A. P. (1988). Primate motor cortex and free arm movements to visual
+targets in three-dimensional space. III. Positional gradients and
+population coding of movement direction from various movement
+origins. The journal of Neuroscience, 8(8), 2938-2947.</li>
 
-</li>
 <li>Moran, D. W., &amp; Schwartz, A. B. (1999). Motor cortical
-  representation of speed and direction during reaching. Journal of
-  Neurophysiology, 82(5), 2676-2692.
-</li>
+representation of speed and direction during reaching. Journal of
+Neurophysiology, 82(5), 2676-2692.</li>
 </ul>
-
-
-
 </div>
 
-<div id="outline-container-6-1" class="outline-3">
-<h3 id="sec-6-1">An Alternate View</h3>
-<div class="outline-text-3" id="text-6-1">
-
-
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16">An Alternate View</h3>
+<div class="outline-text-3" id="text-orgheadline16">
 <p>
 A paper by Mussa-Ivaldi in 1988 showed that in fact the Georgopoulos
 finding that broadly tuned neurons seem to encode hand movement
 kinematics does not imply that the brain encodes
-kinematics&hellip; Mussa-Ivaldi showed that because in the motor system so
+kinematics&#x2026; Mussa-Ivaldi showed that because in the motor system so
 many kinematic and dynamic variables are correlated, broadly tuned
 neurons in motor cortex could be shown to "encode" many intrinsic and
 extrinsic kinematic and dynamic variables.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Mussa-Ivaldi, F. A. (1988). Do neurons in the motor cortex encode
-  movement direction? An alternative hypothesis. Neuroscience Letters,
-  91(1), 106-111.
-</li>
+movement direction? An alternative hypothesis. Neuroscience Letters,
+91(1), 106-111.</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-6-2" class="outline-3">
-<h3 id="sec-6-2">Neural Prosthetics</h3>
-<div class="outline-text-3" id="text-6-2">
-
-
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17">Neural Prosthetics</h3>
+<div class="outline-text-3" id="text-orgheadline17">
 <p>
 The Georgopoulos results have been directly translated into the very
 applied problem of using brain activity to control neural prosthetics,
@@ -1212,62 +1095,50 @@ build computational models (even just statistical models) of the
 relationship between cortical activity and limb motion. Here are some
 examples.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Chapin, J. K., Moxon, K. A., Markowitz, R. S., &amp; Nicolelis,
-  M. A. (1999). Real-time control of a robot arm using simultaneously
-  recorded neurons in the motor cortex. Nature neuroscience, 2,
-  664-670.
+M. A. (1999). Real-time control of a robot arm using simultaneously
+recorded neurons in the motor cortex. Nature neuroscience, 2,
+664-670.</li>
 
-</li>
 <li>Taylor, D. M., Tillery, S. I. H., &amp; Schwartz, A. B. (2002). Direct
-  cortical control of 3D neuroprosthetic devices. Science, 296(5574),
-  1829-1832.
+cortical control of 3D neuroprosthetic devices. Science, 296(5574),
+1829-1832.</li>
 
-</li>
 <li>Donoghue, J. P. (2002). Connecting cortex to machines: recent
-  advances in brain interfaces. Nature Neuroscience, 5, 1085-1088.
+advances in brain interfaces. Nature Neuroscience, 5, 1085-1088.</li>
 
-</li>
 <li>Wolpaw, J. R., &amp; McFarland, D. J. (2004). Control of a
-  two-dimensional movement signal by a noninvasive brain-computer
-  interface in humans. Proceedings of the National Academy of Sciences
-  of the United States of America, 101(51), 17849-17854.
+two-dimensional movement signal by a noninvasive brain-computer
+interface in humans. Proceedings of the National Academy of Sciences
+of the United States of America, 101(51), 17849-17854.</li>
 
-</li>
 <li>Musallam, S., Corneil, B. D., Greger, B., Scherberger, H., &amp;
-  Andersen, R. A. (2004). Cognitive control signals for neural
-  prosthetics. Science, 305(5681), 258-262.
+Andersen, R. A. (2004). Cognitive control signals for neural
+prosthetics. Science, 305(5681), 258-262.</li>
 
-</li>
 <li>Hochberg, L. R., Serruya, M. D., Friehs, G. M., Mukand, J. A.,
-  Saleh, M., Caplan, A. H., &hellip; &amp; Donoghue, J. P. (2006). Neuronal
-  ensemble control of prosthetic devices by a human with
-  tetraplegia. Nature, 442(7099), 164-171.
+Saleh, M., Caplan, A. H., &#x2026; &amp; Donoghue, J. P. (2006). Neuronal
+ensemble control of prosthetic devices by a human with
+tetraplegia. Nature, 442(7099), 164-171.</li>
 
-</li>
 <li>Santhanam, G., Ryu, S. I., Byron, M. Y., Afshar, A., &amp; Shenoy,
-  K. V. (2006). A high-performance brain–computer interface. nature,
-  442(7099), 195-198.
+K. V. (2006). A high-performance brain–computer interface. nature,
+442(7099), 195-198.</li>
 
-</li>
 <li>Velliste, M., Perel, S., Spalding, M. C., Whitford, A. S., &amp;
-  Schwartz, A. B. (2008). Cortical control of a prosthetic arm for
-  self-feeding. Nature, 453(7198), 1098-1101.
-</li>
+Schwartz, A. B. (2008). Cortical control of a prosthetic arm for
+self-feeding. Nature, 453(7198), 1098-1101.</li>
 </ul>
-
-
-
+</div>
 </div>
 </div>
 
-</div>
 
-<div id="outline-container-7" class="outline-2">
-<h2 id="sec-7">Why are kinematic transformations important?</h2>
-<div class="outline-text-2" id="text-7">
-
-
+<div id="outline-container-orgheadline18" class="outline-2">
+<h2 id="orgheadline18">Why are kinematic transformations important?</h2>
+<div class="outline-text-2" id="text-orgheadline18">
 <p>
 The many-to-one mapping issue is directly relevant to current key
 questions in sensory-motor neuroscience. How does the nervous system
@@ -1286,6 +1157,7 @@ coordinate transformations, and make predictions based on different
 proposed theories, is an important way to address these kinds of
 questions.
 </p>
+
 <p>
 Another category of scientific question where modeling kinematic
 transformations comes in handy, is related to <i>noise</i> (I don't mean
@@ -1298,6 +1170,7 @@ there predictable patterns of variability in arm movement that can be
 attributed to these coordinate transformations? If so, can we study
 how the CNS deals with this, i.e. compensates for it (or not)?
 </p>
+
 <p>
 This gives you a flavour for the sorts of questions one can begin to
 address, when you have an explicit quantitative model of coordinate
@@ -1305,55 +1178,46 @@ transformations. There are many studies in arm movement control, eye
 movements, locomotion, etc, that use this basic approach, combining
 experimental data with predictions from computational models.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Scott, S. H., and G. E. Loeb. "The computation of position sense
-  from spindles in mono-and multiarticular muscles." The Journal of
-  neuroscience 14, no. 12 (1994): 7529-7540.
+from spindles in mono-and multiarticular muscles." The Journal of
+neuroscience 14, no. 12 (1994): 7529-7540.</li>
 
-</li>
 <li>Tweed, Douglas B., Thomas P. Haslwanter, Vera Happe, and Michael
-  Fetter. "Non-commutativity in the brain." Nature 399, no. 6733
-  (1999): 261-263.
+Fetter. "Non-commutativity in the brain." Nature 399, no. 6733
+(1999): 261-263.</li>
 
-</li>
 <li>Messier, J., &amp; Kalaska, J. F. (1999). Comparison of variability of
-  initial kinematics and endpoints of reaching movements. Experimental
-  Brain Research, 125(2), 139-152.
+initial kinematics and endpoints of reaching movements. Experimental
+Brain Research, 125(2), 139-152.</li>
 
-</li>
 <li>Loeb, E. P., S. F. Giszter, P. Saltiel and E. Bizzi, and
-  F. A. Mussa-Ivaldi. "Output units of motor behavior: an experimental
-  and modeling study." Journal of cognitive neuroscience 12, no. 1
-  (2000): 78-97.
+F. A. Mussa-Ivaldi. "Output units of motor behavior: an experimental
+and modeling study." Journal of cognitive neuroscience 12, no. 1
+(2000): 78-97.</li>
 
-</li>
 <li>Selen, Luc PJ, David W. Franklin, and Daniel M. Wolpert. "Impedance
-  control reduces instability that arises from motor noise." The
-  Journal of Neuroscience 29, no. 40 (2009): 12606-12616.
-</li>
+control reduces instability that arises from motor noise." The
+Journal of Neuroscience 29, no. 40 (2009): 12606-12616.</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-8" class="outline-2">
-<h2 id="sec-8">Next Steps</h2>
-<div class="outline-text-2" id="text-8">
-
-
+<div id="outline-container-orgheadline19" class="outline-2">
+<h2 id="orgheadline19">Next Steps</h2>
+<div class="outline-text-2" id="text-orgheadline19">
 <p>
 Next we will look at modelling the dynamics of arm movement.
 </p>
+
 <p>
 [ <a href="5_Computational_Motor_Control_Dynamics.html">Computational Motor Control: Dynamics</a> ]
 </p>
 </div>
 </div>
 </div>
-
-<div id="postamble">
+<div id="postamble" class="status">
 <hr />Paul Gribble &amp; Dinant Kistemaker | fall 2012<br>This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />
 </div>
 </body>

@@ -1,65 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
+<!-- 2016-01-03 Sun 11:43 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
 <title>6. Computational Motor Control: Muscle</title>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-<meta name="title" content="6. Computational Motor Control: Muscle"/>
-<meta name="generator" content="Org-mode"/>
-<meta name="generated" content="fall 2012"/>
-<meta name="author" content="Paul Gribble &amp; Dinant Kistemaker"/>
-<meta name="description" content=""/>
-<meta name="keywords" content=""/>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Paul Gribble &amp; Dinant Kistemaker" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  html { font-family: Times, serif; font-size: 12pt; }
-  .title  { text-align: center; }
-  .todo   { color: red; }
-  .done   { color: green; }
-  .tag    { background-color: #add8e6; font-weight:normal }
-  .target { }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .right  {margin-left:auto; margin-right:0px;  text-align:right;}
-  .left   {margin-left:0px;  margin-right:auto; text-align:left;}
-  .center {margin-left:auto; margin-right:auto; text-align:center;}
-  p.verse { margin-left: 3% }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
   pre {
-	border: 1pt solid #AEBDCC;
-	background-color: #F3F5F7;
-	padding: 5pt;
-	font-family: courier, monospace;
-        font-size: 90%;
-        overflow:auto;
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
   }
-  table { border-collapse: collapse; }
-  td, th { vertical-align: top;  }
-  th.right  { text-align:center;  }
-  th.left   { text-align:center;   }
-  th.center { text-align:center; }
-  td.right  { text-align:right;  }
-  td.left   { text-align:left;   }
-  td.center { text-align:center; }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
   dt { font-weight: bold; }
-  div.figure { padding: 0.5em; }
-  div.figure p { text-align: center; }
-  div.inlinetask {
-    padding:10px;
-    border:2px solid gray;
-    margin:10px;
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
     background: #ffffcc;
   }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
   textarea { overflow-x: auto; }
-  .linenr { font-size:smaller }
-  .code-highlighted {background-color:#ffff00;}
-  .org-info-js_info-navigation { border-style:none; }
-  #org-info-js_console-label { font-size:10px; font-weight:bold;
-                               white-space:nowrap; }
-  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
-                                 font-weight:bold; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
   /*]]>*/-->
-</style><link rel="stylesheet" type="text/css" href="mystyle.css" />
+</style>
+<link rel="stylesheet" type="text/css" href="mystyle.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -106,161 +141,83 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js">
-/**
- *
- * @source: http://orgmode.org/mathjax/MathJax.js
- *
- * @licstart  The following is the entire license notice for the
- *  JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- * Copyright (C) 2012-2013  MathJax
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- * @licend  The above is the entire license notice
- * for the JavaScript code in http://orgmode.org/mathjax/MathJax.js.
- *
- */
-
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code below.
-
-Copyright (C) 2012-2013 Free Software Foundation, Inc.
-
-The JavaScript code below is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code below.
-*/
-<!--/*--><![CDATA[/*><!--*/
+<script type="text/x-mathjax-config">
     MathJax.Hub.Config({
-        // Only one of the two following lines, depending on user settings
-        // First allows browser-native MathML display, second forces HTML/CSS
-        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
-                     "TeX/noUndefined.js"],
-        tex2jax: {
-            inlineMath: [ ["\\(","\\)"] ],
-            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
-            skipTags: ["script","noscript","style","textarea","pre","code"],
-            ignoreClass: "tex2jax_ignore",
-            processEscapes: false,
-            processEnvironments: true,
-            preview: "TeX"
-        },
-        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "2em",
+        displayIndent: "0em",
 
-        "HTML-CSS": {
-             scale: 100,
-             availableFonts: ["STIX","TeX"],
-             preferredFont: "TeX",
-             webFont: "TeX",
-             imageFont: "TeX",
-             showMathMenu: true,
-        },
-        MMLorHTML: {
-             prefer: {
-                 MSIE:    "MML",
-                 Firefox: "MML",
-                 Opera:   "HTML",
-                 other:   "HTML"
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
              }
-        }
-    });
-/*]]>*///-->
+});
 </script>
+<script type="text/javascript"
+        src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
-<div id="org-div-home-and-up" style="text-align:right;font-size:70%;white-space:nowrap;">
- <a accesskey="h" href="http://www.gribblelab.org/compneuro/5_Computational_Motor_Control_Dynamics.html"> UP </a>
+<div id="org-div-home-and-up">
+ <a accesskey="h" href=""> UP </a>
  |
  <a accesskey="H" href="http://www.gribblelab.org/compneuro/index.html"> HOME </a>
-</div>
-
-<div id="preamble">
-
-</div>
-
-<div id="content">
+</div><div id="content">
 <h1 class="title">6. Computational Motor Control: Muscle</h1>
-
-
-
-<hr/>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">Introduction</a></li>
-<li><a href="#sec-2">Modelling simple torque muscles</a>
+<li><a href="#orgheadline1">Introduction</a></li>
+<li><a href="#orgheadline10">Modelling simple torque muscles</a>
 <ul>
-<li><a href="#sec-2-1">Constant Torque Muscle</a>
+<li><a href="#orgheadline2">Constant Torque Muscle</a>
 <ul>
-<li><a href="#sec-2-1-1">Questions</a></li>
+<li><a href="#orgheadline3">Questions</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-2">Two Antagonistic Torque Muscles</a>
+<li><a href="#orgheadline4">Two Antagonistic Torque Muscles</a>
 <ul>
-<li><a href="#sec-2-2-1">Questions</a></li>
+<li><a href="#orgheadline5">Questions</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-3">Muscles as Linear Springs</a>
+<li><a href="#orgheadline6">Muscles as Linear Springs</a>
 <ul>
-<li><a href="#sec-2-3-1">Questions</a></li>
+<li><a href="#orgheadline7">Questions</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-4">Muscles as Linear Spring-Dampers</a>
+<li><a href="#orgheadline8">Muscles as Linear Spring-Dampers</a>
 <ul>
-<li><a href="#sec-2-4-1">Questions</a></li>
-</ul></li>
+<li><a href="#orgheadline9">Questions</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">Introduction to Hill-type muscle models</a>
-<ul>
-<li><a href="#sec-3-1">The SE</a></li>
-<li><a href="#sec-3-2">The CE: the force-length relationship</a></li>
-<li><a href="#sec-3-3">The CE: the force-velocity relationship</a></li>
-<li><a href="#sec-3-4">Modeling the interaction between muscle and skeleton</a></li>
 </ul>
 </li>
-<li><a href="#sec-4">Simulations with a musculoskeletal model</a></li>
-<li><a href="#sec-5">How are muscles controlled?</a>
+<li><a href="#orgheadline11">Introduction to Hill-type muscle models</a>
 <ul>
-<li><a href="#sec-5-1">Equilibrium-Point Control</a></li>
-<li><a href="#sec-5-2">Force Control Models</a></li>
-<li><a href="#sec-5-3">Hybrid Models</a></li>
-<li><a href="#sec-5-4">Learning using feedback signals to train feedforward controllers</a>
+<li><a href="#orgheadline12">The SE</a></li>
+<li><a href="#orgheadline13">The CE: the force-length relationship</a></li>
+<li><a href="#orgheadline14">The CE: the force-velocity relationship</a></li>
+<li><a href="#orgheadline15">Modeling the interaction between muscle and skeleton</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline16">Simulations with a musculoskeletal model</a></li>
+<li><a href="#orgheadline17">How are muscles controlled?</a>
 <ul>
-<li><a href="#sec-5-4-1">A Neural Network model using combined Forward and Inverse Models</a></li>
-<li><a href="#sec-5-4-2">Feedback Error Learning</a></li>
+<li><a href="#orgheadline18">Equilibrium-Point Control</a></li>
+<li><a href="#orgheadline19">Force Control Models</a></li>
+<li><a href="#orgheadline20">Hybrid Models</a></li>
+<li><a href="#orgheadline21">Learning using feedback signals to train feedforward controllers</a>
+<ul>
+<li><a href="#orgheadline22">A Neural Network model using combined Forward and Inverse Models</a></li>
+<li><a href="#orgheadline23">Feedback Error Learning</a></li>
 </ul>
 </li>
 </ul>
@@ -268,15 +225,11 @@ for the JavaScript code below.
 </ul>
 </div>
 </div>
+<hr  />
 
-<hr/>
-
-
-<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">Introduction</h2>
-<div class="outline-text-2" id="text-1">
-
-
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1">Introduction</h2>
+<div class="outline-text-2" id="text-orgheadline1">
 <p>
 Here we will add muscles with neural efferent inputs and afferent
 feedback, to our arm model. We will start with very simplified models
@@ -284,22 +237,14 @@ of muscle force and work up to descriptions of more physiologically
 realistic models.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">Modelling simple torque muscles</h2>
-<div class="outline-text-2" id="text-2">
-
-
-
-</div>
-
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1">Constant Torque Muscle</h3>
-<div class="outline-text-3" id="text-2-1">
-
-
+<div id="outline-container-orgheadline10" class="outline-2">
+<h2 id="orgheadline10">Modelling simple torque muscles</h2>
+<div class="outline-text-2" id="text-orgheadline10">
+</div><div id="outline-container-orgheadline2" class="outline-3">
+<h3 id="orgheadline2">Constant Torque Muscle</h3>
+<div class="outline-text-3" id="text-orgheadline2">
 <p>
 In the previous section we built a model of the skeletal dynamics a
 forearm. As a first step to implement "torque muscles", we will use a
@@ -307,12 +252,12 @@ simple dynamic equation of motion of a single joint arm in a vertical
 plane, with gravity:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/onejointarm_muscle.png" width="400px" align="center" alt="figs/onejointarm_muscle.png" /></p>
-<p>Schematic of a simple one-joint arm in a vertical plane with one muscle.</p>
+<p><img src="figs/onejointarm_muscle.png" alt="onejointarm_muscle.png" width="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 1:</span> Schematic of a simple one-joint arm in a vertical plane with one muscle.</p>
 </div>
-
-
 
 \begin{equation}
 I \ddot{\theta} = m g l_{z} \cos \theta + T_{m}
@@ -325,11 +270,12 @@ from the joint, and \(\theta\) and \(\ddot{\theta}\) are joint angular
 position and acceleration, respectively. The new term we are now
 adding, \(T_{m}\), is the net joint torque due to muscle contraction.
 </p>
+
 <p>
 Here is what a simple Python function would look like for simulating these dynamics:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,Tm):
   <span style="color: #a0522d;">m</span> = 1.65    <span style="color: #b22222;"># </span><span style="color: #b22222;">kg</span>
@@ -341,59 +287,51 @@ Here is what a simple Python function would look like for simulating these dynam
   <span style="color: #a0522d;">add</span> = (m*g*lz*cos(a) + Tm) / I
   <span style="color: #a020f0;">return</span> [ad,add]
 </pre>
-
+</div>
 
 <p>
 You can download a full program here that implements a simulation and animation of this version of the arm:
 </p>
+
 <p>
-<a href="code/onejointmuscle_1.py">onejointmuscle_1.py</a>
+<a href="code/onejointmuscle_1.py">onejointmuscle\<sub>1.py</sub></a>
 </p>
-
 </div>
 
-<div id="outline-container-2-1-1" class="outline-4">
-<h4 id="sec-2-1-1">Questions</h4>
-<div class="outline-text-4" id="text-2-1-1">
-
-
-<ol>
+<div id="outline-container-orgheadline3" class="outline-4">
+<h4 id="orgheadline3">Questions</h4>
+<div class="outline-text-4" id="text-orgheadline3">
+<ol class="org-ol">
 <li>Play with the \(T_{m}\) parameter until you arrive at a value that
-   maintains the arm at an angle of 30 degrees.
+maintains the arm at an angle of 30 degrees.</li>
 
-</li>
 <li>What value of muscle torque \(T_{m}\) is required to maintain the arm
-   at 45 degrees?
-</li>
+at 45 degrees?</li>
 </ol>
-
-
-
+</div>
 </div>
 </div>
 
-</div>
 
-<div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2">Two Antagonistic Torque Muscles</h3>
-<div class="outline-text-3" id="text-2-2">
-
-
+<div id="outline-container-orgheadline4" class="outline-3">
+<h3 id="orgheadline4">Two Antagonistic Torque Muscles</h3>
+<div class="outline-text-3" id="text-orgheadline4">
 <p>
 Now we add a second "muscle" so we have \(T_{mf}\) from a "flexor"
 muscle (like biceps brachii) and \(T_{me}\) from an "extensor" muscle
 (like triceps brachii).
 </p>
 
+
 <div class="figure">
-<p><img src="figs/onejointarm_muscle2.png" width="400px" align="center" alt="figs/onejointarm_muscle2.png" /></p>
-<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic muscles.</p>
+<p><img src="figs/onejointarm_muscle2.png" alt="onejointarm_muscle2.png" width="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 2:</span> Schematic of a simple one-joint arm in a vertical plane with two antagonistic muscles.</p>
 </div>
 
 <p>
 Now our dynamics equation looks like this:
 </p>
-
 
 \begin{equation}
 I \ddot{\theta} = m g l_{z} \cos \theta + T_{mf} - T_{me}
@@ -402,11 +340,12 @@ I \ddot{\theta} = m g l_{z} \cos \theta + T_{mf} - T_{me}
 <p>
 Note how the two muscles act to produce torque in opposite directions.
 </p>
+
 <p>
 Here is a new version of the Python function:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,Tmf,Tme):
   <span style="color: #a0522d;">m</span> = 1.65    <span style="color: #b22222;"># </span><span style="color: #b22222;">kg</span>
@@ -418,52 +357,42 @@ Here is a new version of the Python function:
   <span style="color: #a0522d;">add</span> = (m*g*lz*cos(a) + Tmf - Tme) / I
   <span style="color: #a020f0;">return</span> [ad,add]
 </pre>
-
+</div>
 
 <p>
 You can download a full program here that implements a simulation and animation of this version of the arm:
 </p>
+
 <p>
-<a href="code/onejointmuscle_2.py">onejointmuscle_2.py</a>
+<a href="code/onejointmuscle_2.py">onejointmuscle\<sub>2.py</sub></a>
 </p>
-
 </div>
 
-<div id="outline-container-2-2-1" class="outline-4">
-<h4 id="sec-2-2-1">Questions</h4>
-<div class="outline-text-4" id="text-2-2-1">
-
-
-<ol>
+<div id="outline-container-orgheadline5" class="outline-4">
+<h4 id="orgheadline5">Questions</h4>
+<div class="outline-text-4" id="text-orgheadline5">
+<ol class="org-ol">
 <li>Say the initial position of the forearm is \(\pi/4\) radians with
-   zero initial velocity. What static muscle torques \(T_{mf},T_{me}\)
-   are needed to make the arm stay put?
+zero initial velocity. What static muscle torques \(T_{mf},T_{me}\)
+are needed to make the arm stay put?</li>
 
-</li>
 <li>Using your answer from Question 1 as a starting point, what happens
-   if you increase \(T_{mf}\) and \(T_{me}\) by the same amount (e.g. by
-   1.0 Nm)?
-</li>
+if you increase \(T_{mf}\) and \(T_{me}\) by the same amount (e.g. by
+1.0 Nm)?</li>
 </ol>
-
-
-
+</div>
 </div>
 </div>
 
-</div>
 
-<div id="outline-container-2-3" class="outline-3">
-<h3 id="sec-2-3">Muscles as Linear Springs</h3>
-<div class="outline-text-3" id="text-2-3">
-
-
-<p> 
+<div id="outline-container-orgheadline6" class="outline-3">
+<h3 id="orgheadline6">Muscles as Linear Springs</h3>
+<div class="outline-text-3" id="text-orgheadline6">
+<p>
 A very coarse approximation of muscle behaviour is that the muscles
 deliver a torque that depends linearly on joint angle. This is
 essentially the same as a spring:
 </p>
-
 
 \begin{equation}
 T_{m} = -k(\theta-\theta_{0})
@@ -471,21 +400,23 @@ T_{m} = -k(\theta-\theta_{0})
 
 
 <div class="figure">
-<p><img src="figs/onejointarm_muscle3.png" width="400px" align="center" alt="figs/onejointarm_muscle3.png" /></p>
-<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles.</p>
+<p><img src="figs/onejointarm_muscle3.png" alt="onejointarm_muscle3.png" width="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 3:</span> Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles.</p>
 </div>
 
 <p>
 Note that for simplicity we are ignoring muscle <a href="http://muscle.ucsd.edu/musintro/ma.shtml">moment arms</a> and we are
 assuming they are constant with respect to joint angle.
 </p>
+
 <p>
 The \(\theta_{0}\) parameter is the "rest length" angle for the elbow joint angle. This is the angle at which the muscles produce no force.
 </p>
+
 <p>
 You may have noticed that our spring muscles can "push" as well as pull. To fix this we adjust the muscle equation a bit:
 </p>
-
 
 \begin{eqnarray}
 T_{flex} &= &\left[ -k(\theta - \theta_{0}) \right]^{+} \\
@@ -494,13 +425,13 @@ T_{ext} &= &\left[ -k(\theta - \theta_{0}) \right]^{-}
 
 <p>
 The notation \(y=\left[x\right]^{+}\) and \(y=\left[x\right]^{-}\) means
-that \(y\) is \(x\) when \(x&gt;0\) (and zero otherwise) or \(-x\) when \(x&lt;0\) (or
+that \(y\) is \(x\) when \(x>0\) (and zero otherwise) or \(-x\) when \(x<0\) (or
 zero otherwise), respectively.
 </p>
+
 <p>
 So the equation of motion for linear spring-like muscles is:
 </p>
-
 
 \begin{equation}
 I \ddot{\theta} = m g l_{z} \cos\theta + \left[ -k(\theta - \theta_{0}) \right]^{+} + \left[ -k(\theta - \theta_{0}) \right]^{-}
@@ -510,7 +441,7 @@ I \ddot{\theta} = m g l_{z} \cos\theta + \left[ -k(\theta - \theta_{0}) \right]^
 Here is a Python function that implements this:
 </p>
 
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,a0):
         <span style="color: #a0522d;">m</span> = 1.65    <span style="color: #b22222;"># </span><span style="color: #b22222;">kg</span>
@@ -525,54 +456,43 @@ Here is a Python function that implements this:
         <span style="color: #a0522d;">add</span> = (m*g*lz*cos(a) + Tmf + Tme) / I
         <span style="color: #a020f0;">return</span> [ad,add]
 </pre>
-
+</div>
 
 <p>
 You can download a full program here that implements a simulation and animation of this version of the arm:
 </p>
+
 <p>
-<a href="code/onejointmuscle_3.py">onejointmuscle_3.py</a>
+<a href="code/onejointmuscle_3.py">onejointmuscle\<sub>3.py</sub></a>
 </p>
-
 </div>
 
-<div id="outline-container-2-3-1" class="outline-4">
-<h4 id="sec-2-3-1">Questions</h4>
-<div class="outline-text-4" id="text-2-3-1">
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7">Questions</h4>
+<div class="outline-text-4" id="text-orgheadline7">
+<ol class="org-ol">
+<li>Play with the simulation found in <a href="code/onejointmuscle_3.py">onejointmuscle\<sub>3.py</sub></a>. Vary the
+value of <code>k</code>. What happens to the motion of the arm?</li>
 
+<li>Vary the value of <code>a0</code>. What happens?</li>
 
-<ol>
-<li>Play with the simulation found in <a href="code/onejointmuscle_3.py">onejointmuscle_3.py</a>. Vary the
-   value of <code>k</code>. What happens to the motion of the arm?
-
-</li>
-<li>Vary the value of <code>a0</code>. What happens?
-
-</li>
 <li>How would you change the code so that each muscle had its own
-   stiffness parameter <code>k</code> and its own rest angle <code>a0</code>?
-</li>
+stiffness parameter <code>k</code> and its own rest angle <code>a0</code>?</li>
 </ol>
-
-
-
+</div>
 </div>
 </div>
 
-</div>
 
-<div id="outline-container-2-4" class="outline-3">
-<h3 id="sec-2-4">Muscles as Linear Spring-Dampers</h3>
-<div class="outline-text-3" id="text-2-4">
-
-
+<div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8">Muscles as Linear Spring-Dampers</h3>
+<div class="outline-text-3" id="text-orgheadline8">
 <p>
 A better approximation (yet still too coarse for good predictions
 about realistic muscle behaviour) is to incorporate a <a href="http://en.wikipedia.org/wiki/Dashpot">damper</a> in the
 muscle. A damper is a mechanical unit that delivers an opposing force
 that is proportional to velocity. It acts to "damp out" oscillations. Muscle force in a real muscle is also proportional to velocity, but in a more complex way, which we will see later. For now let's assume linear damping:
 </p>
-
 
 \begin{eqnarray}
 T_{flex} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{+} \\
@@ -581,12 +501,12 @@ T_{ext} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{-}
 
 
 <div class="figure">
-<p><img src="figs/onejointarm_muscle4.png" width="400px" align="center" alt="figs/onejointarm_muscle4.png" /></p>
-<p>Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles with dampers.</p>
+<p><img src="figs/onejointarm_muscle4.png" alt="onejointarm_muscle4.png" width="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 4:</span> Schematic of a simple one-joint arm in a vertical plane with two antagonistic spring-like muscles with dampers.</p>
 </div>
 
-
-
+<div class="org-src-container">
 
 <pre class="src src-python"><span style="color: #a020f0;">def</span> <span style="color: #0000ff;">onejointmuscle</span>(state,t,a0):
         <span style="color: #a0522d;">m</span> = 1.65    <span style="color: #b22222;"># </span><span style="color: #b22222;">kg</span>
@@ -602,45 +522,36 @@ T_{ext} &= &\left[ -k(\theta - \theta_{0}) + b \dot{\theta} \right]^{-}
         <span style="color: #a0522d;">add</span> = (m*g*lz*cos(a) + Tmf + Tme) / I
         <span style="color: #a020f0;">return</span> [ad,add]
 </pre>
-
+</div>
 
 <p>
 You can download a full program here that implements a simulation and animation of this version of the arm:
 </p>
+
 <p>
-<a href="code/onejointmuscle_4.py">onejointmuscle_4.py</a>
+<a href="code/onejointmuscle_4.py">onejointmuscle\<sub>4.py</sub></a>
 </p>
-
 </div>
 
-<div id="outline-container-2-4-1" class="outline-4">
-<h4 id="sec-2-4-1">Questions</h4>
-<div class="outline-text-4" id="text-2-4-1">
+<div id="outline-container-orgheadline9" class="outline-4">
+<h4 id="orgheadline9">Questions</h4>
+<div class="outline-text-4" id="text-orgheadline9">
+<ol class="org-ol">
+<li>Play with the simulation found in <a href="code/onejointmuscle_4.py">onejointmuscle\<sub>4.py</sub></a>. Vary the
+value of <code>b</code>. What happens to the motion of the arm?</li>
 
-
-<ol>
-<li>Play with the simulation found in <a href="code/onejointmuscle_4.py">onejointmuscle_4.py</a>. Vary the
-   value of <code>b</code>. What happens to the motion of the arm?
-
-</li>
 <li>Can you find a combination of <code>k</code>, <code>b</code> and <code>a0</code> that makes the arm
-   rest in a stable equilibrium at \(\theta = -\pi/6\) radians?
-</li>
+rest in a stable equilibrium at \(\theta = -\pi/6\) radians?</li>
 </ol>
-
-
-
+</div>
 </div>
 </div>
 </div>
 
-</div>
 
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3">Introduction to Hill-type muscle models</h2>
-<div class="outline-text-2" id="text-3">
-
-
+<div id="outline-container-orgheadline11" class="outline-2">
+<h2 id="orgheadline11">Introduction to Hill-type muscle models</h2>
+<div class="outline-text-2" id="text-orgheadline11">
 <p>
 In reality, muscles show way more complicated behaviour then depicted
 in the last section. Over the last decades, several different types of
@@ -655,9 +566,11 @@ muscle models are more frequently used, mainly because they are easier
 to implement.
 </p>
 
+
 <div class="figure">
-<p><img src="figs/hillmuscle.png" width="300px" align="center" alt="figs/hillmuscle.png" /></p>
-<p>Schematic of a Hill-type muscle model.</p>
+<p><img src="figs/hillmuscle.png" alt="hillmuscle.png" width="300px" align="center" />
+</p>
+<p><span class="figure-number">Figure 5:</span> Schematic of a Hill-type muscle model.</p>
 </div>
 
 <p>
@@ -669,21 +582,17 @@ the muscle and the SE represents all the tendinous tissue in series
 with the CE. Below, a short simplified description of the elements is
 provided.
 </p>
-
 </div>
 
-<div id="outline-container-3-1" class="outline-3">
-<h3 id="sec-3-1">The SE</h3>
-<div class="outline-text-3" id="text-3-1">
-
-
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12">The SE</h3>
+<div class="outline-text-3" id="text-orgheadline12">
 <p>
 Collagen tissue is a passive material that behaves like a non-linear
 spring. Although the behavior of a tendon (or aponeurosis, etc) is
 quite complex, the "normal" working range is well described by a
 quadratic spring:
 </p>
-
 
 \begin{equation}
 F_{SE} = \left( \left[ k_{SE}(l_{SE_0} - l_{SE}) \right]^{+} \right)^{2}
@@ -695,12 +604,11 @@ Here, \(k_{SE}\) is the tendon stiffness, \(l_{SE}\) the tendon length and
 vivo using very fast perturbations, for example using the so-called
 "quick-release experiment":
 </p>
-<ul>
-<li>Hof, AL. In vivo measurement of the series elasticity release curve
-  of human triceps surae muscle. J Biomech 1998 Sep;31(9):793-800
-</li>
-</ul>
 
+<ul class="org-ul">
+<li>Hof, AL. In vivo measurement of the series elasticity release curve
+of human triceps surae muscle. J Biomech 1998 Sep;31(9):793-800</li>
+</ul>
 
 <p>
 The slack length of tendons are muscle specific and are in general
@@ -708,20 +616,18 @@ measured in cadaver studies. Here is an example of the (relative)
 force-length curve of a SE:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/forcelengthse.png" width="250px" align="center" alt="figs/forcelengthse.png" /></p>
-<p>The force-length curve of a SE. Force is plotted relative to the maximal isometric force of the muscle.</p>
+<p><img src="figs/forcelengthse.png" alt="forcelengthse.png" width="250px" align="center" />
+</p>
+<p><span class="figure-number">Figure 6:</span> The force-length curve of a SE. Force is plotted relative to the maximal isometric force of the muscle.</p>
+</div>
+</div>
 </div>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2">The CE: the force-length relationship</h3>
-<div class="outline-text-3" id="text-3-2">
-
-
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13">The CE: the force-length relationship</h3>
+<div class="outline-text-3" id="text-orgheadline13">
 <p>
 Due to their contractile proteins (actin and myosin, etc.), muscles
 are capable of actively generating force. In contrast with the Huxley
@@ -735,9 +641,11 @@ model too much, the isometric force-length relationship is often
 described by a parabola:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/forcelengthce.png" width="300px" align="center" alt="figs/forcelengthce.png" /></p>
-<p>The isometric CE force (relative to the maximum isometric force) as a function of the length of the CE. The dashed line represents the isometric force when the muscle is stimulated half the maximum. Depicted is also the PE force. Note that the l<sub>PE</sub> is equal to l<sub>CE</sub>. The total force-length relationship is the sum of the active CE and passive PE force-length relationship. Also shown is the passive force of the PE: a quadratic spring that is similar to that of the SE.</p>
+<p><img src="figs/forcelengthce.png" alt="forcelengthce.png" width="300px" align="center" />
+</p>
+<p><span class="figure-number">Figure 7:</span> The isometric CE force (relative to the maximum isometric force) as a function of the length of the CE. The dashed line represents the isometric force when the muscle is stimulated half the maximum. Depicted is also the PE force. Note that the l<sub>PE</sub> is equal to l<sub>CE</sub>. The total force-length relationship is the sum of the active CE and passive PE force-length relationship. Also shown is the passive force of the PE: a quadratic spring that is similar to that of the SE.</p>
 </div>
 
 <p>
@@ -747,22 +655,17 @@ measuring the physiological cross-sectional area). The optimum length
 of a muscle can be estimated by counting the amount of sarcomeres in
 series, see for example:
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Murray WM, Buchanan TS, and Delp SL. The isometric functional
-  capacity of muscles that cross the elbow. J Biomech 33: 943-952, 200
-</li>
+capacity of muscles that cross the elbow. J Biomech 33: 943-952, 200</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-3-3" class="outline-3">
-<h3 id="sec-3-3">The CE: the force-velocity relationship</h3>
-<div class="outline-text-3" id="text-3-3">
-
-
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14">The CE: the force-velocity relationship</h3>
+<div class="outline-text-3" id="text-orgheadline14">
 <p>
 The force-velocity relationship is a bit more difficult that the
 force-length relationship. This relationship describes the phenomenon
@@ -772,20 +675,18 @@ contraction), the maximal force decreases and if the muscle lengthens
 (eccentric contraction) the maximal force increases:
 </p>
 
+
 <div class="figure">
-<p><img src="figs/forcevelocity.png" width="300px" align="center" alt="figs/forcevelocity.png" /></p>
-<p>The CE force as a function of the contraction velocity. The dashed line represents the force-velocity curve when the muscle is stimulated half the maximal value.</p>
+<p><img src="figs/forcevelocity.png" alt="forcevelocity.png" width="300px" align="center" />
+</p>
+<p><span class="figure-number">Figure 8:</span> The CE force as a function of the contraction velocity. The dashed line represents the force-velocity curve when the muscle is stimulated half the maximal value.</p>
+</div>
+</div>
 </div>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-4" class="outline-3">
-<h3 id="sec-3-4">Modeling the interaction between muscle and skeleton</h3>
-<div class="outline-text-3" id="text-3-4">
-
-
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15">Modeling the interaction between muscle and skeleton</h3>
+<div class="outline-text-3" id="text-orgheadline15">
 <p>
 In the previous section we have implicitly assumed that the "length"
 of the torque muscles change linearly with joint angle. In reality,
@@ -803,6 +704,7 @@ of the angle. Together with the reference length, the kinematic
 relationship between l<sub>MTC</sub> and joint angle is known. But what about
 the mechanical interaction?
 </p>
+
 <p>
 The muscles deliver a torque on the skeleton. The torque delivered by
 a muscle equals the force they deliver multiplied with the moment arm
@@ -815,39 +717,34 @@ by the change in joint angle (thus, the derivative of l<sub>MTC</sub> with
 respect to joint angle:
 </p>
 
-
 \begin{equation}
 momentarm = \frac{\partial l_{MTC}}{\partial \theta}
 \end{equation}
-
 </div>
 </div>
-
 </div>
 
-<div id="outline-container-4" class="outline-2">
-<h2 id="sec-4">Simulations with a musculoskeletal model</h2>
-<div class="outline-text-2" id="text-4">
-
-
+<div id="outline-container-orgheadline16" class="outline-2">
+<h2 id="orgheadline16">Simulations with a musculoskeletal model</h2>
+<div class="outline-text-2" id="text-orgheadline16">
 <p>
 Over the last decades several changes have been suggested to improve
 the predictive capacities of the Hill-type muscle model. For the
 interested reader, a detailed overview of a "full-blown"
 musculoskeletal model and its mathematical description can be found in:
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Kistemaker DA, Wong JD, Gribble PL (2010) The Central Nervous System
-  does not minimize energy cost in arm movements. J Neurophysiol, 104,
-  2985-94
-</li>
+does not minimize energy cost in arm movements. J Neurophysiol, 104,
+2985-94</li>
 </ul>
 
 
-
 <div class="figure">
-<p><img src="figs/fullblownschematic.png" width="400px" align="center" alt="figs/fullblownschematic.png" /></p>
-<p>Schematic of "full-blown" musculoskeletal model described in Kistemaker et al. (2010).</p>
+<p><img src="figs/fullblownschematic.png" alt="fullblownschematic.png" width="400px" align="center" />
+</p>
+<p><span class="figure-number">Figure 9:</span> Schematic of "full-blown" musculoskeletal model described in Kistemaker et al. (2010).</p>
 </div>
 
 <p>
@@ -858,6 +755,7 @@ release of Ca2+ from the sarcoplasmatic reticulum in the intercellular
 which leads to free binding places for cross-bridges between actin and
 myosin. 
 </p>
+
 <p>
 There are many examples in the literature of using physiologically
 realistic (to varying degrees) musculoskeletal models to investigate
@@ -865,77 +763,64 @@ questions of neural control of movement, sensory-motor learning, etc,
 in all sorts of model systems like arm movements, speech production,
 locomotion, posture and balance, jumping, etc. Here are a few:
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Kuo, A. D. (1995). An optimal control model for analyzing human
-  postural balance. Biomedical Engineering, IEEE Transactions on,
-  42(1), 87-101.
+postural balance. Biomedical Engineering, IEEE Transactions on,
+42(1), 87-101.</li>
 
-</li>
 <li>Gribble, P. L., &amp; Ostry, D. J. (1996). Origins of the power law
-  relation between movement velocity and curvature: modeling the
-  effects of muscle mechanics and limb dynamics. Journal of
-  Neurophysiology, 76(5), 2853-2860.
+relation between movement velocity and curvature: modeling the
+effects of muscle mechanics and limb dynamics. Journal of
+Neurophysiology, 76(5), 2853-2860.</li>
 
-</li>
 <li>Bobbert, M. F., Gerritsen, K. G., Litjens, M. C., &amp; Van Soest,
-  A. J. (1996). Why is countermovement jump height greater than squat
-  jump height?. Medicine and Science in Sports and Exercise, 28,
-  1402-1412.
+A. J. (1996). Why is countermovement jump height greater than squat
+jump height?. Medicine and Science in Sports and Exercise, 28,
+1402-1412.</li>
 
-</li>
 <li>Gribble, P. L., Ostry, D. J., Sanguineti, V., &amp; Laboissière,
-  R. (1998). Are complex control signals required for human arm
-  movement?. Journal of Neurophysiology, 79(3), 1409-1424.
+R. (1998). Are complex control signals required for human arm
+movement?. Journal of Neurophysiology, 79(3), 1409-1424.</li>
 
-</li>
 <li>Sanguineti, V., Laboissiere, R., &amp; Ostry, D. J. (1998). A dynamic
-  biomechanical model for neural control of speech production. The
-  Journal of the Acoustical Society of America, 103, 1615.
+biomechanical model for neural control of speech production. The
+Journal of the Acoustical Society of America, 103, 1615.</li>
 
-</li>
 <li>Todorov, E. (2000). Direct cortical control of muscle activation in
-  voluntary arm movements: a model. Nature Neuroscience, 3, 391-398.
+voluntary arm movements: a model. Nature Neuroscience, 3, 391-398.</li>
 
-</li>
 <li>Cheng, E. J., Brown, I. E., &amp; Loeb, G. E. (2000). Virtual muscle: a
-  computational approach to understanding the effects of muscle
-  properties on motor control. Journal of neuroscience methods,
-  101(2), 117-130.
+computational approach to understanding the effects of muscle
+properties on motor control. Journal of neuroscience methods,
+101(2), 117-130.</li>
 
-</li>
 <li>Srinivasan, M., &amp; Ruina, A. (2005). Computer optimization of a
-  minimal biped model discovers walking and running. Nature,
-  439(7072), 72-75.
+minimal biped model discovers walking and running. Nature,
+439(7072), 72-75.</li>
 
-</li>
 <li>Guigon, E., Baraduc, P., &amp; Desmurget, M. (2007). Coding of
-  movement‐and force‐related information in primate primary motor
-  cortex: a computational approach. European Journal of Neuroscience,
-  26(1), 250-260.
+movement‐and force‐related information in primate primary motor
+cortex: a computational approach. European Journal of Neuroscience,
+26(1), 250-260.</li>
 
-</li>
 <li>Raphael, G., Tsianos, G. A., &amp; Loeb, G. E. (2010). Spinal-like
-  regulator facilitates control of a two-degree-of-freedom wrist. The
-  Journal of Neuroscience, 30(28), 9431-9444.
-</li>
+regulator facilitates control of a two-degree-of-freedom wrist. The
+Journal of Neuroscience, 30(28), 9431-9444.</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5">How are muscles controlled?</h2>
-<div class="outline-text-2" id="text-5">
-
-
+<div id="outline-container-orgheadline17" class="outline-2">
+<h2 id="orgheadline17">How are muscles controlled?</h2>
+<div class="outline-text-2" id="text-orgheadline17">
 <p>
 Once we have a physiologically realistic model of muscle force
 generation, the question arises, how does the brain control movement?
 How does the brain determine what time-varying patterns of stimulaton
 to send down to muscles, in order to generate a desired movement?
 </p>
+
 <p>
 A key insight is that there are many complex, non-linear relationships
 that sit in between neural control signals to muscles, and the arm
@@ -946,6 +831,7 @@ many others including gradual development of muscle force over time
 (due to calcium kinetics), and dynamics introduced by series elastic
 elements (e.g. tendons).
 </p>
+
 <p>
 Something we haven't talked about much yet is that the activation of
 spinal motoneurones controlling a muscle is determined not only by
@@ -957,6 +843,7 @@ a very complex interplay between central efferent "control" signals,
 properties of the neuromuscular "plant", and afferent feedback
 signals.
 </p>
+
 <p>
 Once you start to build up computational models that include all of
 these features in a realistic way, it's practically (and in some cases
@@ -966,14 +853,11 @@ influential model of motor control that proposes a physiologically
 motivated solution to the problem of how the brain controls movement,
 given these complexities, is the Equilibrium-Point Hypothesis.
 </p>
-
 </div>
 
-<div id="outline-container-5-1" class="outline-3">
-<h3 id="sec-5-1">Equilibrium-Point Control</h3>
-<div class="outline-text-3" id="text-5-1">
-
-
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18">Equilibrium-Point Control</h3>
+<div class="outline-text-3" id="text-orgheadline18">
 <p>
 Something you may have noticed about the simplified arm models
 presented above, is that when you have opposing muscles around a
@@ -986,6 +870,7 @@ signals define an equilibrium position for the limb, and movement is
 produced by gradually shifting this centrally specified equilibrium
 position over time.
 </p>
+
 <p>
 Patterns of time varying muscle forces (and hence muscle activation
 patterns as measured by EMG) are not explicitly planned by the nervous
@@ -996,6 +881,7 @@ task of movement planning, eliminating the need to perform the often
 complex, nonlinear "inversions" required in order to explicitly
 specify the dynamics of multi-joint movement.
 </p>
+
 <p>
 Two main variants of the EP hypothesis have been offered, and are
 known as the \(\alpha\) and \(\lambda\) versions. Original proposals have
@@ -1014,6 +900,7 @@ stiffness may be controlled independent of movement through
 simultaneous increases or decreases in flexor and extensor MN
 activation, leading to muscle cocontraction around a joint.
 </p>
+
 <p>
 In the \(\alpha\) version of the EP hypothesis proprioception and
 afferent feedback play a limited role in MN activation, which is
@@ -1036,6 +923,7 @@ afferent information plays some role in programming limb movement. The
 α version is a force control model since it posits that the centrally
 controlled variable is MN activation.
 </p>
+
 <p>
 In contrast to the \(\alpha\) version, in the \(\lambda\) version of the
 EP hypothesis proprioception plays a central role in movement, and in
@@ -1053,60 +941,52 @@ to the \(\alpha\) version, in the \(\lambda\) model EMG activity is a
 consequence of the shifting equilibrium and afferent reflexes, rather
 than a quantity under direct central control.
 </p>
+
 <p>
 An appealing property of EP models is that at their heart they include
 the interaction between central efferent control signals and afferent
 signals, and their dual influence on muscle forces and movement.
 </p>
+
 <p>
 Here are some papers on the EP hypothesis. There are many others.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Bizzi, E., Accornero, N., Chapple, W., &amp; Hogan, N. (1982). Arm
-  trajectory formation in monkeys. Experimental Brain Research, 46(1),
-  139-143.
+trajectory formation in monkeys. Experimental Brain Research, 46(1),
+139-143.</li>
 
-</li>
 <li>Feldman, A. G. (1986). Once more on the equilibrium-point hypothesis
-  (lambda model) for motor control. Journal of motor behavior,
-  18(1), 17.
+(lambda model) for motor control. Journal of motor behavior,
+18(1), 17.</li>
 
-</li>
 <li>Bizzi, E., Hogan, N., Mussa-Ivaldi, F. A., &amp; Giszter,
-  S. (1992). Does the nervous system use equilibrium-point control to
-  guide single and multiple joint movements?. Behavioral and Brain
-  sciences, 15(04), 603-613.
+S. (1992). Does the nervous system use equilibrium-point control to
+guide single and multiple joint movements?. Behavioral and Brain
+sciences, 15(04), 603-613.</li>
 
-</li>
 <li>Gomi, H., &amp; Kawato, M. (1996). Equilibrium-point control hypothesis
-  examined by measured arm stiffness during multijoint
-  movement. Science, 272(5258), 117-120.
+examined by measured arm stiffness during multijoint
+movement. Science, 272(5258), 117-120.</li>
 
-</li>
 <li>Gribble, P. L., Ostry, D. J., Sanguineti, V., &amp; Laboissière,
-  R. (1998). Are complex control signals required for human arm
-  movement?. Journal of Neurophysiology, 79(3), 1409-1424.
+R. (1998). Are complex control signals required for human arm
+movement?. Journal of Neurophysiology, 79(3), 1409-1424.</li>
 
-</li>
-<li>Shadmehr, R. (1998). <a href="http://www.jhu.edu/shadmehr/Reprints/eqpoint.pdf">The equilibrium point hypothesis for control of movement</a>. Dept. of Bio. Eng. Johns Hopkins University.
+<li>Shadmehr, R. (1998). <a href="http://www.jhu.edu/shadmehr/Reprints/eqpoint.pdf">The equilibrium point hypothesis for control of
+movement</a>. Dept. of Bio. Eng. Johns Hopkins University.</li>
 
-</li>
 <li>Gribble, P. L., &amp; Ostry, D. J. (2000). Compensation for loads during
-  arm movements using equilibrium-point control. Experimental Brain
-  Research, 135(4), 474-482.
-</li>
+arm movements using equilibrium-point control. Experimental Brain
+Research, 135(4), 474-482.</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-5-2" class="outline-3">
-<h3 id="sec-5-2">Force Control Models</h3>
-<div class="outline-text-3" id="text-5-2">
-
-
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19">Force Control Models</h3>
+<div class="outline-text-3" id="text-orgheadline19">
 <p>
 In force control models, the hypothesis is that the brain is able to
 compute open-loop (no feedback) neural control signals to muscles for
@@ -1126,6 +1006,7 @@ of the actual movement (which is delayed due to neural feedback
 delays, which can be quite long), to update the command, and hence
 achieve motor learning.
 </p>
+
 <p>
 A major challenge to this class of models, in particular the idea of
 an inverse model, is centered around the criticism that a full
@@ -1136,50 +1017,39 @@ system engages in "prediction" of the consquences of motor commands,
 and hence the idea of a forward model, at least in principle, is less
 controversial.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Miall, R. C., &amp; Wolpert, D. M. (1996). Forward models for
-  physiological motor control. Neural networks, 9(8), 1265-1279.
+physiological motor control. Neural networks, 9(8), 1265-1279.</li>
 
-</li>
 <li>Wolpert, D. M., &amp; Kawato, M. (1998). Multiple paired forward and
-  inverse models for motor control. Neural Networks, 11(7), 1317-1329.
+inverse models for motor control. Neural Networks, 11(7), 1317-1329.</li>
 
-</li>
 <li>Wolpert, D. M., Miall, R. C., &amp; Kawato, M. (1998). Internal models
-  in the cerebellum. Trends in cognitive sciences, 2(9), 338-347.
+in the cerebellum. Trends in cognitive sciences, 2(9), 338-347.</li>
 
-</li>
 <li>Kawato, M. (1999). Internal models for motor control and trajectory
-  planning. Current opinion in neurobiology, 9(6), 718-727.
+planning. Current opinion in neurobiology, 9(6), 718-727.</li>
 
-</li>
 <li>Desmurget, M., &amp; Grafton, S. (2000). Forward modeling allows
-  feedback control for fast reaching movements. Trends in cognitive
-  sciences, 4(11), 423-431.
+feedback control for fast reaching movements. Trends in cognitive
+sciences, 4(11), 423-431.</li>
 
-</li>
 <li>Ostry, D., &amp; Feldman, A. (2003). A critical evaluation of the force
-  control hypothesis in motor control. Experimental Brain Research,
-  153(3), 275-288.
+control hypothesis in motor control. Experimental Brain Research,
+153(3), 275-288.</li>
 
-</li>
 <li>Pasalar, S., Roitman, A. V., Durfee, W. K., &amp; Ebner,
-  T. J. (2006). Force field effects on cerebellar Purkinje cell
-  discharge with implications for internal models. Nature
-  neuroscience, 9(11), 1404-1411.
-</li>
+T. J. (2006). Force field effects on cerebellar Purkinje cell
+discharge with implications for internal models. Nature
+neuroscience, 9(11), 1404-1411.</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-5-3" class="outline-3">
-<h3 id="sec-5-3">Hybrid Models</h3>
-<div class="outline-text-3" id="text-5-3">
-
-
+<div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20">Hybrid Models</h3>
+<div class="outline-text-3" id="text-orgheadline20">
 <p>
 There is debate about the extent to which "pure" EP models can account
 for features of motor control and motor learning such as compensation
@@ -1189,40 +1059,33 @@ open-loop control signals and EP-style feedback-control signals. This
 however does not solve the question of how the brain learns to shape
 the open-loop control signals.
 </p>
+
 <p>
 Some review articles that cover these topics:
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Wolpert, D. M., &amp; Ghahramani, Z. (2000). Computational principles of
-  movement neuroscience. nature neuroscience, 3, 1212-1217.
+movement neuroscience. nature neuroscience, 3, 1212-1217.</li>
 
-</li>
 <li>Wolpert, D. M., Ghahramani, Z., &amp; Flanagan,
-  J. R. (2001). Perspectives and problems in motor learning. Trends in
-  cognitive sciences, 5(11), 487-494.
+J. R. (2001). Perspectives and problems in motor learning. Trends in
+cognitive sciences, 5(11), 487-494.</li>
 
-</li>
 <li>Shadmehr, R., Smith, M. A., &amp; Krakauer, J. W. (2010). Error
-  correction, sensory prediction, and adaptation in motor
-  control. Annual review of neuroscience, 33, 89-108.
+correction, sensory prediction, and adaptation in motor
+control. Annual review of neuroscience, 33, 89-108.</li>
 
-</li>
 <li>Krakauer, J. W., &amp; Mazzoni, P. (2011). Human sensorimotor learning:
-  adaptation, skill, and beyond. Current opinion in neurobiology,
-  21(4), 636-644.
-</li>
+adaptation, skill, and beyond. Current opinion in neurobiology,
+21(4), 636-644.</li>
 </ul>
-
-
+</div>
 </div>
 
-</div>
-
-<div id="outline-container-5-4" class="outline-3">
-<h3 id="sec-5-4">Learning using feedback signals to train feedforward controllers</h3>
-<div class="outline-text-3" id="text-5-4">
-
-
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21">Learning using feedback signals to train feedforward controllers</h3>
+<div class="outline-text-3" id="text-orgheadline21">
 <p>
 One of the challenges in the motor system when we start to think about
 learning from errors, is that movement errors are in a different
@@ -1234,16 +1097,14 @@ coordinates (the ball was 10 cm too high). How do we transform that
 "distal" error into an appropriate change in neural control signal to
 arm muscles?
 </p>
-
 </div>
 
-<div id="outline-container-5-4-1" class="outline-4">
-<h4 id="sec-5-4-1">A Neural Network model using combined Forward and Inverse Models</h4>
-<div class="outline-text-4" id="text-5-4-1">
-
-
+<div id="outline-container-orgheadline22" class="outline-4">
+<h4 id="orgheadline22">A Neural Network model using combined Forward and Inverse Models</h4>
+<div class="outline-text-4" id="text-orgheadline22">
 <p>
-Michael Jordan (no, not <a href="http://en.wikipedia.org/wiki/Michael_Jordan">that one</a>, I'm talking about <a href="http://www.cs.berkeley.edu/~jordan/">the statistician from MIT/Berkeley</a>) and David Rumelhart proposed a solution to this
+Michael Jordan (no, not <a href="http://en.wikipedia.org/wiki/Michael_Jordan">that one</a>, I'm talking about <a href="http://www.cs.berkeley.edu/~jordan/">the statistician
+from MIT/Berkeley</a>) and David Rumelhart proposed a solution to this
 that involves a clever combination of forward and inverse internal
 models, arrange in a multi-layer neural network. The basic idea is
 that first, a forward model is trained, for example by "motor
@@ -1255,63 +1116,57 @@ given a motor command input. Once the forward model is trained at
 least to be partially accurate, it can be used to transform motor
 errors into required changes in motor commands.
 </p>
-<ul>
-<li>Jordan, M. I., &amp; Rumelhart, D. E. (1992). Forward models: Supervised
-  learning with a distal teacher. Cognitive science, 16(3), 307-354.
-</li>
-</ul>
 
+<ul class="org-ul">
+<li>Jordan, M. I., &amp; Rumelhart, D. E. (1992). Forward models: Supervised
+learning with a distal teacher. Cognitive science, 16(3), 307-354.</li>
+</ul>
 
 <p>
 We haven't talked about neural networks yet, but it is our next topic,
 so we will return to this idea again alter.
 </p>
 </div>
-
 </div>
 
-<div id="outline-container-5-4-2" class="outline-4">
-<h4 id="sec-5-4-2">Feedback Error Learning</h4>
-<div class="outline-text-4" id="text-5-4-2">
-
-
+<div id="outline-container-orgheadline23" class="outline-4">
+<h4 id="orgheadline23">Feedback Error Learning</h4>
+<div class="outline-text-4" id="text-orgheadline23">
 <p>
 Another interesting theory called <i>feedback error learning</i> proposes
 that the CNS uses afferent feedback signals from a simplistic (and
 only partially accurate) feedback controller (e.g. at the spinal cord)
 as a "teaching signal" to train an accurate central neural controller.
 </p>
-<ul>
+
+<ul class="org-ul">
 <li>Miyamoto, H., Kawato, M., Setoyama, T., &amp; Suzuki,
-  R. (1988). Feedback-error-learning neural network for trajectory
-  control of a robotic manipulator. Neural Networks, 1(3), 251-265.
+R. (1988). Feedback-error-learning neural network for trajectory
+control of a robotic manipulator. Neural Networks, 1(3), 251-265.</li>
 
-</li>
 <li>Kawato, M., &amp; Gomi, H. (1992). A computational model of four regions
-  of the cerebellum based on feedback-error learning. Biological
-  cybernetics, 68(2), 95-103.
+of the cerebellum based on feedback-error learning. Biological
+cybernetics, 68(2), 95-103.</li>
 
-</li>
 <li>Predictive and feedback performance errors are signaled in the
-  simple spike discharge of individual purkinje cells. Popa LS, Hewitt
-  AL, Ebner TJ.  J Neurosci. 2012 Oct 31;32(44):15345-58.
-</li>
+simple spike discharge of individual purkinje cells. Popa LS, Hewitt
+AL, Ebner TJ.  J Neurosci. 2012 Oct 31;32(44):15345-58.</li>
 </ul>
-
 
 <p>
 We will return to the question of motor learning after we talk about
 neural network models and learning more generally.
 </p>
+
 <p>
 [ next ]
-</p></div>
+</p>
 </div>
 </div>
 </div>
 </div>
-
-<div id="postamble">
+</div>
+<div id="postamble" class="status">
 <hr />Paul Gribble &amp; Dinant Kistemaker | fall 2012<br>This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" rel="dct:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png" /></a><br />
 </div>
 </body>

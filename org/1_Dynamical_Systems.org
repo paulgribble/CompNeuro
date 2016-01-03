@@ -4,12 +4,10 @@
 #+AUTHOR:    Paul Gribble & Dinant Kistemaker
 #+EMAIL:     paul@gribblelab.org
 #+DATE:      fall 2012
-#+LINK_UP: http://www.gribblelab.org/compneuro/0_Setup_Your_Computer.html
-#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+#+HTML_LINK_UP: http://www.gribblelab.org/compneuro/0_Setup_Your_Computer.html
+#+HTML_LINK_HOME: http://www.gribblelab.org/compneuro/index.html
 #+BIBLIOGRAPHY: refs plain option:-d limit:t
 
------
-[TABLE-OF-CONTENTS]
 -----
 
 * What is a dynamical system?
@@ -32,7 +30,7 @@ length of the spring, which depends on the spring force. The property
 that acceleration of the mass depends on its position makes this a
 dynamical system.
 
-#+ATTR_HTML: height="200px" align="center"
+#+ATTR_HTML: :height 200px :align center
 #+CAPTION: A spring with a mass attached
 [[file:figs/spring-mass.png]]
 
@@ -96,11 +94,11 @@ responsible for the electical spikes observed experimentally 7 years
 earlierr.
 
 #+CAPTION: Hodgkin-Huxley model of voltage-gated ion channels
-#+ATTR_HTML: height="200px"
+#+ATTR_HTML: :height 200px
 [[file:figs/HH1.png]]
 
 #+CAPTION: Action potentials across the membrane
-#+ATTR_HTML: height="200px"
+#+ATTR_HTML: :height 200px
 [[file:figs/HH2.png]]
 
 A second theoretical reason to make models is that it is sometimes

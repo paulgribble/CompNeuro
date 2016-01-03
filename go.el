@@ -1,20 +1,19 @@
-(require 'org-publish)
+(require 'ox-publish)
 (require 'ox-bibtex)
 (setq org-publish-project-alist
       '(
-
 	("CompNeuro"
 	 :base-directory "org/"
 	 :base-extension "org"
-	 :publishing-directory "html/"
-	 :Publishing-function org-publish-org-to-html
+	 :publishing-directory "~/github/CompNeuro/html/"
+	 :publishing-function org-html-publish-to-html
 	 :recursive t
 	 :section-numbers nil
 	 :html-postamble "<hr />%a | %d<br>This <span xmlns:dct=\"http://purl.org/dc/terms/\" href=\"http://purl.org/dc/dcmitype/Text\" rel=\"dct:type\">work</span> is licensed under a <a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/\">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a><br><a rel=\"license\" href=\"http://creativecommons.org/licenses/by-nc-sa/3.0/\"><img alt=\"Creative Commons License\" style=\"border-width:0\" src=\"http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png\" /></a><br />"
 	 :language en
 	 :link-home "index.html"
 	 :link-up "index.html"
-	 :style "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\" />"
+	 :html-head "<link rel=\"stylesheet\" type=\"text/css\" href=\"mystyle.css\" />"
 	 )
 
 	("CompNeuro_html"
@@ -43,7 +42,7 @@
 
 	("CompNeuro_code"
 	 :base-directory "code/"
-	 :base-extension "c\\|h\\|txt\\|csv\\|py\\|tgz\\|pickle\\|m"
+	 :base-extension "c\\|h\\|txt\\|csv\\|py\\|tgz\\|pickle\\|m\\|tgz"
 	 :publishing-directory "/ssh:plg@toro.ssc.uwo.ca:~/gribblelab.org/compneuro/code/"
 	 :publishing-function org-publish-attachment
 	 :recursive t

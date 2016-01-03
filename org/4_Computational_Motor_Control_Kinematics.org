@@ -4,11 +4,9 @@
 #+AUTHOR:    Paul Gribble & Dinant Kistemaker
 #+EMAIL:     paul@gribblelab.org
 #+DATE:      fall 2012
-#+LINK_UP:http://www.gribblelab.org/compneuro/3_Modelling_Action_Potentials.html
-#+LINK_HOME: http://www.gribblelab.org/compneuro/index.html
+#+HTML_LINK_UP:http://www.gribblelab.org/compneuro/3_Modelling_Action_Potentials.html
+#+HTML_LINK_HOME: http://www.gribblelab.org/compneuro/index.html
 
------
-[TABLE-OF-CONTENTS]
 -----
 
 * Introduction
@@ -37,7 +35,7 @@ the forearm, and therefore we'll ignore the Radius bone. The lower arm
 will include the hand, and for now we will assume that the wrist joint
 is fixed, i.e. it cannot move. For now let's even ignore muscles.
 
-#+ATTR_HTML: width="600px" align="center"
+#+ATTR_HTML: :width 600px  :align center
 #+CAPTION: Schematic of a simple kinematic model of the elbow joint
 [[file:figs/elbow_kinematics.png]]
 
@@ -125,7 +123,7 @@ ylabel('Y (m)')
 axis('equal')
 #+END_SRC
 
-#+ATTR_HTML: width="800px" align="center"
+#+ATTR_HTML: :width 800px  :align center
 #+CAPTION: Example elbow movement
 [[file:figs/elbow_movement_kinematics.png]]
 
@@ -133,7 +131,7 @@ axis('equal')
 
 Let's introduce a shoulder joint as well:
 
-#+ATTR_HTML: width="600px" align="center"
+#+ATTR_HTML: :width 600px :align center
 #+CAPTION: Schematic of a simple kinematic model of a two-joint arm
 [[file:figs/twojointarm_kinematics.png]]
 
@@ -218,7 +216,7 @@ plot((xl[0],xl[1]),(hy,hy),'b-')
 plot((hx,hx),(yl[0],yl[1]),'b-')
 #+END_SRC
 
-#+ATTR_HTML: width="600px" align="center"
+#+ATTR_HTML: :width 600px :align center
 #+CAPTION: Joint vs Hand Kinematics for Two Joint Arm
 [[file:figs/twojointarm_kinematics_workspace.png]]
 
@@ -405,7 +403,7 @@ We can visualize the Jacobian by plotting velocity vectors in joint
 space and the corresponding velocity vectors in hand space. See source
 file [[file:code/jacobian_plots.py][jacobian\_plots.py]] for python code.
 
-#+ATTR_HTML: width="700px" align="center"
+#+ATTR_HTML: :width 700px  :align center
 #+CAPTION: Visualizing the Jacobian
 [[file:figs/jacobian_plots.png]]
 
